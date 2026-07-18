@@ -1,0 +1,27 @@
+{
+  "name": "igc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leo1z/test-dones-igc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/leo1z/test-dones-igc/issues"
+  },
+  "homepage": "https://github.com/leo1z/test-dones-igc#readme",
+  "dependencies": {
+    "@supabase/server": "^1.4.0"
+  }
+}

@@ -1,3 +1,6 @@
+# Dependencies
+node_modules/
+
 # IDE and System Files
 .gemini/
 .vscode/
@@ -24,3 +27,9 @@ yarn-error.log*
 # Temp files
 tmp/
 temp/
+
+.vercel
+
+# Claude Code local settings & auto-versioning snapshots
+.claude/
+_versions/

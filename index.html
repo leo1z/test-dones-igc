@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Dones Espirituales - IGC Tegucigalpa</title>
+  <!-- Tailwind CSS CDN for layout utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pine: '#2E5138',
+            terracotta: '#E05A2B',
+            navy: '#1E293B',
+            cream: '#F5F2EB',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Custom CSS for design system tokens & doodle styling -->
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="bg-[#F5F2EB] text-[#1E293B] flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="py-4 px-6 border-b-3 border-[#1E293B] bg-white flex justify-between items-center shadow-[0_4px_0_#1E293B]">
+    <div class="flex items-center gap-3">
+      <!-- Logo image if exists, fallback to text -->
+      <img src="White-Logo.png" alt="IGC Logo" class="h-10 w-auto bg-[#2E5138] p-1.5 rounded-lg border-2 border-[#1E293B] shadow-[2px_2px_0_#1E293B]" onerror="this.style.display='none';">
+      <div>
+        <h1 class="text-xl font-bold tracking-tight">Gran Comisión</h1>
+        <p class="text-xs uppercase font-semibold text-[#E05A2B] tracking-wider">Tegucigalpa</p>
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <button id="nav-btn-test" class="doodle-btn px-3 py-1.5 text-sm font-bold bg-[#F5F2EB]">El Test</button>
+      <button id="nav-btn-all" class="doodle-btn px-3 py-1.5 text-sm font-bold bg-white">Ver Dones</button>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-8 flex flex-col justify-center">
+
+    <!-- SCREEN 1: Welcome / Bienvenida -->
+    <section id="screen-welcome" class="space-y-6 max-w-lg mx-auto w-full py-6">
+      <div class="doodle-card-organic p-6 md:p-8 bg-white text-center space-y-6 relative overflow-hidden">
+        <!-- Playful Background Accent Circle -->
+        <div class="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-amber-100 -z-10 opacity-70"></div>
+        
+        <!-- Welcome Sketch Icon -->
+        <div class="mx-auto w-24 h-24 bg-amber-100 border-3 border-[#1E293B] rounded-full flex items-center justify-center shadow-[3px_3px_0_#1E293B] rotate-3">
+          <svg class="w-12 h-12 text-[#E05A2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+          </svg>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="text-3xl font-extrabold text-[#2E5138]">Test de Dones Espirituales</h2>
+          <p class="text-lg font-medium text-[#1E293B] max-w-md mx-auto">
+            Descubre las motivaciones y capacidades únicas que Dios ha depositado en ti para bendecir y servir al cuerpo de Cristo.
+          </p>
+        </div>
+
+        <div class="p-4 border-2 border-dashed border-[#1E293B] bg-[#F5F2EB] rounded-lg text-sm space-y-2 text-left">
+          <h4 class="font-bold text-[#E05A2B] uppercase tracking-wide">Instrucciones básicas:</h4>
+          <ul class="list-disc pl-4 space-y-1 font-medium">
+            <li>El test consta de <strong>128 afirmaciones</strong> divididas en 16 páginas rápidas.</li>
+            <li>Responde según qué tan cierta es la frase en tu vida (1 = Casi nunca, 5 = Casi siempre).</li>
+            <li><strong>Importante:</strong> Evita responder con "3 = A veces" para obtener resultados más claros y sin sesgos.</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="doodle-btn doodle-btn-pine w-full text-lg py-4">
+          Comenzar Test
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: Test Wizard / Formulario -->
+    <section id="screen-test" class="hidden space-y-6 w-full max-w-2xl mx-auto py-4">
+      <!-- Progress Bar & Indicator -->
+      <div class="space-y-2">
+        <div class="flex justify-between items-center px-1 font-bold">
+          <span class="text-sm uppercase tracking-wide text-[#E05A2B]" id="wizard-progress-title">Pregunta 1 de 128</span>
+          <span class="text-sm text-[#2E5138]" id="wizard-progress-percent">0% Completado</span>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="wizard-progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Question List Container -->
+      <div class="doodle-card p-6 md:p-8 bg-white space-y-6">
+        <div class="border-b-2 border-slate-100 pb-4">
+          <h3 class="text-xl font-bold text-[#2E5138]" id="wizard-block-title">Bloque 1: Motivación General</h3>
+          <p class="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Por favor responde con total sinceridad</p>
+        </div>
+
+        <!-- Questions render dynamically here -->
+        <div id="questions-container" class="space-y-8">
+          <!-- Question elements will be injected here -->
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between items-center gap-4 pt-6 border-t-2 border-slate-100">
+          <button id="btn-prev" class="doodle-btn px-5 py-3 bg-[#F5F2EB]" disabled>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+            Atrás
+          </button>
+          <button id="btn-next" class="doodle-btn doodle-btn-terracotta px-6 py-3">
+            Siguiente
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: Results / Resultados -->
+    <section id="screen-results" class="hidden space-y-8 w-full py-4">
+      <div class="text-center space-y-2 max-w-lg mx-auto">
+        <h2 class="text-4xl font-extrabold text-[#2E5138]">Tus Resultados</h2>
+        <p class="text-lg font-medium text-[#64748B]">Aquí tienes la puntuación de tus dones y las áreas donde Dios te invita a florecer.</p>
+      </div>
+
+      <!-- Section: Top 3 Dones -->
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold text-[#E05A2B] px-1 flex items-center gap-2">
+          <span>🏆</span> Dones Principales (Top 3)
+        </h3>
+        <!-- Top 3 Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="top-gifts-container">
+          <!-- Top cards will be dynamically injected here -->
+        </div>
+      </div>
+
+      <!-- Section: Graph and Full Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Scores Graph -->
+        <div class="lg:col-span-6 space-y-4">
+          <h3 class="text-2xl font-bold text-[#2E5138] px-1">📊 Puntuación General</h3>
+          <div class="chart-container" id="scores-chart-container">
+            <!-- Graph bars injected here -->
+          </div>
+        </div>
+
+        <!-- Right: Ver Todos / Global List -->
+        <div class="lg:col-span-6 space-y-4">
+          <div class="flex justify-between items-center px-1">
+            <h3 class="text-2xl font-bold text-[#2E5138]">💡 Todos los Dones</h3>
+            <button id="btn-toggle-all" class="doodle-btn py-1 px-3 text-xs bg-white">Ver Detalles</button>
+          </div>
+          <div class="grid grid-cols-2 gap-3" id="all-gifts-grid">
+            <!-- All cards injected here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Action Buttons -->
+      <div class="doodle-card p-6 bg-white flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-center md:text-left">
+          <h4 class="font-bold text-[#2E5138] text-lg">¿Quieres repetir el test?</h4>
+          <p class="text-sm font-medium text-[#64748B]">Esto borrará los resultados guardados en este dispositivo y te permitirá iniciar de nuevo.</p>
+        </div>
+        <button id="btn-reset" class="doodle-btn doodle-btn-terracotta whitespace-nowrap">
+          Reiniciar Test
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89M9 11l3-3 3 3m-3-3v12"></path></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: View All Gifts List (Independent mode) -->
+    <section id="screen-all-gifts" class="hidden space-y-6 w-full py-4">
+      <div class="text-center space-y-2 max-w-lg mx-auto">
+        <h2 class="text-3xl font-extrabold text-[#2E5138]">Glosario de Dones Espirituales</h2>
+        <p class="text-base font-medium text-[#64748B]">Conoce en detalle cada uno de los 16 dones bíblicos, sus cuidados y sus objetivos ministeriales.</p>
+      </div>
+      <div class="bento-grid" id="glossary-grid">
+        <!-- Glossary cards loaded here -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Detail Modal -->
+  <div id="gift-modal" class="modal-overlay">
+    <div class="modal-content p-6 space-y-6" id="gift-modal-body">
+      <!-- Content injected by app.js -->
+    </div>
+  </div>
+
+  <!-- Main Application Logic Bundle -->
+  <script type="module" src="src/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+/* CSS Tokens & Custom Styles for IGC Spiritual Gifts Test */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --color-bg: #F5F2EB;
+  --color-pine: #2E5138;
+  --color-pine-light: #3e6e4c;
+  --color-terracotta: #E05A2B;
+  --color-terracotta-light: #e6764e;
+  --color-navy: #1E293B;
+  --color-white: #FFFFFF;
+  --color-accent-yellow: #F4C430; /* Warm doodle background color */
+  --color-gray: #64748B;
+  --color-border: #1E293B;
+
+  /* Typography */
+  --font-title: 'Space Grotesk', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+/* Custom Base resets */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-navy);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  color: var(--color-navy);
+  font-weight: 700;
+}
+
+/* Doodle Style Borders & Shadows */
+.doodle-card {
+  background-color: var(--color-white);
+  border: 3px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0px var(--color-border);
+  transition: all 0.2s ease-in-out;
+}
+
+.doodle-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px var(--color-border);
+}
+
+.doodle-card-organic {
+  background-color: var(--color-white);
+  border: 3px solid var(--color-border);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: 4px 6px 0px var(--color-border);
+  transition: all 0.2s ease-in-out;
+}
+
+.doodle-card-organic:hover {
+  transform: rotate(-0.5deg) translate(-2px, -2px);
+  box-shadow: 6px 8px 0px var(--color-border);
+}
+
+/* Buttons */
+.doodle-btn {
+  font-family: var(--font-title);
+  font-weight: 600;
+  border: 3px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-white);
+  color: var(--color-navy);
+  box-shadow: 3px 3px 0px var(--color-border);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.doodle-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--color-border);
+}
+
+.doodle-btn:disabled {
+  background-color: #E2E8F0;
+  border-color: #94A3B8;
+  color: #94A3B8;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.doodle-btn-pine {
+  background-color: var(--color-pine);
+  color: var(--color-bg);
+}
+.doodle-btn-pine:hover {
+  background-color: var(--color-pine-light);
+}
+
+.doodle-btn-terracotta {
+  background-color: var(--color-terracotta);
+  color: var(--color-white);
+}
+.doodle-btn-terracotta:hover {
+  background-color: var(--color-terracotta-light);
+}
+
+/* Scale Option Buttons (1 to 5) */
+.scale-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background-color: var(--color-white);
+}
+
+.scale-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Colors for answers scale */
+.scale-1 { color: #DC2626; border-color: #DC2626; }
+.scale-1.selected { background-color: #FEF2F2; color: #DC2626; box-shadow: 0 0 0 3px #DC2626; }
+
+.scale-2 { color: #EA580C; border-color: #EA580C; }
+.scale-2.selected { background-color: #FFF7ED; color: #EA580C; box-shadow: 0 0 0 3px #EA580C; }
+
+.scale-3 { color: var(--color-terracotta); border-color: var(--color-terracotta); position: relative; }
+.scale-3.selected { background-color: #FFF7ED; color: var(--color-terracotta); box-shadow: 0 0 0 3px var(--color-terracotta); }
+
+.scale-4 { color: #16A34A; border-color: #16A34A; }
+.scale-4.selected { background-color: #F0FDF4; color: #16A34A; box-shadow: 0 0 0 3px #16A34A; }
+
+.scale-5 { color: var(--color-pine); border-color: var(--color-pine); }
+.scale-5.selected { background-color: #F0FDF4; color: var(--color-pine); box-shadow: 0 0 0 3px var(--color-pine); }
+
+/* Warning Tooltip or Box for selection 3 */
+.warning-box {
+  border: 2px dashed var(--color-terracotta);
+  background-color: rgba(224, 90, 43, 0.08);
+  border-radius: 8px;
+  color: var(--color-navy);
+  font-size: 0.9rem;
+}
+
+/* Progress Bar Container */
+.progress-container {
+  height: 16px;
+  background-color: var(--color-white);
+  border: 3px solid var(--color-border);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--color-terracotta);
+  border-right: 3px solid var(--color-border);
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Results Custom Bar Chart */
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: var(--color-white);
+  border: 3px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0px var(--color-border);
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 40px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chart-label {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-bar-bg {
+  height: 24px;
+  background-color: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.chart-bar-fill {
+  height: 100%;
+  background-color: var(--color-pine);
+  width: 0%; /* Dynamic */
+  transition: width 0.8s cubic-bezier(0.1, 0.8, 0.3, 1);
+  border-right: 2px solid var(--color-border);
+}
+
+.chart-bar-fill.top-gift {
+  background-color: var(--color-terracotta);
+}
+
+.chart-value {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.bento-item-featured {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-item-featured {
+    grid-column: span 2;
+  }
+}
+
+/* Interactive Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: var(--color-bg);
+  border: 4px solid var(--color-border);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 8px 8px 0px var(--color-border);
+  transform: scale(0.9);
+  transition: transform 0.2s ease-in-out;
+}
+
+.modal-overlay.open .modal-content {
+  transform: scale(1);
+}
+
+/* Custom Scrollbar for Modal and Page */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-pine);
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+}
+
+/* Animations */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.doodle-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 2s ease-in-out forwards;
+}
+
+/* Shake feedback for incomplete question blocks */
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+/* Truncate glossary descriptions to 3 lines */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
