@@ -20,7 +20,7 @@ export const gifts = [
     overuse: 'Demasiada expectación',
     objective: 'Dirigir por el ejemplo, no por manipulación',
     passages: 'Rom. 12:8; 1 Cor. 12:28; Hch. 6:1-7',
-    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+    illustration: 'src/assets/gifts/administracion.svg',
   },
   {
     id: 'apostolado',
@@ -31,7 +31,7 @@ export const gifts = [
     overuse: 'Empujar demasiado / Demasiada autoridad',
     objective: 'Construir más hondo y más fuerte',
     passages: 'Ef. 4:7,11; 1 Cor. 9:1-2; Gl. 2:8-10; 1 Cor. 12:28-29',
-    icon: 'M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5',
+    illustration: 'src/assets/gifts/apostolado.svg',
   },
   {
     id: 'discernimiento',
@@ -42,7 +42,7 @@ export const gifts = [
     overuse: 'Inclinados a criticar o demasiado prontos para hablar',
     objective: 'Buscar más información antes de responder',
     passages: '1 Cor. 12:7,10b; 1 Cor. 2:14',
-    icon: 'M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178zM15 12a3 3 0 11-6 0 3 3 0 016 0z',
+    illustration: 'src/assets/gifts/discernimiento.svg',
   },
   {
     id: 'evangelizacion',
@@ -53,7 +53,7 @@ export const gifts = [
     overuse: 'Celo',
     objective: 'Edificar discípulos, no estadísticas',
     passages: 'Ef. 4:7,11; Hch. 8:26-40; Lc. 19:1-10',
-    icon: 'M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.9 20.9 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m8.835 2.535a23.847 23.847 0 000-3.46m0 3.46a23.847 23.847 0 010 3.46m0-3.46a1.73 1.73 0 010 3.46m0-3.46a1.73 1.73 0 000 3.46',
+    illustration: 'src/assets/gifts/evangelizacion.svg',
   },
   {
     id: 'exhortacion',
@@ -64,7 +64,7 @@ export const gifts = [
     overuse: 'Hablar demasiado',
     objective: 'Aplicar la verdad, no crear expectaciones',
     passages: 'Rom. 12:6,8; Hch. 11:23-24; Heb. 10:24-25',
-    icon: 'M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z',
+    illustration: 'src/assets/gifts/exhortacion.svg',
   },
   {
     id: 'fe',
@@ -75,7 +75,7 @@ export const gifts = [
     overuse: 'Excesivamente confiados y a menudo orgullosos de su fe',
     objective: 'Combinar la fe con las obras / Aprender a ser paciente con otros',
     passages: '1 Cor. 12:7,9; Mat. 8:5-16; Heb. 11:1',
-    icon: 'M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1.001A3.75 3.75 0 0012 18z',
+    illustration: 'src/assets/gifts/fe.svg',
   },
   {
     id: 'dar',
@@ -86,7 +86,7 @@ export const gifts = [
     overuse: 'El poder del dinero',
     objective: 'Mayordomía sincera, no hostigamiento financiero',
     passages: 'Rom. 12:6,8b; Hch. 4:32-35; 2 Cor. 9:7-8',
-    icon: 'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    illustration: 'src/assets/gifts/dar.svg',
   },
   {
     id: 'hospitalidad',
@@ -97,7 +97,7 @@ export const gifts = [
     overuse: 'Abarcar demasiado / Agotarse',
     objective: 'Proveer compañerismo sin sacrificar el tiempo de la familia',
     passages: '1 P. 4:9-10; Hch. 16:13-15; Lc. 14:12-14',
-    icon: 'M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25',
+    illustration: 'src/assets/gifts/hospitalidad.svg',
   },
   {
     id: 'conocimiento',
@@ -108,7 +108,7 @@ export const gifts = [
     overuse: 'Hacer que otros se sientan inferiores o ignorantes',
     objective: 'Cambiar vidas, en lugar de impresionar a otros',
     passages: '1 Cor. 12:7-8; 8:1b-2',
-    icon: 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25',
+    illustration: 'src/assets/gifts/conocimiento.svg',
   },
   {
     id: 'liderazgo',
@@ -119,7 +119,7 @@ export const gifts = [
     overuse: 'Demasiado exigente e impaciente',
     objective: 'Dirigir por el ejemplo y estar dispuesto a ser siervo',
     passages: 'Rom. 12:6,8c; Jn. 13:13-17; Heb. 13:17',
-    icon: 'M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5',
+    illustration: 'src/assets/gifts/liderazgo.svg',
   },
   {
     id: 'misericordia',
@@ -130,7 +130,7 @@ export const gifts = [
     overuse: 'Demasiado sensible',
     objective: 'Noción sabia, no respuesta necia',
     passages: 'Rom. 12:6,8d; Mt. 5:7',
-    icon: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z',
+    illustration: 'src/assets/gifts/misericordia.svg',
   },
   {
     id: 'profecia',
@@ -141,7 +141,7 @@ export const gifts = [
     overuse: 'Luchador',
     objective: 'Declarar la verdad, y no dividir a los creyentes',
     passages: 'Ef. 4:7,11; 1 Cor. 14:1,3; 2 P. 1:19-21',
-    icon: 'M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z',
+    illustration: 'src/assets/gifts/profecia.svg',
   },
   {
     id: 'pastor',
@@ -152,7 +152,7 @@ export const gifts = [
     overuse: 'Aprovecharse de la confianza de otros',
     objective: 'Liderazgo fuerte, en lugar de manipular al rebaño',
     passages: 'Ef. 4:11; 1 P. 5:2-4',
-    icon: 'M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z',
+    illustration: 'src/assets/gifts/pastor.svg',
   },
   {
     id: 'servicio',
@@ -163,7 +163,7 @@ export const gifts = [
     overuse: 'Abarcar demasiado',
     objective: 'Ser siervo, no mártir',
     passages: '1 Cor. 12:28; Hch. 6:1-3; Rom. 16:1-2',
-    icon: 'M10.05 4.575a1.575 1.575 0 10-3.15 0v3m3.15-3v-3.75a1.575 1.575 0 013.15 0V6.75m-3.15-2.175v5.925M13.2 6.75v-3a1.575 1.575 0 013.15 0v3m0 0V21a2.25 2.25 0 01-2.25 2.25h-5.25A6.75 6.75 0 011.9 16.5v-.75c0-.622.504-1.125 1.125-1.125h1.5c.621 0 1.125.503 1.125 1.125v.75',
+    illustration: 'src/assets/gifts/servicio.svg',
   },
   {
     id: 'ensenanza',
@@ -174,7 +174,7 @@ export const gifts = [
     overuse: 'Hurgar demasiado hondo',
     objective: 'Revelar la verdad, no agotarla',
     passages: 'Rom. 12:6,7b; Col. 3:16; Stg. 3:1,2; 2 Tim. 2:2',
-    icon: 'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.814A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0012 13.489a50.702 50.702 0 007.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5',
+    illustration: 'src/assets/gifts/ensenanza.svg',
   },
   {
     id: 'sabiduria',
@@ -185,7 +185,7 @@ export const gifts = [
     overuse: 'Menospreciar a las personas',
     objective: 'Confiar consistentemente y pedir la sabiduría de Dios',
     passages: '1 Cor. 12:7-8; Stg. 3:13-18',
-    icon: 'M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18',
+    illustration: 'src/assets/gifts/sabiduria.svg',
   },
 ];
 

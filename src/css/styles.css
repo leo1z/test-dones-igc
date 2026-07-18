@@ -6,8 +6,8 @@
   --color-bg: #F5F2EB;
   --color-pine: #2E5138;
   --color-pine-light: #3e6e4c;
-  --color-terracotta: #E05A2B;
-  --color-terracotta-light: #e6764e;
+  --color-terracotta: #2F6BBD;
+  --color-terracotta-light: #4F86D1;
   --color-navy: #1E293B;
   --color-white: #FFFFFF;
   --color-accent-yellow: #F4C430; /* Warm doodle background color */
@@ -150,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Warning Tooltip or Box for selection 3 */
 .warning-box {
   border: 2px dashed var(--color-terracotta);
-  background-color: rgba(224, 90, 43, 0.08);
+  background-color: rgba(47, 107, 189, 0.08);
   border-radius: 8px;
   color: var(--color-navy);
   font-size: 0.9rem;

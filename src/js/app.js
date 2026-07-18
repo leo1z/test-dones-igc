@@ -123,6 +123,10 @@ function iconSvg(pathD, classes = 'w-7 h-7') {
   return `<svg class="${classes}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${pathD}"></path></svg>`;
 }
 
+function giftIllustration(gift, classes = 'w-14 h-14') {
+  return `<img src="${gift.illustration}" alt="${gift.name}" class="${classes}" loading="lazy">`;
+}
+
 // ---------------------------------------------------------------------------
 // Wizard del test
 // ---------------------------------------------------------------------------
@@ -314,13 +318,13 @@ function renderResults(ranked) {
       (g, i) => `
       <div class="doodle-card-organic p-5 bg-white space-y-3 cursor-pointer gift-card" data-gift-id="${g.id}">
         <div class="flex items-center justify-between">
-          <div class="w-12 h-12 rounded-full bg-amber-100 border-2 border-[#1E293B] flex items-center justify-center text-[#E05A2B]">
-            ${iconSvg(g.icon)}
+          <div class="w-14 h-14 rounded-full bg-blue-50 border-2 border-[#1E293B] flex items-center justify-center overflow-hidden">
+            ${giftIllustration(g, 'w-11 h-11')}
           </div>
           <span class="text-2xl">${['🥇', '🥈', '🥉'][i]}</span>
         </div>
         <h4 class="text-lg font-bold text-[#2E5138]">${g.name}</h4>
-        <p class="text-xs uppercase font-bold text-[#E05A2B] tracking-wide">${g.oneWord}</p>
+        <p class="text-xs uppercase font-bold text-[#2F6BBD] tracking-wide">${g.oneWord}</p>
         <p class="text-sm font-semibold text-[#64748B]">${g.score} / 40 puntos</p>
       </div>`
     )
@@ -354,8 +358,8 @@ function renderAllGiftsGrid(ranked, top3Ids) {
       (g) => `
       <div class="doodle-card p-4 bg-white space-y-2 cursor-pointer gift-card" data-gift-id="${g.id}">
         <div class="flex items-center gap-2">
-          <div class="w-9 h-9 shrink-0 rounded-full bg-amber-100 border-2 border-[#1E293B] flex items-center justify-center text-[#E05A2B]">
-            ${iconSvg(g.icon, 'w-5 h-5')}
+          <div class="w-9 h-9 shrink-0 rounded-full bg-blue-50 border-2 border-[#1E293B] flex items-center justify-center overflow-hidden">
+            ${giftIllustration(g, 'w-7 h-7')}
           </div>
           <div class="min-w-0">
             <p class="font-bold text-sm text-[#2E5138] truncate">${g.name}${top3Ids.has(g.id) ? ' ⭐' : ''}</p>
@@ -376,11 +380,11 @@ function renderGlossary() {
     .map(
       (g) => `
       <div class="doodle-card p-5 bg-white space-y-3 cursor-pointer gift-card" data-gift-id="${g.id}">
-        <div class="w-12 h-12 rounded-full bg-amber-100 border-2 border-[#1E293B] flex items-center justify-center text-[#E05A2B]">
-          ${iconSvg(g.icon)}
+        <div class="w-14 h-14 rounded-full bg-blue-50 border-2 border-[#1E293B] flex items-center justify-center overflow-hidden">
+          ${giftIllustration(g, 'w-11 h-11')}
         </div>
         <h4 class="text-lg font-bold text-[#2E5138]">${g.name}</h4>
-        <p class="text-xs uppercase font-bold text-[#E05A2B] tracking-wide">${g.oneWord}</p>
+        <p class="text-xs uppercase font-bold text-[#2F6BBD] tracking-wide">${g.oneWord}</p>
         <p class="text-sm text-[#64748B] line-clamp-3">${g.description}</p>
       </div>`
     )
@@ -396,14 +400,14 @@ function openGiftModal(giftId) {
 
   el.modalBody.innerHTML = `
     <div class="flex items-start justify-between gap-4">
-      <div class="w-14 h-14 shrink-0 rounded-full bg-amber-100 border-2 border-[#1E293B] flex items-center justify-center text-[#E05A2B]">
-        ${iconSvg(g.icon, 'w-8 h-8')}
+      <div class="w-14 h-14 shrink-0 rounded-full bg-blue-50 border-2 border-[#1E293B] flex items-center justify-center overflow-hidden">
+        ${giftIllustration(g, 'w-11 h-11')}
       </div>
       <button id="modal-close-btn" class="doodle-btn px-3 py-1.5 text-sm bg-white">✕</button>
     </div>
     <div class="space-y-1">
       <h3 class="text-2xl font-bold text-[#2E5138]">${g.name}</h3>
-      <p class="text-sm uppercase font-bold text-[#E05A2B] tracking-wide">En una palabra: ${g.oneWord}</p>
+      <p class="text-sm uppercase font-bold text-[#2F6BBD] tracking-wide">En una palabra: ${g.oneWord}</p>
     </div>
     <p class="text-sm leading-relaxed text-[#1E293B]">${g.description}</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
@@ -417,7 +421,7 @@ function openGiftModal(giftId) {
       </div>
     </div>
     <div class="p-3 bg-white border-2 border-[#1E293B] rounded-lg text-sm">
-      <p class="font-bold text-[#E05A2B]">📖 Pasajes Bíblicos</p>
+      <p class="font-bold text-[#2F6BBD]">📖 Pasajes Bíblicos</p>
       <p>${g.passages}</p>
     </div>
   `;
