@@ -35,5 +35,5 @@ temp/
 _versions/
 
 # Illustrator working files (large binaries, not needed for the site)
-docs/illustrations/*.ai
-docs/illustrations/~*.tmp
+**/docs/illustrations/*.ai
+**/docs/illustrations/~*.tmp

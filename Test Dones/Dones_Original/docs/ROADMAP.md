@@ -2,6 +2,10 @@
 
 Este documento define la trayectoria del desarrollo, desde el MVP inicial hasta la integración móvil final y automatización.
 
+> Esta es la hoja de ruta de la versión **"Dones_Original"**. Existe una
+> segunda versión en planeación, **"Dones_IGC"** (ver `../../Dones_IGC/docs/`),
+> con preguntas y UI/UX propios sobre el mismo tipo de sistema.
+
 ## Fase actual (MVP de hoy)
 - **Fase 1: Setup & Control:** Git, Vercel, `PROJECT_STATE.md`, `ROADMAP.md` y `ARCHITECTURE.md`.
 - **Fase 2: Sistema de Diseño:** Estilos base con Tailwind CDN y custom fonts (`Space Grotesk` y `Outfit`) y efectos "doodle".
