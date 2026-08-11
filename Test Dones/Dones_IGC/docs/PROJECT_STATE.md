@@ -2,10 +2,18 @@
 Fecha de última actualización: 2026-08-11
 
 ## <session>
-*   **Sesión Activa:** Corrección de mobile-first (Claude) tras handoff de Gemini. Backend (Supabase/Auth/Vercel) aún no iniciado.
-*   **Meta de Hoy:** El usuario reportó que el diseño de Gemini no era mobile-first. Verificado con capturas reales a 320-375px y medición de elementos: 3 problemas objetivos confirmados y corregidos (ver abajo). Backend queda para la siguiente sesión, a petición del usuario ("primero UI móvil, luego backend").
-*   **Estado:** Fases 0-5 (contenido, UX, Score Engine, integración SPA, canvas share) siguen en pie sin cambios. La Fase 6 (QA/Optimización Móvil) que Gemini dio por cerrada **tenía bugs reales de mobile-first no detectados** — corregidos en esta sesión. Backend sin iniciar.
-*   **Siguiente Paso:** Fase 7 — Integración Supabase (schema propio) + Auth + despliegue en Vercel (`igc-dones`).
+*   **Sesión Activa:** Corrección de mobile-first + arranque de infraestructura (Vercel desplegado, Supabase vinculado). Auth aún no iniciado.
+*   **Meta de Hoy:** Corregir los bugs de mobile-first del handoff de Gemini (ver detalle abajo), crear y desplegar el proyecto de Vercel `igc-dones`, y vincular el schema de Supabase de este test dentro del mismo proyecto Supabase que usará `Dones_Original` (schemas separados, un solo proyecto).
+*   **Estado:** Mobile-first corregido. **Vercel: desplegado y en vivo en https://igc-dones.vercel.app.** **Supabase: proyecto "IGC" (ref `vmlbrjzsuceizrwqryjf`) vinculado, migración del schema `dones_igc` escrita — pendiente que el usuario la aplique (ver nota de Supabase abajo).**
+*   **Siguiente Paso:** Usuario aplica la migración de Supabase (SQL Editor del dashboard) → conectar `app.js` a Supabase para persistir resultados (hoy solo guarda en `localStorage`) → Fase de Auth.
+
+### Infraestructura (2026-08-11)
+*   **Vercel:** proyecto `igc-dones` creado (`prj_jSuUB3UX8Gr85tDFuBSAKPZf1BfH`), vinculado localmente en `Test Dones/Dones_IGC/.vercel/` (link independiente del de `Dones_Original`). Desplegado a producción: **https://igc-dones.vercel.app**. Nota: igual que `igc` (Dones_Original), el deploy es manual vía CLI — no hay auto-deploy configurado al hacer push a GitHub (requiere conectar el repo desde el dashboard de Vercel si se quiere ese flujo).
+*   **Supabase:** un solo proyecto ("IGC", ref `vmlbrjzsuceizrwqryjf`, ya existía, creado por el usuario) compartido entre `Dones_Original` y `Dones_IGC` — cada uno en su propio schema de Postgres, no en `public`. Repo vinculado (`supabase link`) en la raíz del repositorio (`c:/Users/Leo Borjas/Projects/igc/supabase/`), no dentro de `Test Dones/Dones_IGC/`, porque es infraestructura compartida entre ambas versiones.
+    *   Migración escrita: `supabase/migrations/20260811192746_create_dones_igc_schema.sql` — crea el schema `dones_igc` y la tabla `dones_igc.results` (`answers`/`scores`/`top_gifts`, mapea 1:1 al formato que ya guarda `app.js`), con RLS activado y sin políticas todavía (nadie tiene acceso hasta la fase de Auth).
+    *   **No se pudo aplicar (`supabase db push`) desde este entorno** — las conexiones directas a Postgres están bloqueadas (timeout), solo HTTPS funciona aquí. El usuario va a pegar el SQL directamente en el SQL Editor del dashboard.
+    *   `supabase/config.toml` actualizado para exponer el schema `dones_igc` vía la API (`schemas = ["public", "graphql_public", "dones_igc"]`) — esto es config local; falta confirmar/replicar en Project Settings → API del dashboard si no se sincroniza solo.
+    *   Frontend (`app.js`) **todavía no llama a Supabase** — sigue 100% `localStorage`. Conectar esto es el siguiente paso técnico real antes de que la tabla reciba datos.
 
 ### Corrección de mobile-first (2026-08-11, por Claude)
 Verificado con Playwright a 320px/375px (no solo confiando en el doc de Gemini). 3 problemas objetivos encontrados y corregidos:
