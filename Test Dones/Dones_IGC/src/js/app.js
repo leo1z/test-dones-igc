@@ -8,6 +8,7 @@
 import { situations, TOTAL_SITUATIONS } from '../data/situations.js';
 import { gifts } from '../data/gifts.js';
 import { runFullCalculation, isTestComplete } from './score-engine.js';
+import { submitResult } from './supabase-client.js';
 
 // ---------------------------------------------------------------------------
 // Constantes de almacenamiento local
@@ -359,7 +360,8 @@ function finishTest() {
   };
   
   saveResult(result);
-  
+  submitResult(result); // best-effort, no bloquea la UI si falla
+
   sendBridgeCompletionMessage({
     version: result.version,
     completedAt: result.completedAt,
