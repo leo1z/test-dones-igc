@@ -1,0 +1,10 @@
+{
+  "name": "dones-igc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Test de Dones Espirituales - Dones IGC (v2). Ver docs/ para plan y decisiones.",
+  "scripts": {
+    "test:score-engine": "node src/js/score-engine.test.mjs"
+  }
+}
