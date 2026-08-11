@@ -1,8 +1,8 @@
 /**
  * gifts.js
  * Catalogo de los 15 dones espirituales motivacionales de Dones IGC (v2).
- * Fuente: docs/CONTENIDO.md. tips/examples/illustration quedan null —
- * pendientes de contenido (ver docs/BRIEF.md) e ilustracion (Fase 2 — UI).
+ * Fuente: docs/CONTENIDO.md, con consejos (tips) y ejemplos (examples) integrados,
+ * e ilustraciones enlazadas a src/assets/illustrations/.
  *
  * El orden de este arreglo tambien es el criterio de desempate del
  * Score Engine cuando dos dones quedan exactamente iguales (ver
@@ -19,9 +19,17 @@ export const gifts = [
     questionCount: 7,
     maxRawScore: 35,
     minRawScore: 7,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Habla de Cristo con naturalidad en tu día a día.",
+      "Entrena a otros en métodos prácticos para compartir su fe.",
+      "Mantén el enfoque en la gracia de Dios sin entrar en debates infructuosos."
+    ],
+    examples: [
+      "Compartir el evangelio durante una conversación cotidiana.",
+      "Escribir guías cortas o folletos de discipulado.",
+      "Coordinar campañas de alcance comunitario."
+    ],
+    illustration: "src/assets/illustrations/Evangelismo.png",
   },
   {
     id: 'dar',
@@ -30,9 +38,17 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Canaliza tu provisión en proyectos que tengan un impacto claro y espiritual.",
+      "Mantén discreción absoluta para proteger tu corazón del orgullo.",
+      "Inspira generosidad a los demás compartiendo testimonios sin presionar."
+    ],
+    examples: [
+      "Proveer alimentos o medicinas a familias vulnerables de la iglesia en silencio.",
+      "Financiar becas de campamentos para jóvenes de escasos recursos.",
+      "Donar recursos significativos para la mejora del templo o proyectos especiales."
+    ],
+    illustration: "src/assets/illustrations/Dar.png",
   },
   {
     id: 'fe',
@@ -41,9 +57,16 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Dedica tiempo constante a la oración intercesora por causas que parecen imposibles.",
+      "Anima a otros en sus dudas sin juzgarlos ni menospreciar sus temores.",
+      "Ayuda a organizar cadenas de oración ante crisis de la comunidad."
+    ],
+    examples: [
+      "Liderar o iniciar un grupo de intercesión por necesidades extremas.",
+      "Sostener espiritualmente a un ministerio que atraviesa una crisis económica confiando plenamente en la provisión divina."
+    ],
+    illustration: "src/assets/illustrations/Fe.png",
   },
   {
     id: 'servir',
@@ -52,9 +75,17 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Aprende a decir 'no' ocasionalmente para evitar el agotamiento extremo.",
+      "Recuerda que tu labor silenciosa es la que sostiene el funcionamiento de la iglesia.",
+      "Hazlo con gozo y no por compromiso o temor a quedar mal."
+    ],
+    examples: [
+      "Ayudar en la limpieza, orden y preparación física del templo.",
+      "Asistir a familias de la iglesia en mudanzas o reparaciones prácticas del hogar.",
+      "Preparar la logística física antes de un servicio dominical o evento especial."
+    ],
+    illustration: "src/assets/illustrations/Servir.png",
   },
   {
     id: 'misericordia',
@@ -63,9 +94,17 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Protege tu salud emocional para no absorber el dolor ajeno de manera destructiva.",
+      "Acompaña en silencio cuando falten palabras; tu sola presencia es de gran ayuda.",
+      "Conecta a las personas con ayuda pastoral o profesional si el problema supera tus capacidades."
+    ],
+    examples: [
+      "Visitar y orar por hermanos enfermos en hospitales o que están pasando por un duelo.",
+      "Acompañar emocionalmente a alguien que pasa por momentos difíciles de desánimo.",
+      "Movilizar ayuda práctica (comida, transporte) para familias afligidas."
+    ],
+    illustration: "src/assets/illustrations/Misericordia.png",
   },
   {
     id: 'exhortar',
@@ -74,9 +113,17 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Asegúrate de que tu corrección siempre vaya acompañada de consuelo e instrucciones claras de acción.",
+      "Usa la Escritura con empatía y amor, no como una herramienta de juicio.",
+      "Guía a las personas a definir pasos concretos para su restauración espiritual."
+    ],
+    examples: [
+      "Brindar consejería bíblica a hermanos o parejas con problemas personales.",
+      "Alentar a un servidor o líder desanimado a continuar firmemente en su llamado.",
+      "Guiar a alguien a confesar un pecado y trazar un camino de restauración."
+    ],
+    illustration: "src/assets/illustrations/Exhortar.png",
   },
   {
     id: 'pastor',
@@ -85,9 +132,17 @@ export const gifts = [
     questionCount: 6,
     maxRawScore: 30,
     minRawScore: 6,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Enfócate en el cuidado y crecimiento personalizado (discipulado uno a uno).",
+      "Establece límites saludables en tus relaciones ministeriales para no sobrecargarte.",
+      "Ayuda a las personas a integrarse en grupos pequeños de conexión para que no se sientan solas."
+    ],
+    examples: [
+      "Dirigir y cuidar con dedicación de un grupo de conexión semanal.",
+      "Dar seguimiento telefónico o presencial a hermanos que se han ausentado de las reuniones.",
+      "Mentorear espiritualmente a nuevos creyentes para ayudarles a dar sus primeros pasos de fe."
+    ],
+    illustration: "src/assets/illustrations/Pastor.png",
   },
   {
     id: 'administrar',
@@ -96,9 +151,17 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Recuerda que las personas son más importantes que los procesos y la perfección del plan.",
+      "Comunica siempre el propósito detrás de cada regla o directriz administrativa.",
+      "Confía y delega responsabilidades con instrucciones claras y plazos realistas."
+    ],
+    examples: [
+      "Diseñar el presupuesto o plan de trabajo de un ministerio principal.",
+      "Coordinar la logística, horarios y comisiones para un congreso o evento eclesial.",
+      "Organizar los turnos, asignaciones y recursos del equipo de servicio de los domingos."
+    ],
+    illustration: "src/assets/illustrations/Administrar.png",
   },
   {
     id: 'presidir_liderazgo',
@@ -107,9 +170,17 @@ export const gifts = [
     questionCount: 4,
     maxRawScore: 20,
     minRawScore: 4,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Lidera con el ejemplo y mantén una actitud de servicio humilde al estilo de Jesús.",
+      "Enfócate en identificar y desarrollar el liderazgo de las personas que te rodean.",
+      "Comunica la visión del proyecto con claridad, paciencia y entusiasmo contagioso."
+    ],
+    examples: [
+      "Guiar al equipo de líderes de un ministerio principal de la iglesia.",
+      "Tomar decisiones estratégicas de crecimiento en momentos de transición o crisis del grupo.",
+      "Envisionar e inspirar a la iglesia o a un grupo a sumarse a nuevas iniciativas misioneras."
+    ],
+    illustration: "src/assets/illustrations/Liderazgo.png",
   },
   {
     id: 'discernimiento',
@@ -118,9 +189,16 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Evita volverte una persona desconfiada, hipercrítica o sospechosa con los demás.",
+      "Contrasta siempre tus impresiones internas con la verdad objetiva de la Palabra de Dios.",
+      "Busca edificar y alertar sabiamente y en privado, canalizando tus observaciones con el liderazgo."
+    ],
+    examples: [
+      "Identificar errores doctrinales sutiles en libros, videos o prédicas populares que circulan.",
+      "Ayudar a resolver un malentendido grupal identificando las verdaderas motivaciones en juego."
+    ],
+    illustration: "src/assets/illustrations/Discernimiento.png",
   },
   {
     id: 'ciencia_conocimiento',
@@ -129,9 +207,17 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Estudia no solo para acumular información doctrinal, sino para edificar espiritualmente a la iglesia.",
+      "Comunica las verdades bíblicas con palabras sencillas y prácticas que todos entiendan.",
+      "Sé paciente con los hermanos que no estudian o asimilan la doctrina a tu mismo ritmo."
+    ],
+    examples: [
+      "Investigar a fondo un tema teológico para aclarar dudas doctrinales en el grupo.",
+      "Redactar guías de estudio teológico o materiales de lectura para grupos de conexión.",
+      "Aclarar con paciencia y precisión un malentendido doctrinal en una conversación."
+    ],
+    illustration: "src/assets/illustrations/Conocimiento.png",
   },
   {
     id: 'sabiduria',
@@ -140,9 +226,16 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Escucha por completo la situación de la persona antes de ofrecer tu consejo.",
+      "Busca la aplicación más simple, bíblica y directa para los problemas cotidianos de la vida.",
+      "Mantén siempre una actitud humilde, recordando que la sabiduría proviene del Señor."
+    ],
+    examples: [
+      "Encontrar una solución sensata y basada en principios bíblicos ante un conflicto entre ministerios.",
+      "Aconsejar a un hermano sobre cómo tomar decisiones sabias sobre su futuro laboral o académico."
+    ],
+    illustration: "src/assets/illustrations/Sabiduria.png",
   },
   {
     id: 'ensenanza',
@@ -151,9 +244,17 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Sé sumamente ordenado y estructurado al preparar tus clases o exposiciones.",
+      "Busca analogías e ilustraciones de la vida cotidiana que hagan sencillo lo complejo.",
+      "Modelar en tu propia conducta y vida diaria la verdad que estás enseñando a otros."
+    ],
+    examples: [
+      "Explicar un pasaje bíblico complejo en un grupo de conexión de forma interactiva y legible.",
+      "Dictar cursos sistemáticos de doctrina básica o clases de formación de la iglesia.",
+      "Preparar lecciones didácticas adaptadas a diferentes edades o niveles de madurez espiritual."
+    ],
+    illustration: "src/assets/illustrations/Ensenanza.png",
   },
   {
     id: 'profecia',
@@ -162,9 +263,16 @@ export const gifts = [
     questionCount: 4,
     maxRawScore: 20,
     minRawScore: 4,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Habla con valentía y convicción, pero con una profunda compasión y humildad por la iglesia.",
+      "Cuida que tu mensaje confronte con la verdad de las Escrituras para edificar y no para herir destructivamente.",
+      "Asegúrate de que tus palabras siempre apunten a centrar los corazones en Cristo Jesús."
+    ],
+    examples: [
+      "Predicar un mensaje bíblico confrontador que inspire un arrepentimiento profundo en la congregación.",
+      "Dar una palabra de exhortación oportuna y directa frente a la autocomplacencia espiritual del grupo."
+    ],
+    illustration: "src/assets/illustrations/Profecia.png",
   },
   {
     id: 'misionero_apostol',
@@ -173,8 +281,15 @@ export const gifts = [
     questionCount: 5,
     maxRawScore: 25,
     minRawScore: 5,
-    tips: null, // pendiente — ver docs/BRIEF.md
-    examples: null, // pendiente — ver docs/BRIEF.md
-    illustration: null, // pendiente — Fase 2 (UI)
+    tips: [
+      "Rodéate de personas con dones complementarios de administración y pastoreo para sostener lo que inicias.",
+      "Mantén una mentalidad flexible y adaptable a los cambios culturales y de entorno.",
+      "No descuides tu vida espiritual personal en el afán por fundar nuevas iniciativas."
+    ],
+    examples: [
+      "Coordinar y liderar el inicio de un nuevo grupo de estudio bíblico en una zona no alcanzada.",
+      "Estructurar un equipo de pioneros para plantar o abrir una nueva iglesia local de la red."
+    ],
+    illustration: "src/assets/illustrations/Apostol.png",
   },
 ];

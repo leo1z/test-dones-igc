@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Dones Espirituales - IGC Tegucigalpa</title>
+  <meta name="description" content="Descubre tus dones espirituales y cómo puedes servir en la Iglesia Gran Comisión Tegucigalpa. Test 100% estático y optimizado para móvil.">
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="src/assets/logos/IGC.png" alt="Logo IGC" class="logo-igc">
+      </div>
+      <nav class="nav-links">
+        <button id="nav-btn-back" class="nav-btn-link" style="display: none;">Volver</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+
+    <!-- SCREEN 1: Welcome / Bienvenida (Replicando Ref1.png) -->
+    <section id="screen-welcome" class="screen screen-fade active">
+      <div class="welcome-container">
+        <div class="welcome-illustration-wrapper">
+          <img src="src/assets/illustrations/Apostol.png" alt="Ilustración Dones" class="welcome-illustration">
+        </div>
+        
+        <h2 class="welcome-brand-title">DONES<br>ESPIRITUALES</h2>
+        
+        <div class="welcome-actions">
+          <button id="btn-start" class="btn btn-primary btn-large btn-block">Descubrir</button>
+          <button id="nav-btn-glossary-welcome" class="btn btn-navy btn-large btn-block">Aprender</button>
+          <button id="btn-view-results" class="btn btn-secondary btn-large btn-block" style="display: none;">Ver Resultados</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: Test Wizard / Formulario (Replicando Ref2.png) -->
+    <section id="screen-test" class="screen screen-fade">
+      <div class="test-container">
+        <!-- Progress bar -->
+        <div class="progress-section">
+          <div class="progress-labels">
+            <span class="progress-scene-title" id="test-scene-indicator">Parte 1</span>
+            <span class="progress-percent-text" id="test-percent-indicator">0% Completado</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="test-progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- Scene Banner Card -->
+        <div class="scene-card" id="scene-banner">
+          <img src="src/assets/illustrations/Discernimiento.png" alt="Parte Ilustración" class="scene-banner-img" id="scene-illustration">
+          <div class="scene-banner-text">
+            <h3 class="scene-banner-title" id="scene-part-title">Parte 1</h3>
+          </div>
+        </div>
+
+        <!-- Scale legend (once per scene, not repeated per situation) -->
+        <div class="scale-legend">
+          <span>No me identifico</span>
+          <span>Así soy yo</span>
+        </div>
+
+        <!-- Situations / Questions list -->
+        <div class="questions-list" id="questions-container">
+          <!-- Dynamic rendering of situations with circular index and pill scales -->
+        </div>
+
+        <!-- Wizard Navigation -->
+        <div class="test-navigation">
+          <div class="navigation-hint" id="nav-hint">Por favor responde todas las preguntas de esta parte</div>
+          <div class="test-navigation-buttons">
+            <button id="btn-prev" class="btn btn-secondary">
+              <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg); margin-left: 0; margin-right: 8px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              Atrás
+            </button>
+            <button id="btn-next" class="btn btn-primary" disabled>
+              Siguiente
+              <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: Results / Resultados -->
+    <section id="screen-results" class="screen screen-fade">
+      <div class="results-container">
+        <div class="results-header">
+          <span class="results-badge">RESULTADO OFICIAL</span>
+          <h2>Tus Dones Espirituales</h2>
+          <p>Dios te ha dotado de capacidades únicas para servir a su iglesia. Aquí están tus resultados.</p>
+        </div>
+
+        <!-- Bento Grid: Top 3 Dones -->
+        <div class="bento-title">
+          <h3>🏆 Dones Principales (Top 3)</h3>
+        </div>
+        <div class="bento-grid" id="top-gifts-container">
+          <!-- Dynamic Bento items: Rank 1 (Large), Rank 2 (Medium), Rank 3 (Small) -->
+        </div>
+
+        <!-- Remaining Dones and Detail Graph -->
+        <div class="results-split">
+          <!-- Remaining 12 Dones list -->
+          <div class="remaining-section">
+            <h3 class="section-title">💡 Otros Dones en ti</h3>
+            <div class="remaining-list" id="remaining-gifts-container">
+              <!-- Dynamic list of 12 remaining gifts -->
+            </div>
+          </div>
+
+          <!-- Sharing panel & Reset -->
+          <div class="actions-section">
+            <div class="card share-card">
+              <h3>📸 Compartir en tus Historias</h3>
+              <p>Descarga una imagen (1080×1920) optimizada para compartir tus resultados en Instagram o Facebook Stories.</p>
+              
+              <div class="share-options">
+                <button class="btn btn-share btn-primary" data-variant="bento">
+                  <span class="share-icon">📊</span>
+                  <div class="share-btn-text">
+                    <strong>Variante 1: Top 3 Bento</strong>
+                    <span>Tus 3 dones en formato Bento</span>
+                  </div>
+                </button>
+                
+                <button class="btn btn-share btn-primary" data-variant="highlight">
+                  <span class="share-icon">🥇</span>
+                  <div class="share-btn-text">
+                    <strong>Variante 2: Don Destacado</strong>
+                    <span>Detalle de tu don #1 con descripción</span>
+                  </div>
+                </button>
+                
+                <button class="btn btn-share btn-primary" data-variant="viral">
+                  <span class="share-icon">✨</span>
+                  <div class="share-btn-text">
+                    <strong>Variante 3: Invitación Viral</strong>
+                    <span>"Este es mi don, descubre el tuyo"</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="card reset-card">
+              <h3>🔄 Repetir el Test</h3>
+              <p>Elimina permanentemente tus respuestas actuales de este dispositivo para comenzar de nuevo.</p>
+              <button id="btn-reset" class="btn btn-danger">Reiniciar Test</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: View All Gifts List (Glossary) -->
+    <section id="screen-glossary" class="screen screen-fade">
+      <div class="glossary-container">
+        <div class="glossary-header">
+          <h2>Aprender de los Dones</h2>
+          <p>Explora el catálogo completo de los 15 dones motivacionales y sus propósitos bíblicos.</p>
+          
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="glossary-search" placeholder="Buscar un don, palabra clave o pasaje bíblico...">
+          </div>
+        </div>
+
+        <div class="glossary-grid" id="glossary-grid">
+          <!-- Dynamic cards of the 15 gifts -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Detail Modal -->
+  <div id="gift-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-body" id="gift-modal-body">
+        <!-- Rendered dynamically (Replicando Ref3.png) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p class="footer-copy">&copy; 2026 Iglesia Gran Comisión Tegucigalpa</p>
+      <div class="developed-by">
+        <span>Desarrollado por</span>
+        <img src="src/assets/logos/antimateria.png" alt="Logo Antimateria" class="logo-antimateria">
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="src/js/app.js"></script>
+</body>
+</html>
