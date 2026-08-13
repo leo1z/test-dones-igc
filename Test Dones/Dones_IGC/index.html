@@ -6,6 +6,8 @@
   <title>Test de Dones Espirituales - IGC Tegucigalpa</title>
   <meta name="description" content="Descubre tus dones espirituales y cómo puedes servir en la Iglesia Gran Comisión Tegucigalpa. Test 100% estático y optimizado para móvil.">
   <link rel="stylesheet" href="src/css/styles.css">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
@@ -121,8 +123,14 @@
           <!-- Sharing panel & Reset -->
           <div class="actions-section">
             <div class="card share-card">
-              <h3>📸 Compartir en tus Historias</h3>
-              <p>Descarga una imagen (1080×1920) optimizada para compartir tus resultados en Instagram o Facebook Stories.</p>
+              <h3>📲 Compartir Resultados</h3>
+              <p>Envía tus resultados directamente por WhatsApp, redes o genera una imagen 1080×1920 para tus historias.</p>
+
+              <button id="btn-native-share" class="btn btn-primary btn-block mb-4" style="margin-bottom: 16px; background-color: var(--primary); font-size: 1.1rem; gap: 8px;">
+                <span>🔗</span> Compartir por WhatsApp / Enlace
+              </button>
+
+              <div class="share-subtitle" style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--navy); opacity: 0.7; margin-bottom: 10px;">📸 Historias de Instagram / Facebook</div>
               
               <div class="share-options">
                 <button class="btn btn-share btn-primary" data-variant="bento">

@@ -348,6 +348,17 @@ function sendBridgeCompletionMessage(payload) {
   }
 }
 
+function triggerConfetti() {
+  if (typeof window.confetti === 'function') {
+    window.confetti({
+      particleCount: 120,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ['#336cdd', '#D4AF37', '#E05A2B', '#10B981']
+    });
+  }
+}
+
 function finishTest() {
   const calculation = runFullCalculation(state.answers);
   
@@ -372,6 +383,7 @@ function finishTest() {
   
   renderResults(calculation);
   showScreen('results');
+  triggerConfetti();
 }
 
 function renderResults(calculation) {
@@ -471,7 +483,7 @@ function openGiftModal(giftId) {
   let tipsHTML = '';
   if (g.tips && g.tips.length > 0) {
     tipsHTML = `
-      <div class="modal-section">
+      <div class="modal-section objective-callout">
         <span class="modal-section-title">💡 Consejos para florecer</span>
         <ul class="modal-list">
           ${g.tips.map(t => `<li>${t}</li>`).join('')}
@@ -499,7 +511,7 @@ function openGiftModal(giftId) {
     
     <div class="modal-gift-tag">${g.name.toUpperCase()}</div>
     
-    ${currentPct !== null ? `<span class="bento-pct-badge" style="margin-top:-10px;">${currentPct}% afinidad actual</span>` : ''}
+    ${currentPct !== null ? `<span class="bento-pct-badge" style="margin-top:-10px; font-size: 0.85rem; padding: 4px 14px;">${currentPct}% afinidad detectada</span>` : ''}
     
     <p class="modal-desc">${g.description}</p>
     
@@ -640,6 +652,36 @@ function init() {
   } else {
     showScreen('welcome');
   }
+}
+
+// Integración compartir nativo Web Share API (WhatsApp / Redes)
+const btnNativeShare = document.getElementById('btn-native-share');
+if (btnNativeShare) {
+  btnNativeShare.addEventListener('click', async () => {
+    const stored = loadStoredResult();
+    if (!stored) return;
+    const calculation = runFullCalculation(stored.answers);
+    const top1 = calculation.top3[0];
+    const shareData = {
+      title: 'Mis Dones Espirituales - IGC Tegucigalpa',
+      text: `¡Hola! Mi don principal es ${top1.name} (${top1.percentage}% de afinidad). Descubre tus dones espirituales en la Iglesia Gran Comisión Tegucigalpa:`,
+      url: window.location.href
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log('Compartir cancelado o no soportado:', err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+        alert('¡Enlace y resultado copiados al portapapeles!');
+      } catch (err) {
+        alert('Copia este enlace para compartir: ' + window.location.href);
+      }
+    }
+  });
 }
 
 // Integración historias
