@@ -289,9 +289,9 @@ function renderScene() {
   // Renderizar Mapa de Ruta
   renderJourneyRoadmap();
   
-  // Actualizar textos y banner
+  // Actualizar textos y banner limpiamente (Imagen 1 fix)
   if (el.testSceneIndicator) el.testSceneIndicator.textContent = `Parte ${sceneId}`;
-  if (el.scenePartTitle) el.scenePartTitle.textContent = `Parte ${sceneId}: ${STATION_NAMES[sceneId] || ''}`;
+  if (el.scenePartTitle) el.scenePartTitle.textContent = `Parte ${sceneId}`;
   
   if (el.sceneIllustration) {
     el.sceneIllustration.src = SCENE_ILLUSTRATIONS[sceneId] || "src/assets/illustrations/Discernimiento.png";
@@ -370,6 +370,16 @@ function renderScene() {
 
     scaleRow.appendChild(pillsContainer);
     scaleWrapper.appendChild(scaleRow);
+
+    // Leyenda de extremos por pregunta (Imagen 2 style: No me identifico ... Así soy yo)
+    const scaleSubLegend = document.createElement('div');
+    scaleSubLegend.className = 'scale-sub-legend';
+    scaleSubLegend.innerHTML = `
+      <span class="sub-legend-left">No me identifico</span>
+      <span class="sub-legend-right">Así soy yo</span>
+    `;
+    scaleWrapper.appendChild(scaleSubLegend);
+
     itemEl.appendChild(scaleWrapper);
     
     // Fila de estado para alertas de sesgo en valor 3

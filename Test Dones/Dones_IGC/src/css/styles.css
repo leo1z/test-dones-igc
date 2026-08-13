@@ -351,26 +351,27 @@ body {
 
 /* Banner de escena (Parte X - Ref2) */
 .scene-card {
-  background-color: var(--primary);
-  border-radius: var(--radius-md);
-  height: 110px;
-  padding: 0 24px;
+  background: linear-gradient(135deg, #336cdd 0%, #2251ad 100%);
+  border-radius: var(--radius-lg);
+  min-height: 100px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   gap: 20px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 8px 24px rgba(51, 108, 221, 0.22);
 }
 
 .scene-banner-img {
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
 }
 
 .scene-banner-title {
-  font-size: 1.8rem;
+  font-size: 1.65rem;
   font-weight: 900;
-  color: var(--navy);
+  color: #ffffff;
 }
 
 /* Lista de situaciones */
@@ -380,41 +381,62 @@ body {
   gap: 24px;
 }
 
+/* Tarjeta Blanca Flotante Elevada (Estilo Slothui / Imágenes 3 y 4) */
 .situation-item {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(15, 15, 49, 0.06);
+  gap: 16px;
+  padding: 24px 20px 20px;
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(15, 15, 49, 0.07);
+  box-shadow: 0 10px 30px -6px rgba(15, 15, 49, 0.06), 0 4px 12px -2px rgba(15, 15, 49, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.situation-item:hover {
+  box-shadow: 0 14px 36px -6px rgba(51, 108, 221, 0.12);
 }
 
 .situation-header-row {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
 }
 
 .situation-number {
-  background-color: #ffffff;
-  color: var(--navy);
-  font-size: 0.85rem;
+  background-color: rgba(51, 108, 221, 0.12);
+  color: var(--primary);
+  font-size: 0.9rem;
   font-weight: 900;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(51, 108, 221, 0.1);
 }
 
 .situation-text {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.98rem;
+  font-weight: 800;
   color: var(--navy);
-  line-height: 1.35;
+  line-height: 1.45;
   padding-top: 3px;
+}
+
+/* Leyenda de Extremos por Pregunta (Imagen 2 style) */
+.scale-sub-legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  font-weight: 750;
+  color: var(--text-muted);
+  padding: 6px 4px 0 4px;
+  letter-spacing: -0.01em;
 }
 
 /* Leyenda de la escala — una sola vez por escena, no repetida por situación */

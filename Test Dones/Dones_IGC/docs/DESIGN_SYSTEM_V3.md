@@ -60,3 +60,12 @@ Cada ítem de pregunta incluye 5 píldoras táctiles numéricas sobre una barra 
   * `.icon-arrow`: Dimensiones fijas `20px × 20px` sin desbordamiento sobre el texto.
   * Botón Siguiente: Gradiente de 135° (`#336cdd` a `#2251ad`), sombra de elevación `0 8px 24px`, destello *shimmer* y animación de flecha `translateX(4px)`.
 * **Ruta de Evaluación:** Titular del módulo nombrado **"Conoce tus dones"** con partes nombradas neutralmente (`Parte 1` ... `Parte 10`).
+
+---
+
+## 🃏 5. Tarjetas de Pregunta Elevadas (Estilo Slothui - V6)
+
+* **`.situation-item`:** Tarjeta blanca flotante elevada (`background: #ffffff`, `border-radius: 18px`, `box-shadow: 0 10px 30px -6px rgba(15, 15, 49, 0.06)`).
+* **Insignia de Pregunta (`.situation-number`):** Círculo con fondo azul suave (`rgba(51, 108, 221, 0.12)`) y número en azul real (`#336cdd`).
+* **Leyenda Inferior (`.scale-sub-legend`):** `No me identifico` (izquierda) y `Así soy yo` (derecha) en tipografía suave (`font-size: 0.74rem`, `font-weight: 750`, `color: var(--text-muted)`) por debajo del riel de píldoras.
+* **Banner de Escena (`.scene-card`):** Gradiente azul real limpio con título conciso `Parte #`.
