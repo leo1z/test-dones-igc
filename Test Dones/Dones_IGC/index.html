@@ -8,8 +8,14 @@
   <link rel="stylesheet" href="src/css/styles.css">
   <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- Driver.js Tour CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
 </head>
 <body>
+  <!-- Ambient Blurred Glow Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
 
   <!-- Header -->
   <header class="main-header">
@@ -43,14 +49,26 @@
       </div>
     </section>
 
-    <!-- SCREEN 2: Test Wizard / Formulario (Replicando Ref2.png) -->
+    <!-- SCREEN 2: Test Wizard / Formulario — Web App Journey -->
     <section id="screen-test" class="screen screen-fade">
       <div class="test-container">
-        <!-- Progress bar -->
-        <div class="progress-section">
+        <!-- Mapa de Ruta Espiritual / Estaciones (Estilo Noom / Duolingo) -->
+        <div class="journey-roadmap-card" id="journey-roadmap-card">
+          <div class="journey-header">
+            <span class="journey-badge">⚡ RUTA ESPIRITUAL</span>
+            <span class="journey-percent" id="test-percent-indicator">0% Completado</span>
+          </div>
+          <div class="journey-nodes-scroll" id="journey-nodes-scroll">
+            <div class="journey-nodes-track" id="journey-nodes-container">
+              <!-- Renderizado dinámico de las 10 estaciones de la ruta -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress bar secundaria -->
+        <div class="progress-section" style="display: none;">
           <div class="progress-labels">
             <span class="progress-scene-title" id="test-scene-indicator">Parte 1</span>
-            <span class="progress-percent-text" id="test-percent-indicator">0% Completado</span>
           </div>
           <div class="progress-track">
             <div class="progress-fill" id="test-progress-bar"></div>
@@ -210,6 +228,26 @@
       </div>
     </div>
   </footer>
+
+  <!-- Floating Glass Bottom Navigation Bar (Estilo Fluentify, Monday, Zakarya UI) -->
+  <nav class="bottom-nav-glass" id="bottom-nav">
+    <button class="bottom-nav-item active" data-target="welcome" id="nav-item-welcome">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span>Inicio</span>
+    </button>
+    <button class="bottom-nav-item" data-target="test" id="nav-item-test">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+      <span>Viaje</span>
+    </button>
+    <button class="bottom-nav-item" data-target="glossary" id="nav-item-glossary">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0.5-5.5Z"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      <span>Dones</span>
+    </button>
+    <button class="bottom-nav-item" data-target="results" id="nav-item-results" style="display: none;">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+      <span>Resultados</span>
+    </button>
+  </nav>
 
   <!-- Scripts -->
   <script type="module" src="src/js/app.js"></script>

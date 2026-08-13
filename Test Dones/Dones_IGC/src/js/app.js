@@ -127,7 +127,22 @@ function clearStorage() {
 }
 
 // ---------------------------------------------------------------------------
-// Navegación entre Pantallas (SPA Transitions)
+// Nombres de las 10 estaciones de la Ruta Espiritual
+const STATION_NAMES = {
+  1: "1. Alcance",
+  2: "2. Discernimiento",
+  3: "3. Profecía",
+  4: "4. Exhortación",
+  5: "5. Gestión",
+  6: "6. Compasión",
+  7: "7. Enseñanza",
+  8: "8. Pastoreo",
+  9: "9. Servicio",
+  10: "10. Fe"
+};
+
+// ---------------------------------------------------------------------------
+// Navegación entre Pantallas (SPA Transitions & Bottom Glass Nav)
 // ---------------------------------------------------------------------------
 function showScreen(screenKey) {
   // Ocultar todas las pantallas con desvanecimiento
@@ -149,6 +164,22 @@ function showScreen(screenKey) {
     targetScreen.classList.add('active');
   }
 
+  // Sincronizar Barra Flotante Inferior Glassmorphic
+  document.querySelectorAll('.bottom-nav-item').forEach(item => {
+    if (item.dataset.target === screenKey) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+
+  // Mostrar tab de resultados si el test está completo
+  const stored = loadStoredResult();
+  const navResultsBtn = document.getElementById('nav-item-results');
+  if (navResultsBtn) {
+    navResultsBtn.style.display = (stored && isTestComplete(stored.answers)) ? 'flex' : 'none';
+  }
+
   // Configurar botón "Volver/Inicio" del header dinámicamente
   if (screenKey === 'welcome') {
     el.navBtnBack.style.display = 'none';
@@ -162,6 +193,81 @@ function showScreen(screenKey) {
   }
   
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---------------------------------------------------------------------------
+// Renderizado del Mapa de Ruta Espiritual (10 Estaciones Noom/Duolingo style)
+// ---------------------------------------------------------------------------
+function renderJourneyRoadmap() {
+  const container = document.getElementById('journey-nodes-container');
+  if (!container) return;
+
+  container.innerHTML = '';
+  for (let sId = 1; sId <= 10; sId++) {
+    const sceneQuestions = situations.filter(s => s.sceneId === sId);
+    const isCompleted = sceneQuestions.every(q => state.answers[q.id]);
+    const isCurrent = state.currentScene === sId;
+
+    let nodeStateClass = 'locked';
+    let iconContent = `🔒`;
+    if (isCompleted) {
+      nodeStateClass = 'completed';
+      iconContent = `✓`;
+    } else if (isCurrent) {
+      nodeStateClass = 'current';
+      iconContent = `${sId}`;
+    }
+
+    const nodeEl = document.createElement('div');
+    nodeEl.className = `journey-node ${nodeStateClass}`;
+    nodeEl.title = `Estación ${sId}: ${STATION_NAMES[sId]}`;
+
+    nodeEl.innerHTML = `
+      <div class="node-circle">${iconContent}</div>
+      <span class="node-label">${STATION_NAMES[sId]}</span>
+    `;
+
+    // Permitir navegar a estaciones ya respondidas o la actual
+    nodeEl.addEventListener('click', () => {
+      if (isCompleted || isCurrent) {
+        state.currentScene = sId;
+        renderScene();
+      }
+    });
+
+    container.appendChild(nodeEl);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Tour Guiado Interactivo con Driver.js
+// ---------------------------------------------------------------------------
+function startDriverTour() {
+  if (typeof window.driver === 'undefined') return;
+
+  const driverObj = window.driver.js.driver({
+    showProgress: true,
+    animate: true,
+    doneBtnText: '¡Entendido!',
+    nextBtnText: 'Siguiente ➔',
+    prevBtnText: '← Atrás',
+    steps: [
+      { 
+        element: '#journey-roadmap-card', 
+        popover: { title: '⚡ Ruta Espiritual', description: 'Aquí avanzas a través de 10 estaciones. Cada una explora distintas facetas de tus dones.' } 
+      },
+      { 
+        element: '#scene-banner', 
+        popover: { title: '🎯 Estación Actual', description: 'Cada parte contiene situaciones prácticas para evaluar tu afinidad de servicio.' } 
+      },
+      { 
+        element: '#questions-container', 
+        popover: { title: '🔢 Escala de Respuestas 1 al 5', description: 'Sé 100% sincero. Selecciona 1 (Casi nunca) a 5 (Casi siempre). ¡Evita los neutrales!' } 
+      }
+    ]
+  });
+
+  driverObj.drive();
 }
 
 // Determinar el primer número de escena que no está completo
@@ -180,9 +286,12 @@ function getFirstUnansweredScene() {
 function renderScene() {
   const sceneId = state.currentScene;
   
+  // Renderizar Mapa de Ruta
+  renderJourneyRoadmap();
+  
   // Actualizar textos y banner
-  el.testSceneIndicator.textContent = `Parte ${sceneId}`;
-  el.scenePartTitle.textContent = `Parte ${sceneId}`;
+  if (el.testSceneIndicator) el.testSceneIndicator.textContent = `Parte ${sceneId}`;
+  if (el.scenePartTitle) el.scenePartTitle.textContent = `Parte ${sceneId}: ${STATION_NAMES[sceneId] || ''}`;
   
   if (el.sceneIllustration) {
     el.sceneIllustration.src = SCENE_ILLUSTRATIONS[sceneId] || "src/assets/illustrations/Discernimiento.png";
@@ -581,6 +690,12 @@ el.btnStart.addEventListener('click', () => {
   state.currentScene = getFirstUnansweredScene();
   renderScene();
   showScreen('test');
+
+  // Lanzar tour guiado si es la primera vez
+  if (localStorage.getItem('dones_igc_tour_done') !== 'true') {
+    setTimeout(startDriverTour, 400);
+    localStorage.setItem('dones_igc_tour_done', 'true');
+  }
 });
 
 if (el.navBtnGlossaryWelcome) {
@@ -589,6 +704,30 @@ if (el.navBtnGlossaryWelcome) {
     showScreen('glossary');
   });
 }
+
+// Botones de la Barra Flotante Inferior Glassmorphic
+document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    if (target === 'test') {
+      state.currentScene = getFirstUnansweredScene();
+      renderScene();
+      showScreen('test');
+    } else if (target === 'glossary') {
+      renderGlossary();
+      showScreen('glossary');
+    } else if (target === 'results') {
+      const stored = loadStoredResult();
+      if (stored && isTestComplete(stored.answers)) {
+        const calculation = runFullCalculation(stored.answers);
+        renderResults(calculation);
+        showScreen('results');
+      }
+    } else {
+      showScreen('welcome');
+    }
+  });
+});
 
 el.btnViewResults.addEventListener('click', () => {
   const stored = loadStoredResult();

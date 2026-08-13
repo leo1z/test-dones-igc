@@ -46,6 +46,7 @@ Archivos tocados: `index.html`, `src/css/styles.css`, `src/js/app.js`. `src/js/s
 *   [x] Fase 5: Canvas Share — Lógica de canvas en `canvas-share.js` para descarga de historias.
 *   [x] Fase 6: QA/Optimización Móvil — Ejecución de suite de tests y optimización responsiva fina (cero scrollbar horizontal).
 *   [x] Fase 7: Rediseño UI/UX Premium (v3) — Ampliación de logos de marca (Header: 64px, Footer: 30px), escala de encuestas numérica interactiva 1 a 5 dentro de píldoras con feedback táctil spring/bounce, botones con efecto destello *shimmer*, animación de confetti y Web Share API nativo.
+*   [x] Fase 8: Web App Journey V4 — Transformación completa a Web App interactiva estilo Fluentify/Duolingo/Noom con Barra de Navegación Flotante Inferior Glassmorphic (`#bottom-nav`), Mapa de Ruta Espiritual de 10 Estaciones (`#journey-roadmap`), Tour Guiado con Driver.js, Ilustraciones Vivas `doodle-float` y orbes de luz desenfocadas.
 
 ## Estado Técnico de Componentes
 *   `Dones_IGC/index.html` — Contenedor estructurado de la SPA, header minimalista, secciones dinámicas y modal.
