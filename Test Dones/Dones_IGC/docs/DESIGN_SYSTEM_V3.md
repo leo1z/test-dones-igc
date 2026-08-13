@@ -1,6 +1,6 @@
-# Design System v3 - Dones IGC (Iglesia Gran Comisión Tegucigalpa)
+# Design System v5 - Dones IGC (Iglesia Gran Comisión Tegucigalpa)
 
-Este documento registra los tokens de diseño, componentes, micro-interacciones y reglas visuales aplicadas en la versión 3 de **Dones IGC**.
+Este documento registra los tokens de diseño, componentes, micro-interacciones y reglas visuales aplicadas en la versión 5 de **Dones IGC**.
 
 ---
 
@@ -28,41 +28,35 @@ Este documento registra los tokens de diseño, componentes, micro-interacciones 
 
 ---
 
-## 📐 2. Escala de Logos y Dimensiones
+## 📐 2. Escala de Logos y Dimensiones V5
 
 * **Header Main Logo (`.logo-igc`):**
-  * Altura: `64px` (`max-width: 240px`).
-  * Altura de la barra header: `88px`.
-  * Filtro: `drop-shadow(0 2px 8px rgba(15, 15, 49, 0.06))`.
+  * Altura: `76px` (`max-width: 280px`).
+  * Altura de la barra header: `96px`.
+  * Filtro: `drop-shadow(0 3px 10px rgba(15, 15, 49, 0.08))`.
 * **Footer Logo (`.logo-antimateria`):**
   * Altura: `32px`.
-  * Filtro: `drop-shadow(0 1px 4px rgba(15, 15, 49, 0.1))`.
+  * Presente en el pie general y en el bloque crediticio del Home (`.welcome-actions`).
 
 ---
 
-## 🔢 3. Escala Numérica Interactiva (Píldoras 1 al 5)
+## 🔢 3. Escala de Afinidad con Gradiente Horizontal y Tooltip Flotante
 
-Cada ítem de pregunta incluye 5 píldoras táctiles con sus correspondientes dígitos centrados:
+Cada ítem de pregunta incluye 5 píldoras táctiles numéricas sobre una barra de gradiente horizontal (`rgba(100, 116, 139, 0.12)` a `rgba(51, 108, 221, 0.2)`):
 
-1. **`1` (No me Identifico):** Neutro pizarra suave (`#64748b`).
-2. **`2` (Poco):** Azul tenue (`#3b82f6`).
-3. **`3` (Algo):** Terracota Alerta (`#E05A2B`) + Alerta de sesgo ("Evita neutrales").
+1. **`1` (No me identifico):** Neutro Pizarra (`#64748b`).
+2. **`2` (Poco):** Azul Suave (`#3b82f6`).
+3. **`3` (A veces):** Terracota Alerta (`#E05A2B`) + Alerta de sesgo ("Evita 3").
 4. **`4` (Bastante):** Azul Intenso (`#2563eb`).
-5. **`5` (Así Soy Yo):** Azul Real Brand (`#336cdd`) + Halo de luz con escala 1.08x.
+5. **`5` (Así soy yo):** Azul Real Brand (`#336cdd`) + Halo de luz con escala 1.08x.
+
+* **Tooltip Flotante Popover (`.scale-tooltip-bubble`):** Burbuja flotante animada que aparece directamente encima del número seleccionado mostrando la etiqueta textual ("No me identifico", "Así soy yo", etc.).
 
 ---
 
-## 🚀 4. Botones Magnéticos con Efecto Shimmer
+## 🚀 4. Botones Magnéticos & Proporciones Flecha
 
-Los botones primarios (`.btn-primary`) cuentan con:
-* Gradiente de 135°: `linear-gradient(135deg, #336cdd 0%, #2251ad 100%)`.
-* Sombra de profundidad: `0 8px 24px rgba(51, 108, 221, 0.3)`.
-* Animación *shimmer*: Destello oblicuo que pasa periódicamente a 4s.
-* Flecha interactiva: Desplazamiento `translateX(4px)` al pasar el cursor.
-
----
-
-## 📱 5. Módulo de Compartir (Web Share API Nativo & Canvas)
-
-* **Botón Nativo:** Invoca `navigator.share()` para compartir directo a WhatsApp, Instagram, Telegram o copiar enlace con el resultado formateado.
-* **Canvas Stories (1080×1920):** Descarga local en 3 variantes (Bento Top 3, Don Destacado, Invitación Viral).
+* **Botones Siguiente / Atrás:**
+  * `.icon-arrow`: Dimensiones fijas `20px × 20px` sin desbordamiento sobre el texto.
+  * Botón Siguiente: Gradiente de 135° (`#336cdd` a `#2251ad`), sombra de elevación `0 8px 24px`, destello *shimmer* y animación de flecha `translateX(4px)`.
+* **Ruta de Evaluación:** Titular del módulo nombrado **"Conoce tus dones"** con partes nombradas neutralmente (`Parte 1` ... `Parte 10`).

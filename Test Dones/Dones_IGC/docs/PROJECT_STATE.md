@@ -47,6 +47,7 @@ Archivos tocados: `index.html`, `src/css/styles.css`, `src/js/app.js`. `src/js/s
 *   [x] Fase 6: QA/Optimización Móvil — Ejecución de suite de tests y optimización responsiva fina (cero scrollbar horizontal).
 *   [x] Fase 7: Rediseño UI/UX Premium (v3) — Ampliación de logos de marca (Header: 64px, Footer: 30px), escala de encuestas numérica interactiva 1 a 5 dentro de píldoras con feedback táctil spring/bounce, botones con efecto destello *shimmer*, animación de confetti y Web Share API nativo.
 *   [x] Fase 8: Web App Journey V4 — Transformación completa a Web App interactiva estilo Fluentify/Duolingo/Noom con Barra de Navegación Flotante Inferior Glassmorphic (`#bottom-nav`), Mapa de Ruta Espiritual de 10 Estaciones (`#journey-roadmap`), Tour Guiado con Driver.js, Ilustraciones Vivas `doodle-float` y orbes de luz desenfocadas.
+*   [x] Fase 9: Ajustes UI/UX V5 — Corrección proporcional de íconos de flecha `20px` en botones Atrás/Siguiente, ampliación del logo del header a `72px` (header `96px`), bloque crediticio `Desarrollado por Antimateria` en la pantalla de bienvenida, ruta nombrada `Conoce tus dones` (`Parte 1` ... `Parte 10`), y escala de afinidad numérica sobre gradiente horizontal continuo con tooltip flotante popover (sin emojis).
 
 ## Estado Técnico de Componentes
 *   `Dones_IGC/index.html` — Contenedor estructurado de la SPA, header minimalista, secciones dinámicas y modal.

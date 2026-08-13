@@ -127,18 +127,18 @@ function clearStorage() {
 }
 
 // ---------------------------------------------------------------------------
-// Nombres de las 10 estaciones de la Ruta Espiritual
+// Nombres neutrales de las 10 partes de la Ruta Espiritual
 const STATION_NAMES = {
-  1: "1. Alcance",
-  2: "2. Discernimiento",
-  3: "3. Profecía",
-  4: "4. Exhortación",
-  5: "5. Gestión",
-  6: "6. Compasión",
-  7: "7. Enseñanza",
-  8: "8. Pastoreo",
-  9: "9. Servicio",
-  10: "10. Fe"
+  1: "Parte 1",
+  2: "Parte 2",
+  3: "Parte 3",
+  4: "Parte 4",
+  5: "Parte 5",
+  6: "Parte 6",
+  7: "Parte 7",
+  8: "Parte 8",
+  9: "Parte 9",
+  10: "Parte 10"
 };
 
 // ---------------------------------------------------------------------------
@@ -326,20 +326,33 @@ function renderScene() {
     headerRow.appendChild(textEl);
     itemEl.appendChild(headerRow);
     
-    // Fila de la escala de píldoras (Ref2.png)
+    // Fila de la escala de píldoras con gradiente y tooltip flotante (Imagen 3 & 4 style)
+    const scaleWrapper = document.createElement('div');
+    scaleWrapper.className = 'situation-scale-wrapper';
+
+    const labels = {
+      1: "No me identifico",
+      2: "Poco",
+      3: "A veces (Evita 3)",
+      4: "Bastante",
+      5: "Así soy yo"
+    };
+
+    // Tooltip flotante tipo Imagen 4
+    const tooltip = document.createElement('div');
+    tooltip.className = `scale-tooltip-bubble ${answeredValue ? 'show' : ''}`;
+    tooltip.id = `tooltip-q-${q.id}`;
+    if (answeredValue) {
+      tooltip.textContent = labels[answeredValue];
+      tooltip.style.left = `${(answeredValue - 0.5) * 20}%`;
+    }
+    scaleWrapper.appendChild(tooltip);
+
     const scaleRow = document.createElement('div');
     scaleRow.className = 'situation-scale-row';
 
     const pillsContainer = document.createElement('div');
     pillsContainer.className = 'scale-pills';
-
-    const labels = {
-      1: "No me Identifico",
-      2: "Poco",
-      3: "Algo",
-      4: "Bastante",
-      5: "Así Soy Yo"
-    };
 
     for (let i = 1; i <= 5; i++) {
       const pill = document.createElement('button');
@@ -356,7 +369,8 @@ function renderScene() {
     }
 
     scaleRow.appendChild(pillsContainer);
-    itemEl.appendChild(scaleRow);
+    scaleWrapper.appendChild(scaleRow);
+    itemEl.appendChild(scaleWrapper);
     
     // Fila de estado para alertas de sesgo en valor 3
     const statusRow = document.createElement('div');
@@ -395,6 +409,21 @@ function handlePillClick(event, qid, val, itemEl) {
   pillsBox.querySelectorAll('.scale-pill').forEach(p => {
     p.classList.toggle('selected', Number(p.dataset.value) === val);
   });
+
+  // Actualizar Tooltip Flotante (Imagen 4 style)
+  const tooltipEl = document.getElementById(`tooltip-q-${qid}`);
+  if (tooltipEl) {
+    const labels = {
+      1: "No me identifico",
+      2: "Poco",
+      3: "A veces (Evita 3)",
+      4: "Bastante",
+      5: "Así soy yo"
+    };
+    tooltipEl.textContent = labels[val];
+    tooltipEl.style.left = `${(val - 0.5) * 20}%`;
+    tooltipEl.classList.add('show');
+  }
   
   // Mostrar u ocultar alerta de sesgo (si responde 3)
   const biasEl = document.getElementById(`bias-q-${qid}`);

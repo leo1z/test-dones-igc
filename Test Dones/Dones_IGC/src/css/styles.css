@@ -85,7 +85,7 @@ body {
 /* 4. CABECERA (LOGO FLOTANTE) */
 .main-header {
   background-color: transparent;
-  height: 88px;
+  height: 96px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -102,11 +102,11 @@ body {
 }
 
 .logo-igc {
-  height: 64px;
+  height: 76px;
   width: auto;
-  max-width: 240px;
+  max-width: 280px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(15, 15, 49, 0.06));
+  filter: drop-shadow(0 3px 10px rgba(15, 15, 49, 0.08));
 }
 
 .nav-links {
@@ -261,6 +261,11 @@ body {
 }
 
 .icon-arrow {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  flex-shrink: 0;
   transition: transform 0.2s ease;
 }
 
@@ -423,7 +428,49 @@ body {
   padding: 0 2px;
 }
 
-/* ESCALA DE PÍLDORAS — objetivo táctil de 44px mínimo (WCAG 2.5.5) */
+.situation-scale-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 28px; /* Espacio para la burbuja/tooltip flotante */
+}
+
+/* Tooltip Flotante Popover (Estilo Imagen 4) */
+.scale-tooltip-bubble {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background-color: var(--navy);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 850;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 14px rgba(15, 15, 49, 0.22);
+  pointer-events: none;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.25s ease;
+  z-index: 10;
+}
+
+.scale-tooltip-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: var(--navy) transparent transparent transparent;
+}
+
+.scale-tooltip-bubble.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ESCALA DE PÍLDORAS — Barra con Gradiente (Estilo Imagen 3) */
 .situation-scale-row {
   display: flex;
   align-items: center;
@@ -432,8 +479,12 @@ body {
 
 .scale-pills {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
+  background: linear-gradient(90deg, rgba(100, 116, 139, 0.12) 0%, rgba(59, 130, 246, 0.12) 25%, rgba(224, 90, 43, 0.15) 50%, rgba(37, 99, 235, 0.15) 75%, rgba(51, 108, 221, 0.2) 100%);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(15, 15, 49, 0.06);
 }
 
 .scale-pill {
