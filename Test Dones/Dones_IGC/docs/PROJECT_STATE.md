@@ -45,6 +45,7 @@ Archivos tocados: `index.html`, `src/css/styles.css`, `src/js/app.js`. `src/js/s
 *   [x] Fase 4: Integración SPA — Lógica de app.js con localStorage, wizard de escenas y glosario.
 *   [x] Fase 5: Canvas Share — Lógica de canvas en `canvas-share.js` para descarga de historias.
 *   [x] Fase 6: QA/Optimización Móvil — Ejecución de suite de tests y optimización responsiva fina (cero scrollbar horizontal).
+*   [x] Fase 7: Rediseño UI/UX Premium (v3) — Ampliación de logos de marca (Header: 64px, Footer: 30px), escala de encuestas numérica interactiva 1 a 5 dentro de píldoras con feedback táctil spring/bounce, botones con efecto destello *shimmer*, animación de confetti y Web Share API nativo.
 
 ## Estado Técnico de Componentes
 *   `Dones_IGC/index.html` — Contenedor estructurado de la SPA, header minimalista, secciones dinámicas y modal.

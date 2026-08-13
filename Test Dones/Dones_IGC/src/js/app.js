@@ -234,11 +234,12 @@ function renderScene() {
 
     for (let i = 1; i <= 5; i++) {
       const pill = document.createElement('button');
-      pill.className = `scale-pill ${answeredValue === i ? 'selected' : ''}`;
+      pill.className = `scale-pill scale-pill-${i} ${answeredValue === i ? 'selected' : ''}`;
       pill.dataset.value = i;
       pill.dataset.qid = q.id;
       pill.title = labels[i];
-      pill.setAttribute('aria-label', labels[i]);
+      pill.setAttribute('aria-label', `${i}: ${labels[i]}`);
+      pill.innerHTML = `<span class="pill-number">${i}</span>`;
 
       // Click handler
       pill.addEventListener('click', (e) => handlePillClick(e, q.id, i, itemEl));
