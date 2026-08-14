@@ -1,8 +1,8 @@
 /**
  * situations.js
- * Las 76 situaciones del Test de Dones IGC (v7), agrupadas en 10 escenas.
- * Redacción desculpabilizadora basada en frecuencia de vivencias y experiencias prácticas.
- * Backup de preguntas previas disponible en docs/PREGUNTAS_REFORMULADAS_BACKUP.md.
+ * Las 76 situaciones del Test de Dones IGC (v7.1), agrupadas en 10 escenas.
+ * Redacción desculpabilizadora limpia y directa (sin redundancia de la palabra "frecuencia",
+ * ya que la escala inferior "Con poca frecuencia" ... "Con mucha frecuencia" lo explicita).
  */
 
 export const TOTAL_SITUATIONS = 76;
@@ -13,21 +13,21 @@ export const situations = [
     id: 1,
     giftId: 'evangelismo',
     sceneId: 1,
-    text: "En mis conversaciones cotidianas con familiares y amigos, con frecuencia me encuentro compartiendo sobre mi fe en Jesús.",
+    text: "En mis conversaciones cotidianas con familiares y amigos, suelo compartir sobre mi fe en Jesús.",
     sourceQuestion: "¿Te gusta evangelizar?",
   },
   {
     id: 2,
     giftId: 'pastor',
     sceneId: 1,
-    text: "Con frecuencia acompaño a otros con paciencia cuando están a punto de tomar decisiones difíciles o apresuradas.",
+    text: "Acompaño a otros con paciencia cuando están a punto de tomar decisiones difíciles o apresuradas.",
     sourceQuestion: "¿Ayudas a hermanos a no tomar malas decisiones, y lo haces con amor, paciencia, comprensión?",
   },
   {
     id: 3,
     giftId: 'fe',
     sceneId: 1,
-    text: "En mi rutina semanal, dedico momentos constantes y prolongados a la oración a solas con Dios.",
+    text: "En mi vida diaria, dedico momentos constantes a la oración a solas con Dios.",
     sourceQuestion: "¿Tu vida de oración es rica?",
   },
   {
@@ -41,14 +41,14 @@ export const situations = [
     id: 5,
     giftId: 'administrar',
     sceneId: 1,
-    text: "Ante contratiempos logísticos u organizativos, con frecuencia identifico soluciones prácticas rápidamente.",
+    text: "Ante contratiempos logísticos u organizativos, identifico soluciones prácticas con rapidez.",
     sourceQuestion: "¿Resuelves problemas prácticos de manera fácil?",
   },
   {
     id: 6,
     giftId: 'ciencia_conocimiento',
     sceneId: 1,
-    text: "Me motiva con frecuencia investigar y profundizar en el significado claro de la sana doctrina bíblica.",
+    text: "Me resulta motivador investigar y profundizar en el significado claro de la sana doctrina bíblica.",
     sourceQuestion: "¿Te sientes movido a que los hermanos sepan y entiendan la sana doctrina?",
   },
   {
@@ -97,7 +97,7 @@ export const situations = [
     id: 13,
     giftId: 'administrar',
     sceneId: 2,
-    text: "Con frecuencia me siento cómodo administrando recursos, presupuestos o agendas de trabajo.",
+    text: "Me siento cómodo administrando recursos, presupuestos o agendas de trabajo.",
     sourceQuestion: "¿Sabes dirigir planes y recursos en la iglesia?",
   },
   {
@@ -111,7 +111,7 @@ export const situations = [
     id: 15,
     giftId: 'ensenanza',
     sceneId: 2,
-    text: "Procuro con frecuencia comprobar que mis enseñanzas estén bien fundamentadas en la Palabra.",
+    text: "Procuro comprobar que mis enseñanzas estén bien fundamentadas en la Palabra.",
     sourceQuestion: "¿Te caracteriza enseñar la sana doctrina?",
   },
   {
@@ -139,14 +139,14 @@ export const situations = [
     id: 19,
     giftId: 'fe',
     sceneId: 3,
-    text: "Experimento con frecuencia la certeza de ver respuestas concretas a peticiones específicas de oración.",
+    text: "Veo respuestas concretas a peticiones específicas que he llevado en oración.",
     sourceQuestion: "¿Es frecuente que veas respuesta de tus oraciones?",
   },
   {
     id: 20,
     giftId: 'misericordia',
     sceneId: 3,
-    text: "Me ofrezco con frecuencia para atender emergencias personales de otros (traslados, alimentos, visitas).",
+    text: "Suelo ofrecerme para atender emergencias personales de otros (traslados, alimentos, apoyo práctico).",
     sourceQuestion: "¿Si alguien lo necesita lo llevas al médico, o le consigues comida, etc?",
   },
   {
@@ -160,21 +160,21 @@ export const situations = [
     id: 22,
     giftId: 'ciencia_conocimiento',
     sceneId: 3,
-    text: "Dedico con frecuencia tiempo a la lectura y estudio de recursos de formación teológica o bíblica.",
+    text: "Disfruto dedicar tiempo a la lectura y estudio de recursos de formación teológica o bíblica.",
     sourceQuestion: "¿Lees bastante?",
   },
   {
     id: 23,
     giftId: 'ensenanza',
     sceneId: 3,
-    text: "Con frecuencia personas se acercan a mí para pedirme que les aclare algún pasaje bíblico confuso.",
+    text: "Personas cercanas acuden a mí para pedirme que les explique algún pasaje bíblico confuso.",
     sourceQuestion: "¿Te buscan los hermanos para que les expliques algo?",
   },
   {
     id: 24,
     giftId: 'profecia',
     sceneId: 3,
-    text: "Al hablar a otros sobre la verdad bíblica, con frecuencia se generan reflexiones profundas en quienes me escuchan.",
+    text: "Al hablar sobre verdades bíblicas, se generan reflexiones profundas en quienes me escuchan.",
     sourceQuestion: "¿Cuándo enseñas o hablas llegas al corazón?",
   },
   {
@@ -188,7 +188,7 @@ export const situations = [
     id: 26,
     giftId: 'dar',
     sceneId: 4,
-    text: "Destino con frecuencia recursos financieros o materiales para apoyar a otros o a la iglesia con alegría.",
+    text: "Destino recursos financieros o materiales para apoyar a otros o a la iglesia con alegría.",
     sourceQuestion: "¿Te es fácil dar/ ofrendar/ diezmar? (aunque no seas una persona de dinero)",
   },
   {
@@ -216,7 +216,7 @@ export const situations = [
     id: 30,
     giftId: 'sabiduria',
     sceneId: 4,
-    text: "Ante dilemas complejos, identifico con frecuencia principios prácticos de la Escritura que orientan la solución.",
+    text: "Ante dilemas complejos, identifico principios prácticos de la Escritura que orientan la solución.",
     sourceQuestion: "¿Te gusta aconsejar e identificas qué principios se necesita aplicar?",
   },
   {
@@ -377,14 +377,14 @@ export const situations = [
     id: 53,
     giftId: 'discernimiento',
     sceneId: 7,
-    text: "Me consultan con frecuencia para evaluar situaciones complejas donde no es claro qué intención hay detrás.",
+    text: "Me consultan para evaluar situaciones complejas donde no está clara la intención de fondo.",
     sourceQuestion: "¿Te piden consejo y distingues fácil entre la verdad y la mentira?",
   },
   {
     id: 54,
     giftId: 'sabiduria',
     sceneId: 7,
-    text: "Me enfoco con frecuencia en enseñar principios de conducta e integridad para el diario vivir.",
+    text: "Me enfoco en compartir principios de conducta e integridad para el diario vivir.",
     sourceQuestion: "¿Te gusta enseñar sobre la vida práctica cristiana?",
   },
   {
@@ -482,7 +482,7 @@ export const situations = [
     id: 68,
     giftId: 'ensenanza',
     sceneId: 9,
-    text: "Con frecuencia logro traducir pasajes teológicos complejos a un lenguaje sencillo y accesible.",
+    text: "Logro traducir pasajes teológicos complejos a un lenguaje sencillo y accesible.",
     sourceQuestion: "¿Haces fácilmente entendibles temas bíblicos?",
   },
   {
