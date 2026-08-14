@@ -8,9 +8,10 @@ Fecha de última actualización: 2026-08-14
     2. **Onboarding Inicial Pre-Home:** Modal de bienvenida que explica la gracia y el Espíritu Santo (con enlace pastoral a `https://igcteg.org/grupos/`), capturando asistencia a Grupo de Crecimiento (Sí/No) y Zona/Ciudad de Honduras.
     3. **Home Reorganizado & CTA YouTube:** Botones ordenados (`Aprender` primero, `Descubrir` segundo), subtítulo *"Otro de los regalos de la Gracia de Dios"*, ilustración principal agrandada, créditos oficiales (*Creado por Iglesia Gran Comisión Tegucigalpa* y *Revisado por Pastor Gustavo Zepeda*), y tarjeta interactiva **"Conoce sobre los Dones Espirituales"** con enlace activo a YouTube (`https://www.youtube.com/watch?v=SnUkqFxukyk&t=180s`) y episodios 2 y 3 etiquetados como *Pendiente*.
     4. **Auditoría UI/UX y Sistema de Diseño:**
-       - **Escala de 3 Píldoras:** Cada píldora muestra ahora de forma vertical tanto el número (`1`, `2`, `3`) como su etiqueta textual explícita (`Rara vez`, `A veces`, `Con frecuencia`), resolviendo cualquier ambigüedad visual.
-       - **Header & Logo IGC:** Ampliado y resaltado a `64px` de alto con sombras suaves y contenedor adaptativo.
-       - **Botón "← Inicio":** Rediseñado como píldora blanca flotante elevada (`#nav-btn-back`) con sombra e interactividad hover responsiva.
+       - **Escala de 3 Píldoras:** Diseño ultralimpio. Se removieron la burbuja popover y las leyendas inferiores redundantes, dejando únicamente el par `[Número | Texto]` dentro de cada píldora (`1 Rara vez`, `2 A veces`, `3 Con frecuencia`).
+       - **Header & Logo IGC:** Corregido el nombre del archivo del logo (`IGC.png` en mayúsculas) y altura a `64px` para que se despliegue de forma impecable en todos los navegadores.
+       - **Franja Disclaimer Responsive:** Rediseñada en flex-col/row adaptativo para evitar cualquier desbordamiento horizontal del botón `Explorar Dones`.
+       - **Banner de Escena:** Proporcionado a `80px` de alto máximo con gradiente limpio y texto `PARTE X` alineado.
     5. **Resultados Igualitarios Top 3 & Eliminación de Compartir:** Tarjetas primarias paralelas de igual jerarquía para los 3 dones principales; se removieron por completo todas las opciones de compartir historias/canvas.
     6. **Encuesta de Evaluación de 3 Preguntas:** Modal final de retroalimentación (Claridad 1-5★, Precisión percibida, Comentarios abiertos) almacenados en Supabase.
     7. **Modal de Cierre "Pon en práctica tus dones":** Recomendación pastoral con botón directo a `https://igcteg.org/grupos/` para usuarios que no asisten a un grupo de crecimiento.
