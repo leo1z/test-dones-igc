@@ -85,7 +85,7 @@ body {
 /* 4. CABECERA (LOGO FLOTANTE) */
 .main-header {
   background-color: transparent;
-  height: 110px;
+  height: 130px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -102,11 +102,11 @@ body {
 }
 
 .logo-igc {
-  height: 88px;
+  height: 106px;
   width: auto;
-  max-width: 320px;
+  max-width: 380px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 12px rgba(15, 15, 49, 0.12));
+  filter: drop-shadow(0 4px 14px rgba(15, 15, 49, 0.14));
 }
 
 .nav-links {
@@ -349,29 +349,27 @@ body {
   transition: width var(--transition-normal);
 }
 
-/* Banner de escena (Parte X - Ref2) */
+/* Banner de escena (Parte X - Replicando imagen de referencia del usuario) */
 .scene-card {
-  background: linear-gradient(135deg, #336cdd 0%, #2251ad 100%);
+  width: 100%;
+  padding: 0;
+  background: transparent;
   border-radius: var(--radius-lg);
-  min-height: 100px;
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
   box-shadow: 0 8px 24px rgba(51, 108, 221, 0.22);
+  overflow: hidden;
+  display: block;
 }
 
 .scene-banner-img {
-  width: 64px;
-  height: 64px;
+  width: 100%;
+  height: auto;
+  display: block;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  border-radius: var(--radius-lg);
 }
 
-.scene-banner-title {
-  font-size: 1.65rem;
-  font-weight: 900;
-  color: #ffffff;
+.scene-banner-text {
+  display: none !important;
 }
 
 /* Lista de situaciones */
