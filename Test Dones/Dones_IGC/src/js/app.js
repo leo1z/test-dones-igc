@@ -294,9 +294,9 @@ function renderScene() {
     scaleWrapper.className = 'situation-scale-wrapper';
 
     const labels = {
-      1: "Rara vez / Casi nunca",
+      1: "Rara vez",
       2: "A veces",
-      3: "Con frecuencia / Siempre"
+      3: "Con frecuencia"
     };
 
     const tooltip = document.createElement('div');
@@ -321,7 +321,10 @@ function renderScene() {
       pill.dataset.qid = q.id;
       pill.title = labels[i];
       pill.setAttribute('aria-label', `${i}: ${labels[i]}`);
-      pill.innerHTML = `<span class="pill-number">${i}</span>`;
+      pill.innerHTML = `
+        <span class="pill-number">${i}</span>
+        <span class="pill-label">${labels[i]}</span>
+      `;
 
       pill.addEventListener('click', (e) => handlePillClick(e, q.id, i, itemEl));
       pillsContainer.appendChild(pill);
@@ -392,7 +395,7 @@ function handlePillClick(e, questionId, val, itemEl) {
   const selectedPill = container.querySelector(`.scale-pill-${val}`);
   if (selectedPill) selectedPill.classList.add('selected');
 
-  const labels = { 1: "Rara vez / Casi nunca", 2: "A veces", 3: "Con frecuencia / Siempre" };
+  const labels = { 1: "Rara vez", 2: "A veces", 3: "Con frecuencia" };
   const tooltip = itemEl.querySelector(`#tooltip-q-${questionId}`);
   if (tooltip) {
     tooltip.textContent = labels[val];

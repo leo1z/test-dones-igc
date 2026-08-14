@@ -82,17 +82,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 4. CABECERA (LOGO FLOTANTE) */
+/* 4. CABECERA (LOGO FLOTANTE & BOTÓN VOLVER) */
 .main-header {
   background-color: transparent;
-  height: 84px;
+  height: 90px;
   display: flex;
   align-items: center;
   width: 100%;
 }
 
 .header-container {
-  max-width: 600px; /* Alineado con el ancho del wizard */
+  max-width: 600px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
@@ -102,11 +102,11 @@ body {
 }
 
 .logo-igc {
-  height: 58px;
+  height: 64px;
   width: auto;
-  max-width: 260px;
+  max-width: 280px;
   object-fit: contain;
-  filter: drop-shadow(0 3px 8px rgba(15, 15, 49, 0.08));
+  filter: drop-shadow(0 4px 12px rgba(15, 15, 49, 0.1));
 }
 
 .nav-links {
@@ -114,21 +114,106 @@ body {
   align-items: center;
 }
 
-.nav-btn-link {
-  background: rgba(15, 15, 49, 0.05);
-  border: none;
-  font-family: var(--font-family);
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
+#nav-btn-back {
+  background: #ffffff !important;
+  color: var(--navy) !important;
+  border: 1.5px solid rgba(15, 15, 49, 0.12) !important;
+  box-shadow: 0 4px 14px rgba(15, 15, 49, 0.06) !important;
+  font-weight: 850 !important;
+  font-size: 0.85rem !important;
+  padding: 8px 18px !important;
+  border-radius: var(--radius-pill) !important;
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
 }
 
-.nav-btn-link:hover {
-  background-color: rgba(15, 15, 49, 0.1);
+#nav-btn-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(51, 108, 221, 0.15) !important;
+  border-color: var(--primary) !important;
+}
+
+/* ESCALA DE PÍLDORAS — 3 Opciones (Base 3) */
+.situation-scale-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.scale-pills {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(100, 116, 139, 0.12) 0%, rgba(59, 130, 246, 0.15) 50%, rgba(51, 108, 221, 0.22) 100%);
+  padding: 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(15, 15, 49, 0.06);
+}
+
+.scale-pill {
+  flex: 1 1 0;
+  min-height: 64px;
+  padding: 6px 4px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(15, 15, 49, 0.12);
+  background-color: #ffffff;
+  color: var(--navy);
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  box-shadow: 0 3px 8px rgba(15, 15, 49, 0.04);
+}
+
+.pill-number {
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--navy);
+  transition: color 0.2s ease;
+}
+
+.pill-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-muted);
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+.scale-pill:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 6px 16px rgba(15, 15, 49, 0.1);
+}
+
+.scale-pill.selected .pill-number,
+.scale-pill.selected .pill-label {
+  color: #ffffff !important;
+}
+
+.scale-pill-1.selected {
+  background-color: #64748b !important;
+  border-color: #64748b !important;
+  transform: scale(1.04);
+}
+
+.scale-pill-2.selected {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  transform: scale(1.04);
+}
+
+.scale-pill-3.selected {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 8px 20px rgba(51, 108, 221, 0.45) !important;
+  transform: scale(1.06);
 }
 
 /* 5. CONTENEDOR PRINCIPAL */
