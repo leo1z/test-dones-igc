@@ -1162,37 +1162,81 @@ body {
   gap: 12px;
 }
 
+/* Cards del Glosario de Dones (Estilo Slothui / Premium Web App) */
 .glossary-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 16px;
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  border: 1px solid rgba(15, 15, 49, 0.07);
+  box-shadow: 0 10px 30px -6px rgba(15, 15, 49, 0.06), 0 4px 12px -2px rgba(15, 15, 49, 0.03);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, border-color 0.2s ease;
+}
+
+.glossary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -6px rgba(51, 108, 221, 0.14);
+  border-color: rgba(51, 108, 221, 0.25);
 }
 
 .glossary-card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 
 .glossary-gift-img {
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 3px 10px rgba(15, 15, 49, 0.1));
 }
 
-.glossary-card h4 {
-  font-size: 1rem;
-  font-weight: 800;
+.glossary-card-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 0;
+  line-height: 1.25;
 }
 
-.glossary-card p {
-  font-size: 0.8rem;
+.glossary-card-summary {
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-glossary-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 16px;
+  background-color: rgba(51, 108, 221, 0.08);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 800;
+  border: 1px solid rgba(51, 108, 221, 0.15);
+  margin-top: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.glossary-card:hover .btn-glossary-more {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
 }
 
 /* 10. MODAL INTERACTIVO (REPLICANDO Ref3.png) */
