@@ -85,7 +85,7 @@ body {
 /* 4. CABECERA (LOGO FLOTANTE) */
 .main-header {
   background-color: transparent;
-  height: 130px;
+  height: 84px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -102,11 +102,11 @@ body {
 }
 
 .logo-igc {
-  height: 106px;
+  height: 58px;
   width: auto;
-  max-width: 380px;
+  max-width: 260px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 14px rgba(15, 15, 49, 0.14));
+  filter: drop-shadow(0 3px 8px rgba(15, 15, 49, 0.08));
 }
 
 .nav-links {
@@ -349,27 +349,46 @@ body {
   transition: width var(--transition-normal);
 }
 
-/* Banner de escena (Parte X - Replicando imagen de referencia del usuario) */
+/* Banner de escena (Parte X - Replicando EXACTAMENTE Imagen 1 de Referencia del Usuario) */
 .scene-card {
   width: 100%;
-  padding: 0;
-  background: transparent;
+  height: 104px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 24px rgba(51, 108, 221, 0.22);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
   overflow: hidden;
-  display: block;
+  position: relative;
 }
 
 .scene-banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
+  height: 76px;
+  width: auto;
+  max-width: 110px;
   object-fit: contain;
-  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
 }
 
 .scene-banner-text {
-  display: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.scene-banner-title {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
 }
 
 /* Lista de situaciones */
