@@ -9,9 +9,9 @@ Fecha de última actualización: 2026-08-14
     3. **Home Reorganizado & CTA YouTube:** Botones ordenados (`Aprender` primero, `Descubrir` segundo), subtítulo *"Otro de los regalos de la Gracia de Dios"*, ilustración principal agrandada, créditos oficiales (*Creado por Iglesia Gran Comisión Tegucigalpa* y *Revisado por Pastor Gustavo Zepeda*), y tarjeta interactiva **"Conoce sobre los Dones Espirituales"** con enlace activo a YouTube (`https://www.youtube.com/watch?v=SnUkqFxukyk&t=180s`) y episodios 2 y 3 etiquetados como *Pendiente*.
     4. **Auditoría UI/UX y Sistema de Diseño:**
        - **Escala de 3 Píldoras:** Diseño ultralimpio. Se removieron la burbuja popover y las leyendas inferiores redundantes, dejando únicamente el par `[Número | Texto]` dentro de cada píldora (`1 Rara vez`, `2 A veces`, `3 Con frecuencia`).
-       - **Header & Logo IGC:** Corregido el nombre del archivo del logo (`IGC.png` en mayúsculas) y altura a `64px` para que se despliegue de forma impecable en todos los navegadores.
-       - **Franja Disclaimer Responsive:** Rediseñada en flex-col/row adaptativo para evitar cualquier desbordamiento horizontal del botón `Explorar Dones`.
-       - **Banner de Escena:** Proporcionado a `80px` de alto máximo con gradiente limpio y texto `PARTE X` alineado.
+       - **Header & Logo IGC Ampliado:** Tamaño incrementado a `84px` de alto (`max-width: 320px`) para máxima legibilidad y jerarquía institucional en la barra superior.
+       - **Banner Azul Unificado:** Se fusionó la franja de parte (`PARTE X`) con la ilustración ampliada (`94px`), el texto motivador (*💡 Conocer sobre los dones le dará mayor claridad a tus respuestas*) y el botón de píldora blanca **`Explorar Dones`** en una sola tarjeta azul degradada cohesiva y elegante (`#scene-banner`).
+       - **Escala de 3 Píldoras Limpia:** Tarjeta de pregunta simplificada a 2 capas sin leyendas flotantes ni tooltips desalineados (`1 Rara vez`, `2 A veces`, `3 Con frecuencia`).
     5. **Resultados Igualitarios Top 3 & Eliminación de Compartir:** Tarjetas primarias paralelas de igual jerarquía para los 3 dones principales; se removieron por completo todas las opciones de compartir historias/canvas.
     6. **Encuesta de Evaluación de 3 Preguntas:** Modal final de retroalimentación (Claridad 1-5★, Precisión percibida, Comentarios abiertos) almacenados en Supabase.
     7. **Modal de Cierre "Pon en práctica tus dones":** Recomendación pastoral con botón directo a `https://igcteg.org/grupos/` para usuarios que no asisten a un grupo de crecimiento.
