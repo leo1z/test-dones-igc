@@ -16,18 +16,18 @@ import { submitResult } from './supabase-client.js';
 const STORAGE_ANSWERS_KEY = 'dones_igc_answers';
 const STORAGE_RESULT_KEY = 'dones_igc_result';
 
-// Mapeo de ilustraciones para las 10 partes del test (Ref2.png)
+// Mapeo de ilustraciones para las 10 partes del test (desde docs/design/illustrations_banners)
 const SCENE_ILLUSTRATIONS = {
-  1: "src/assets/illustrations/Evangelismo.png",
-  2: "src/assets/illustrations/Discernimiento.png",
-  3: "src/assets/illustrations/Profecia.png",
-  4: "src/assets/illustrations/Exhortar.png",
-  5: "src/assets/illustrations/Administrar.png",
-  6: "src/assets/illustrations/Misericordia.png",
-  7: "src/assets/illustrations/Ensenanza.png",
-  8: "src/assets/illustrations/Pastor.png",
-  9: "src/assets/illustrations/Servir.png",
-  10: "src/assets/illustrations/Fe.png"
+  1: "src/assets/illustrations/banners/Parte 1.png",
+  2: "src/assets/illustrations/banners/Parte 2.png",
+  3: "src/assets/illustrations/banners/Parte 3.png",
+  4: "src/assets/illustrations/banners/Parte 4.png",
+  5: "src/assets/illustrations/banners/Parte 5.png",
+  6: "src/assets/illustrations/banners/Parte 6.png",
+  7: "src/assets/illustrations/banners/Parte 7.png",
+  8: "src/assets/illustrations/banners/Parte 8.png",
+  9: "src/assets/illustrations/banners/Parte 9.png",
+  10: "src/assets/illustrations/banners/Parte 10.png"
 };
 
 // ---------------------------------------------------------------------------
@@ -414,27 +414,27 @@ function checkProgressMilestone() {
 
   if (pct >= 90 && !shownMilestones[90]) {
     shownMilestones[90] = true;
-    showMilestoneModal(90, '🔥 90% COMPLETADO', '¡Último tramo!', 'Calibrando la precisión final de tus 3 Dones Principales...');
+    showMilestoneModal(90, '🔥 90% COMPLETADO', '¡Último tramo!', 'Calibrando la precisión final de tus 3 Dones Principales...', 'src/assets/illustrations/ui/90.png');
   } else if (pct >= 50 && !shownMilestones[50]) {
     shownMilestones[50] = true;
-    showMilestoneModal(50, '🎯 50% COMPLETADO', '¡Vas por la mitad!', 'Mapeando tus fortalezas prácticas de servicio...');
+    showMilestoneModal(50, '🎯 50% COMPLETADO', '¡Vas por la mitad!', 'Mapeando tus fortalezas prácticas de servicio...', 'src/assets/illustrations/ui/70.png');
   } else if (pct >= 25 && !shownMilestones[25]) {
     shownMilestones[25] = true;
-    showMilestoneModal(25, '⚡ 25% COMPLETADO', '¡Buen ritmo!', 'Procesando tus primeras tendencias de afinidad...');
+    showMilestoneModal(25, '⚡ 25% COMPLETADO', '¡Buen ritmo!', 'Procesando tus primeras tendencias de afinidad...', 'src/assets/illustrations/ui/25.png');
   }
 }
 
-function showMilestoneModal(pct, badgeText, titleText, descText) {
+function showMilestoneModal(pct, badgeText, titleText, descText, imgPath) {
   const modal = document.getElementById('modal-progress-milestone');
   if (!modal) return;
 
   const badgeEl = document.getElementById('milestone-badge-pct');
-  const numEl = document.getElementById('milestone-pct-num');
+  const imgEl = document.getElementById('milestone-img');
   const titleEl = document.getElementById('milestone-title');
   const descEl = document.getElementById('milestone-desc');
 
   if (badgeEl) badgeEl.textContent = badgeText;
-  if (numEl) numEl.textContent = `${pct}%`;
+  if (imgEl && imgPath) imgEl.src = imgPath;
   if (titleEl) titleEl.textContent = titleText;
   if (descEl) descEl.textContent = descText;
 
