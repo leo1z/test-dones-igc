@@ -1,8 +1,9 @@
 /**
- * app.js — Dones IGC (v2)
- * Orquestador principal de la SPA. Controla el flujo del wizard (10 escenas),
- * la escala interactiva de píldoras horizontales, la persistencia local, la presentación de resultados
- * (Bento Grid) y el glosario con buscador.
+ * app.js — Dones IGC (v3)
+ * Orquestador principal de la Web App Dones IGC.
+ * Maneja el flujo de onboarding (Evangelio + Demografía), el wizard del test con 3 opciones,
+ * resultados igualitarios Top 3, encuesta de evaluación de 3 preguntas, consulta rápida de dones y
+ * la sincronización con Supabase.
  */
 
 import { situations, TOTAL_SITUATIONS } from '../data/situations.js';
@@ -15,8 +16,9 @@ import { submitResult } from './supabase-client.js';
 // ---------------------------------------------------------------------------
 const STORAGE_ANSWERS_KEY = 'dones_igc_answers';
 const STORAGE_RESULT_KEY = 'dones_igc_result';
+const STORAGE_ONBOARDING_KEY = 'dones_igc_onboarding';
+const STORAGE_SUBMISSION_ID_KEY = 'dones_igc_submission_id';
 
-// Mapeo de ilustraciones para las 10 partes del test (desde docs/design/illustrations_banners)
 const SCENE_ILLUSTRATIONS = {
   1: "src/assets/illustrations/banners/Parte 1.png",
   2: "src/assets/illustrations/banners/Parte 2.png",
@@ -35,7 +37,11 @@ const SCENE_ILLUSTRATIONS = {
 // ---------------------------------------------------------------------------
 const state = {
   answers: loadAnswers(),
-  currentScene: 1, // 1 a 10
+  currentScene: 1,
+  onboarding: loadOnboardingData(),
+  evalRating: 0,
+  evalAccuracy: null,
+  submissionId: localStorage.getItem(STORAGE_SUBMISSION_ID_KEY) || null,
 };
 
 // ---------------------------------------------------------------------------
@@ -55,33 +61,54 @@ const el = {
   navBtnBack: document.getElementById('nav-btn-back'),
   
   // Wizard
-  testSceneIndicator: document.getElementById('test-scene-indicator'),
   testPercentIndicator: document.getElementById('test-percent-indicator'),
-  testProgressBar: document.getElementById('test-progress-bar'),
   sceneIllustration: document.getElementById('scene-illustration'),
   scenePartTitle: document.getElementById('scene-part-title'),
   questionsContainer: document.getElementById('questions-container'),
   btnPrev: document.getElementById('btn-prev'),
   btnNext: document.getElementById('btn-next'),
   navHint: document.getElementById('nav-hint'),
+  btnQuickExploreGifts: document.getElementById('btn-quick-explore-gifts'),
   
   // Resultados
   topGiftsContainer: document.getElementById('top-gifts-container'),
   remainingGiftsContainer: document.getElementById('remaining-gifts-container'),
   btnReset: document.getElementById('btn-reset'),
+  btnOpenEvaluation: document.getElementById('btn-open-evaluation'),
   
   // Glosario
   glossarySearch: document.getElementById('glossary-search'),
   glossaryGrid: document.getElementById('glossary-grid'),
   
-  // Modal
+  // Modales
   modal: document.getElementById('gift-modal'),
   modalBody: document.getElementById('gift-modal-body'),
   modalClose: document.getElementById('modal-close-btn'),
+  
+  // Onboarding
+  modalOnboarding: document.getElementById('modal-initial-onboarding'),
+  btnOnboardingStep2: document.getElementById('btn-onboarding-to-step2'),
+  btnFinishOnboarding: document.getElementById('btn-finish-onboarding'),
+  btnGroupYes: document.getElementById('btn-group-yes'),
+  btnGroupNo: document.getElementById('btn-group-no'),
+  zoneSelect: document.getElementById('onboarding-zone-select'),
+  
+  // Encuesta Evaluación
+  modalEval: document.getElementById('modal-evaluation-survey'),
+  evalCloseBtn: document.getElementById('eval-modal-close'),
+  btnSubmitEval: document.getElementById('btn-submit-evaluation'),
+  
+  // Quick Gifts Slideover
+  modalQuickGifts: document.getElementById('modal-quick-gifts'),
+  quickGiftsCloseBtn: document.getElementById('quick-gifts-close'),
+  quickGiftsList: document.getElementById('quick-gifts-list'),
+  
+  // Callout Grupo
+  modalGrowthCallout: document.getElementById('modal-growth-group-callout'),
 };
 
 // ---------------------------------------------------------------------------
-// Carga y Guardado (localStorage)
+// Persistencia local
 // ---------------------------------------------------------------------------
 function loadAnswers() {
   try {
@@ -95,9 +122,7 @@ function loadAnswers() {
 function saveAnswers(answers) {
   try {
     localStorage.setItem(STORAGE_ANSWERS_KEY, JSON.stringify(answers));
-  } catch {
-    // Silencioso
-  }
+  } catch {}
 }
 
 function loadStoredResult() {
@@ -112,239 +137,174 @@ function loadStoredResult() {
 function saveResult(result) {
   try {
     localStorage.setItem(STORAGE_RESULT_KEY, JSON.stringify(result));
+  } catch {}
+}
+
+function loadOnboardingData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_ONBOARDING_KEY);
+    return raw ? JSON.parse(raw) : { completed: false, attendsGrowthGroup: null, zoneLocation: '' };
   } catch {
-    // Silencioso
+    return { completed: false, attendsGrowthGroup: null, zoneLocation: '' };
   }
+}
+
+function saveOnboardingData(data) {
+  try {
+    localStorage.setItem(STORAGE_ONBOARDING_KEY, JSON.stringify(data));
+  } catch {}
 }
 
 function clearStorage() {
-  try {
-    localStorage.removeItem(STORAGE_ANSWERS_KEY);
-    localStorage.removeItem(STORAGE_RESULT_KEY);
-  } catch {
-    // Silencioso
-  }
+  localStorage.removeItem(STORAGE_ANSWERS_KEY);
+  localStorage.removeItem(STORAGE_RESULT_KEY);
+  localStorage.removeItem(STORAGE_SUBMISSION_ID_KEY);
 }
 
 // ---------------------------------------------------------------------------
-// Nombres neutrales de las 10 partes de la Ruta Espiritual
-const STATION_NAMES = {
-  1: "Parte 1",
-  2: "Parte 2",
-  3: "Parte 3",
-  4: "Parte 4",
-  5: "Parte 5",
-  6: "Parte 6",
-  7: "Parte 7",
-  8: "Parte 8",
-  9: "Parte 9",
-  10: "Parte 10"
-};
-
+// Control de Pantallas
 // ---------------------------------------------------------------------------
-// Navegación entre Pantallas (SPA Transitions & Bottom Glass Nav)
-// ---------------------------------------------------------------------------
-function showScreen(screenKey) {
-  // Ocultar todas las pantallas con desvanecimiento
-  Object.entries(screens).forEach(([key, screenEl]) => {
-    if (screenEl) {
-      if (screenEl.classList.contains('active')) {
-        screenEl.classList.remove('active');
-      }
-      screenEl.style.display = 'none';
+function showScreen(screenId) {
+  Object.keys(screens).forEach(key => {
+    if (screens[key]) {
+      screens[key].classList.remove('active');
     }
   });
 
-  // Mostrar pantalla seleccionada con retardo
-  const targetScreen = screens[screenKey];
-  if (targetScreen) {
-    targetScreen.style.display = 'block';
-    // Forzar reflow
-    targetScreen.offsetHeight;
-    targetScreen.classList.add('active');
+  if (screens[screenId]) {
+    screens[screenId].classList.add('active');
   }
 
-  // Sincronizar Barra Flotante Inferior Glassmorphic
+  // Actualizar Bottom Navigation
   document.querySelectorAll('.bottom-nav-item').forEach(item => {
-    if (item.dataset.target === screenKey) {
-      item.classList.add('active');
-    } else {
-      item.classList.remove('active');
-    }
+    item.classList.toggle('active', item.dataset.target === screenId);
   });
 
-  // Mostrar tab de resultados si el test está completo
   const stored = loadStoredResult();
+  const hasResult = stored && isTestComplete(stored.answers);
   const navResultsBtn = document.getElementById('nav-item-results');
   if (navResultsBtn) {
-    navResultsBtn.style.display = (stored && isTestComplete(stored.answers)) ? 'flex' : 'none';
+    navResultsBtn.style.display = hasResult ? 'flex' : 'none';
   }
 
-  // Configurar botón "Volver/Inicio" del header dinámicamente
-  if (screenKey === 'welcome') {
-    el.navBtnBack.style.display = 'none';
-  } else {
-    el.navBtnBack.style.display = 'block';
-    if (screenKey === 'test') {
-      el.navBtnBack.textContent = 'Volver';
-    } else {
-      el.navBtnBack.textContent = 'Inicio';
-    }
-  }
-  
+  // Header Back Button
+  el.navBtnBack.style.display = (screenId === 'welcome') ? 'none' : 'block';
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ---------------------------------------------------------------------------
-// Renderizado del Mapa de Ruta Espiritual (10 Estaciones Noom/Duolingo style)
+// Flujo de Onboarding Inicial (Evangelio + Zona)
 // ---------------------------------------------------------------------------
-function renderJourneyRoadmap() {
-  const container = document.getElementById('journey-nodes-container');
-  if (!container) return;
+function initOnboardingFlow() {
+  if (!state.onboarding.completed) {
+    el.modalOnboarding.classList.add('active');
+  }
 
-  container.innerHTML = '';
-  for (let sId = 1; sId <= 10; sId++) {
-    const sceneQuestions = situations.filter(s => s.sceneId === sId);
-    const isCompleted = sceneQuestions.every(q => state.answers[q.id]);
-    const isCurrent = state.currentScene === sId;
+  if (el.btnOnboardingStep2) {
+    el.btnOnboardingStep2.addEventListener('click', () => {
+      document.getElementById('onboarding-step-1').style.display = 'none';
+      document.getElementById('onboarding-step-2').style.display = 'block';
+    });
+  }
 
-    let nodeStateClass = 'locked';
-    let iconContent = `🔒`;
-    if (isCompleted) {
-      nodeStateClass = 'completed';
-      iconContent = `✓`;
-    } else if (isCurrent) {
-      nodeStateClass = 'current';
-      iconContent = `${sId}`;
-    }
-
-    const nodeEl = document.createElement('div');
-    nodeEl.className = `journey-node ${nodeStateClass}`;
-    nodeEl.title = `Estación ${sId}: ${STATION_NAMES[sId]}`;
-
-    nodeEl.innerHTML = `
-      <div class="node-circle">${iconContent}</div>
-      <span class="node-label">${STATION_NAMES[sId]}</span>
-    `;
-
-    // Permitir navegar a estaciones ya respondidas o la actual
-    nodeEl.addEventListener('click', () => {
-      if (isCompleted || isCurrent) {
-        state.currentScene = sId;
-        renderScene();
-      }
+  if (el.btnGroupYes && el.btnGroupNo) {
+    el.btnGroupYes.addEventListener('click', () => {
+      state.onboarding.attendsGrowthGroup = true;
+      el.btnGroupYes.classList.add('selected');
+      el.btnGroupNo.classList.remove('selected');
+      validateOnboardingForm();
     });
 
-    container.appendChild(nodeEl);
+    el.btnGroupNo.addEventListener('click', () => {
+      state.onboarding.attendsGrowthGroup = false;
+      el.btnGroupNo.classList.add('selected');
+      el.btnGroupYes.classList.remove('selected');
+      validateOnboardingForm();
+    });
+  }
+
+  if (el.zoneSelect) {
+    el.zoneSelect.addEventListener('change', (e) => {
+      state.onboarding.zoneLocation = e.target.value;
+      validateOnboardingForm();
+    });
+  }
+
+  if (el.btnFinishOnboarding) {
+    el.btnFinishOnboarding.addEventListener('click', () => {
+      state.onboarding.completed = true;
+      saveOnboardingData(state.onboarding);
+      el.modalOnboarding.classList.remove('active');
+      showScreen('welcome');
+    });
+  }
+}
+
+function validateOnboardingForm() {
+  const isGroupSelected = state.onboarding.attendsGrowthGroup !== null;
+  const isZoneSelected = state.onboarding.zoneLocation.trim() !== '';
+  if (el.btnFinishOnboarding) {
+    el.btnFinishOnboarding.disabled = !(isGroupSelected && isZoneSelected);
   }
 }
 
 // ---------------------------------------------------------------------------
-// Tour Guiado Interactivo con Driver.js
+// Wizard del Test (Escala 3 Opciones)
 // ---------------------------------------------------------------------------
-function startDriverTour() {
-  if (typeof window.driver === 'undefined') return;
-
-  const driverObj = window.driver.js.driver({
-    showProgress: true,
-    animate: true,
-    doneBtnText: '¡Entendido!',
-    nextBtnText: 'Siguiente ➔',
-    prevBtnText: '← Atrás',
-    steps: [
-      { 
-        element: '#journey-roadmap-card', 
-        popover: { title: '⚡ Ruta Espiritual', description: 'Aquí avanzas a través de 10 estaciones. Cada una explora distintas facetas de tus dones.' } 
-      },
-      { 
-        element: '#scene-banner', 
-        popover: { title: '🎯 Estación Actual', description: 'Cada parte contiene situaciones prácticas para evaluar tu afinidad de servicio.' } 
-      },
-      { 
-        element: '#questions-container', 
-        popover: { title: '🔢 Escala de Respuestas 1 al 5', description: 'Sé 100% sincero. Selecciona 1 (Casi nunca) a 5 (Casi siempre). ¡Evita los neutrales!' } 
-      }
-    ]
-  });
-
-  driverObj.drive();
-}
-
-// Determinar el primer número de escena que no está completo
 function getFirstUnansweredScene() {
   for (let sceneId = 1; sceneId <= 10; sceneId++) {
     const sceneQuestions = situations.filter(s => s.sceneId === sceneId);
-    const complete = sceneQuestions.every(q => state.answers[q.id]);
-    if (!complete) return sceneId;
+    const allAnswered = sceneQuestions.every(q => state.answers[q.id]);
+    if (!allAnswered) return sceneId;
   }
-  return 1;
+  return 10;
 }
 
-// ---------------------------------------------------------------------------
-// Lógica del Wizard del Test (Replicando Ref2.png)
-// ---------------------------------------------------------------------------
 function renderScene() {
   const sceneId = state.currentScene;
-  
-  // Renderizar Mapa de Ruta
-  renderJourneyRoadmap();
-  
-  // Actualizar textos y banner limpiamente (Imagen 1 fix)
-  if (el.testSceneIndicator) el.testSceneIndicator.textContent = `Parte ${sceneId}`;
-  if (el.scenePartTitle) el.scenePartTitle.textContent = `Parte ${sceneId}`;
-  
-  if (el.sceneIllustration) {
-    el.sceneIllustration.src = SCENE_ILLUSTRATIONS[sceneId] || "src/assets/illustrations/Discernimiento.png";
-  }
-  
-  // Filtrar situaciones de esta escena
   const sceneQuestions = situations.filter(s => s.sceneId === sceneId);
   
-  // Renderizar preguntas
+  // Banner de la Escena
+  el.sceneIllustration.src = SCENE_ILLUSTRATIONS[sceneId] || SCENE_ILLUSTRATIONS[1];
+  el.scenePartTitle.textContent = `PARTE ${sceneId}`;
+  
+  // Estaciones del Mapa de Ruta
+  renderRoadmapTrack(sceneId);
+  
+  // Preguntas con 3 píldoras
   el.questionsContainer.innerHTML = '';
-  sceneQuestions.forEach(q => {
+  
+  sceneQuestions.forEach((q, index) => {
+    const globalIndex = situations.findIndex(s => s.id === q.id) + 1;
+    const itemEl = document.createElement('div');
+    itemEl.className = 'question-item-card';
+    itemEl.id = `question-card-${q.id}`;
+    
     const answeredValue = state.answers[q.id] || null;
     
-    // Crear contenedor del ítem
-    const itemEl = document.createElement('div');
-    itemEl.className = 'situation-item';
-    itemEl.dataset.questionId = q.id;
-    
-    // Fila superior (Número circular + situación)
-    const headerRow = document.createElement('div');
-    headerRow.className = 'situation-header-row';
-    
-    const numEl = document.createElement('span');
-    numEl.className = 'situation-number';
-    numEl.textContent = q.id;
-    
-    const textEl = document.createElement('p');
-    textEl.className = 'situation-text';
-    textEl.textContent = q.text;
-    
-    headerRow.appendChild(numEl);
-    headerRow.appendChild(textEl);
-    itemEl.appendChild(headerRow);
-    
-    // Fila de la escala de píldoras con gradiente y tooltip flotante (Imagen 3 & 4 style)
+    itemEl.innerHTML = `
+      <div class="question-header">
+        <span class="question-index-badge">${globalIndex}</span>
+        <p class="question-text">${q.text}</p>
+      </div>
+    `;
+
     const scaleWrapper = document.createElement('div');
     scaleWrapper.className = 'situation-scale-wrapper';
 
     const labels = {
-      1: "Casi nunca",
-      2: "Rara vez",
-      3: "A veces (Evita 3)",
-      4: "Con frecuencia",
-      5: "Con mucha frecuencia"
+      1: "Rara vez / Casi nunca",
+      2: "A veces",
+      3: "Con frecuencia / Siempre"
     };
 
-    // Tooltip flotante tipo Imagen 4
     const tooltip = document.createElement('div');
     tooltip.className = `scale-tooltip-bubble ${answeredValue ? 'show' : ''}`;
     tooltip.id = `tooltip-q-${q.id}`;
     if (answeredValue) {
       tooltip.textContent = labels[answeredValue];
-      tooltip.style.left = `${(answeredValue - 0.5) * 20}%`;
+      tooltip.style.left = `${(answeredValue - 0.5) * 33.33}%`;
     }
     scaleWrapper.appendChild(tooltip);
 
@@ -354,7 +314,7 @@ function renderScene() {
     const pillsContainer = document.createElement('div');
     pillsContainer.className = 'scale-pills';
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 3; i++) {
       const pill = document.createElement('button');
       pill.className = `scale-pill scale-pill-${i} ${answeredValue === i ? 'selected' : ''}`;
       pill.dataset.value = i;
@@ -363,7 +323,6 @@ function renderScene() {
       pill.setAttribute('aria-label', `${i}: ${labels[i]}`);
       pill.innerHTML = `<span class="pill-number">${i}</span>`;
 
-      // Click handler
       pill.addEventListener('click', (e) => handlePillClick(e, q.id, i, itemEl));
       pillsContainer.appendChild(pill);
     }
@@ -371,131 +330,86 @@ function renderScene() {
     scaleRow.appendChild(pillsContainer);
     scaleWrapper.appendChild(scaleRow);
 
-    // Leyenda de extremos por pregunta (Frecuencia: Con poca frecuencia ... Con mucha frecuencia)
     const scaleSubLegend = document.createElement('div');
     scaleSubLegend.className = 'scale-sub-legend';
     scaleSubLegend.innerHTML = `
-      <span class="sub-legend-left">Con poca frecuencia</span>
-      <span class="sub-legend-right">Con mucha frecuencia</span>
+      <span class="sub-legend-left">Rara vez</span>
+      <span class="sub-legend-right">Con frecuencia</span>
     `;
     scaleWrapper.appendChild(scaleSubLegend);
 
     itemEl.appendChild(scaleWrapper);
-    
-    // Fila de estado para alertas de sesgo en valor 3
-    const statusRow = document.createElement('div');
-    statusRow.className = 'situation-status-row';
-    
-    const biasAlert = document.createElement('span');
-    biasAlert.className = `bias-alert ${answeredValue === 3 ? 'show' : ''}`;
-    biasAlert.innerHTML = `⚠️ Evita neutrales`;
-    biasAlert.id = `bias-q-${q.id}`;
-    
-    statusRow.appendChild(biasAlert);
-    itemEl.appendChild(statusRow);
-    
     el.questionsContainer.appendChild(itemEl);
   });
-  
-  // Deshabilitar botón atrás en Parte 1
-  el.btnPrev.disabled = sceneId === 1;
+
+  el.btnPrev.style.display = sceneId === 1 ? 'none' : 'inline-flex';
   checkSceneCompletion();
   updateProgressBar();
 }
 
-// ---------------------------------------------------------------------------
-// Modales de Progreso e Hitos (25%, 50%, 90% - IQ Test Style)
-// ---------------------------------------------------------------------------
-const shownMilestones = { 25: false, 50: false, 90: false };
+function renderRoadmapTrack(currentSceneId) {
+  const container = document.getElementById('journey-nodes-container');
+  if (!container) return;
+  
+  container.innerHTML = '';
+  for (let i = 1; i <= 10; i++) {
+    const sceneQuestions = situations.filter(s => s.sceneId === i);
+    const isCompleted = sceneQuestions.every(q => state.answers[q.id]);
+    const isCurrent = i === currentSceneId;
 
-function checkProgressMilestone() {
-  const answeredCount = Object.keys(state.answers).length;
-  const pct = Math.round((answeredCount / TOTAL_SITUATIONS) * 100);
+    const node = document.createElement('div');
+    node.className = `roadmap-node ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}`;
+    node.title = `Parte ${i}`;
 
-  if (pct >= 90 && !shownMilestones[90]) {
-    shownMilestones[90] = true;
-    showMilestoneModal(90, '🔥 90% COMPLETADO', '¡Último tramo!', 'Calibrando la precisión final de tus 3 Dones Principales...', 'src/assets/illustrations/ui/90.png');
-  } else if (pct >= 50 && !shownMilestones[50]) {
-    shownMilestones[50] = true;
-    showMilestoneModal(50, '🎯 50% COMPLETADO', '¡Vas por la mitad!', 'Mapeando tus fortalezas prácticas de servicio...', 'src/assets/illustrations/ui/70.png');
-  } else if (pct >= 25 && !shownMilestones[25]) {
-    shownMilestones[25] = true;
-    showMilestoneModal(25, '⚡ 25% COMPLETADO', '¡Buen ritmo!', 'Procesando tus primeras tendencias de afinidad...', 'src/assets/illustrations/ui/25.png');
+    node.innerHTML = `
+      <div class="node-circle">
+        ${isCompleted ? '✓' : i}
+      </div>
+      <span class="node-label">Parte ${i}</span>
+    `;
+
+    if (isCompleted || i <= getFirstUnansweredScene()) {
+      node.style.cursor = 'pointer';
+      node.addEventListener('click', () => {
+        state.currentScene = i;
+        renderScene();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    container.appendChild(node);
   }
 }
 
-function showMilestoneModal(pct, badgeText, titleText, descText, imgPath) {
-  const modal = document.getElementById('modal-progress-milestone');
-  if (!modal) return;
-
-  const badgeEl = document.getElementById('milestone-badge-pct');
-  const imgEl = document.getElementById('milestone-img');
-  const titleEl = document.getElementById('milestone-title');
-  const descEl = document.getElementById('milestone-desc');
-
-  if (badgeEl) badgeEl.textContent = badgeText;
-  if (imgEl && imgPath) imgEl.src = imgPath;
-  if (titleEl) titleEl.textContent = titleText;
-  if (descEl) descEl.textContent = descText;
-
-  modal.classList.add('active');
-}
-
-const btnCloseMilestone = document.getElementById('btn-close-milestone');
-if (btnCloseMilestone) {
-  btnCloseMilestone.addEventListener('click', () => {
-    document.getElementById('modal-progress-milestone')?.classList.remove('active');
-  });
-}
-
-function handlePillClick(event, qid, val, itemEl) {
-  const btn = event.currentTarget;
-  
-  // Animación de onda ripple
-  btn.classList.add('clicked');
-  setTimeout(() => btn.classList.remove('clicked'), 400);
-  
-  // Guardar respuestas
-  state.answers[qid] = val;
+function handlePillClick(e, questionId, val, itemEl) {
+  e.preventDefault();
+  state.answers[questionId] = val;
   saveAnswers(state.answers);
-  
-  // Actualizar clases seleccionadas en las píldoras de este grupo
-  const pillsBox = btn.parentElement;
-  pillsBox.querySelectorAll('.scale-pill').forEach(p => {
-    p.classList.toggle('selected', Number(p.dataset.value) === val);
-  });
 
-  // Actualizar Tooltip Flotante (Imagen 4 style)
-  const tooltipEl = document.getElementById(`tooltip-q-${qid}`);
-  if (tooltipEl) {
-    const labels = {
-      1: "Casi nunca",
-      2: "Rara vez",
-      3: "A veces (Evita 3)",
-      4: "Con frecuencia",
-      5: "Con mucha frecuencia"
-    };
-    tooltipEl.textContent = labels[val];
-    tooltipEl.style.left = `${(val - 0.5) * 20}%`;
-    tooltipEl.classList.add('show');
-  }
+  const container = itemEl.querySelector('.scale-pills');
+  container.querySelectorAll('.scale-pill').forEach(p => p.classList.remove('selected'));
   
-  // Mostrar u ocultar alerta de sesgo (si responde 3)
-  const biasEl = document.getElementById(`bias-q-${qid}`);
-  if (biasEl) {
-    biasEl.classList.toggle('show', val === 3);
+  const selectedPill = container.querySelector(`.scale-pill-${val}`);
+  if (selectedPill) selectedPill.classList.add('selected');
+
+  const labels = { 1: "Rara vez / Casi nunca", 2: "A veces", 3: "Con frecuencia / Siempre" };
+  const tooltip = itemEl.querySelector(`#tooltip-q-${questionId}`);
+  if (tooltip) {
+    tooltip.textContent = labels[val];
+    tooltip.style.left = `${(val - 0.5) * 33.33}%`;
+    tooltip.classList.add('show');
   }
-  
+
   checkSceneCompletion();
   updateProgressBar();
-  checkProgressMilestone();
-  
-  // Auto-scroll suave a la siguiente pregunta sin responder
+
+  // Auto-scroll a la siguiente pregunta
   setTimeout(() => {
-    const sceneQuestions = situations.filter(s => s.sceneId === state.currentScene);
-    const nextUnanswered = sceneQuestions.find(q => !state.answers[q.id]);
-    if (nextUnanswered) {
-      const nextCard = el.questionsContainer.querySelector(`[data-question-id="${nextUnanswered.id}"]`);
+    const questionsInScene = situations.filter(s => s.sceneId === state.currentScene);
+    const currentIndex = questionsInScene.findIndex(q => q.id === questionId);
+    if (currentIndex < questionsInScene.length - 1) {
+      const nextQ = questionsInScene[currentIndex + 1];
+      const nextCard = document.getElementById(`question-card-${nextQ.id}`);
       if (nextCard) {
         nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -504,10 +418,8 @@ function handlePillClick(event, qid, val, itemEl) {
 }
 
 function checkSceneCompletion() {
-  const sceneId = state.currentScene;
-  const sceneQuestions = situations.filter(s => s.sceneId === sceneId);
+  const sceneQuestions = situations.filter(s => s.sceneId === state.currentScene);
   const complete = sceneQuestions.every(q => state.answers[q.id]);
-  
   el.btnNext.disabled = !complete;
   el.navHint.style.opacity = complete ? '0' : '1';
 }
@@ -515,9 +427,7 @@ function checkSceneCompletion() {
 function updateProgressBar() {
   const globalAnswered = countAnswered();
   const pct = Math.round((globalAnswered / TOTAL_SITUATIONS) * 100);
-  
   el.testPercentIndicator.textContent = `${pct}% Completado`;
-  el.testProgressBar.style.width = `${pct}%`;
 }
 
 function countAnswered() {
@@ -529,111 +439,92 @@ function countAnswered() {
 }
 
 // ---------------------------------------------------------------------------
+// Tutorial Driver.js
+// ---------------------------------------------------------------------------
+function runDriverTutorial() {
+  if (typeof window.driver === 'function' || window.driver?.js?.driver) {
+    const driverObj = window.driver.js.driver({
+      showProgress: true,
+      steps: [
+        { element: '#screen-welcome', popover: { title: 'Bienvenido a Dones IGC', description: 'Este test está diseñado para ayudarte a descubrir tus fortalezas de servicio en la iglesia local.' } },
+        { element: '#nav-btn-glossary-welcome', popover: { title: '1. Aprender de los Dones', description: 'Te recomendamos explorar la guía de dones previamente para responder con mayor claridad.' } },
+        { element: '#btn-start', popover: { title: '2. Iniciar el Test', description: 'El test está dividido en 10 partes cortas. Responde con total sinceridad en base a tus vivencias reales.' } }
+      ]
+    });
+    driverObj.drive();
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Finalización y Resultados
 // ---------------------------------------------------------------------------
-function sendBridgeCompletionMessage(payload) {
-  const message = { type: 'IGC_GIFTS_TEST_COMPLETED', payload };
-
-  if (window.ReactNativeWebView && typeof window.ReactNativeWebView.postMessage === 'function') {
-    window.ReactNativeWebView.postMessage(JSON.stringify(message));
-  }
-
-  if (window.parent && window.parent !== window) {
-    window.parent.postMessage(message, '*');
-  }
-}
-
-function triggerConfetti() {
-  if (typeof window.confetti === 'function') {
-    window.confetti({
-      particleCount: 120,
-      spread: 80,
-      origin: { y: 0.6 },
-      colors: ['#336cdd', '#D4AF37', '#E05A2B', '#10B981']
-    });
-  }
-}
-
-function finishTest() {
+async function finishTest() {
   const calculation = runFullCalculation(state.answers);
   
   const result = {
-    version: '2.0.0',
+    id: state.submissionId || undefined,
+    version: '3.0.0',
     completedAt: new Date().toISOString(),
     answers: { ...state.answers },
     scores: calculation.percentage,
     topGifts: calculation.top3.map(g => g.id),
+    attendsGrowthGroup: state.onboarding.attendsGrowthGroup,
+    zoneLocation: state.onboarding.zoneLocation,
   };
   
   saveResult(result);
-  submitResult(result); // best-effort, no bloquea la UI si falla
+  const createdId = await submitResult(result);
+  if (createdId) {
+    state.submissionId = createdId;
+    localStorage.setItem(STORAGE_SUBMISSION_ID_KEY, createdId);
+  }
 
-  sendBridgeCompletionMessage({
-    version: result.version,
-    completedAt: result.completedAt,
-    answers: result.answers,
-    scores: result.scores,
-    topGifts: result.topGifts,
-  });
-  
   renderResults(calculation);
   showScreen('results');
   triggerConfetti();
+
+  // Abrir modal de llamado a Grupo de Crecimiento
+  setTimeout(() => {
+    openGrowthGroupModal();
+  }, 1200);
+}
+
+function triggerConfetti() {
+  if (typeof window.confetti === 'function') {
+    window.confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#336cdd', '#D4AF37', '#E05A2B', '#10B981'] });
+  }
 }
 
 function renderResults(calculation) {
   const top3 = calculation.top3;
   const remaining = calculation.ranked.slice(3);
   
-  // Render Bento Grid Top 3
+  // Render Top 3 en Igualdad de Jerarquía
   el.topGiftsContainer.innerHTML = '';
   top3.forEach((g, i) => {
     const card = document.createElement('div');
-    card.className = `bento-card rank-${i+1}`;
+    card.className = 'top3-equal-card';
     
-    const rankIcons = ['🥇', '🥈', '🥉'];
-    
-    let innerHTML = `
-      <span class="bento-rank-tag">${rankIcons[i]}</span>
-      <div class="bento-card-content">
-        <div class="bento-card-header">
-          <img src="${g.illustration || 'src/assets/illustrations/Evangelismo.png'}" alt="${g.name}" class="bento-gift-img">
-          <div class="bento-title-text">
-            <h4>${g.name}</h4>
-            <span class="bento-pct-badge">${g.percentage}% afinidad</span>
-          </div>
-        </div>
-        <p class="bento-description">${g.description}</p>
+    card.innerHTML = `
+      <span class="top3-rank-badge">LUGAR #${i+1}</span>
+      <img src="${g.illustration || 'src/assets/illustrations/Evangelismo.png'}" alt="${g.name}" class="top3-gift-img">
+      <h4>${g.name}</h4>
+      <span class="top3-pct-badge">${g.percentage}% afinidad</span>
+      <p>${g.summary || g.description}</p>
+      <button class="btn-know-more" data-gift-id="${g.id}">Conocer más →</button>
     `;
     
-    if (i === 0) {
-      innerHTML += `
-        <div class="bento-extended">
-          <div>
-            <span class="bento-meta-title">💡 Consejos para florecer</span>
-            <p class="bento-meta-text">${g.tips ? g.tips[0] : 'Sigue usando tu don con amor.'}</p>
-          </div>
-          <div>
-            <span class="bento-meta-title">📌 Ejemplo práctico</span>
-            <p class="bento-meta-text">${g.examples ? g.examples[0] : 'Servir activamente en las tareas locales.'}</p>
-          </div>
-        </div>
-      `;
-    }
-    
-    innerHTML += `
-        <button class="btn-card-more" data-gift-id="${g.id}">
-          Ver detalles
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
-      </div>
-    `;
-    
-    card.innerHTML = innerHTML;
     el.topGiftsContainer.appendChild(card);
   });
+
+  el.topGiftsContainer.querySelectorAll('.btn-know-more').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openGiftModal(btn.dataset.giftId);
+    });
+  });
   
-  // Render listado restante
+  // Render listado restante de 12 dones
   el.remainingGiftsContainer.innerHTML = '';
   remaining.forEach(g => {
     const row = document.createElement('div');
@@ -652,21 +543,137 @@ function renderResults(calculation) {
     `;
     el.remainingGiftsContainer.appendChild(row);
   });
-  
-  // Click de "Ver detalles" del Bento
-  el.topGiftsContainer.querySelectorAll('.btn-card-more').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openGiftModal(btn.dataset.giftId);
-    });
-  });
-  
-  // Habilitar botón de ver resultados en inicio
+
   el.btnViewResults.style.display = 'block';
 }
 
 // ---------------------------------------------------------------------------
-// Modal de Detalles de un Don (Replicando Ref3.png)
+// Encuesta de Evaluación (3 Preguntas)
+// ---------------------------------------------------------------------------
+function initEvaluationSurvey() {
+  if (el.btnOpenEvaluation) {
+    el.btnOpenEvaluation.addEventListener('click', () => {
+      el.modalEval.classList.add('active');
+    });
+  }
+
+  if (el.evalCloseBtn) {
+    el.evalCloseBtn.addEventListener('click', () => {
+      el.modalEval.classList.remove('active');
+    });
+  }
+
+  // Selección de Estrellas
+  const starsContainer = document.getElementById('star-rating-container');
+  if (starsContainer) {
+    starsContainer.querySelectorAll('span').forEach(star => {
+      star.addEventListener('click', () => {
+        state.evalRating = Number(star.dataset.star);
+        starsContainer.querySelectorAll('span').forEach(s => {
+          s.style.color = Number(s.dataset.star) <= state.evalRating ? '#f59e0b' : '#cbd5e1';
+        });
+      });
+    });
+  }
+
+  // Selección de Precisión
+  document.querySelectorAll('.eval-acc-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.eval-acc-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.evalAccuracy = btn.dataset.acc;
+    });
+  });
+
+  // Envío de la evaluación
+  if (el.btnSubmitEval) {
+    el.btnSubmitEval.addEventListener('click', async () => {
+      const feedbackText = document.getElementById('eval-feedback-text')?.value || '';
+      
+      const stored = loadStoredResult();
+      if (stored) {
+        const payload = {
+          id: state.submissionId || undefined,
+          version: '3.0.0',
+          answers: stored.answers,
+          scores: stored.scores,
+          topGifts: stored.topGifts,
+          completedAt: stored.completedAt,
+          attendsGrowthGroup: state.onboarding.attendsGrowthGroup,
+          zoneLocation: state.onboarding.zoneLocation,
+          clarityRating: state.evalRating || null,
+          accuracyPerception: state.evalAccuracy || null,
+          feedbackComments: feedbackText,
+        };
+
+        await submitResult(payload);
+      }
+
+      el.modalEval.classList.remove('active');
+      alert('¡Gracias por tus comentarios! Nos ayudan a mejorar.');
+    });
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Modal de Llamado a Grupo de Crecimiento
+// ---------------------------------------------------------------------------
+function openGrowthGroupModal() {
+  const container = document.getElementById('growth-callout-actions');
+  if (!container) return;
+
+  if (state.onboarding.attendsGrowthGroup === false) {
+    container.innerHTML = `
+      <p style="font-size:0.85rem; color: var(--navy); font-weight: 750; margin-bottom: 16px;">
+        Indicaste que no asistes a un grupo. ¡Te invitamos a integrarte a uno cerca de ti!
+      </p>
+      <a href="https://igcteg.org/grupos/" target="_blank" class="btn btn-primary btn-block" style="text-decoration:none; padding:12px; font-size:0.95rem;">🌱 Solicitar Grupo de Crecimiento</a>
+    `;
+  } else {
+    container.innerHTML = `
+      <p style="font-size:0.88rem; color: var(--primary); font-weight: 800; margin-bottom: 16px;">
+        ¡Sigue ejerciendo activamente tus dones en tu Grupo de Crecimiento!
+      </p>
+      <button class="btn btn-secondary btn-block" onclick="document.getElementById('modal-growth-group-callout').classList.remove('active')">Entendido</button>
+    `;
+  }
+
+  el.modalGrowthCallout.classList.add('active');
+}
+
+// ---------------------------------------------------------------------------
+// Slideover Consulta Rápida de Dones (Desde el Test)
+// ---------------------------------------------------------------------------
+function initQuickGiftsSlideover() {
+  if (el.btnQuickExploreGifts) {
+    el.btnQuickExploreGifts.addEventListener('click', () => {
+      renderQuickGiftsList();
+      el.modalQuickGifts.classList.add('active');
+    });
+  }
+
+  if (el.quickGiftsCloseBtn) {
+    el.quickGiftsCloseBtn.addEventListener('click', () => {
+      el.modalQuickGifts.classList.remove('active');
+    });
+  }
+}
+
+function renderQuickGiftsList() {
+  if (!el.quickGiftsList) return;
+  el.quickGiftsList.innerHTML = gifts.map(g => `
+    <div style="background:#ffffff; border-radius: 12px; padding: 14px; border: 1px solid rgba(15,15,49,0.08); display: flex; gap: 12px; align-items: center;">
+      <img src="${g.illustration || 'src/assets/illustrations/Evangelismo.png'}" style="width: 44px; height: 44px; object-fit: contain;">
+      <div>
+        <h5 style="margin: 0; font-size: 0.95rem; font-weight: 900; color: var(--navy);">${g.name}</h5>
+        <p style="margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.35;">${g.summary || g.description}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ---------------------------------------------------------------------------
+// Modal de Detalles de un Don
 // ---------------------------------------------------------------------------
 function openGiftModal(giftId) {
   const g = gifts.find(x => x.id === giftId);
@@ -675,23 +682,11 @@ function openGiftModal(giftId) {
   const stored = loadStoredResult();
   const currentPct = stored ? stored.scores[g.id] : null;
   
-  let tipsHTML = '';
-  if (g.tips && g.tips.length > 0) {
-    tipsHTML = `
-      <div class="modal-section objective-callout">
-        <span class="modal-section-title">💡 Consejos para florecer</span>
-        <ul class="modal-list">
-          ${g.tips.map(t => `<li>${t}</li>`).join('')}
-        </ul>
-      </div>
-    `;
-  }
-  
   let examplesHTML = '';
   if (g.examples && g.examples.length > 0) {
     examplesHTML = `
-      <div class="modal-section">
-        <span class="modal-section-title">📌 Ejemplos prácticos</span>
+      <div class="modal-section" style="margin-top: 14px;">
+        <span class="modal-section-title" style="font-size: 0.88rem; font-weight: 850; color: var(--primary); display: block; margin-bottom: 6px;">📌 Ejemplos Prácticos de Servicio</span>
         <ul class="modal-list">
           ${g.examples.map(ex => `<li>${ex}</li>`).join('')}
         </ul>
@@ -708,9 +703,8 @@ function openGiftModal(giftId) {
     
     ${currentPct !== null ? `<span class="bento-pct-badge" style="margin-top:-10px; font-size: 0.85rem; padding: 4px 14px;">${currentPct}% afinidad detectada</span>` : ''}
     
-    <p class="modal-desc">${g.description}</p>
+    <p class="modal-desc" style="font-size: 0.9rem; line-height: 1.5; color: var(--navy); text-align: left; margin-top: 12px;">${g.description}</p>
     
-    ${tipsHTML}
     ${examplesHTML}
   `;
   
@@ -732,19 +726,30 @@ el.modal.addEventListener('click', (e) => {
 function renderGlossary(filterText = '') {
   const query = filterText.toLowerCase().trim();
   el.glossaryGrid.innerHTML = '';
-  
+
+  // Banner personal si ya tiene test
+  const stored = loadStoredResult();
+  const banner = document.getElementById('user-test-results-banner');
+  const title = document.getElementById('user-top3-summary-title');
+  if (stored && isTestComplete(stored.answers)) {
+    const calc = runFullCalculation(stored.answers);
+    const names = calc.top3.map(g => g.name).join(', ');
+    if (banner && title) {
+      title.textContent = `Tus Dones Principales: ${names}`;
+      banner.style.display = 'block';
+    }
+  } else if (banner) {
+    banner.style.display = 'none';
+  }
+
+  // Filtro exclusivo por nombre de don
   const filtered = gifts.filter(g => {
     if (!query) return true;
-    return (
-      g.name.toLowerCase().includes(query) ||
-      g.description.toLowerCase().includes(query) ||
-      (g.tips && g.tips.some(t => t.toLowerCase().includes(query))) ||
-      (g.examples && g.examples.some(ex => ex.toLowerCase().includes(query)))
-    );
+    return g.name.toLowerCase().includes(query);
   });
   
   if (filtered.length === 0) {
-    el.glossaryGrid.innerHTML = `<p style="grid-column: span 3; text-align: center; color: var(--text-muted); padding: 32px 0;">No se encontraron dones.</p>`;
+    el.glossaryGrid.innerHTML = `<p style="grid-column: span 3; text-align: center; color: var(--text-muted); padding: 32px 0;">No se encontraron dones que coincidan.</p>`;
     return;
   }
   
@@ -760,7 +765,7 @@ function renderGlossary(filterText = '') {
       </div>
       <p class="glossary-card-summary">${g.summary || g.description}</p>
       <button class="btn-glossary-more" type="button">
-        <span>Ver más detalle</span>
+        <span>Conocer más</span>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </button>
     `;
@@ -768,33 +773,20 @@ function renderGlossary(filterText = '') {
   });
 }
 
-el.glossarySearch.addEventListener('input', (e) => {
-  renderGlossary(e.target.value);
-});
-
 // ---------------------------------------------------------------------------
-// Event Listeners y Navegación
+// Event Listeners Globales
 // ---------------------------------------------------------------------------
 el.btnStart.addEventListener('click', () => {
   state.currentScene = getFirstUnansweredScene();
   renderScene();
   showScreen('test');
-
-  // Lanzar tour guiado si es la primera vez
-  if (localStorage.getItem('dones_igc_tour_done') !== 'true') {
-    setTimeout(startDriverTour, 400);
-    localStorage.setItem('dones_igc_tour_done', 'true');
-  }
 });
 
-if (el.navBtnGlossaryWelcome) {
-  el.navBtnGlossaryWelcome.addEventListener('click', () => {
-    renderGlossary();
-    showScreen('glossary');
-  });
-}
+el.navBtnGlossaryWelcome.addEventListener('click', () => {
+  renderGlossary();
+  showScreen('glossary');
+});
 
-// Botones de la Barra Flotante Inferior Glassmorphic
 document.querySelectorAll('.bottom-nav-item').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = btn.dataset.target;
@@ -827,14 +819,10 @@ el.btnViewResults.addEventListener('click', () => {
   }
 });
 
-// Botón de Volver/Inicio en el Header
 el.navBtnBack.addEventListener('click', () => {
-  const stored = loadStoredResult();
-  el.btnViewResults.style.display = (stored && isTestComplete(stored.answers)) ? 'block' : 'none';
   showScreen('welcome');
 });
 
-// Navegación del Test con Auto-scroll superior
 el.btnPrev.addEventListener('click', () => {
   if (state.currentScene > 1) {
     state.currentScene--;
@@ -844,13 +832,11 @@ el.btnPrev.addEventListener('click', () => {
 });
 
 el.btnNext.addEventListener('click', () => {
-  const sceneId = state.currentScene;
-  const sceneQuestions = situations.filter(s => s.sceneId === sceneId);
+  const sceneQuestions = situations.filter(s => s.sceneId === state.currentScene);
   const complete = sceneQuestions.every(q => state.answers[q.id]);
-  
   if (!complete) return;
   
-  if (sceneId < 10) {
+  if (state.currentScene < 10) {
     state.currentScene++;
     renderScene();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -870,83 +856,18 @@ el.btnReset.addEventListener('click', () => {
   }
 });
 
-// ---------------------------------------------------------------------------
-// Modal Selector de 3 Imágenes de Compartir & Compartir Test a otros (Estilo Heavy App)
-// ---------------------------------------------------------------------------
-const btnOpenShareModal = document.getElementById('btn-open-share-modal');
-const modalShareSelector = document.getElementById('modal-share-selector');
-const modalShareCloseBtn = document.getElementById('modal-share-close-btn');
-
-if (btnOpenShareModal && modalShareSelector) {
-  btnOpenShareModal.addEventListener('click', () => {
-    modalShareSelector.classList.add('active');
-  });
-}
-
-if (modalShareCloseBtn && modalShareSelector) {
-  modalShareCloseBtn.addEventListener('click', () => {
-    modalShareSelector.classList.remove('active');
-  });
-}
-
-let selectedShareVariant = 'bento';
-document.querySelectorAll('.share-variant-card').forEach(card => {
-  card.addEventListener('click', () => {
-    document.querySelectorAll('.share-variant-card').forEach(c => c.classList.remove('active'));
-    card.classList.add('active');
-    selectedShareVariant = card.dataset.variant;
-  });
+el.glossarySearch.addEventListener('input', (e) => {
+  renderGlossary(e.target.value);
 });
-
-const btnTriggerCanvasShare = document.getElementById('btn-trigger-canvas-share');
-if (btnTriggerCanvasShare) {
-  btnTriggerCanvasShare.addEventListener('click', async () => {
-    const stored = loadStoredResult();
-    if (!stored) return;
-
-    try {
-      if (modalShareSelector) modalShareSelector.classList.remove('active');
-      const { downloadStory } = await import('./canvas-share.js');
-      const calculation = runFullCalculation(stored.answers);
-      downloadStory(calculation, selectedShareVariant);
-    } catch (err) {
-      console.error("Error al compartir historia:", err);
-      alert("Error al descargar la imagen.");
-    }
-  });
-}
-
-// Botón Secundario: "Compartir Test a otros"
-const btnShareTestLink = document.getElementById('btn-share-test-link');
-if (btnShareTestLink) {
-  btnShareTestLink.addEventListener('click', async () => {
-    const shareData = {
-      title: 'Test de Dones Espirituales IGC',
-      text: '¡Hola! Te invito a realizar el Test de Dones Espirituales de Iglesia Gran Comisión Tegucigalpa para descubrir cómo Dios te ha capacitado para servir:',
-      url: window.location.href.split('#')[0]
-    };
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (e) {
-        console.log('Share canceled', e);
-      }
-    } else {
-      try {
-        await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-        alert('¡Enlace de invitación copiado al portapapeles! Ya puedes pegarlo en WhatsApp.');
-      } catch (e) {
-        alert(`Comparte este enlace: ${shareData.url}`);
-      }
-    }
-  });
-}
 
 // ---------------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------------
 function init() {
+  initOnboardingFlow();
+  initEvaluationSurvey();
+  initQuickGiftsSlideover();
+
   const stored = loadStoredResult();
   if (stored && isTestComplete(stored.answers)) {
     const calculation = runFullCalculation(stored.answers);

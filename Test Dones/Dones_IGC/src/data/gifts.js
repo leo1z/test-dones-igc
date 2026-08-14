@@ -14,7 +14,7 @@ export const gifts = [
     summary: "Capacidad para comunicar el Evangelio de forma sencilla y clara, conectando a las personas con la salvación en Jesús.",
     description: "Capacidad sobrenatural para dar el evangelio de manera sencilla y breve. Es el único don hacia incrédulos. No lo hace igual con todos, sabe cómo entrarles, no importa su temperamento. Unos lo hacen a grandes públicos, otros 1 a 1, unos por escrito, no necesitan de una actividad de la iglesia: lo pasan haciendo. También son buenos para enseñar a evangelizar.",
     questionCount: 7,
-    maxRawScore: 35,
+    maxRawScore: 21,
     minRawScore: 7,
     tips: [
       "Habla de Cristo con naturalidad en tu día a día.",
@@ -34,7 +34,7 @@ export const gifts = [
     summary: "Disposición alegre para proveer recursos financieros y materiales de forma generosa, sacrificada y discreta.",
     description: "Capacidad sobrenatural de dar en lo económico, o provisión, medicinas, llena necesidades materiales. A veces en anonimato (no quieren llamar la atención). Pueden identificar necesidades. También apoyan la obra en general (donaciones). Lo hace con liberalidad (sin pesar sino con alegría, generoso, sin condiciones). No siempre es rico, pero dan (a veces absteniéndose de cosas). Promueven la generosidad en otros.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Canaliza tu provisión en proyectos que tengan un impacto claro y espiritual.",
@@ -54,7 +54,7 @@ export const gifts = [
     summary: "Confianza firme en Dios frente a situaciones difíciles, perseverando en la oración e inspirando convicción en otros.",
     description: "Es una confianza sobrenatural en Dios para enfrentar situaciones. Pueden estimular la fe de otros. Le creen a Dios. Se les ve en grupos de oración. Son para animar la fe de desanimados, a los que les cuesta creer.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Dedica tiempo constante a la oración intercesora por causas que parecen imposibles.",
@@ -73,7 +73,7 @@ export const gifts = [
     summary: "Disposición humilde para resolver necesidades prácticas y logísticas tras bambalinas con gozo e iniciativa.",
     description: "Capacidad sobrenatural de ver áreas de necesidad, y soluciona de manera práctica y con humildad, sirve sin buscar sobresalir. Ayuda en cosas prácticas de la iglesia. Sirven con gozo, no a la fuerza.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Aprende a decir 'no' ocasionalmente para evitar el agotamiento extremo.",
@@ -93,7 +93,7 @@ export const gifts = [
     summary: "Sensibilidad empática profunda para acompañar, consolar y aliviar el sufrimiento físico y emocional de las personas.",
     description: "Parecido al de servir. Es mostrar compasión, aliviar sufrimiento de hermanos. Muy movidos a ayudar enfermos, afligidos, desanimados, solitarios, pobres, en duelo, etc. Pueden dar consejería de manera natural. Lo hacen sin quejarse, de corazón, se conectan con la gente.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Protege tu salud emocional para no absorber el dolor ajeno de manera destructiva.",
@@ -113,7 +113,7 @@ export const gifts = [
     summary: "Capacidad para animar, guiar en consejería bíblica y amonestar con amor, impulsando el crecimiento personal.",
     description: "De una manera sobrenatural pueden animar, consolar, exhortar, amonestar, obteniendo resultados. Son buenos en consejería, la gente los busca de manera natural. Ayudan a hacer la voluntad de Dios, llevan a la obediencia sin forzar ni manipular. Usa la Biblia.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Asegúrate de que tu corrección siempre vaya acompañada de consuelo e instrucciones claras de acción.",
@@ -133,7 +133,7 @@ export const gifts = [
     summary: "Devoción para cuidar, alimentar y velar de cerca por el crecimiento espiritual individual de cada persona.",
     description: "Implica cuidar ovejas de manera sobrenatural: las alimenta, las cuida, está pendiente de ellas, inspira confianza, está pendiente del que no viene. Habla con los hermanos y se sienten cuidados. También les enseña la Palabra, les ayuda a crecer, personal.",
     questionCount: 6,
-    maxRawScore: 30,
+    maxRawScore: 18,
     minRawScore: 6,
     tips: [
       "Enfócate en el cuidado y crecimiento personalizado (discipulado uno a uno).",
@@ -153,7 +153,7 @@ export const gifts = [
     summary: "Habilidad organizada para coordinar recursos, solucionar contingencias y dirigir proyectos grupales con eficiencia.",
     description: "Es bueno para organizar, planificar, llevar a cabo, dirige proyectos de la iglesia, ayudan a que funcionen los ministerios y las cosas. No domina, sino que inspira a cumplir la misión de la iglesia local, o el grupo.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Recuerda que las personas son más importantes que los procesos y la perfección del plan.",
@@ -173,7 +173,7 @@ export const gifts = [
     summary: "Capacidad de liderar con visión, inspirar la colaboración en equipo y formar a la siguiente generación de líderes.",
     description: "De líder, influye y dirige hermanos, se suma al de Administración. Están al frente fácilmente, guían con claridad, saben tomar decisiones con sabiduría, envisionan a otros, ayudan a desarrollar líderes. El que preside se centra en las personas, el de Administrar en recursos, procesos, planes.",
     questionCount: 4,
-    maxRawScore: 20,
+    maxRawScore: 12,
     minRawScore: 4,
     tips: [
       "Lidera con el ejemplo y mantén una actitud de servicio humilde al estilo de Jesús.",
@@ -193,7 +193,7 @@ export const gifts = [
     summary: "Capacidad para distinguir la verdad bíblica del error sutil, percibiendo el origen espiritual de enseñanzas y actitudes.",
     description: "Es una capacidad sobrenatural de distinguir el origen espiritual de un mensaje o enseñanza (si viene de Dios o del hombre o demonios). Es importante conocer la sana doctrina y no exponerse a cualquier enseñanza.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Evita volverte una persona desconfiada, hipercrítica o sospechosa con los demás.",
@@ -212,7 +212,7 @@ export const gifts = [
     summary: "Pasión por profundizar en la sana doctrina, la investigación bíblica rigurosa y la comprensión de las Escrituras.",
     description: "Este don da a entender una verdad bíblica (el de sabiduría dice cómo aplicarla). El de Ciencia revela una verdad doctrinal, el de sabiduría nos muestra cómo actuar a la luz de esa verdad. Solo puede ser basado en la Biblia. Les gusta estudiar.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Estudia no solo para acumular información doctrinal, sino para edificar espiritualmente a la iglesia.",
@@ -232,7 +232,7 @@ export const gifts = [
     summary: "Facilidad para orientar en la aplicación práctica de principios bíblicos ante dilemas y decisiones del diario vivir.",
     description: "Útil en consejería. Saber cómo aplicar los principios bíblicos en una situación difícil; es la sabiduría de Dios la que habla. No solo en consejería sino en pláticas formales con hermanos. Tiene que ser basado en la Biblia.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Escucha por completo la situación de la persona antes de ofrecer tu consejo.",
@@ -251,7 +251,7 @@ export const gifts = [
     summary: "Habilidad para estructurar y comunicar pasajes de la Biblia de forma clara, amena y accesible para todos.",
     description: "Capacidad sobrenatural para hacer entendibles enseñanzas de la Palabra de Dios. Puede ser al predicar, o al enseñar en un grupo pequeño, o por escrito. Aun temas no tan fáciles los presenta menos difíciles.",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Sé sumamente ordenado y estructurado al preparar tus clases o exposiciones.",
@@ -271,7 +271,7 @@ export const gifts = [
     summary: "Comunicación directa de verdades bíblicas que confrontan con amor, edifican y mueven al cambio de conducta.",
     description: "Significa \"hablar un mensaje de Dios\" (no necesariamente sobre el futuro): sirve más para exhortar, consolar, edificar con la Palabra de Dios de una manera profunda y especial. Puede suceder al predicar, pero también al platicar de la Palabra sobre temas especiales.",
     questionCount: 4,
-    maxRawScore: 20,
+    maxRawScore: 12,
     minRawScore: 4,
     tips: [
       "Habla con valentía y convicción, pero con una profunda compasión y humedad por la iglesia.",
@@ -290,7 +290,7 @@ export const gifts = [
     summary: "Impulso emprendedor para plantar nuevas comunidades de fe e iniciar ministerios donde antes no existían.",
     description: "Tiene la capacidad sobrenatural para empezar un grupo, o una iglesia, ya sea que tenga otros dones o se acompañe de hermanos con dones necesarios (Administrar, Pastor, Evangelismo, Enseñanza, Servir).",
     questionCount: 5,
-    maxRawScore: 25,
+    maxRawScore: 15,
     minRawScore: 5,
     tips: [
       "Rodéate de personas con dones complementarios de administración y pastoreo para sostener lo que inicias.",

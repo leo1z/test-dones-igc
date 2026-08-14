@@ -3,64 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test de Dones Espirituales - IGC Tegucigalpa</title>
-  <meta name="description" content="Descubre tus dones espirituales y cómo puedes servir en la Iglesia Gran Comisión Tegucigalpa. Test 100% estático y optimizado para móvil.">
+  <title>Test de Dones Espirituales — Iglesia Gran Comisión Tegucigalpa</title>
+  
+  <!-- SEO Best Practices -->
+  <meta name="description" content="Descubre y aprende sobre tus dones espirituales motivacionales según las Escrituras con el Test de la Iglesia Gran Comisión Tegucigalpa.">
+  <meta name="author" content="Iglesia Gran Comisión Tegucigalpa">
+
+  <!-- Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="src/css/styles.css">
-  <!-- Canvas Confetti CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <!-- Driver.js Tour CDN -->
+
+  <!-- Driver.js para el tour guiado -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css"/>
   <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
 </head>
 <body>
-  <!-- Ambient Blurred Glow Orbs -->
-  <div class="ambient-orb orb-1"></div>
-  <div class="ambient-orb orb-2"></div>
 
-  <!-- Header -->
-  <header class="main-header">
+  <!-- App Header (Minimalista con Logo IGC) -->
+  <header class="main-header" id="main-header">
     <div class="header-container">
-      <div class="brand">
-        <img src="src/assets/logos/IGC.png" alt="Logo IGC" class="logo-igc">
+      <div class="logo-wrapper">
+        <img src="src/assets/logos/igc.png" alt="Iglesia Gran Comisión Tegucigalpa" class="logo-igc" id="logo-igc">
       </div>
-      <nav class="nav-links">
-        <button id="nav-btn-back" class="nav-btn-link" style="display: none;">Volver</button>
-      </nav>
+      <div class="nav-links">
+        <button id="nav-btn-back" class="btn btn-secondary btn-sm" style="display: none;">← Inicio</button>
+      </div>
     </div>
   </header>
 
   <!-- Main Content Container -->
   <main class="main-content">
 
-    <!-- SCREEN 1: Welcome / Bienvenida (Replicando Ref1.png) -->
+    <!-- SCREEN 1: Welcome / Bienvenida -->
     <section id="screen-welcome" class="screen screen-fade active">
       <div class="welcome-container">
-        <div class="welcome-illustration-wrapper">
-          <img src="src/assets/illustrations/ui/Home.png" alt="Ilustración Dones" class="welcome-illustration">
+        <div class="welcome-illustration-wrapper" style="margin-bottom: 8px;">
+          <img src="src/assets/illustrations/ui/Home.png" alt="Ilustración Dones" class="welcome-illustration" style="height: 190px; width: auto; object-fit: contain;">
         </div>
         
-        <h2 class="welcome-brand-title">DONES<br>ESPIRITUALES</h2>
-        
+        <h2 class="welcome-brand-title" style="margin-bottom: 4px;">DONES<br>ESPIRITUALES</h2>
+        <p class="welcome-subtitle" style="font-size: 0.95rem; font-weight: 750; color: var(--primary); margin-bottom: 24px;">Otro de los regalos de la Gracia de Dios</p>
+
+        <!-- Botones de Acción (Aprender primero, Descubrir segundo) -->
         <div class="welcome-actions">
-          <button id="btn-start" class="btn btn-primary btn-large btn-block">Descubrir</button>
-          <button id="nav-btn-glossary-welcome" class="btn btn-navy btn-large btn-block">Aprender</button>
-          <button id="btn-view-results" class="btn btn-secondary btn-large btn-block" style="display: none;">Ver Resultados</button>
+          <button id="nav-btn-glossary-welcome" class="btn btn-primary btn-large btn-block" style="height: 54px; font-size: 1.05rem;">Aprender</button>
+          <button id="btn-start" class="btn btn-navy btn-large btn-block" style="height: 52px; font-size: 1rem;">Descubrir</button>
+          <button id="btn-view-results" class="btn btn-secondary btn-large btn-block" style="display: none;">Ver Mi Resultado</button>
         </div>
 
-        <div class="developed-by-home" style="margin-top: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
-          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; color: var(--navy); font-weight: 850;">
-            <span>Desarrollado por</span>
-            <img src="src/assets/logos/antimateria.png" alt="Logo Antimateria" class="logo-antimateria" style="height: 48px; width: auto; object-fit: contain;">
+        <!-- CTA Serie de Prédicas en YouTube (3 Episodios) -->
+        <div class="youtube-series-card" id="youtube-series-card" style="margin-top: 24px; background: #ffffff; border-radius: 18px; padding: 20px; border: 1px solid rgba(15,15,49,0.08); box-shadow: 0 8px 24px rgba(15,15,49,0.04); text-align: left;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <span style="font-size: 1.5rem;">🎬</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem; font-weight: 850; color: var(--navy);">Serie de Prédicas en YouTube</h4>
+              <p style="margin: 0; font-size: 0.78rem; color: var(--text-muted); font-weight: 650;">Explora las 3 predicaciones sobre Dones Espirituales</p>
+            </div>
           </div>
-          <div class="reviewed-by-pastor" style="font-size: 0.76rem; font-weight: 650; color: var(--navy); opacity: 0.7; font-style: italic; margin-top: 2px;">Revisado por Pastor Gustavo Zepeda</div>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+            <a href="https://www.youtube.com/@igcteg" target="_blank" class="yt-episode-link" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: rgba(51,108,221,0.06); border-radius: 10px; color: var(--navy); font-size: 0.82rem; font-weight: 800; text-decoration: none;">
+              <span>▶ Episodio 1: Entendiendo los Dones de Gracia</span>
+              <span style="color: var(--primary);">Ver →</span>
+            </a>
+            <a href="https://www.youtube.com/@igcteg" target="_blank" class="yt-episode-link" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: rgba(15,15,49,0.03); border-radius: 10px; color: var(--navy); font-size: 0.82rem; font-weight: 800; text-decoration: none;">
+              <span>▶ Episodio 2: Cómo Descubrir tu Don</span>
+              <span style="color: var(--primary);">Ver →</span>
+            </a>
+            <a href="https://www.youtube.com/@igcteg" target="_blank" class="yt-episode-link" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: rgba(15,15,49,0.03); border-radius: 10px; color: var(--navy); font-size: 0.82rem; font-weight: 800; text-decoration: none;">
+              <span>▶ Episodio 3: Servir con Propósito</span>
+              <span style="color: var(--primary);">Ver →</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Créditos Oficiales -->
+        <div class="developed-by-home" style="margin-top: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;">
+          <div style="font-size: 0.88rem; color: var(--navy); font-weight: 850;">
+            Creado por Iglesia Gran Comisión Tegucigalpa
+          </div>
+          <div class="reviewed-by-pastor" style="font-size: 0.76rem; font-weight: 650; color: var(--navy); opacity: 0.7; font-style: italic;">Revisado por Pastor Gustavo Zepeda</div>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 2: Test Wizard / Formulario — Web App Journey -->
+    <!-- SCREEN 2: Test Wizard / Formulario -->
     <section id="screen-test" class="screen screen-fade">
       <div class="test-container">
-        <!-- Mapa de Ruta: Conoce tus Dones (Estilo Noom / Duolingo) -->
+        <!-- Mapa de Ruta: Conoce tus Dones -->
         <div class="journey-roadmap-card" id="journey-roadmap-card">
           <div class="journey-header">
             <span class="journey-badge">⚡ CONOCE TUS DONES</span>
@@ -68,38 +101,30 @@
           </div>
           <div class="journey-nodes-scroll" id="journey-nodes-scroll">
             <div class="journey-nodes-track" id="journey-nodes-container">
-              <!-- Renderizado dinámico de las 10 estaciones de la ruta -->
+              <!-- Renderizado dinámico de las 10 estaciones -->
             </div>
-          </div>
-        </div>
-
-        <!-- Progress bar secundaria -->
-        <div class="progress-section" style="display: none;">
-          <div class="progress-labels">
-            <span class="progress-scene-title" id="test-scene-indicator">Parte 1</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill" id="test-progress-bar"></div>
           </div>
         </div>
 
         <!-- Scene Banner Card -->
         <div class="scene-card" id="scene-banner">
-          <img src="src/assets/illustrations/Discernimiento.png" alt="Parte Ilustración" class="scene-banner-img" id="scene-illustration">
+          <img src="src/assets/illustrations/banners/Parte 1.png" alt="Parte Ilustración" class="scene-banner-img" id="scene-illustration">
           <div class="scene-banner-text">
-            <h3 class="scene-banner-title" id="scene-part-title">Parte 1</h3>
+            <h3 class="scene-banner-title" id="scene-part-title">PARTE 1</h3>
           </div>
         </div>
 
-        <!-- Scale legend (once per scene, not repeated per situation) -->
-        <div class="scale-legend">
-          <span>No me identifico</span>
-          <span>Así soy yo</span>
+        <!-- Franja Permanente Disclaimer de Aprendizaje -->
+        <div class="test-banner-disclaimer" style="margin-top: 14px; background: rgba(51,108,221,0.08); border: 1px solid rgba(51,108,221,0.2); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <span style="font-size: 0.82rem; font-weight: 750; color: var(--navy); line-height: 1.35;">
+            💡 Conocer sobre los dones previamente le dará mayor sentido y claridad a tus respuestas en el test.
+          </span>
+          <button id="btn-quick-explore-gifts" class="btn btn-navy btn-sm" style="white-space: nowrap; flex-shrink: 0; padding: 6px 12px; font-size: 0.78rem;">Explorar Dones</button>
         </div>
 
         <!-- Situations / Questions list -->
-        <div class="questions-list" id="questions-container">
-          <!-- Dynamic rendering of situations with circular index and pill scales -->
+        <div class="questions-list" id="questions-container" style="margin-top: 20px;">
+          <!-- Dynamic rendering of situations with 3 pill scales -->
         </div>
 
         <!-- Wizard Navigation -->
@@ -125,64 +150,52 @@
         <div class="results-header">
           <span class="results-badge">RESULTADO OFICIAL</span>
           <h2>Tus Dones Espirituales</h2>
-          <p>Dios te ha dotado de capacidades únicas para servir a su iglesia. Aquí están tus resultados.</p>
+          <p>Dios te ha capacitado con recursos únicos para servir con propósito. Aquí están tus resultados.</p>
         </div>
 
-        <!-- Bento Grid: Top 3 Dones -->
+        <!-- Top 3 Dones en Jerarquía Igualitaria -->
         <div class="bento-title">
-          <h3>🏆 Dones Principales (Top 3)</h3>
+          <h3>🏆 Tus 3 Dones Principales</h3>
         </div>
-        <div class="bento-grid" id="top-gifts-container">
-          <!-- Dynamic Bento items: Rank 1 (Large), Rank 2 (Medium), Rank 3 (Small) -->
+        <div class="bento-grid top3-equal-grid" id="top-gifts-container">
+          <!-- Dynamic Top 3 equal cards -->
         </div>
 
-        <!-- Remaining Dones and Detail Graph -->
-        <div class="results-split">
-          <!-- Remaining 12 Dones list -->
-          <div class="remaining-section">
-            <h3 class="section-title">💡 Otros Dones en ti</h3>
-            <div class="remaining-list" id="remaining-gifts-container">
-              <!-- Dynamic list of 12 remaining gifts -->
-            </div>
-          </div>
-
-          <!-- Sharing panel & Reset -->
-          <div class="actions-section">
-            <div class="card share-card">
-              <h3>📲 Compartir tus Resultados</h3>
-              <p>Elige entre 3 formatos visuales diseñados para tus historias de Instagram, WhatsApp y redes sociales.</p>
-
-              <!-- Botón Principal: Abre el selector visual de 3 imágenes (Estilo Heavy App) -->
-              <button id="btn-open-share-modal" class="btn btn-primary btn-block" style="font-size: 1.05rem; gap: 8px; margin-bottom: 12px; height: 56px;">
-                <span>📸</span> Compartir Mis Resultados (3 Estilos)
-              </button>
-
-              <!-- Botón Secundario: Compartir Test a otros -->
-              <button id="btn-share-test-link" class="btn btn-secondary btn-block" style="font-size: 0.95rem; gap: 8px;">
-                <span>📢</span> Compartir Test a otros
-              </button>
-            </div>
-
-            <div class="card reset-card">
-              <h3>🔄 Repetir el Test</h3>
-              <p>Elimina permanentemente tus respuestas actuales de este dispositivo para comenzar de nuevo.</p>
-              <button id="btn-reset" class="btn btn-danger">Reiniciar Test</button>
-            </div>
+        <!-- Demás Dones -->
+        <div class="remaining-section" style="margin-top: 32px;">
+          <h3 class="section-title">💡 Otros Dones en ti</h3>
+          <div class="remaining-list" id="remaining-gifts-container">
+            <!-- Dynamic list of 12 remaining gifts -->
           </div>
         </div>
+
+        <!-- Acciones de Evaluación y Cierre -->
+        <div class="results-actions-card" style="margin-top: 32px; background: #ffffff; border-radius: 20px; padding: 24px; border: 1px solid rgba(15,15,49,0.08); text-align: center; box-shadow: 0 8px 24px rgba(15,15,49,0.04);">
+          <h3 style="font-size: 1.15rem; font-weight: 850; color: var(--navy); margin-bottom: 6px;">¿Cómo fue tu experiencia?</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Ayúdanos a mejorar completando 3 preguntas cortas de retroalimentación.</p>
+          <button id="btn-open-evaluation" class="btn btn-primary btn-block" style="height: 52px; font-size: 1rem; margin-bottom: 12px;">✍️ Evaluar la Experiencia del Test</button>
+          <button id="btn-reset" class="btn btn-danger btn-block" style="height: 44px; font-size: 0.88rem;">Reiniciar Test</button>
+        </div>
+
       </div>
     </section>
 
-    <!-- SCREEN 4: View All Gifts List (Glossary) -->
+    <!-- SCREEN 4: Sección de Dones (Glosario) -->
     <section id="screen-glossary" class="screen screen-fade">
       <div class="glossary-container">
+        <!-- Banner personal si ya realizó el test -->
+        <div id="user-test-results-banner" style="display: none; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #ffffff; border-radius: 18px; padding: 18px 20px; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(37,99,235,0.25);">
+          <span style="font-size: 0.78rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 20px;">Tus Dones Detectados</span>
+          <h3 id="user-top3-summary-title" style="margin: 8px 0 0 0; font-size: 1.1rem; font-weight: 900;">Cargando tus resultados...</h3>
+        </div>
+
         <div class="glossary-header">
           <h2>Aprender de los Dones</h2>
-          <p>Explora el catálogo completo de los 15 dones motivacionales y sus propósitos bíblicos.</p>
+          <p>Explora los 15 dones motivacionales y sus aplicaciones bíblicas.</p>
           
           <div class="search-box">
             <span class="search-icon">🔍</span>
-            <input type="text" id="glossary-search" placeholder="Buscar un don, palabra clave o pasaje bíblico...">
+            <input type="text" id="glossary-search" placeholder="Buscar por nombre de don...">
           </div>
         </div>
 
@@ -194,17 +207,132 @@
 
   </main>
 
-  <!-- Interactive Detail Modal -->
-  <div id="gift-modal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="modal-close" id="modal-close-btn">&times;</button>
-      <div class="modal-body" id="gift-modal-body">
-        <!-- Rendered dynamically (Replicando Ref3.png) -->
+  <!-- Modal 1: Onboarding Inicial (Evangelio + Demografía de Zonas) -->
+  <div id="modal-initial-onboarding" class="modal-overlay">
+    <div class="modal-content" style="max-width: 480px; padding: 32px 24px;">
+      
+      <!-- Paso 1: Evangelio y Gracia -->
+      <div id="onboarding-step-1">
+        <span style="font-size: 0.78rem; font-weight: 850; color: var(--primary); background: rgba(51,108,221,0.1); padding: 4px 12px; border-radius: 20px;">MENSAJE PASTORAL</span>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--navy); margin: 12px 0 10px 0;">Bienvenido al Test de Dones</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">
+          Los dones espirituales son capacitaciones otorgadas por la gracia del Espíritu Santo a quienes han creído en Jesús. Si aún tienes dudas sobre tu fe o no has tenido la oportunidad de comprender el Evangelio, te animamos a ponerte en contacto con nuestro equipo pastoral.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="https://igcteg.org/grupos/" target="_blank" class="btn btn-secondary btn-block" style="font-size: 0.88rem; text-decoration: none; text-align: center;">💬 Quiero contactar a un líder / pastor</a>
+          <button id="btn-onboarding-to-step2" class="btn btn-primary btn-block" style="height: 48px; font-size: 0.95rem;">Comprendo, ¡Continuar!</button>
+        </div>
+      </div>
+
+      <!-- Paso 2: Asistencia a Grupo + Zona -->
+      <div id="onboarding-step-2" style="display: none;">
+        <span style="font-size: 0.78rem; font-weight: 850; color: var(--primary); background: rgba(51,108,221,0.1); padding: 4px 12px; border-radius: 20px;">PASO 2 DE 2</span>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--navy); margin: 12px 0 16px 0;">Cuéntanos un poco de ti</h3>
+
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label style="font-size: 0.88rem; font-weight: 850; color: var(--navy); display: block; margin-bottom: 8px;">1. ¿Asistes actualmente a un Grupo de Crecimiento?</label>
+          <div style="display: flex; gap: 10px;">
+            <button type="button" id="btn-group-yes" class="btn btn-secondary option-choice-btn" style="flex: 1; padding: 10px;">Sí asisto</button>
+            <button type="button" id="btn-group-no" class="btn btn-secondary option-choice-btn" style="flex: 1; padding: 10px;">No asisto</button>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 24px; text-align: left;">
+          <label for="onboarding-zone-select" style="font-size: 0.88rem; font-weight: 850; color: var(--navy); display: block; margin-bottom: 8px;">2. ¿En qué Zona / Ciudad de Honduras vives?</label>
+          <select id="onboarding-zone-select" style="width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid rgba(15,15,49,0.15); font-size: 0.9rem; font-weight: 750; color: var(--navy); background: #ffffff;">
+            <option value="">Selecciona tu zona o departamento...</option>
+            <option value="Tegucigalpa / M.D.C.">Tegucigalpa / M.D.C. (Francisco Morazán)</option>
+            <option value="San Pedro Sula">San Pedro Sula (Cortés)</option>
+            <option value="Choluteca">Choluteca</option>
+            <option value="Comayagua">Comayagua</option>
+            <option value="Danlí">Danlí (El Paraíso)</option>
+            <option value="La Ceiba">La Ceiba (Atlántida)</option>
+            <option value="El Progreso">El Progreso (Yoro)</option>
+            <option value="Juticalpa">Juticalpa (Olancho)</option>
+            <option value="Siguatepeque">Siguatepeque</option>
+            <option value="La Esperanza">La Esperanza (Intibucá)</option>
+            <option value="Santa Rosa de Copán">Santa Rosa de Copán</option>
+            <option value="Roatán / Islas de la Bahía">Roatán / Islas de la Bahía</option>
+            <option value="Otro departamento">Otro departamento de Honduras</option>
+            <option value="Fuera de Honduras">Resido fuera de Honduras</option>
+          </select>
+        </div>
+
+        <button id="btn-finish-onboarding" class="btn btn-primary btn-block" style="height: 50px; font-size: 1rem;" disabled>Entrar a la aplicación</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal 2: Encuesta de Evaluación Final (3 Preguntas) -->
+  <div id="modal-evaluation-survey" class="modal-overlay">
+    <div class="modal-content" style="max-width: 460px; padding: 28px 24px;">
+      <button class="modal-close" id="eval-modal-close">&times;</button>
+      <h3 style="font-size: 1.25rem; font-weight: 900; color: var(--navy); margin-bottom: 6px;">Evaluación de la Experiencia</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Tu opinión nos ayuda a perfeccionar esta herramienta.</p>
+
+      <div style="text-align: left; margin-bottom: 16px;">
+        <label style="font-size: 0.85rem; font-weight: 800; color: var(--navy); display: block; margin-bottom: 6px;">1. ¿Qué tan claro y comprensible te pareció el test?</label>
+        <div id="star-rating-container" style="display: flex; gap: 8px; font-size: 1.6rem; cursor: pointer; color: #cbd5e1;">
+          <span data-star="1">★</span><span data-star="2">★</span><span data-star="3">★</span><span data-star="4">★</span><span data-star="5">★</span>
+        </div>
+      </div>
+
+      <div style="text-align: left; margin-bottom: 16px;">
+        <label style="font-size: 0.85rem; font-weight: 800; color: var(--navy); display: block; margin-bottom: 6px;">2. ¿Sientes que los resultados reflejan tus vivencias de servicio?</label>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn btn-secondary eval-acc-btn" data-acc="si" style="flex:1; padding: 8px; font-size: 0.82rem;">Sí</button>
+          <button type="button" class="btn btn-secondary eval-acc-btn" data-acc="parcial" style="flex:1; padding: 8px; font-size: 0.82rem;">Parcialmente</button>
+          <button type="button" class="btn btn-secondary eval-acc-btn" data-acc="no" style="flex:1; padding: 8px; font-size: 0.82rem;">No</button>
+        </div>
+      </div>
+
+      <div style="text-align: left; margin-bottom: 20px;">
+        <label for="eval-feedback-text" style="font-size: 0.85rem; font-weight: 800; color: var(--navy); display: block; margin-bottom: 6px;">3. Comentarios o sugerencias para mejorar:</label>
+        <textarea id="eval-feedback-text" rows="3" placeholder="Escribe aquí tu opinión sincera..." style="width: 100%; padding: 10px; border-radius: 10px; border: 1.5px solid rgba(15,15,49,0.15); font-size: 0.88rem; font-family: inherit;"></textarea>
+      </div>
+
+      <button id="btn-submit-evaluation" class="btn btn-primary btn-block" style="height: 48px; font-size: 0.95rem;">Enviar Retroalimentación</button>
+    </div>
+  </div>
+
+  <!-- Modal 3: Cierre de Grupo de Crecimiento ("Pon en práctica tus dones") -->
+  <div id="modal-growth-group-callout" class="modal-overlay">
+    <div class="modal-content" style="max-width: 440px; padding: 32px 24px; text-align: center;">
+      <span style="font-size: 2.2rem;">🌱</span>
+      <h3 style="font-size: 1.25rem; font-weight: 900; color: var(--navy); margin: 10px 0 8px 0;">¡Pon en práctica tus dones!</h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 20px;">
+        Los dones cobran su verdadero propósito al ejercitarlos en comunidad y servicio en un grupo de crecimiento.
+      </p>
+      <div id="growth-callout-actions">
+        <!-- Renderizado dinámico según respuesta de onboarding -->
       </div>
     </div>
   </div>
 
-  <!-- Modal de Progreso / Analizador estilo IQ Test (25%, 50%, 90%) -->
+  <!-- Slideover Consulta Rápida de Dones (Desde el Test) -->
+  <div id="modal-quick-gifts" class="modal-overlay">
+    <div class="modal-content" style="max-width: 540px; max-height: 85vh; overflow-y: auto; padding: 24px;">
+      <button class="modal-close" id="quick-gifts-close">&times;</button>
+      <h3 style="font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 4px;">📖 Guía Rápida de Dones</h3>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Consulta los propósitos bíblicos sin perder tus respuestas del test.</p>
+      <div id="quick-gifts-list" style="display: flex; flex-direction: column; gap: 12px;">
+        <!-- Renderizado dinámico de tarjetas condensadas -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Detalle Completo de Don -->
+  <div id="gift-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-body" id="gift-modal-body">
+        <!-- Renderizado dinámico -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Progreso (25%, 50%, 90%) -->
   <div id="modal-progress-milestone" class="modal-overlay">
     <div class="modal-content progress-milestone-content">
       <div class="milestone-badge" id="milestone-badge-pct">⚡ 25% COMPLETADO</div>
@@ -213,58 +341,23 @@
       </div>
       <h3 class="milestone-title" id="milestone-title">Analizando tus respuestas...</h3>
       <p class="milestone-desc" id="milestone-desc">Estamos procesando tus patrones de afinidad práctica de servicio.</p>
-      <button class="btn btn-primary btn-block" id="btn-close-milestone" style="margin-top: 16px;">¡Continuar!</button>
-    </div>
-  </div>
-
-  <!-- Modal Selector de 3 Imágenes de Compartir (Estilo Heavy App) -->
-  <div id="modal-share-selector" class="modal-overlay">
-    <div class="modal-content share-selector-content">
-      <button class="modal-close" id="modal-share-close-btn">&times;</button>
-      <h3>📸 Galería de Compartir Resultados</h3>
-      <p class="share-modal-intro">Selecciona una variante para generar la imagen HD (1080×1920) y enviarla directamente:</p>
       
-      <div class="share-variants-grid">
-        <div class="share-variant-card active" data-variant="bento">
-          <div class="variant-preview-thumb">📊</div>
-          <h4>1. Bento Top 3</h4>
-          <span>Resumen de tus 3 dones principales con porcentajes</span>
-        </div>
-
-        <div class="share-variant-card" data-variant="highlight">
-          <div class="variant-preview-thumb">🥇</div>
-          <h4>2. Don Principal Destacado</h4>
-          <span>Detalle de tu Don #1 con ilustración a color</span>
-        </div>
-
-        <div class="share-variant-card" data-variant="viral">
-          <div class="variant-preview-thumb">✨</div>
-          <h4>3. Invitación Viral QR</h4>
-          <span>"Este es mi don, descubre el tuyo"</span>
-        </div>
+      <div style="margin-top: 12px; padding: 10px; background: rgba(51,108,221,0.06); border-radius: 10px; font-size: 0.78rem; color: var(--navy); font-weight: 750;">
+        💡 Recuerda: Conocer sobre los dones te dará más claridad para entender tus resultados.
       </div>
-
-      <button id="btn-trigger-canvas-share" class="btn btn-primary btn-block" style="margin-top: 18px; font-size: 1.05rem; height: 54px;">
-        📲 Compartir Variante Seleccionada
-      </button>
+      
+      <button class="btn btn-primary btn-block" id="btn-close-milestone" style="margin-top: 16px;">¡Continuar!</button>
     </div>
   </div>
 
   <!-- Footer -->
   <footer class="main-footer">
-    <div class="footer-container">
-      <p class="footer-copy">&copy; 2026 Iglesia Gran Comisión Tegucigalpa</p>
-      <div class="developed-by" style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 800; color: var(--navy);">
-          <span>Desarrollado por</span>
-          <img src="src/assets/logos/antimateria.png" alt="Logo Antimateria" class="logo-antimateria" style="height: 42px; width: auto; object-fit: contain;">
-        </div>
-        <div class="reviewed-by-pastor" style="font-size: 0.74rem; font-weight: 650; color: var(--navy); opacity: 0.7; font-style: italic;">Revisado por Pastor Gustavo Zepeda</div>
-      </div>
+    <div class="footer-container" style="text-align: center;">
+      <p class="footer-copy" style="margin: 0; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">&copy; 2026 Iglesia Gran Comisión Tegucigalpa</p>
     </div>
   </footer>
 
-  <!-- Floating Glass Bottom Navigation Bar (Estilo Fluentify, Monday, Zakarya UI) -->
+  <!-- Floating Glass Bottom Navigation Bar -->
   <nav class="bottom-nav-glass" id="bottom-nav">
     <button class="bottom-nav-item active" data-target="welcome" id="nav-item-welcome">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -272,7 +365,7 @@
     </button>
     <button class="bottom-nav-item" data-target="test" id="nav-item-test">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-      <span>Viaje</span>
+      <span>Test</span>
     </button>
     <button class="bottom-nav-item" data-target="glossary" id="nav-item-glossary">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0.5-5.5Z"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
