@@ -67,5 +67,14 @@ Cada ítem de pregunta incluye 5 píldoras táctiles numéricas sobre una barra 
 
 * **`.situation-item`:** Tarjeta blanca flotante elevada (`background: #ffffff`, `border-radius: 18px`, `box-shadow: 0 10px 30px -6px rgba(15, 15, 49, 0.06)`).
 * **Insignia de Pregunta (`.situation-number`):** Círculo con fondo azul suave (`rgba(51, 108, 221, 0.12)`) y número en azul real (`#336cdd`).
-* **Leyenda Inferior (`.scale-sub-legend`):** `No me identifico` (izquierda) y `Así soy yo` (derecha) en tipografía suave (`font-size: 0.74rem`, `font-weight: 750`, `color: var(--text-muted)`) por debajo del riel de píldoras.
+* **Leyenda Inferior (`.scale-sub-legend`):** `Con poca frecuencia` (izquierda) y `Con mucha frecuencia` (derecha) en tipografía suave (`font-size: 0.74rem`, `font-weight: 750`, `color: var(--text-muted)`) por debajo del riel de píldoras.
 * **Banner de Escena (`.scene-card`):** Gradiente azul real limpio con título conciso `Parte #`.
+
+---
+
+## 🚀 6. Experiencia de Usuario y Compartir (V7)
+
+* **Criterio de Escala:** Medición de frecuencia de experiencia práctica (`Con poca frecuencia` a `Con mucha frecuencia`).
+* **Modales de Progreso e Hitos (`#modal-progress-milestone`):** Emergentes animados al 25%, 50% y 90% estilo IQ Test con anillo giratorio y mensajes de avance.
+* **Tarjeta Principal Don #1 (`.bento-card.rank-1`):** Fondo blanco brillante (`#ffffff`) con borde dorado de 2.5px (`#D4AF37`), sombras flotantes multicapa e ilustración a color destacada de 80px.
+* **Modal Selector de 3 Imágenes (`#modal-share-selector` - Estilo Heavy App):** Selector visual interactivo (Bento Top 3, Don Destacado e Invitación Viral QR) más botón `Compartir Test a otros`.

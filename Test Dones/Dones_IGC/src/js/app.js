@@ -331,11 +331,11 @@ function renderScene() {
     scaleWrapper.className = 'situation-scale-wrapper';
 
     const labels = {
-      1: "No me identifico",
-      2: "Poco",
+      1: "Casi nunca",
+      2: "Rara vez",
       3: "A veces (Evita 3)",
-      4: "Bastante",
-      5: "Así soy yo"
+      4: "Con frecuencia",
+      5: "Con mucha frecuencia"
     };
 
     // Tooltip flotante tipo Imagen 4
@@ -371,12 +371,12 @@ function renderScene() {
     scaleRow.appendChild(pillsContainer);
     scaleWrapper.appendChild(scaleRow);
 
-    // Leyenda de extremos por pregunta (Imagen 2 style: No me identifico ... Así soy yo)
+    // Leyenda de extremos por pregunta (Frecuencia: Con poca frecuencia ... Con mucha frecuencia)
     const scaleSubLegend = document.createElement('div');
     scaleSubLegend.className = 'scale-sub-legend';
     scaleSubLegend.innerHTML = `
-      <span class="sub-legend-left">No me identifico</span>
-      <span class="sub-legend-right">Así soy yo</span>
+      <span class="sub-legend-left">Con poca frecuencia</span>
+      <span class="sub-legend-right">Con mucha frecuencia</span>
     `;
     scaleWrapper.appendChild(scaleSubLegend);
 
@@ -403,6 +403,51 @@ function renderScene() {
   updateProgressBar();
 }
 
+// ---------------------------------------------------------------------------
+// Modales de Progreso e Hitos (25%, 50%, 90% - IQ Test Style)
+// ---------------------------------------------------------------------------
+const shownMilestones = { 25: false, 50: false, 90: false };
+
+function checkProgressMilestone() {
+  const answeredCount = Object.keys(state.answers).length;
+  const pct = Math.round((answeredCount / TOTAL_SITUATIONS) * 100);
+
+  if (pct >= 90 && !shownMilestones[90]) {
+    shownMilestones[90] = true;
+    showMilestoneModal(90, '🔥 90% COMPLETADO', '¡Último tramo!', 'Calibrando la precisión final de tus 3 Dones Principales...');
+  } else if (pct >= 50 && !shownMilestones[50]) {
+    shownMilestones[50] = true;
+    showMilestoneModal(50, '🎯 50% COMPLETADO', '¡Vas por la mitad!', 'Mapeando tus fortalezas prácticas de servicio...');
+  } else if (pct >= 25 && !shownMilestones[25]) {
+    shownMilestones[25] = true;
+    showMilestoneModal(25, '⚡ 25% COMPLETADO', '¡Buen ritmo!', 'Procesando tus primeras tendencias de afinidad...');
+  }
+}
+
+function showMilestoneModal(pct, badgeText, titleText, descText) {
+  const modal = document.getElementById('modal-progress-milestone');
+  if (!modal) return;
+
+  const badgeEl = document.getElementById('milestone-badge-pct');
+  const numEl = document.getElementById('milestone-pct-num');
+  const titleEl = document.getElementById('milestone-title');
+  const descEl = document.getElementById('milestone-desc');
+
+  if (badgeEl) badgeEl.textContent = badgeText;
+  if (numEl) numEl.textContent = `${pct}%`;
+  if (titleEl) titleEl.textContent = titleText;
+  if (descEl) descEl.textContent = descText;
+
+  modal.classList.add('active');
+}
+
+const btnCloseMilestone = document.getElementById('btn-close-milestone');
+if (btnCloseMilestone) {
+  btnCloseMilestone.addEventListener('click', () => {
+    document.getElementById('modal-progress-milestone')?.classList.remove('active');
+  });
+}
+
 function handlePillClick(event, qid, val, itemEl) {
   const btn = event.currentTarget;
   
@@ -424,11 +469,11 @@ function handlePillClick(event, qid, val, itemEl) {
   const tooltipEl = document.getElementById(`tooltip-q-${qid}`);
   if (tooltipEl) {
     const labels = {
-      1: "No me identifico",
-      2: "Poco",
+      1: "Casi nunca",
+      2: "Rara vez",
       3: "A veces (Evita 3)",
-      4: "Bastante",
-      5: "Así soy yo"
+      4: "Con frecuencia",
+      5: "Con mucha frecuencia"
     };
     tooltipEl.textContent = labels[val];
     tooltipEl.style.left = `${(val - 0.5) * 20}%`;
@@ -443,6 +488,7 @@ function handlePillClick(event, qid, val, itemEl) {
   
   checkSceneCompletion();
   updateProgressBar();
+  checkProgressMilestone();
   
   // Auto-scroll suave a la siguiente pregunta sin responder
   setTimeout(() => {
@@ -784,11 +830,12 @@ el.navBtnBack.addEventListener('click', () => {
   showScreen('welcome');
 });
 
-// Navegación del Test
+// Navegación del Test con Auto-scroll superior
 el.btnPrev.addEventListener('click', () => {
   if (state.currentScene > 1) {
     state.currentScene--;
     renderScene();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
 
@@ -802,6 +849,7 @@ el.btnNext.addEventListener('click', () => {
   if (sceneId < 10) {
     state.currentScene++;
     renderScene();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
     finishTest();
   }
@@ -819,6 +867,79 @@ el.btnReset.addEventListener('click', () => {
 });
 
 // ---------------------------------------------------------------------------
+// Modal Selector de 3 Imágenes de Compartir & Compartir Test a otros (Estilo Heavy App)
+// ---------------------------------------------------------------------------
+const btnOpenShareModal = document.getElementById('btn-open-share-modal');
+const modalShareSelector = document.getElementById('modal-share-selector');
+const modalShareCloseBtn = document.getElementById('modal-share-close-btn');
+
+if (btnOpenShareModal && modalShareSelector) {
+  btnOpenShareModal.addEventListener('click', () => {
+    modalShareSelector.classList.add('active');
+  });
+}
+
+if (modalShareCloseBtn && modalShareSelector) {
+  modalShareCloseBtn.addEventListener('click', () => {
+    modalShareSelector.classList.remove('active');
+  });
+}
+
+let selectedShareVariant = 'bento';
+document.querySelectorAll('.share-variant-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.share-variant-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    selectedShareVariant = card.dataset.variant;
+  });
+});
+
+const btnTriggerCanvasShare = document.getElementById('btn-trigger-canvas-share');
+if (btnTriggerCanvasShare) {
+  btnTriggerCanvasShare.addEventListener('click', async () => {
+    const stored = loadStoredResult();
+    if (!stored) return;
+
+    try {
+      if (modalShareSelector) modalShareSelector.classList.remove('active');
+      const { downloadStory } = await import('./canvas-share.js');
+      const calculation = runFullCalculation(stored.answers);
+      downloadStory(calculation, selectedShareVariant);
+    } catch (err) {
+      console.error("Error al compartir historia:", err);
+      alert("Error al descargar la imagen.");
+    }
+  });
+}
+
+// Botón Secundario: "Compartir Test a otros"
+const btnShareTestLink = document.getElementById('btn-share-test-link');
+if (btnShareTestLink) {
+  btnShareTestLink.addEventListener('click', async () => {
+    const shareData = {
+      title: 'Test de Dones Espirituales IGC',
+      text: '¡Hola! Te invito a realizar el Test de Dones Espirituales de Iglesia Gran Comisión Tegucigalpa para descubrir cómo Dios te ha capacitado para servir:',
+      url: window.location.href.split('#')[0]
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (e) {
+        console.log('Share canceled', e);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+        alert('¡Enlace de invitación copiado al portapapeles! Ya puedes pegarlo en WhatsApp.');
+      } catch (e) {
+        alert(`Comparte este enlace: ${shareData.url}`);
+      }
+    }
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------------
 function init() {
@@ -832,53 +953,5 @@ function init() {
     showScreen('welcome');
   }
 }
-
-// Integración compartir nativo Web Share API (WhatsApp / Redes)
-const btnNativeShare = document.getElementById('btn-native-share');
-if (btnNativeShare) {
-  btnNativeShare.addEventListener('click', async () => {
-    const stored = loadStoredResult();
-    if (!stored) return;
-    const calculation = runFullCalculation(stored.answers);
-    const top1 = calculation.top3[0];
-    const shareData = {
-      title: 'Mis Dones Espirituales - IGC Tegucigalpa',
-      text: `¡Hola! Mi don principal es ${top1.name} (${top1.percentage}% de afinidad). Descubre tus dones espirituales en la Iglesia Gran Comisión Tegucigalpa:`,
-      url: window.location.href
-    };
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        console.log('Compartir cancelado o no soportado:', err);
-      }
-    } else {
-      try {
-        await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-        alert('¡Enlace y resultado copiados al portapapeles!');
-      } catch (err) {
-        alert('Copia este enlace para compartir: ' + window.location.href);
-      }
-    }
-  });
-}
-
-// Integración historias
-document.querySelectorAll('.btn-share').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const variant = btn.dataset.variant;
-    const stored = loadStoredResult();
-    if (!stored) return;
-    
-    try {
-      const { downloadStory } = await import('./canvas-share.js');
-      const calculation = runFullCalculation(stored.answers);
-      downloadStory(calculation, variant);
-    } catch (err) {
-      console.error("Error al compartir historia:", err);
-      alert("Error al descargar la imagen.");
-    }
-  });
-});
 
 init();

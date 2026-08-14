@@ -776,11 +776,11 @@ body {
 }
 
 .bento-card.rank-1 {
-  padding: 26px 22px;
-  background: linear-gradient(135deg, #0f0f31 0%, #171746 100%);
-  color: #ffffff;
-  border: 2px solid var(--gold);
-  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.2);
+  padding: 28px 24px;
+  background-color: #ffffff;
+  color: var(--navy);
+  border: 2.5px solid var(--gold);
+  box-shadow: 0 16px 40px -8px rgba(212, 175, 55, 0.28), 0 8px 20px -4px rgba(15, 15, 49, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -792,31 +792,167 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 65%);
   pointer-events: none;
 }
 
 .bento-card.rank-1 .bento-title-text h4 {
-  font-size: 1.45rem;
-  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--navy);
 }
 
 .bento-card.rank-1 .bento-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--navy);
+  font-size: 0.92rem;
+  line-height: 1.45;
 }
 
 .bento-card.rank-1 .bento-pct-badge {
-  background-color: var(--gold-light);
-  color: var(--gold);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  font-size: 0.8rem;
-  padding: 3px 12px;
+  background: linear-gradient(135deg, #336cdd 0%, #2251ad 100%);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 850;
+  padding: 4px 14px;
+  box-shadow: 0 4px 12px rgba(51, 108, 221, 0.25);
 }
 
 .bento-card.rank-1 .bento-gift-img {
-  width: 72px;
-  height: 72px;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 6px 16px rgba(15, 15, 49, 0.12));
+}
+
+/* Modales Adicionales: Progreso (IQ Test Style) y Selector de Compartir (Heavy App Style) */
+.progress-milestone-content {
+  text-align: center;
+  padding: 32px 24px;
+  max-width: 420px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(51, 108, 221, 0.15);
+  box-shadow: 0 20px 50px rgba(15, 15, 49, 0.2);
+}
+
+.milestone-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #336cdd 0%, #2251ad 100%);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 850;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.milestone-spinner-box {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milestone-ring {
+  position: absolute;
+  inset: 0;
+  border: 4px solid rgba(51, 108, 221, 0.15);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: milestone-spin 1.2s linear infinite;
+}
+
+@keyframes milestone-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.milestone-pct-num {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.milestone-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.milestone-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* Modal Selector de 3 Imágenes de Compartir (Estilo Heavy App) */
+.share-selector-content {
+  max-width: 520px;
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+}
+
+.share-modal-intro {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.share-variants-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.share-variant-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.share-variant-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.share-variant-card.active {
+  border-color: var(--primary);
+  background-color: rgba(51, 108, 221, 0.05);
+  box-shadow: 0 6px 20px rgba(51, 108, 221, 0.15);
+}
+
+.variant-preview-thumb {
+  font-size: 1.8rem;
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.share-variant-card h4 {
+  font-size: 1rem;
+  font-weight: 850;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+
+.share-variant-card span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 .bento-card.rank-1 .bento-rank-tag {

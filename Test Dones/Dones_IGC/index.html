@@ -146,40 +146,18 @@
           <!-- Sharing panel & Reset -->
           <div class="actions-section">
             <div class="card share-card">
-              <h3>📲 Compartir Resultados</h3>
-              <p>Envía tus resultados directamente por WhatsApp, redes o genera una imagen 1080×1920 para tus historias.</p>
+              <h3>📲 Compartir tus Resultados</h3>
+              <p>Elige entre 3 formatos visuales diseñados para tus historias de Instagram, WhatsApp y redes sociales.</p>
 
-              <button id="btn-native-share" class="btn btn-primary btn-block mb-4" style="margin-bottom: 16px; background-color: var(--primary); font-size: 1.1rem; gap: 8px;">
-                <span>🔗</span> Compartir por WhatsApp / Enlace
+              <!-- Botón Principal: Abre el selector visual de 3 imágenes (Estilo Heavy App) -->
+              <button id="btn-open-share-modal" class="btn btn-primary btn-block" style="font-size: 1.05rem; gap: 8px; margin-bottom: 12px; height: 56px;">
+                <span>📸</span> Compartir Mis Resultados (3 Estilos)
               </button>
 
-              <div class="share-subtitle" style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--navy); opacity: 0.7; margin-bottom: 10px;">📸 Historias de Instagram / Facebook</div>
-              
-              <div class="share-options">
-                <button class="btn btn-share btn-primary" data-variant="bento">
-                  <span class="share-icon">📊</span>
-                  <div class="share-btn-text">
-                    <strong>Variante 1: Top 3 Bento</strong>
-                    <span>Tus 3 dones en formato Bento</span>
-                  </div>
-                </button>
-                
-                <button class="btn btn-share btn-primary" data-variant="highlight">
-                  <span class="share-icon">🥇</span>
-                  <div class="share-btn-text">
-                    <strong>Variante 2: Don Destacado</strong>
-                    <span>Detalle de tu don #1 con descripción</span>
-                  </div>
-                </button>
-                
-                <button class="btn btn-share btn-primary" data-variant="viral">
-                  <span class="share-icon">✨</span>
-                  <div class="share-btn-text">
-                    <strong>Variante 3: Invitación Viral</strong>
-                    <span>"Este es mi don, descubre el tuyo"</span>
-                  </div>
-                </button>
-              </div>
+              <!-- Botón Secundario: Compartir Test a otros -->
+              <button id="btn-share-test-link" class="btn btn-secondary btn-block" style="font-size: 0.95rem; gap: 8px;">
+                <span>📢</span> Compartir Test a otros
+              </button>
             </div>
 
             <div class="card reset-card">
@@ -220,6 +198,53 @@
       <div class="modal-body" id="gift-modal-body">
         <!-- Rendered dynamically (Replicando Ref3.png) -->
       </div>
+    </div>
+  </div>
+
+  <!-- Modal de Progreso / Analizador estilo IQ Test (25%, 50%, 90%) -->
+  <div id="modal-progress-milestone" class="modal-overlay">
+    <div class="modal-content progress-milestone-content">
+      <div class="milestone-badge" id="milestone-badge-pct">⚡ 25% COMPLETADO</div>
+      <div class="milestone-spinner-box">
+        <div class="milestone-ring"></div>
+        <span class="milestone-pct-num" id="milestone-pct-num">25%</span>
+      </div>
+      <h3 class="milestone-title" id="milestone-title">Analizando tus respuestas...</h3>
+      <p class="milestone-desc" id="milestone-desc">Estamos procesando tus patrones de afinidad práctica de servicio.</p>
+      <button class="btn btn-primary btn-block" id="btn-close-milestone" style="margin-top: 16px;">¡Continuar!</button>
+    </div>
+  </div>
+
+  <!-- Modal Selector de 3 Imágenes de Compartir (Estilo Heavy App) -->
+  <div id="modal-share-selector" class="modal-overlay">
+    <div class="modal-content share-selector-content">
+      <button class="modal-close" id="modal-share-close-btn">&times;</button>
+      <h3>📸 Galería de Compartir Resultados</h3>
+      <p class="share-modal-intro">Selecciona una variante para generar la imagen HD (1080×1920) y enviarla directamente:</p>
+      
+      <div class="share-variants-grid">
+        <div class="share-variant-card active" data-variant="bento">
+          <div class="variant-preview-thumb">📊</div>
+          <h4>1. Bento Top 3</h4>
+          <span>Resumen de tus 3 dones principales con porcentajes</span>
+        </div>
+
+        <div class="share-variant-card" data-variant="highlight">
+          <div class="variant-preview-thumb">🥇</div>
+          <h4>2. Don Principal Destacado</h4>
+          <span>Detalle de tu Don #1 con ilustración a color</span>
+        </div>
+
+        <div class="share-variant-card" data-variant="viral">
+          <div class="variant-preview-thumb">✨</div>
+          <h4>3. Invitación Viral QR</h4>
+          <span>"Este es mi don, descubre el tuyo"</span>
+        </div>
+      </div>
+
+      <button id="btn-trigger-canvas-share" class="btn btn-primary btn-block" style="margin-top: 18px; font-size: 1.05rem; height: 54px;">
+        📲 Compartir Variante Seleccionada
+      </button>
     </div>
   </div>
 
