@@ -299,15 +299,6 @@ function renderScene() {
       3: "Con frecuencia"
     };
 
-    const tooltip = document.createElement('div');
-    tooltip.className = `scale-tooltip-bubble ${answeredValue ? 'show' : ''}`;
-    tooltip.id = `tooltip-q-${q.id}`;
-    if (answeredValue) {
-      tooltip.textContent = labels[answeredValue];
-      tooltip.style.left = `${(answeredValue - 0.5) * 33.33}%`;
-    }
-    scaleWrapper.appendChild(tooltip);
-
     const scaleRow = document.createElement('div');
     scaleRow.className = 'situation-scale-row';
 
@@ -332,14 +323,6 @@ function renderScene() {
 
     scaleRow.appendChild(pillsContainer);
     scaleWrapper.appendChild(scaleRow);
-
-    const scaleSubLegend = document.createElement('div');
-    scaleSubLegend.className = 'scale-sub-legend';
-    scaleSubLegend.innerHTML = `
-      <span class="sub-legend-left">Rara vez</span>
-      <span class="sub-legend-right">Con frecuencia</span>
-    `;
-    scaleWrapper.appendChild(scaleSubLegend);
 
     itemEl.appendChild(scaleWrapper);
     el.questionsContainer.appendChild(itemEl);
@@ -394,14 +377,6 @@ function handlePillClick(e, questionId, val, itemEl) {
   
   const selectedPill = container.querySelector(`.scale-pill-${val}`);
   if (selectedPill) selectedPill.classList.add('selected');
-
-  const labels = { 1: "Rara vez", 2: "A veces", 3: "Con frecuencia" };
-  const tooltip = itemEl.querySelector(`#tooltip-q-${questionId}`);
-  if (tooltip) {
-    tooltip.textContent = labels[val];
-    tooltip.style.left = `${(val - 0.5) * 33.33}%`;
-    tooltip.classList.add('show');
-  }
 
   checkSceneCompletion();
   updateProgressBar();
