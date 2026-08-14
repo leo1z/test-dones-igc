@@ -10,7 +10,7 @@ Fecha de última actualización: 2026-08-14
     4. **Auditoría UI/UX y Sistema de Diseño:**
        - **Escala de 3 Píldoras:** Diseño ultralimpio. Se removieron la burbuja popover y las leyendas inferiores redundantes, dejando únicamente el par `[Número | Texto]` dentro de cada píldora (`1 Rara vez`, `2 A veces`, `3 Con frecuencia`).
        - **Header & Logo IGC Ampliado:** Tamaño incrementado a `84px` de alto (`max-width: 320px`) para máxima legibilidad y jerarquía institucional en la barra superior.
-       - **Banner Azul Unificado:** Se fusionó la franja de parte (`PARTE X`) con la ilustración ampliada (`94px`), el texto motivador (*💡 Conocer sobre los dones le dará mayor claridad a tus respuestas*) y el botón de píldora blanca **`Explorar Dones`** en una sola tarjeta azul degradada cohesiva y elegante (`#scene-banner`).
+       - **Banner Azul Unificado Refinado:** Texto acortado (*💡 Conocer los dones te dará más claridad*), ilustración ampliada a `118px` de alto, y el botón **`Explorar Dones`** estilizado como una pastilla blanca compacta elegante (`font-size: 0.76rem; padding: 5px 14px`).
        - **Escala de 3 Píldoras Limpia:** Tarjeta de pregunta simplificada a 2 capas sin leyendas flotantes ni tooltips desalineados (`1 Rara vez`, `2 A veces`, `3 Con frecuencia`).
     5. **Resultados Igualitarios Top 3 & Eliminación de Compartir:** Tarjetas primarias paralelas de igual jerarquía para los 3 dones principales; se removieron por completo todas las opciones de compartir historias/canvas.
     6. **Encuesta de Evaluación de 3 Preguntas:** Modal final de retroalimentación (Claridad 1-5★, Precisión percibida, Comentarios abiertos) almacenados en Supabase.
