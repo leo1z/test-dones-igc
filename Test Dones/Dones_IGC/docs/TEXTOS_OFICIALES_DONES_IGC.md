@@ -258,7 +258,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 
 ### Catálogo de los 15 Dones Motivacionales
 
-#### 1. Evangelismo
+#### 1. Evangelizar
 * **Oración Resumen (Card):** *"Capacidad para comunicar el Evangelio de forma sencilla y clara, conectando a las personas con la salvación en Jesús."*
 * **Descripción Completa:** Capacidad sobrenatural para dar el evangelio de manera sencilla y breve. Es el único don hacia incrédulos. No lo hace igual con todos, sabe cómo entrarles, no importa su temperamento. Unos lo hacen a grandes públicos, otros 1 a 1, unos por escrito, no necesitan de una actividad de la iglesia: lo pasan haciendo. También son buenos para enseñar a evangelizar.
 * **Ejemplos Prácticos de Servicio:**
@@ -322,7 +322,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Coordinar la logística y distribución de turnos de servicio en los ministerios.
   - Reorganizar un área administrativa de la iglesia para hacerla más eficiente.
 
-#### 9. Presidir / Liderazgo
+#### 9. Liderar (Presidir)
 * **Oración Resumen (Card):** *"Capacidad de liderar con visión, inspirar la colaboración en equipo y formar a la siguiente generación de líderes."*
 * **Descripción Completa:** De líder, influye y dirige hermanos, se suma al de Administración. Están al frente fácilmente, guían con claridad, saben tomar decisiones con sabiduría, envisionan a otros, ayudan a desarrollar líderes. El que preside se centra en las personas, el de Administrar en recursos, procesos, planes.
 * **Ejemplos Prácticos de Servicio:**
@@ -330,7 +330,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Tomar decisiones determinantes durante momentos de transición en el ministerio.
   - Mentorear a futuros servidores para traspasarles responsabilidades de liderazgo.
 
-#### 10. Discernimiento
+#### 10. Discernir
 * **Oración Resumen (Card):** *"Capacidad para distinguir la verdad bíblica del error sutil, percibiendo el origen espiritual de enseñanzas y actitudes."*
 * **Descripción Completa:** Es una capacidad sobrenatural de distinguir el origen espiritual de un mensaje o enseñanza (si viene de Dios o del hombre o demonios). Es importante conocer la sana doctrina y no exponerse a cualquier enseñanza.
 * **Ejemplos Prácticos de Servicio:**
@@ -353,7 +353,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Encontrar una solución sensata y basada en principios bíblicos ante un conflicto entre ministerios.
   - Aconsejar a un hermano sobre cómo tomar decisiones sabias sobre su futuro laboral o académico.
 
-#### 13. Enseñanza
+#### 13. Enseñar
 * **Oración Resumen (Card):** *"Habilidad para estructurar y comunicar pasajes de la Biblia de forma clara, amena y accesible para todos."*
 * **Descripción Completa:** Capacidad sobrenatural para hacer entendibles enseñanzas de la Palabra de Dios. Puede ser al predicar, o al enseñar en un grupo pequeño, o por escrito. Aun temas no tan fáciles los presenta menos difíciles.
 * **Ejemplos Prácticos de Servicio:**
@@ -368,7 +368,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Predicar un mensaje bíblico confrontador que inspire un arrepentimiento profundo en la congregación.
   - Dar una palabra de exhortación oportuna y directa frente a la autocomplacencia espiritual del grupo.
 
-#### 15. Misionero / Apóstol
+#### 15. Misionero (Apóstol)
 * **Oración Resumen (Card):** *"Impulso emprendedor para plantar nuevas comunidades de fe e iniciar ministerios donde antes no existían."*
 * **Descripción Completa:** Tiene la capacidad sobrenatural para empezar un grupo, o una iglesia, ya sea que tenga otros dones o se acompañe de hermanos con dones necesarios (Administrar, Pastor, Evangelismo, Enseñanza, Servir).
 * **Ejemplos Prácticos de Servicio:**

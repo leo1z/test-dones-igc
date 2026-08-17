@@ -541,6 +541,24 @@ function renderResults(calculation) {
     });
   });
   
+  // Callout dinámico si NO asiste a Grupo de Crecimiento (justo abajo del Top 3)
+  const calloutEl = document.getElementById('results-growth-group-callout');
+  if (calloutEl) {
+    if (state.onboarding.attendsGrowthGroup === false) {
+      calloutEl.innerHTML = `
+        <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 18px; padding: 20px; text-align: center; box-shadow: 0 6px 20px rgba(5, 150, 105, 0.08);">
+          <div style="font-size: 1.6rem; margin-bottom: 4px;">🌱</div>
+          <h4 style="margin: 0 0 6px 0; font-size: 1.05rem; font-weight: 850; color: #065f46;">¿Aún no estás en un Grupo de Crecimiento?</h4>
+          <p style="margin: 0 0 14px 0; font-size: 0.86rem; color: #047857; line-height: 1.4;">Descubrir tus dones es el primer paso. Conéctate a un grupo en tu comunidad para ejercitarlos con propósito.</p>
+          <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-connect-group btn-block">🤝 Conectar con un Grupo de Crecimiento</a>
+        </div>
+      `;
+      calloutEl.style.display = 'block';
+    } else {
+      calloutEl.style.display = 'none';
+    }
+  }
+  
   // Render listado restante de 12 dones
   el.remainingGiftsContainer.innerHTML = '';
   remaining.forEach(g => {
