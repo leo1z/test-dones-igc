@@ -90,7 +90,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 
 ### Escala de Respuesta (3 Píldoras)
 * **Valor 1:** `1 | No es mi fuerte`
-* **Valor 2:** `2 | Lo hago si me lo piden`
+* **Valor 2:** `2 | En ocasiones`
 * **Valor 3:** `3 | Es natural en mí`
 
 ---

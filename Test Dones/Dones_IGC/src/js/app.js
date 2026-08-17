@@ -295,7 +295,7 @@ function renderScene() {
 
     const labels = {
       1: "No es mi fuerte",
-      2: "Lo hago si me lo piden",
+      2: "En ocasiones",
       3: "Es natural en mí"
     };
 
