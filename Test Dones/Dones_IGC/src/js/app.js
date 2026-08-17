@@ -773,8 +773,14 @@ function closeGiftModal() {
 }
 
 el.modalClose.addEventListener('click', closeGiftModal);
-el.modal.addEventListener('click', (e) => {
-  if (e.target === el.modal) closeGiftModal();
+
+// Cierre global al hacer click en el fondo oscuro de cualquier modal (excepto Onboarding inicial si no ha finalizado)
+document.querySelectorAll('.modal-overlay').forEach(modalEl => {
+  modalEl.addEventListener('click', (e) => {
+    if (e.target === modalEl && modalEl.id !== 'modal-initial-onboarding') {
+      modalEl.classList.remove('active');
+    }
+  });
 });
 
 // ---------------------------------------------------------------------------

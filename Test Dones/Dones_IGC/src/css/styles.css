@@ -75,11 +75,17 @@ body {
   background-color: var(--cream); /* Fondo crema cálido e idéntico de las referencias */
   color: var(--text-primary);
   line-height: 1.5;
+  letter-spacing: -0.012em;
+  word-spacing: -0.015em;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.025em;
 }
 
 /* 4. CABECERA (LOGO FLOTANTE & BOTÓN VOLVER) */
