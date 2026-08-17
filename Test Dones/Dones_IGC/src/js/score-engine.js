@@ -28,8 +28,8 @@ export function isTestComplete(answersMap) {
 }
 
 /**
- * Suma el puntaje crudo (1-5 por situación) de cada don.
- * @param {Object<number, number>} answersMap - { "1": 4, "2": 2, ... }
+ * Suma el puntaje crudo (1-3 por situación) de cada don.
+ * @param {Object<number, number>} answersMap - { "1": 3, "2": 2, ... }
  * @returns {Object<string, number>} puntaje crudo por giftId
  */
 export function calculateRawScores(answersMap) {
@@ -44,7 +44,7 @@ export function calculateRawScores(answersMap) {
 
 /**
  * Normaliza cada puntaje crudo a un porcentaje 0-100 sobre el máximo
- * posible de ESE don (questionCount × 5) — necesario porque los 15 dones
+ * posible de ESE don (questionCount × 3) — necesario porque los 15 dones
  * no tienen la misma cantidad de situaciones (4 a 7 c/u, ver CONTENIDO.md).
  * Redondeado a entero (0 decimales).
  */

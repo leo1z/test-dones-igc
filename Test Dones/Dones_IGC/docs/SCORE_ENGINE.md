@@ -31,15 +31,12 @@ verificar que una reimplementación produce los mismos resultados.
 Un test respondido es un objeto plano `answersMap`:
 
 ```js
-{ "1": 4, "2": 2, "3": 5, ..., "76": 3 }
+{ "1": 3, "2": 2, "3": 1, ..., "76": 3 }
 ```
 
 - Llave: `situationId` (1-76, ver `situations.js`).
-- Valor: entero 1-5 (escala de identificación, ver `docs/UX_PLAN.md` §2).
-  1=No me identifico, 2=Poco, 3=Algo, 4=Bastante, 5=Totalmente.
-- El valor 3 ("Algo") **no tiene ningún efecto especial en el cálculo** —
-  el aviso visual de sesgo es puramente de UI, el motor lo trata como
-  cualquier otro valor 1-5.
+- Valor: entero 1-3 (escala de 3 opciones):
+  1=Rara vez, 2=A veces, 3=Con frecuencia.
 - Situaciones sin responder (llave ausente o valor falsy) cuentan como 0
   — el motor es defensivo (`Number(answersMap[id]) || 0`), no explota con
   un `answersMap` incompleto.
@@ -48,25 +45,22 @@ Un test respondido es un objeto plano `answersMap`:
 
 Para cada uno de los 15 dones:
 
-1. **Puntaje crudo** (`raw`): suma de 1-5 de todas sus situaciones
+1. **Puntaje crudo** (`raw`): suma de 1-3 de todas sus situaciones
    respondidas. Rango posible: `questionCount` (mín, todo en 1) a
-   `questionCount × 5` (máx, todo en 5) — varía por don porque los 15
+   `questionCount × 3` (máx, todo en 3) — varía por don porque los 15
    dones **no tienen la misma cantidad de situaciones** (4 a 7 c/u, ver
    `gifts.js` → `questionCount`/`maxRawScore`).
 2. **Porcentaje** (`percentage`): `round(raw / maxRawScore × 100)`,
    entero 0-100. Normaliza cada don contra su propio máximo — así los 15
-   son comparables entre sí pese a tener distinta cantidad de preguntas
-   (decisión tomada en Fase 0, ver `PROJECT_STATE.md`).
+   son comparables entre sí pese a tener distinta cantidad de preguntas.
 3. **Ranking**: los 15 dones ordenados de mayor a menor `percentage`.
    **Desempate** (2 niveles, 100% determinista — nunca aleatorio):
    1. Mayor `raw` (más preciso que el `%` ya redondeado).
    2. Si el `raw` también es idéntico: el **orden fijo** en que aparece
-      el don en `data/gifts.js` (ese arreglo es, a la vez, catálogo de
-      contenido y criterio de desempate — no reordenar `gifts.js` sin
-      saber que afecta esto).
-4. **Top 3**: los primeros 3 del ranking, ya con `rank` 1/2/3. El
-   *tamaño* de sus cards (grande/mediana/chica) es una decisión de UI
-   basada en `rank`, no de este motor — ver `UX_PLAN.md` §3.
+      el don en `data/gifts.js`.
+4. **Top 3**: los primeros 3 del ranking, ya con `rank` 1/2/3. Se presentan
+   en tarjetas de **igual jerarquía primaria** (`.top3-equal-card`), otorgando la
+   misma visibilidad y relevancia pastoral a los 3 dones principales.
 5. **`complete`**: `true` solo si las 76 situaciones tienen respuesta.
    La pantalla de resultados no debería ser accesible si `complete` es
    `false` (mismo patrón que `Dones_Original`: no se puede saltar al
