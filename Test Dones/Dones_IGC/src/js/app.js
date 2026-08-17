@@ -372,7 +372,7 @@ function renderRoadmapTrack(currentSceneId) {
     const isCurrent = i === currentSceneId;
 
     const node = document.createElement('div');
-    node.className = `roadmap-node ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}`;
+    node.className = `roadmap-node journey-node ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}`;
     node.title = `Parte ${i}`;
 
     node.innerHTML = `
