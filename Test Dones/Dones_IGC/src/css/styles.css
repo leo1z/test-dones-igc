@@ -516,9 +516,32 @@ body {
   .scene-banner-title {
     font-size: 1.35rem;
   }
-  .scene-banner-disclaimer {
-    font-size: 0.78rem;
-  }
+}
+
+/* Nota de Instrucción Honesta por Escena */
+.test-honest-instruction-note {
+  width: 100%;
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(51, 108, 221, 0.16);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: 0 4px 12px rgba(15, 15, 49, 0.03);
+  box-sizing: border-box;
+}
+
+.test-honest-instruction-note span {
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: var(--navy);
+  line-height: 1.4;
+  display: block;
+}
+
+.test-honest-instruction-note strong {
+  font-weight: 850;
+  color: var(--primary);
 }
 
 /* Lista de situaciones */

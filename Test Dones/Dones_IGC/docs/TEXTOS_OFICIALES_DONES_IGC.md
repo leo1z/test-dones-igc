@@ -88,6 +88,10 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Texto Informativo:** `💡 Conocer los dones te dará más claridad.`
 * **Enlace Interactivo:** `Explorar Dones →` *(Abre hoja emergente de consulta rápida)*
 
+### Nota de Instrucción Honesta por Escena
+* **Icono & Título:** `🎯 Instrucción:`
+* **Texto:** `Imagínate en cada situación y responde con total sinceridad sobre lo que realmente harías, no lo que desearías hacer.`
+
 ### Escala de Respuesta (3 Píldoras)
 * **Valor 1:** `1 | Rara vez`
 * **Valor 2:** `2 | En ocasiones`

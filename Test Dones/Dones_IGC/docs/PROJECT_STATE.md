@@ -17,6 +17,7 @@ Fecha de última actualización: 2026-08-17
 *   [x] Motor de cálculo recalibrado para escala 1..3 (`maxRawScore = questionCount × 3`).
 *   [x] Vaciado / Truncate de registros de prueba en Supabase (`dones_igc.results`) ejecutado exitosamente.
 *   [x] Permisos de lectura (`SELECT`) y eliminación (`DELETE`) concedidos para el Panel Admin (`admin.html`).
+*   [x] **Banner Azul Unificado Compacto:** La acción "Explorar Dones" se integró directamente como un enlace resaltado en línea (`Explorar Dones →`), con una **Nota de Instrucción Honesta** ubicable debajo (*🎯 Instrucción: Imagínate en cada situación y responde con total sinceridad sobre lo que realmente harías, no lo que desearías hacer.*).
 *   [x] Onboarding inicial de 2 pasos antes de acceder al Home.
 *   [x] Tarjetas de Top 3 en igualdad visual.
 *   [x] Encuesta de 3 preguntas de evaluación guardada en Supabase.
