@@ -17,9 +17,13 @@ Fecha de última actualización: 2026-08-17
 *   [x] Motor de cálculo recalibrado para escala 1..3 (`maxRawScore = questionCount × 3`).
 *   [x] Vaciado / Truncate de registros de prueba en Supabase (`dones_igc.results`) ejecutado exitosamente.
 *   [x] Permisos de lectura (`SELECT`) y eliminación (`DELETE`) concedidos para el Panel Admin (`admin.html`).
-*   [x] **Rediseño 100% Responsivo del Panel Admin (`admin.html`):** Adaptado el layout para pantallas móviles (iPhones y Android) con métricas en cuadrícula adaptable, botones táctiles y vista en tarjetas para consultas pastorales rápidas desde celulares.
-*   [x] **Panel de Evaluación y Feedbacks Abiertos Mejorado:** Rediseñado el área de retroalimentación con feed de tarjetas interactivas, métricas visuales de satisfacción/precisión y pestañas de filtro (*Todos*, *Solo con Texto*, *5 Estrellas ★*, *Sugerencias*).
-*   [x] **Gestión de Enlaces de Videos de Enseñanza (Home Page):** Añadido el panel en `admin.html` que permite a los administradores actualizar los links de YouTube de los episodios 1, 2 y 3. Al guardar, la Home Page desbloquea automáticamente los nuevos videos en vivo.
+*   [x] **Rediseño Completo del Panel Pastoral Admin (`admin.html`):**
+    *   **Filtros de Fecha Preseteados:** Botones rápidos `Todos`, `Hoy`, `Hace 1 semana`, `Un mes`, `3 meses` y `Personalizado` con corrección de alineación visual para etiquetas *Desde* y *Hasta*.
+    *   **Cuatro Métricas Principales (KPIs):** *Evaluaciones completadas*, *Asiste a grupo*, *No asiste a grupo* y *Llenó evaluación*.
+    *   **Mapa SVG Interactivo de Honduras:** Visualización geográfica regional (Tegucigalpa, SPS, La Ceiba, Choluteca, Danlí) con pines y porcentajes en vivo.
+    *   **Grid de 5 Tarjetas de Estadísticas de Dones:** Top 3 más frecuentes, Top 3 menos frecuentes, Combinación de 3 más común, Combinación de 3 menos común y Don más frecuente por ubicación con selector interactivo.
+    *   **Gráfica Completa de Barras con Filtros Acumulables:** Conmutador entre *Promedio por Don (%)* y *Total por Don (Frecuencia)* con filtros combinables por Ubicación, Asistencia a Grupo y Precisión de Evaluación.
+    *   **Gestor de Enlaces de Videos:** Reubicado al final de la página como última sección.
 *   [x] **Ajuste de Tipografía y Espaciado:** Añadidas reglas de `letter-spacing: -0.012em` en cuerpo y `-0.025em` en encabezados (`styles.css`), mejorando la densidad tipográfica y legibilidad.
 *   [x] **Auditoría de Responsiveness & Navegadores:** Verificadas reglas CSS Flexbox/Grid móviles (`max-width: 600px`, `box-sizing: border-box`, `padding` líquido). Los componentes se adaptan sin desbordamiento desde 320px en iOS Safari, Android Chrome, Edge y Firefox.
 *   [x] **Persistencia Garantizada en Supabase:** Confirmado que `submitResult()` guarda las respuestas, puntuaciones, Top 3, datos de Onboarding (`attends_growth_group`, `zone_location`) y la Encuesta de Evaluación (`clarity_rating`, `accuracy_perception`, `feedback_comments`) en la tabla `dones_igc.results`.
