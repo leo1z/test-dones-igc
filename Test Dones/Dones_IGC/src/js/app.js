@@ -269,6 +269,17 @@ function renderScene() {
   el.sceneIllustration.src = SCENE_ILLUSTRATIONS[sceneId] || SCENE_ILLUSTRATIONS[1];
   el.scenePartTitle.textContent = `PARTE ${sceneId}`;
   
+  // Notificaciones de seguimiento al empezar Parte 2, 5 y 9
+  const progressToasts = {
+    2: { icon: "🚀", title: "¡Buen comienzo!", text: "Has iniciado la Parte 2. Responde con total sinceridad." },
+    5: { icon: "⚡", title: "¡Mitad del camino!", text: "Vas a la mitad del test. Cada respuesta perfecciona tus resultados." },
+    9: { icon: "🏁", title: "¡Recta final!", text: "Estás en las últimas partes para descubrir tus dones principales." }
+  };
+
+  if (progressToasts[sceneId]) {
+    showProgressToast(progressToasts[sceneId]);
+  }
+
   // Estaciones del Mapa de Ruta
   renderRoadmapTrack(sceneId);
   
@@ -414,6 +425,34 @@ function countAnswered() {
     if (state.answers[s.id]) count++;
   }
   return count;
+}
+
+function showProgressToast(toastData) {
+  let toastEl = document.getElementById('test-progress-toast');
+  if (!toastEl) {
+    toastEl = document.createElement('div');
+    toastEl.id = 'test-progress-toast';
+    toastEl.className = 'test-progress-toast';
+    document.body.appendChild(toastEl);
+  }
+
+  toastEl.innerHTML = `
+    <div class="toast-icon">${toastData.icon}</div>
+    <div class="toast-content">
+      <strong class="toast-title">${toastData.title}</strong>
+      <span class="toast-text">${toastData.text}</span>
+    </div>
+    <button class="toast-close" onclick="document.getElementById('test-progress-toast').classList.remove('show')">×</button>
+  `;
+
+  setTimeout(() => {
+    toastEl.classList.add('show');
+  }, 100);
+
+  if (toastEl.hideTimer) clearTimeout(toastEl.hideTimer);
+  toastEl.hideTimer = setTimeout(() => {
+    toastEl.classList.remove('show');
+  }, 4500);
 }
 
 // ---------------------------------------------------------------------------

@@ -288,7 +288,7 @@ export const situations = [
     id: 39,
     giftId: 'misionero_apostol',
     sceneId: 5,
-    text: "Me encantaría ser parte de un equipo para iniciar un nuevo grupo o iglesia.",
+    text: "Participo con entusiasmo cuando se trata de iniciar un nuevo grupo o iglesia.",
     sourceQuestion: "¿Te encantaría ser parte de un equipo para iniciar una nueva iglesia?",
   },
   {
@@ -332,7 +332,7 @@ export const situations = [
     id: 45,
     giftId: 'discernimiento',
     sceneId: 6,
-    text: "Detecto rápido cuando una enseñanza contiene errores sutiles, aunque parezca popular.",
+    text: "Detecto rápido cuando una enseñanza contiene errores sutiles.",
     sourceQuestion: "¿Sabes identificar falsas doctrinas sutiles?",
   },
   {

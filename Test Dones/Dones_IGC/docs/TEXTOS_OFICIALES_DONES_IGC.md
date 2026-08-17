@@ -150,7 +150,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 36. Sé cómo amonestar o corregir a alguien con firmeza pero con amor y sin herir.
 37. Presto mucha atención a las palabras y actitudes de otros para entender cómo se sienten en su corazón.
 38. Disfruto enseñar a otros cómo poner en práctica la Biblia en su vida diaria.
-39. Me encantaría ser parte de un equipo para iniciar un nuevo grupo o iglesia.
+39. Participo con entusiasmo cuando se trata de iniciar un nuevo grupo o iglesia.
 40. Al hablar de la Biblia a un grupo, sé usar la Palabra para animar, consolar y corregir con amor.
 
 ### PARTE 6
@@ -158,7 +158,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 42. Animo con entusiasmo a otros a ser generosos y apoyar proyectos u ofrendas.
 43. Ayudo con gusto en trabajos físicos o de esfuerzo práctico (mudanzas, arreglos, transporte).
 44. Uso versículos específicos de la Biblia para aconsejar y dar dirección a otros.
-45. Detecto rápido cuando una enseñanza contiene errores sutiles, aunque parezca popular.
+45. Detecto rápido cuando una enseñanza contiene errores sutiles.
 46. Las personas se sienten aliviadas y tranquilas cuando les muestro cómo aplicar un principio bíblico.
 47. Me gusta leer o escuchar historias y testimonios de misioneros en otros lugares.
 48. He visto cómo Dios ha usado conversaciones que he tenido con otros para cambiar sus vidas.
