@@ -271,9 +271,9 @@ function renderScene() {
   
   // Notificaciones de seguimiento al empezar Parte 2, 5 y 9
   const progressToasts = {
-    2: { icon: "🚀", title: "¡Buen comienzo!", text: "Recuerda responder con total sinceridad." },
-    5: { icon: "⚡", title: "¡Mitad del camino!", text: "Cada respuesta nos ayuda a guiarte mejor." },
-    9: { icon: "🏁", title: "¡Ya casi terminas!", text: "Sigue adelante." }
+    2: { icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71 1.26-1.5 1.5-2.5l5.5-5.5c-2.83-2.83-6.5-2-6.5-2l-5.5 5.5c-1 .24-1.79.79-2.5 1.5z"/><path d="M12 15l-3-3"/><path d="M15 6l3 3"/></svg>`, title: "¡Buen comienzo!", text: "Recuerda responder con total sinceridad." },
+    5: { icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`, title: "¡Mitad del camino!", text: "Cada respuesta nos ayuda a guiarte mejor." },
+    9: { icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`, title: "¡Ya casi terminas!", text: "Sigue adelante." }
   };
 
   if (progressToasts[sceneId]) {
@@ -547,10 +547,15 @@ function renderResults(calculation) {
     if (state.onboarding.attendsGrowthGroup === false) {
       calloutEl.innerHTML = `
         <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 18px; padding: 20px; text-align: center; box-shadow: 0 6px 20px rgba(5, 150, 105, 0.08);">
-          <div style="font-size: 1.6rem; margin-bottom: 4px;">🌱</div>
+          <div style="display: inline-flex; align-items: center; justify-content: center; background: #d1fae5; padding: 10px; border-radius: 50%; margin-bottom: 8px; color: #059669;">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12a5 5 0 0 1 5-5c0 5-5 5-5 5z"/><path d="M12 12a5 5 0 0 0-5-5c0 5 5 5 5 5z"/></svg>
+          </div>
           <h4 style="margin: 0 0 6px 0; font-size: 1.05rem; font-weight: 850; color: #065f46;">¿Aún no estás en un Grupo de Crecimiento?</h4>
           <p style="margin: 0 0 14px 0; font-size: 0.86rem; color: #047857; line-height: 1.4;">Descubrir tus dones es el primer paso. Conéctate a un grupo en tu comunidad para ejercitarlos con propósito.</p>
-          <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-connect-group btn-block">🤝 Conectar con un Grupo de Crecimiento</a>
+          <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-connect-group btn-block">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-3px; margin-right:6px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Conectar con un Grupo de Crecimiento
+          </a>
         </div>
       `;
       calloutEl.style.display = 'block';
@@ -721,7 +726,7 @@ function openGiftModal(giftId) {
   if (g.examples && g.examples.length > 0) {
     examplesHTML = `
       <div class="modal-section" style="margin-top: 14px;">
-        <span class="modal-section-title" style="font-size: 0.88rem; font-weight: 850; color: var(--primary); display: block; margin-bottom: 6px;">📌 Ejemplos Prácticos de Servicio</span>
+        <span class="modal-section-title" style="font-size: 0.88rem; font-weight: 850; color: var(--primary); display: flex; align-items: center; gap: 6px; margin-bottom: 6px;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Ejemplos Prácticos de Servicio</span>
         <ul class="modal-list">
           ${g.examples.map(ex => `<li>${ex}</li>`).join('')}
         </ul>

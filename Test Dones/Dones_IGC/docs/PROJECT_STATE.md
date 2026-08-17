@@ -17,8 +17,9 @@ Fecha de última actualización: 2026-08-17
 *   [x] Motor de cálculo recalibrado para escala 1..3 (`maxRawScore = questionCount × 3`).
 *   [x] Vaciado / Truncate de registros de prueba en Supabase (`dones_igc.results`) ejecutado exitosamente.
 *   [x] Permisos de lectura (`SELECT`) y eliminación (`DELETE`) concedidos para el Panel Admin (`admin.html`).
+*   [x] **Migración a Íconos Vectoriales SVG (0% Emojis):** Reemplazados todos los emojis del sistema (toasts, tarjetas de resultados, botones de acción, disclaimers, modales y buscador) por **íconos SVG vectoriales limpios y escalables** con colores dinámicos (`stroke="currentColor"` / `stroke="var(--primary)"`).
 *   [x] **Sincronización del Don Liderar (Presidir):** Actualizada la descripción completa en `src/data/gifts.js` (*"Liderar, influir y dirigir hermanos, se suma al de Administración..."*) para alinearse 100% con la edición del documento maestro.
-*   [x] **Icono de Video en el Home:** Cambiado el emoji de televisión `📺` por el icono de cámara de video `🎥` en la tarjeta de la Serie de Enseñanza del Home.
+*   [x] **Icono de Video en el Home:** Cambiado el emoji por el icono de cámara de video SVG en la tarjeta de la Serie de Enseñanza del Home.
 *   [x] **Corrección de Texto en Glosario:** Cambiado el término "motivacionales" por **"espirituales"** (*"Explora los 15 dones espirituales y sus aplicaciones bíblicas."*) tanto en la UI de `index.html` como en `docs/TEXTOS_OFICIALES_DONES_IGC.md`.
 *   [x] **Indicadores Táctiles en Otros Dones:** Añadido mensaje superior (*👆 Toca cualquier don para ver sus detalles y ejemplos*) y chevrons `›` en cada fila de resultados.
 *   [x] **Guía UI/UX:** Actualizada la especificación [`docs/DESIGN_SYSTEM_V3.md`](file:///c:/Users/Leo%20Borjas/Projects/igc/Test%20Dones/Dones_IGC/docs/DESIGN_SYSTEM_V3.md).
