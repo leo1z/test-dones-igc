@@ -17,6 +17,7 @@ Fecha de última actualización: 2026-08-17
 *   [x] Motor de cálculo recalibrado para escala 1..3 (`maxRawScore = questionCount × 3`).
 *   [x] Vaciado / Truncate de registros de prueba en Supabase (`dones_igc.results`) ejecutado exitosamente.
 *   [x] Permisos de lectura (`SELECT`) y eliminación (`DELETE`) concedidos para el Panel Admin (`admin.html`).
+*   [x] **Rediseño UI de 'Conectar con un Grupo de Crecimiento':** Ajustada la altura a `52px`, texto en una sola línea, ícono centrado y aplicación de un fondo azul tintado suave (`rgba(51, 108, 221, 0.08)` / `#ebf3ff`), texto azul primario (`var(--primary)`) y borde `rgba(51, 108, 221, 0.25)` para alinearse 100% a la paleta de la aplicación.
 *   [x] **Migración a Íconos Vectoriales SVG (0% Emojis):** Reemplazados todos los emojis del sistema (toasts, tarjetas de resultados, botones de acción, disclaimers, modales y buscador) por **íconos SVG vectoriales limpios y escalables** con colores dinámicos (`stroke="currentColor"` / `stroke="var(--primary)"`).
 *   [x] **Sincronización del Don Liderar (Presidir):** Actualizada la descripción completa en `src/data/gifts.js` (*"Liderar, influir y dirigir hermanos, se suma al de Administración..."*) para alinearse 100% con la edición del documento maestro.
 *   [x] **Icono de Video en el Home:** Cambiado el emoji por el icono de cámara de video SVG en la tarjeta de la Serie de Enseñanza del Home.

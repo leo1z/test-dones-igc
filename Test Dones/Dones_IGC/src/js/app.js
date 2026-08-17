@@ -546,12 +546,12 @@ function renderResults(calculation) {
   if (calloutEl) {
     if (state.onboarding.attendsGrowthGroup === false) {
       calloutEl.innerHTML = `
-        <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 18px; padding: 20px; text-align: center; box-shadow: 0 6px 20px rgba(5, 150, 105, 0.08);">
-          <div style="display: inline-flex; align-items: center; justify-content: center; background: #d1fae5; padding: 10px; border-radius: 50%; margin-bottom: 8px; color: #059669;">
-            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12a5 5 0 0 1 5-5c0 5-5 5-5 5z"/><path d="M12 12a5 5 0 0 0-5-5c0 5 5 5 5 5z"/></svg>
+        <div style="background: rgba(51, 108, 221, 0.05); border: 1.5px solid rgba(51, 108, 221, 0.2); border-radius: 18px; padding: 20px; text-align: center; box-shadow: 0 6px 20px rgba(51, 108, 221, 0.06);">
+          <div style="display: inline-flex; align-items: center; justify-content: center; background: rgba(51, 108, 221, 0.1); padding: 10px; border-radius: 50%; margin-bottom: 8px; color: var(--primary);">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h4 style="margin: 0 0 6px 0; font-size: 1.05rem; font-weight: 850; color: #065f46;">¿Aún no estás en un Grupo de Crecimiento?</h4>
-          <p style="margin: 0 0 14px 0; font-size: 0.86rem; color: #047857; line-height: 1.4;">Descubrir tus dones es el primer paso. Conéctate a un grupo en tu comunidad para ejercitarlos con propósito.</p>
+          <h4 style="margin: 0 0 6px 0; font-size: 1.05rem; font-weight: 850; color: var(--navy);">¿Aún no estás en un Grupo de Crecimiento?</h4>
+          <p style="margin: 0 0 14px 0; font-size: 0.86rem; color: var(--text-muted); line-height: 1.4;">Descubrir tus dones es el primer paso. Conéctate a un grupo en tu comunidad para ejercitarlos con propósito.</p>
           <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-connect-group btn-block">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-3px; margin-right:6px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             Conectar con un Grupo de Crecimiento
