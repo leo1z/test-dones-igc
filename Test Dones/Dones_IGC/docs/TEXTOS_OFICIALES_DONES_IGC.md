@@ -254,7 +254,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Título:** `Evaluación de la Experiencia`
 * **Subtítulo:** `Tu opinión nos ayuda a perfeccionar esta herramienta.`
 * **Pregunta 1:** `1. ¿Qué tan claro y comprensible te pareció el test?` *(Calificación 1 a 5 estrellas)*
-* **Pregunta 2:** `2. ¿Sientes que los resultados reflejan tus vivencias de servicio?`
+* **Pregunta 2:** `2. ¿Sientes que los resultados reflejan tu forma de servir?`
   - Opciones: `[Sí]` | `[Parcialmente]` | `[No]`
 * **Pregunta 3:** `3. Comentarios o sugerencias para mejorar:` *(Campo de texto abierto)*
 * **Botón de Envío:** `Enviar Retroalimentación`
