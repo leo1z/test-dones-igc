@@ -180,7 +180,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 ### PARTE 8
 56. Dedico tiempo constante a discipular y acompañar a personas más nuevas en la fe.
 57. Doy mis ofrendas y apoyo económico de forma discreta, sin esperar reconocimientos.
-58. Disfruto servir en tareas sencillas detrás de escena para ayudar a que otros puedan ministrar bien.
+58. Disfruto servir en tareas sencillas detrás de escena para ayudar a que otros puedan servir mejor.
 59. Las personas suelen buscar mi consejo u opinión cuando enfrentan problemas difíciles.
 60. Traigo calma y buen juicio cuando hay momentos de confusión o tensión en el equipo.
 61. Mi opinión suele ser escuchada con respeto por la madurez y prudencia que reflejo.
@@ -208,9 +208,10 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 
 ## 6. 🏆 Pantalla de Resultados y Finalización
 
-* **Badge:** `RESULTADO OFICIAL`
-* **Encabezado:** `Tus Dones Espirituales`
+* **Insignia:** `RESULTADO OFICIAL`
+* **Título Principal:** `Tus Dones Espirituales`
 * **Subtítulo:** `Dios te ha capacitado con recursos únicos para servir con propósito. Aquí están tus resultados.`
+* **Disclaimer Orientativo:** `💡 Recordatorio: Este test es únicamente una guía orientativa basada en tus respuestas. Es en la práctica diaria y sirviendo activamente donde realmente descubres y confirmas tus dones espirituales.`
 * **Sección Principal:** `🏆 Tus 3 Dones Principales` *(3 tarjetas de igual jerarquía con porcentaje y botón [Conocer más →])*
 * **Sección Secundaria:** `💡 Otros Dones en ti` *(Listado con barra de afinidad %)*
 * **Tarjeta de Evaluación:**

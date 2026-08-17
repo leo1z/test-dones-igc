@@ -427,7 +427,7 @@ export const situations = [
     id: 58,
     giftId: 'servir',
     sceneId: 8,
-    text: "Disfruto servir en tareas sencillas detrás de escena para ayudar a que otros puedan ministrar bien.",
+    text: "Disfruto servir en tareas sencillas detrás de escena para ayudar a que otros puedan servir mejor.",
     sourceQuestion: "¿Muchas veces sirves desde el anonimato?",
   },
   {
