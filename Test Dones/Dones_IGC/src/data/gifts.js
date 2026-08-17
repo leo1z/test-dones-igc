@@ -171,7 +171,7 @@ export const gifts = [
     id: 'presidir_liderazgo',
     name: "Liderar (Presidir)",
     summary: "Capacidad de liderar con visión, inspirar la colaboración en equipo y formar a la siguiente generación de líderes.",
-    description: "De líder, influye y dirige hermanos, se suma al de Administración. Están al frente fácilmente, guían con claridad, saben tomar decisiones con sabiduría, envisionan a otros, ayudan a desarrollar líderes. El que preside se centra en las personas, el de Administrar en recursos, procesos, planes.",
+    description: "Liderar, influir y dirigir hermanos, se suma al de Administración. Están al frente fácilmente, guían con claridad, saben tomar decisiones con sabiduría, envisionan a otros, ayudan a desarrollar líderes. El que preside se centra en las personas, el de Administrar en recursos, procesos, planes.",
     questionCount: 4,
     maxRawScore: 12,
     minRawScore: 4,

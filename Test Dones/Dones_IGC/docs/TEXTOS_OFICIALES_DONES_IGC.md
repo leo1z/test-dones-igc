@@ -7,10 +7,12 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 ## 1. 🔝 Cabecera (Header) y Navegación Flotante
 
 ### Cabecera (Header Superior)
+
 * **Alt del Logo:** `Iglesia Gran Comisión Tegucigalpa`
 * **Botón de Retorno:** `← Inicio`
 
 ### Barra de Navegación Flotante Inferior (Bottom Nav)
+
 1. **Inicio**
 2. **Test**
 3. **Dones**
@@ -21,14 +23,17 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 ## 2. 🚀 Modal de Onboarding Inicial (Pre-Home)
 
 ### Paso 1: Mensaje Pastoral de Gracia y Evangelio
+
 * **Etiqueta Superior:** `MENSAJE PASTORAL`
 * **Título Principal:** `Bienvenido al Test de Dones Espirituales`
 * **Cuerpo de Texto:**
   > *"Los dones espirituales son capacitaciones otorgadas por la gracia del Espíritu Santo a quienes han creído en Jesús. Si aún tienes dudas sobre tu fe o no has tenido la oportunidad de comprender el Evangelio, te animamos a ponerte en contacto con nuestro equipo pastoral."*
+  >
 * **Botón 1 (Enlace pastoral):** `💬 Quiero contactar a un líder / pastor` *(Redirige a https://igcteg.org/grupos/)*
 * **Botón 2 (Continuar):** `Comprendo, ¡Continuar!`
 
 ### Paso 2: Datos Demográficos
+
 * **Etiqueta Superior:** `PASO 2 DE 2`
 * **Título Principal:** `Cuéntanos un poco de ti`
 * **Pregunta 1:** `1. ¿Asistes actualmente a un Grupo de Crecimiento?`
@@ -62,6 +67,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Botón de Resultados:** `Ver Mi Resultado` *(Aparece si ya completó el test)*
 
 ### Tarjeta de Serie de Enseñanza (YouTube)
+
 * **Icono & Título:** `📺 Conoce sobre los Dones Espirituales`
 * **Descripción:** `Explora nuestra serie de iglesia y aprende más sobre los dones y cómo ponerlos en práctica.`
 * **Episodios:**
@@ -70,6 +76,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - `▶ Parte 3: Servir con Propósito` — *[Pendiente]*
 
 ### Créditos Oficiales (Home)
+
 * **Creador:** `Creado por Iglesia Gran Comisión Tegucigalpa`
 * **Revisión Pastoral:** `Revisado por Pastor Gustavo Zepeda`
 * **Footer Copy:** `© 2026 Iglesia Gran Comisión Tegucigalpa`
@@ -79,25 +86,30 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 ## 4. 🧙 Tutorial Driver.js & Banner del Test
 
 ### Pasos del Tutorial Guiado (Driver.js)
+
 1. **Paso 1:** `Bienvenido a Dones IGC` — *"Este test está diseñado para ayudarte a descubrir tus fortalezas de servicio en la iglesia local."*
 2. **Paso 2:** `1. Aprender de los Dones` — *"Te recomendamos explorar la guía de dones previamente para responder con mayor claridad."*
 3. **Paso 3:** `2. Iniciar el Test` — *"El test está dividido en 10 partes cortas. Responde con total sinceridad en base a tus vivencias reales."*
 
 ### Banner Unificado de la Escena (`#scene-banner`)
+
 * **Título:** `PARTE 1` ... `PARTE 10`
 * **Texto Informativo:** `💡 Conocer los dones te dará más claridad.`
 * **Enlace Interactivo:** `Explorar Dones →` *(Abre hoja emergente de consulta rápida)*
 
 ### Nota de Instrucción Honesta por Escena
+
 * **Icono & Título:** `🎯 Instrucción:`
 * **Texto:** `Imagínate en cada situación y responde con total sinceridad sobre lo que realmente harías, no lo que desearías hacer.`
 
 ### Notificaciones de Seguimiento (Toast Emergente)
+
 * **Parte 2:** 🚀 `¡Buen comienzo! Recuerda responder con total sinceridad.`
 * **Parte 5:** ⚡ `¡Mitad del camino! Cada respuesta nos ayuda a guiarte mejor`
 * **Parte 9:** 🏁 `¡Ya casi terminas! Sigue adelante`
 
 ### Escala de Respuesta (3 Píldoras)
+
 * **Valor 1:** `1 | Rara vez`
 * **Valor 2:** `2 | En ocasiones`
 * **Valor 3:** `3 | Con frecuencia`
@@ -109,6 +121,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 ## 5. 📋 Las 76 Situaciones del Test (Organizadas por Escenas)
 
 ### PARTE 1
+
 1. En mis conversaciones cotidianas con familiares y amigos, suelo compartir sobre mi fe en Jesús.
 2. Acompaño a otros con paciencia cuando están a punto de tomar decisiones difíciles o apresuradas.
 3. En mi vida diaria, dedico momentos constantes a la oración a solas con Dios.
@@ -119,6 +132,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 8. Al hacer una actividad en equipo, me importa más cuidar a las personas que solo cumplir las tareas.
 
 ### PARTE 2
+
 9. Cuando explico que la salvación es solo por fe en Jesús sin obras, las personas lo entienden fácil.
 10. Disfruto cuidar y estar al pendiente del crecimiento espiritual de otras personas.
 11. Me nace de forma natural unirme o motivar a otros a participar en grupos de oración.
@@ -129,6 +143,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 16. Visualizo con claridad metas a futuro y me es fácil entusiasmar a otros para alcanzarlas.
 
 ### PARTE 3
+
 17. En mis conversaciones del día a día, me resulta fácil hablar sobre temas espirituales con conocidos.
 18. Busco comunicarme con quienes noto desanimados o alejados para orar por ellos y acompañarlos.
 19. Veo respuestas concretas a peticiones específicas que he llevado en oración a Dios.
@@ -139,6 +154,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 24. Al hablar de verdades bíblicas, mis palabras llegan al corazón de quienes me escuchan.
 
 ### PARTE 4
+
 25. Hablo con soltura y tranquilidad sobre mi fe con amigos y conocidos.
 26. Aparto dinero o recursos materiales para apoyar a otros o a la iglesia con alegría.
 27. Sirvo con gusto en tareas prácticas de apoyo detrás de escena sin buscar sobresalir.
@@ -149,6 +165,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 32. Mis palabras al enseñar motivan a las personas a tomar decisiones de cambio en su vida.
 
 ### PARTE 5
+
 33. Dios me ha usado para que varias personas entreguen su vida a Jesús.
 34. Noto con facilidad cuando alguien tiene una necesidad económica y busco ayudarle sin llamar la atención.
 35. Estoy siempre disponible cuando se necesita ayuda práctica de último momento.
@@ -159,6 +176,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 40. Al hablar de la Biblia a un grupo, sé usar la Palabra para animar, consolar y corregir con amor.
 
 ### PARTE 6
+
 41. Me resulta fácil enseñar y animar a otras personas a compartir su fe con los demás.
 42. Animo con entusiasmo a otros a ser generosos y apoyar proyectos u ofrendas.
 43. Ayudo con gusto en trabajos físicos o de esfuerzo práctico (mudanzas, arreglos, transporte).
@@ -169,6 +187,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 48. He visto cómo Dios ha usado conversaciones que he tenido con otros para cambiar sus vidas.
 
 ### PARTE 7
+
 49. Aprovecho mensajes de texto, cartas o redes para compartir mensajes de fe con otros.
 50. Organizo mis gastos personales para tener siempre un margen con el cual bendecir a otros.
 51. Sé animar a otros colaboradores a servir a Dios con una buena actitud y sin cansarse.
@@ -178,6 +197,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 55. Tengo un deseo constante de llevar el mensaje de Jesús a lugares o personas que no lo conocen.
 
 ### PARTE 8
+
 56. Dedico tiempo constante a discipular y acompañar a personas más nuevas en la fe.
 57. Doy mis ofrendas y apoyo económico de forma discreta, sin esperar reconocimientos.
 58. Disfruto servir en tareas sencillas detrás de escena para ayudar a que otros puedan servir mejor.
@@ -187,6 +207,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 62. Oro con frecuencia por grupos nuevos e iglesias que se están empezando a formar.
 
 ### PARTE 9
+
 63. Mi mayor alegría es ver cómo una persona que cuido va creciendo y madurando espiritualmente.
 64. Mantengo la fe y la paz en Dios aun cuando paso por momentos económicos o personales difíciles.
 65. Siento una compasión sincera e inmediata cuando veo a alguien pasar por un dolor emocional.
@@ -196,6 +217,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 69. Logro motivar y guiar a diferentes personas para trabajar juntas por una misma meta.
 
 ### PARTE 10
+
 70. Me doy cuenta cuando alguien falta a las reuniones o anda triste, y lo busco para cuidarlo.
 71. Sé animar a personas que tienen dudas a confiar plenamente en Dios.
 72. Visito con amor a personas enfermas, hospitalizadas o que están pasando por un duelo.
@@ -214,9 +236,11 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Disclaimer Orientativo:** `💡 Recordatorio: Este test es únicamente una guía orientativa basada en tus respuestas. Es en la práctica diaria y sirviendo activamente donde realmente descubres y confirmas tus dones espirituales.`
 * **Sección Principal:** `🏆 Tus 3 Dones con Mayor Afinidad` *(3 tarjetas de igual jerarquía con porcentaje y botón [Conocer más →])*
 * **Botonera de Acciones:**
+
   * `✍️ Evaluar la Experiencia del Test`
   * `🤝 Conectar con un Grupo de Crecimiento` *(Abre https://igcteg.org/grupos/)*
   * `Reiniciar Test`
+
   - **Texto:** `Ayúdanos a mejorar completando 3 preguntas cortas de retroalimentación.`
   - **Botón 1:** `✍️ Evaluar la Experiencia del Test`
   - **Botón 2:** `Reiniciar Test`
@@ -226,6 +250,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 ## 7. 📝 Modales de Encuesta y Cierre
 
 ### Encuesta de Evaluación (3 Preguntas)
+
 * **Título:** `Evaluación de la Experiencia`
 * **Subtítulo:** `Tu opinión nos ayuda a perfeccionar esta herramienta.`
 * **Pregunta 1:** `1. ¿Qué tan claro y comprensible te pareció el test?` *(Calificación 1 a 5 estrellas)*
@@ -235,9 +260,11 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Botón de Envío:** `Enviar Retroalimentación`
 
 ### Modal de Cierre de Grupo de Crecimiento
+
 * **Título:** `¡Pon en práctica tus dones!`
 * **Cuerpo de Texto:**
   > *"Los dones cobran su verdadero propósito al ejercitarlos en comunidad y servicio en un grupo de crecimiento."*
+  >
 * **Opción A (Si el usuario marcó NO asistir a grupo):**
   - Texto: `Indicaste que no asistes a un grupo. ¡Te invitamos a integrarte a uno cerca de ti!`
   - Botón: `🌱 Solicitar Grupo de Crecimiento` *(Abre https://igcteg.org/grupos/)*
@@ -250,15 +277,16 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 ## 8. 📖 Sección "Aprender de los Dones" (Glosario)
 
 * **Título:** `Aprender de los Dones`
-* **Subtítulo:** `Explora los 15 dones motivacionales y sus aplicaciones bíblicas.`
+* **Subtítulo:** `Explora los 15 dones espirituales y sus aplicaciones bíblicas.`
 * **Buscador Placeholder:** `Buscar por nombre de don...`
 * **Banner de Resultado Personal:** `Tus Dones Principales: [Don 1], [Don 2], [Don 3]`
 
 ---
 
-### Catálogo de los 15 Dones Motivacionales
+### Catálogo de los 15 Dones Espirituales
 
 #### 1. Evangelizar
+
 * **Oración Resumen (Card):** *"Capacidad para comunicar el Evangelio de forma sencilla y clara, conectando a las personas con la salvación en Jesús."*
 * **Descripción Completa:** Capacidad sobrenatural para dar el evangelio de manera sencilla y breve. Es el único don hacia incrédulos. No lo hace igual con todos, sabe cómo entrarles, no importa su temperamento. Unos lo hacen a grandes públicos, otros 1 a 1, unos por escrito, no necesitan de una actividad de la iglesia: lo pasan haciendo. También son buenos para enseñar a evangelizar.
 * **Ejemplos Prácticos de Servicio:**
@@ -267,6 +295,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Coordinar campañas de alcance comunitario.
 
 #### 2. Dar
+
 * **Oración Resumen (Card):** *"Disposición alegre para proveer recursos financieros y materiales de forma generosa, sacrificada y discreta."*
 * **Descripción Completa:** Capacidad sobrenatural de dar en lo económico, o provisión, medicinas, llena necesidades materiales. A veces en anonimato (no quieren llamar la atención). Pueden identificar necesidades. También apoyan la obra en general (donaciones). Lo hace con liberalidad (sin pesar sino con alegría, generoso, sin condiciones). No siempre es rico, pero dan (a veces absteniéndose de cosas). Promueven la generosidad en otros.
 * **Ejemplos Prácticos de Servicio:**
@@ -275,6 +304,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Donar recursos significativos para la mejora del templo o proyectos especiales.
 
 #### 3. Fe
+
 * **Oración Resumen (Card):** *"Confianza firme en Dios frente a situaciones difíciles, perseverando en la oración e inspirando convicción en otros."*
 * **Descripción Completa:** Es una confianza sobrenatural en Dios para enfrentar situaciones. Pueden estimular la fe de otros. Le creen a Dios. Se les ve en grupos de oración. Son para animar la fe de desanimados, a los que les cuesta creer.
 * **Ejemplos Prácticos de Servicio:**
@@ -283,6 +313,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Iniciar proyectos ministeriales confiando en la provisión de Dios aun sin ver los recursos.
 
 #### 4. Servir
+
 * **Oración Resumen (Card):** *"Disposición humilde para resolver necesidades prácticas y logísticas tras bambalinas con gozo e iniciativa."*
 * **Descripción Completa:** Capacidad sobrenatural de ver áreas de necesidad, y soluciona de manera práctica y con humildad, sirve sin buscar sobresalir. Ayuda en cosas prácticas de la iglesia. Sirven con gozo, no a la fuerza.
 * **Ejemplos Prácticos de Servicio:**
@@ -291,6 +322,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Asistir a líderes y maestros en tareas operativas para liberar su tiempo de enseñanza.
 
 #### 5. Misericordia
+
 * **Oración Resumen (Card):** *"Sensibilidad empática profunda para acompañar, consolar y aliviar el sufrimiento físico y emocional de las personas."*
 * **Descripción Completa:** Parecido al de servir. Es mostrar compasión, aliviar sufrimiento de hermanos. Muy movidos a ayudar enfermos, afligidos, desanimados, solitarios, pobres, en duelo, etc. Pueden dar consejería de manera natural. Lo hacen sin quejarse, de corazón, se conectan con la gente.
 * **Ejemplos Prácticos de Servicio:**
@@ -299,6 +331,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Brindar consejería empática e inicial a personas en crisis emocionales.
 
 #### 6. Exhortar
+
 * **Oración Resumen (Card):** *"Capacidad para animar, guiar en consejería bíblica y amonestar con amor, impulsando el crecimiento personal."*
 * **Descripción Completa:** De una manera sobrenatural pueden animar, consolar, exhortar, amonestar, obteniendo resultados. Son buenos en consejería, la gente los busca de manera natural. Ayudan a hacer la voluntad de Dios, llevan a la obediencia sin forzar ni manipular. Usa la Biblia.
 * **Ejemplos Prácticos de Servicio:**
@@ -307,6 +340,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Escribir o hablar palabras oportunas de ánimo a personas que atraviesan desánimo.
 
 #### 7. Pastor
+
 * **Oración Resumen (Card):** *"Devoción para cuidar, alimentar y velar de cerca por el crecimiento espiritual individual de cada persona."*
 * **Descripción Completa:** Implica cuidar ovejas de manera sobrenatural: las alimenta, las cuida, está pendiente de ellas, inspira confianza, está pendiente del que no viene. Habla con los hermanos y se sienten cuidados. También les enseña la Palabra, les ayuda a crecer, personal.
 * **Ejemplos Prácticos de Servicio:**
@@ -315,6 +349,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Discipular uno a uno a nuevos creyentes en sus primeros pasos de fe.
 
 #### 8. Administrar
+
 * **Oración Resumen (Card):** *"Habilidad organizada para coordinar recursos, solucionar contingencias y dirigir proyectos grupales con eficiencia."*
 * **Descripción Completa:** Es bueno para organizar, planificar, llevar a cabo, dirige proyectos de la iglesia, ayudan a que funcionen los ministerios y las cosas. No domina, sino que inspira a cumplir la misión de la iglesia local, o el grupo.
 * **Ejemplos Prácticos de Servicio:**
@@ -323,14 +358,16 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Reorganizar un área administrativa de la iglesia para hacerla más eficiente.
 
 #### 9. Liderar (Presidir)
+
 * **Oración Resumen (Card):** *"Capacidad de liderar con visión, inspirar la colaboración en equipo y formar a la siguiente generación de líderes."*
-* **Descripción Completa:** De líder, influye y dirige hermanos, se suma al de Administración. Están al frente fácilmente, guían con claridad, saben tomar decisiones con sabiduría, envisionan a otros, ayudan a desarrollar líderes. El que preside se centra en las personas, el de Administrar en recursos, procesos, planes.
+* **Descripción Completa:** Liderar, influir y dirigir hermanos, se suma al de Administración. Están al frente fácilmente, guían con claridad, saben tomar decisiones con sabiduría, envisionan a otros, ayudan a desarrollar líderes. El que preside se centra en las personas, el de Administrar en recursos, procesos, planes.
 * **Ejemplos Prácticos de Servicio:**
   - Guiar a un equipo ministerial hacia el cumplimiento de objetivos estratégicos.
   - Tomar decisiones determinantes durante momentos de transición en el ministerio.
   - Mentorear a futuros servidores para traspasarles responsabilidades de liderazgo.
 
 #### 10. Discernir
+
 * **Oración Resumen (Card):** *"Capacidad para distinguir la verdad bíblica del error sutil, percibiendo el origen espiritual de enseñanzas y actitudes."*
 * **Descripción Completa:** Es una capacidad sobrenatural de distinguir el origen espiritual de un mensaje o enseñanza (si viene de Dios o del hombre o demonios). Es importante conocer la sana doctrina y no exponerse a cualquier enseñanza.
 * **Ejemplos Prácticos de Servicio:**
@@ -339,6 +376,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Orientar al equipo pastoral sobre la idoneidad de nuevos materiales de enseñanza.
 
 #### 11. Ciencia / Conocimiento
+
 * **Oración Resumen (Card):** *"Pasión por profundizar en la sana doctrina, la investigación bíblica rigurosa y la comprensión de las Escrituras."*
 * **Descripción Completa:** Este don da a entender una verdad bíblica (el de sabiduría dice cómo aplicarla). El de Ciencia revela una verdad doctrinal, el de sabiduría nos muestra cómo actuar a la luz de esa verdad. Solo puede ser basado en la Biblia. Les gusta estudiar.
 * **Ejemplos Prácticos de Servicio:**
@@ -347,6 +385,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Aclarar con paciencia y precisión un malentendido doctrinal en una conversación.
 
 #### 12. Sabiduría
+
 * **Oración Resumen (Card):** *"Facilidad para orientar en la aplicación práctica de principios bíblicos ante dilemas y decisiones del diario vivir."*
 * **Descripción Completa:** Útil en consejería. Saber cómo aplicar los principios bíblicos en una situación difícil; es la sabiduría de Dios la que habla. No solo en consejería sino en pláticas formales con hermanos. Tiene que ser basado en la Biblia.
 * **Ejemplos Prácticos de Servicio:**
@@ -354,6 +393,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Aconsejar a un hermano sobre cómo tomar decisiones sabias sobre su futuro laboral o académico.
 
 #### 13. Enseñar
+
 * **Oración Resumen (Card):** *"Habilidad para estructurar y comunicar pasajes de la Biblia de forma clara, amena y accesible para todos."*
 * **Descripción Completa:** Capacidad sobrenatural para hacer entendibles enseñanzas de la Palabra de Dios. Puede ser al predicar, o al enseñar en un grupo pequeño, o por escrito. Aun temas no tan fáciles los presenta menos difíciles.
 * **Ejemplos Prácticos de Servicio:**
@@ -362,6 +402,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Preparar lecciones didácticas adaptadas a diferentes edades o niveles de madurez espiritual.
 
 #### 14. Profecía
+
 * **Oración Resumen (Card):** *"Comunicación directa de verdades bíblicas que confrontan con amor, edifican y mueven al cambio de conducta."*
 * **Descripción Completa:** Significa "hablar un mensaje de Dios" (no necesariamente sobre el futuro): sirve más para exhortar, consolar, edificar con la Palabra de Dios de una manera profunda y especial. Puede suceder al predicar, pero también al platicar de la Palabra sobre temas especiales.
 * **Ejemplos Prácticos de Servicio:**
@@ -369,6 +410,7 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
   - Dar una palabra de exhortación oportuna y directa frente a la autocomplacencia espiritual del grupo.
 
 #### 15. Misionero (Apóstol)
+
 * **Oración Resumen (Card):** *"Impulso emprendedor para plantar nuevas comunidades de fe e iniciar ministerios donde antes no existían."*
 * **Descripción Completa:** Tiene la capacidad sobrenatural para empezar un grupo, o una iglesia, ya sea que tenga otros dones o se acompañe de hermanos con dones necesarios (Administrar, Pastor, Evangelismo, Enseñanza, Servir).
 * **Ejemplos Prácticos de Servicio:**

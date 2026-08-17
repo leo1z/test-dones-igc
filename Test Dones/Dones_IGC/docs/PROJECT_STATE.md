@@ -17,9 +17,9 @@ Fecha de última actualización: 2026-08-17
 *   [x] Motor de cálculo recalibrado para escala 1..3 (`maxRawScore = questionCount × 3`).
 *   [x] Vaciado / Truncate de registros de prueba en Supabase (`dones_igc.results`) ejecutado exitosamente.
 *   [x] Permisos de lectura (`SELECT`) y eliminación (`DELETE`) concedidos para el Panel Admin (`admin.html`).
-*   [x] **Ubicación del Botón 'Conectar con Grupo':** Si la persona indicó que no asiste a un grupo (`attendsGrowthGroup === false`), se despliega una tarjeta destacada `🌱 ¿Aún no estás en un Grupo de Crecimiento?` **ubicada exactamente debajo de los 3 primeros dones principales y antes de 'Otros Dones en ti'**.
-*   [x] **Paleta Verde Esmeralda en Botón de Grupo:** Aplicada paleta de color menta/esmeralda fresca (`#ecfdf5` fondo, `#047857` texto, `#a7f3d0` borde) a `.btn-connect-group` para diferenciarla completamente del azul primario.
-*   [x] **Verificación y Sincronización 100% Documental:** Sincronizados y verificados todos los textos de preguntas, dones, resúmenes, consejos y ejemplos en [`docs/TEXTOS_OFICIALES_DONES_IGC.md`](file:///c:/Users/Leo%20Borjas/Projects/igc/Test%20Dones/Dones_IGC/docs/TEXTOS_OFICIALES_DONES_IGC.md) y `src/data/gifts.js`.
+*   [x] **Sincronización del Don Liderar (Presidir):** Actualizada la descripción completa en `src/data/gifts.js` (*"Liderar, influir y dirigir hermanos, se suma al de Administración..."*) para alinearse 100% con la edición del documento maestro.
+*   [x] **Icono de Video en el Home:** Cambiado el emoji de televisión `📺` por el icono de cámara de video `🎥` en la tarjeta de la Serie de Enseñanza del Home.
+*   [x] **Corrección de Texto en Glosario:** Cambiado el término "motivacionales" por **"espirituales"** (*"Explora los 15 dones espirituales y sus aplicaciones bíblicas."*) tanto en la UI de `index.html` como en `docs/TEXTOS_OFICIALES_DONES_IGC.md`.
 *   [x] **Indicadores Táctiles en Otros Dones:** Añadido mensaje superior (*👆 Toca cualquier don para ver sus detalles y ejemplos*) y chevrons `›` en cada fila de resultados.
 *   [x] **Guía UI/UX:** Actualizada la especificación [`docs/DESIGN_SYSTEM_V3.md`](file:///c:/Users/Leo%20Borjas/Projects/igc/Test%20Dones/Dones_IGC/docs/DESIGN_SYSTEM_V3.md).
 *   [x] **Auditoría de Cobertura de Dones (15 Dones):** Verificado que las 76 situaciones cubren al 100% los 15 dones del catálogo de `gifts.js` (Evangelismo: 7, Pastor: 7, Profecía: 4, los 12 dones restantes: 5 preguntas cada uno).
