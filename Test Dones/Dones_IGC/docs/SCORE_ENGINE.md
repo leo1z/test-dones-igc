@@ -36,7 +36,7 @@ Un test respondido es un objeto plano `answersMap`:
 
 - Llave: `situationId` (1-76, ver `situations.js`).
 - Valor: entero 1-3 (escala de 3 opciones):
-  1=No es mi fuerte, 2=En ocasiones, 3=Es natural en mí.
+  1=Rara vez, 2=En ocasiones, 3=Con frecuencia.
 - Situaciones sin responder (llave ausente o valor falsy) cuentan como 0
   — el motor es defensivo (`Number(answersMap[id]) || 0`), no explota con
   un `answersMap` incompleto.
