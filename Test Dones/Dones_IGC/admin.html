@@ -537,54 +537,57 @@
 
     <main class="admin-container">
 
-      <!-- 1. Date Filters Bar (Presets + Clean Custom Range) -->
-      <div class="filters-bar">
-        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <span style="font-size: 0.82rem; font-weight: 850; color: var(--navy); display:flex; align-items:center; gap:4px;">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Filtro por Fecha:
-          </span>
-          <div class="date-presets">
-            <button class="preset-btn active" data-preset="all">Todos</button>
-            <button class="preset-btn" data-preset="today">Hoy</button>
-            <button class="preset-btn" data-preset="week">Hace 1 semana</button>
-            <button class="preset-btn" data-preset="month">Un mes</button>
-            <button class="preset-btn" data-preset="3months">3 meses</button>
-            <button class="preset-btn" data-preset="custom">Personalizado</button>
+      <!-- 1. Barra de Filtros Generales del Panel (Fecha + Zona) -->
+      <div style="background: #ffffff; padding: 20px; border-radius: 20px; margin-bottom: 24px; box-shadow: 0 6px 18px rgba(15, 15, 49, 0.04); border: 1px solid rgba(15, 15, 49, 0.08);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polygon points="12 6 12 12 16 14"/></svg>
+          <h3 style="margin:0; font-size:1rem; font-weight:900; color:var(--navy);">Filtros Generales del Dashboard</h3>
+        </div>
+
+        <!-- Filtro por Fecha -->
+        <div class="filters-bar" style="box-shadow:none; border: 1px solid rgba(15,15,49,0.06); padding: 14px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 0.82rem; font-weight: 850; color: var(--navy); display:flex; align-items:center; gap:4px;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Rango de Fecha:
+            </span>
+            <div class="date-presets">
+              <button class="preset-btn active" data-preset="all">Todos</button>
+              <button class="preset-btn" data-preset="today">Hoy</button>
+              <button class="preset-btn" data-preset="week">Hace 1 semana</button>
+              <button class="preset-btn" data-preset="month">Un mes</button>
+              <button class="preset-btn" data-preset="3months">3 meses</button>
+              <button class="preset-btn" data-preset="custom">Personalizado</button>
+            </div>
+          </div>
+
+          <div id="custom-date-container" class="custom-date-inputs" style="display: none;">
+            <div class="custom-date-row">
+              <div class="filter-field">
+                <label for="filter-start-date">Desde:</label>
+                <input type="date" id="filter-start-date">
+              </div>
+              <div class="filter-field">
+                <label for="filter-end-date">Hasta:</label>
+                <input type="date" id="filter-end-date">
+              </div>
+            </div>
+            <button id="btn-apply-filters" class="btn btn-primary" style="height: 38px; width: 100%; font-size: 0.84rem; font-weight:850;">Aplicar Rango Personalizado</button>
           </div>
         </div>
 
-        <div id="custom-date-container" class="custom-date-inputs" style="display: none;">
-          <div class="custom-date-row">
-            <div class="filter-field">
-              <label for="filter-start-date">Desde:</label>
-              <input type="date" id="filter-start-date">
-            </div>
-            <div class="filter-field">
-              <label for="filter-end-date">Hasta:</label>
-              <input type="date" id="filter-end-date">
-            </div>
+        <!-- Filtro por Zona -->
+        <div style="background: rgba(15,15,49,0.02); padding: 14px; border-radius: 14px; border: 1px solid rgba(15,15,49,0.06);">
+          <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span style="font-size:0.82rem; font-weight:850; color:var(--navy);">Filtrar por Zona / Ciudad:</span>
           </div>
-          <button id="btn-apply-filters" class="btn btn-primary" style="height: 38px; width: 100%; font-size: 0.84rem; font-weight:850;">Aplicar Rango Personalizado</button>
-        </div>
-
-        <p style="font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0 0; font-weight: 650; display:flex; align-items:center; gap:4px;">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--primary)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          Este filtro por fecha se aplica a todas las estadísticas del panel.
-        </p>
-      </div>
-
-      <!-- 2. Filtro Global por Zona / Ciudad -->
-      <div style="background: #ffffff; padding: 16px; border-radius: 18px; margin-bottom: 24px; box-shadow: 0 4px 14px rgba(15, 15, 49, 0.04); border: 1px solid rgba(15, 15, 49, 0.06);">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <h4 style="margin:0; font-size:0.9rem; font-weight:900; color:var(--navy);">Filtro Global por Zona / Ciudad</h4>
-        </div>
-        <p style="font-size:0.78rem; color:var(--text-muted); margin: 0 0 12px 0; font-weight:650;">
-          Elige la zona que quieres medir (aplica para todas las estadísticas del panel):
-        </p>
-        <div id="global-zone-pills" style="display:flex; gap:8px; flex-wrap:wrap;">
-          <!-- Renderizado dinámico de píldoras de filtro por zona con "Todas las Zonas" activa -->
+          <p style="font-size:0.78rem; color:var(--text-muted); margin: 0 0 10px 0; font-weight:650;">
+            Elige la zona que quieres medir (aplica para métricas generales, mapa, combinaciones y encuesta):
+          </p>
+          <div id="global-zone-pills" style="display:flex; gap:8px; flex-wrap:wrap;">
+            <!-- Renderizado dinámico de píldoras de filtro por zona con "Todas las Zonas" activa por defecto -->
+          </div>
         </div>
       </div>
 
@@ -681,7 +684,7 @@
         </div>
       </section>
 
-      <!-- 5 Cards Grid de Estadísticas de Dones (Sin emojis, SVG) -->
+      <!-- 5 Cards Grid de Estadísticas de Dones -->
       <section style="margin-bottom: 24px;">
         <div style="margin-bottom: 14px;">
           <h3 style="font-size: 1.1rem; font-weight: 900; color: var(--navy); margin: 0; display:flex; align-items:center; gap:6px;">
@@ -755,8 +758,8 @@
         </div>
       </section>
 
-      <!-- Gráfica Completa de Barras de los 15 Dones con Filtros Acumulables -->
-      <section class="data-section">
+      <!-- Gráfica Completa de Barras de los 15 Dones con Filtros Autónomos Propios -->
+      <section class="data-section" style="border-top: 4px solid var(--primary);">
         <div class="section-head">
           <h3>
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M12 20v-6 M6 20V10 M18 20V4"/></svg>
@@ -767,8 +770,11 @@
             <button class="preset-btn" id="btn-metric-mode-total" data-mode="total">Total por Don (Frecuencia)</button>
           </div>
         </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; font-weight:650;">
+          Explorador autónomo para cruzar métricas de los 15 dones por ubicación, asistencia a grupos y percepción de servicio.
+        </p>
 
-        <!-- Filtros Acumulables para Cross-Check -->
+        <!-- Filtros Propios Autónomos de la Gráfica -->
         <div class="chart-controls-bar">
           <div class="chart-control-group">
             <label for="cross-filter-location">Ubicación:</label>
@@ -1037,7 +1043,7 @@
       renderMetrics(globalAdminData);
       renderHondurasMapAndZones(globalAdminData);
       renderGiftStatsCards(globalAdminData);
-      populateCrossFilterDropdowns(globalAdminData);
+      populateCrossFilterDropdowns(rawMetricsData);
       renderFullGiftsChart();
       renderSurveyStatsSection(globalAdminData);
     }
@@ -1219,14 +1225,14 @@
       updateLocationGift();
     }
 
-    // 4. Llenado de Dropdowns de Filtros Acumulables
+    // 4. Llenado de Dropdowns de Filtros Autónomos Propios de la Gráfica de 15 Dones
     function populateCrossFilterDropdowns(data) {
       const locSelect = document.getElementById('cross-filter-location');
       const uniqueLocs = [...new Set(data.map(d => d.zone_location).filter(Boolean))].sort();
       locSelect.innerHTML = '<option value="all">Todas las ubicaciones</option>' + uniqueLocs.map(l => `<option value="${l}">${l}</option>`).join('');
     }
 
-    // 5. Renderizado de Gráfica Completa de Barras (15 Dones) con Filtros Acumulables
+    // 5. Renderizado de Gráfica Completa de Barras (15 Dones) con Filtros Autónomos
     document.getElementById('btn-metric-mode-avg').onclick = function() {
       currentChartMode = 'avg';
       this.classList.add('active');
@@ -1251,7 +1257,7 @@
       const groupVal = document.getElementById('cross-filter-group').value;
       const precVal = document.getElementById('cross-filter-precision').value;
 
-      let filtered = [...globalAdminData];
+      let filtered = [...rawMetricsData]; // Utiliza la muestra filtrada por fecha
 
       if (locVal !== 'all') filtered = filtered.filter(d => d.zone_location === locVal);
       if (groupVal === 'yes') filtered = filtered.filter(d => d.attends_growth_group === true);
@@ -1260,7 +1266,7 @@
 
       const totalFiltered = filtered.length;
       if (totalFiltered === 0) {
-        container.innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem; text-align: center; padding: 20px 0;">No hay datos que coincidan con estos filtros acumulados.</p>';
+        container.innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem; text-align: center; padding: 20px 0;">No hay datos que coincidan con estos filtros autónomos.</p>';
         return;
       }
 
@@ -1350,7 +1356,7 @@
       q1AvgEl.textContent = clarityAvg;
       q1SubEl.textContent = `${clarityItems.length} de ${total} enviaron estrellas`;
 
-      // Pregunta 2: ¿Refleja su forma de servir?
+      // Pregunta 2: Reflejo en su forma de servir
       const accYes = data.filter(d => d.accuracy_perception === 'si').length;
       const accParcial = data.filter(d => d.accuracy_perception === 'parcial').length;
       const accNo = data.filter(d => d.accuracy_perception === 'no').length;
