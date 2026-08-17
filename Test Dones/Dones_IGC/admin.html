@@ -758,55 +758,7 @@
         </div>
       </section>
 
-      <!-- Gráfica Completa de Barras de los 15 Dones con Filtros Autónomos Propios -->
-      <section class="data-section" style="border-top: 4px solid var(--primary);">
-        <div class="section-head">
-          <h3>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M12 20v-6 M6 20V10 M18 20V4"/></svg>
-            Análisis Global de los 15 Dones Espirituales
-          </h3>
-          <div style="display: flex; gap: 6px;">
-            <button class="preset-btn active" id="btn-metric-mode-avg" data-mode="avg">Promedio por Don (%)</button>
-            <button class="preset-btn" id="btn-metric-mode-total" data-mode="total">Total por Don (Frecuencia)</button>
-          </div>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; font-weight:650;">
-          Explorador autónomo para cruzar métricas de los 15 dones por ubicación, asistencia a grupos y percepción de servicio.
-        </p>
-
-        <!-- Filtros Propios Autónomos de la Gráfica -->
-        <div class="chart-controls-bar">
-          <div class="chart-control-group">
-            <label for="cross-filter-location">Ubicación:</label>
-            <select id="cross-filter-location">
-              <option value="all">Todas las ubicaciones</option>
-            </select>
-          </div>
-          <div class="chart-control-group">
-            <label for="cross-filter-group">Asiste a Grupo:</label>
-            <select id="cross-filter-group">
-              <option value="all">Todos</option>
-              <option value="yes">Sí asiste</option>
-              <option value="no">No asiste</option>
-            </select>
-          </div>
-          <div class="chart-control-group">
-            <label for="cross-filter-precision">¿Refleja su forma de servir?:</label>
-            <select id="cross-filter-precision">
-              <option value="all">Todas las respuestas</option>
-              <option value="si">Sí</option>
-              <option value="parcial">Parcialmente</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="bar-list" id="gifts-full-chart-container">
-          <!-- Renderizado dinámico de los 15 dones -->
-        </div>
-      </section>
-
-      <!-- 6. Sección de Estadísticas de Cada Pregunta de la Encuesta de Evaluación -->
+      <!-- 5. Sección de Estadísticas de la Encuesta de Evaluación de la Experiencia (Afectada por Filtros Globales) -->
       <section class="data-section">
         <div class="section-head">
           <h3>
@@ -850,6 +802,59 @@
 
         <div class="feedback-cards-grid" id="feedback-cards-container">
           <!-- Renderizado dinámico -->
+        </div>
+      </section>
+
+      <!-- 6. Gráfica Completa de Barras de los 15 Dones con Filtros Autónomos Propios (Con Disclaimer) -->
+      <section class="data-section" style="border-top: 4px solid var(--primary);">
+        <div class="section-head">
+          <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M12 20v-6 M6 20V10 M18 20V4"/></svg>
+            Análisis Global de los 15 Dones Espirituales
+          </h3>
+          <div style="display: flex; gap: 6px;">
+            <button class="preset-btn active" id="btn-metric-mode-avg" data-mode="avg">Promedio por Don (%)</button>
+            <button class="preset-btn" id="btn-metric-mode-total" data-mode="total">Total por Don (Frecuencia)</button>
+          </div>
+        </div>
+
+        <!-- Aviso / Disclaimer de Filtros Autónomos -->
+        <div style="background: rgba(51, 108, 221, 0.05); border: 1.5px solid rgba(51, 108, 221, 0.2); border-radius: 14px; padding: 12px 16px; margin-bottom: 16px; font-size: 0.82rem; color: var(--navy); font-weight: 700; display: flex; align-items: flex-start; gap: 8px;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2.2" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <strong>Aviso de Filtros Autónomos:</strong> Esta sección funciona como una herramienta de exploración independiente. Las métricas de esta gráfica son controladas exclusivamente por sus propios filtros internos a continuación (Ubicación, Asistencia a Grupo y Reflejo de Servicio) y no son afectadas por el filtro global de zona superior.
+          </div>
+        </div>
+
+        <!-- Filtros Propios Autónomos de la Gráfica -->
+        <div class="chart-controls-bar">
+          <div class="chart-control-group">
+            <label for="cross-filter-location">Ubicación:</label>
+            <select id="cross-filter-location">
+              <option value="all">Todas las ubicaciones</option>
+            </select>
+          </div>
+          <div class="chart-control-group">
+            <label for="cross-filter-group">Asiste a Grupo:</label>
+            <select id="cross-filter-group">
+              <option value="all">Todos</option>
+              <option value="yes">Sí asiste</option>
+              <option value="no">No asiste</option>
+            </select>
+          </div>
+          <div class="chart-control-group">
+            <label for="cross-filter-precision">¿Refleja su forma de servir?:</label>
+            <select id="cross-filter-precision">
+              <option value="all">Todas las respuestas</option>
+              <option value="si">Sí</option>
+              <option value="parcial">Parcialmente</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bar-list" id="gifts-full-chart-container">
+          <!-- Renderizado dinámico de los 15 dones -->
         </div>
       </section>
 
@@ -1232,7 +1237,7 @@
       locSelect.innerHTML = '<option value="all">Todas las ubicaciones</option>' + uniqueLocs.map(l => `<option value="${l}">${l}</option>`).join('');
     }
 
-    // 5. Renderizado de Gráfica Completa de Barras (15 Dones) con Filtros Autónomos
+    // 5. Renderizado de Gráfica Completa de Barras (15 Dones) con Filtros Autónomos Propios
     document.getElementById('btn-metric-mode-avg').onclick = function() {
       currentChartMode = 'avg';
       this.classList.add('active');
