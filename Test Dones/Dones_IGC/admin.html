@@ -12,48 +12,60 @@
     body {
       background-color: #f4f6fa;
       color: var(--navy);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       margin: 0;
       padding: 0;
+      letter-spacing: -0.012em;
+      word-spacing: -0.015em;
     }
+    
+    /* Header Responsivo */
     .admin-header {
       background-color: #ffffff;
       border-bottom: 1px solid rgba(15, 15, 49, 0.08);
-      padding: 20px 32px;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       box-shadow: 0 4px 12px rgba(15, 15, 49, 0.03);
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .admin-brand {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
     .admin-brand img {
-      height: 48px;
+      height: 42px;
     }
     .admin-brand h1 {
-      font-size: 1.35rem;
+      font-size: 1.15rem;
       font-weight: 900;
       margin: 0;
       color: var(--navy);
+      letter-spacing: -0.02em;
     }
     .admin-brand span {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 700;
-      background-color: rgba(51, 108, 221, 0.1);
+      font-size: 0.75rem;
       color: var(--primary);
-      padding: 3px 10px;
-      border-radius: 20px;
+      font-weight: 800;
+      background-color: rgba(51, 108, 221, 0.08);
+      padding: 2px 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 2px;
     }
+
+    /* Contenedor Adaptable Mobile */
     .admin-container {
       max-width: 1200px;
-      margin: 32px auto;
-      padding: 0 24px;
+      margin: 20px auto;
+      padding: 0 16px;
     }
+
+    /* Login Modal */
     .login-overlay {
       position: fixed;
       inset: 0;
@@ -63,164 +75,285 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
     }
     .login-card {
       background: #ffffff;
       border-radius: 24px;
-      padding: 40px 32px;
-      max-width: 400px;
+      padding: 32px 24px;
+      max-width: 380px;
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
     }
     .login-card h2 {
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       font-weight: 900;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--navy);
     }
     .login-card p {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .login-input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 12px 14px;
       border-radius: 12px;
       border: 1.5px solid rgba(15, 15, 49, 0.15);
       font-size: 1rem;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       text-align: center;
       font-weight: 700;
+      box-sizing: border-box;
     }
+
+    /* Barra de Filtros Mobile-Friendly */
     .filters-bar {
       background: #ffffff;
-      padding: 20px;
+      padding: 16px;
       border-radius: 18px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 28px;
-      box-shadow: 0 6px 18px rgba(15, 15, 49, 0.04);
+      gap: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(15, 15, 49, 0.04);
       border: 1px solid rgba(15, 15, 49, 0.06);
     }
     .filter-group {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex: 1;
+      min-width: 130px;
     }
     .filter-group label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 800;
       color: var(--navy);
+      white-space: nowrap;
     }
     .filter-group input[type="date"] {
-      padding: 8px 12px;
-      border-radius: 8px;
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
       border: 1px solid rgba(15, 15, 49, 0.15);
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 700;
+      box-sizing: border-box;
     }
+    .filter-actions {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    /* Grilla de Métricas Responsiva */
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-bottom: 32px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
     }
     .metric-card {
       background: #ffffff;
-      border-radius: 18px;
-      padding: 24px;
+      border-radius: 16px;
+      padding: 16px;
       border: 1px solid rgba(15, 15, 49, 0.06);
-      box-shadow: 0 8px 24px rgba(15, 15, 49, 0.04);
+      box-shadow: 0 4px 16px rgba(15, 15, 49, 0.03);
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
     }
     .metric-title {
-      font-size: 0.85rem;
-      font-weight: 800;
+      font-size: 0.75rem;
+      font-weight: 850;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
     }
     .metric-num {
-      font-size: 2.4rem;
+      font-size: 1.8rem;
       font-weight: 900;
       color: var(--navy);
-      line-height: 1;
+      line-height: 1.1;
     }
     .metric-sub {
-      font-size: 0.82rem;
+      font-size: 0.76rem;
       color: var(--primary);
-      font-weight: 700;
+      font-weight: 750;
+      line-height: 1.2;
     }
+
+    /* Secciones Generales */
     .data-section {
       background: #ffffff;
-      border-radius: 20px;
-      padding: 28px;
-      margin-bottom: 32px;
-      box-shadow: 0 8px 24px rgba(15, 15, 49, 0.04);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 18px rgba(15, 15, 49, 0.03);
       border: 1px solid rgba(15, 15, 49, 0.06);
     }
     .section-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     .section-head h3 {
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       font-weight: 900;
       margin: 0;
       color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+
+    /* Gráficos de Barra Fluidos */
     .bar-list {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
     .bar-item {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
     }
     .bar-info {
       display: flex;
       justify-content: space-between;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 800;
       color: var(--navy);
     }
     .bar-track {
-      height: 10px;
+      height: 8px;
       background: rgba(15, 15, 49, 0.06);
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
     }
     .bar-fill {
       height: 100%;
       background: var(--primary);
-      border-radius: 10px;
+      border-radius: 8px;
+      transition: width 0.4s ease;
     }
-    .comments-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
+
+    /* Tarjetas de Feedbacks y Comentarios para Mobile */
+    .feedback-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
     }
-    .comments-table th, .comments-table td {
+    .feedback-tab-btn {
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 1px solid rgba(15,15,49,0.12);
+      background: #ffffff;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .feedback-tab-btn.active {
+      background: var(--navy);
+      color: #ffffff;
+      border-color: var(--navy);
+    }
+
+    .feedback-cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .feedback-card {
+      background: #fafafa;
+      border: 1px solid rgba(15, 15, 49, 0.08);
+      border-radius: 14px;
       padding: 14px 16px;
-      text-align: left;
-      border-bottom: 1px solid rgba(15, 15, 49, 0.06);
-      font-size: 0.88rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .comments-table th {
-      font-weight: 850;
+    .feedback-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.78rem;
+    }
+    .feedback-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+    .feedback-badge.star { background: rgba(245, 158, 11, 0.12); color: #d97706; }
+    .feedback-badge.yes { background: rgba(16, 185, 129, 0.12); color: #059669; }
+    .feedback-badge.parcial { background: rgba(245, 158, 11, 0.12); color: #b45309; }
+    .feedback-badge.no { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
+    .feedback-text {
+      font-size: 0.88rem;
       color: var(--navy);
-      background: rgba(15, 15, 49, 0.02);
+      line-height: 1.4;
+      font-weight: 650;
+      background: #ffffff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border-left: 3px solid var(--primary);
+    }
+
+    /* Formulario de Gestión de Videos */
+    .video-form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .video-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .video-input-group label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .video-input-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(15, 15, 49, 0.15);
+      font-size: 0.85rem;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    /* Media Query para pantallas grandes */
+    @media (min-width: 768px) {
+      .admin-header { padding: 20px 32px; }
+      .admin-brand img { height: 48px; }
+      .admin-brand h1 { font-size: 1.35rem; }
+      .admin-container { padding: 0 24px; margin: 32px auto; }
+      .metrics-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+      .metric-card { padding: 24px; gap: 8px; border-radius: 18px; }
+      .metric-num { font-size: 2.4rem; }
+      .filter-actions { width: auto; }
+      .data-section { padding: 28px; border-radius: 20px; }
     }
   </style>
 </head>
@@ -229,17 +362,18 @@
   <!-- Login Protection Overlay -->
   <div id="login-overlay" class="login-overlay">
     <div class="login-card">
-      <img src="src/assets/logos/IGC.png" alt="Logo IGC" style="height: 54px; margin-bottom: 16px;">
+      <img src="src/assets/logos/IGC.png" alt="Logo IGC" style="height: 52px; margin-bottom: 12px;">
       <h2>Panel Admin — Dones IGC</h2>
-      <p>Ingresa la clave de acceso autorizada para consultar estadísticas pastorales.</p>
+      <p>Ingresa la clave autorizada para gestionar y consultar estadísticas pastorales.</p>
       <input type="password" id="admin-pass-input" class="login-input" placeholder="••••••••">
-      <button id="admin-login-btn" class="btn btn-primary btn-block" style="height: 48px;">Acceder al Panel</button>
+      <button id="admin-login-btn" class="btn btn-primary btn-block" style="height: 48px; font-weight: 850;">Acceder al Panel</button>
       <p id="login-error-msg" style="color: #e05a2b; font-size: 0.82rem; margin-top: 12px; display: none; font-weight: 800;">Clave incorrecta. Inténtalo de nuevo.</p>
     </div>
   </div>
 
   <!-- Admin Application Content -->
   <div id="admin-app" style="display: none;">
+    
     <header class="admin-header">
       <div class="admin-brand">
         <img src="src/assets/logos/IGC.png" alt="Logo IGC">
@@ -248,7 +382,7 @@
           <span>Panel de Gestión Pastoral</span>
         </div>
       </div>
-      <button id="admin-logout-btn" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cerrar Sesión</button>
+      <button id="admin-logout-btn" class="btn btn-secondary" style="padding: 8px 14px; font-size: 0.82rem; height: 38px;">Cerrar Sesión</button>
     </header>
 
     <main class="admin-container">
@@ -263,41 +397,77 @@
           <label for="filter-end-date">Hasta:</label>
           <input type="date" id="filter-end-date">
         </div>
-        <button id="btn-apply-filters" class="btn btn-navy" style="padding: 8px 20px; font-size: 0.88rem;">Filtrar Rango</button>
-        <button id="btn-reset-filters" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Limpiar Filtros</button>
+        <div class="filter-actions">
+          <button id="btn-apply-filters" class="btn btn-primary" style="flex:1; height: 38px; padding: 0 14px; font-size: 0.84rem;">Filtrar</button>
+          <button id="btn-reset-filters" class="btn btn-secondary" style="flex:1; height: 38px; padding: 0 14px; font-size: 0.84rem;">Limpiar</button>
+        </div>
       </div>
 
       <!-- Top Summary Metrics Cards -->
       <div class="metrics-grid">
         <div class="metric-card">
-          <span class="metric-title">Total de Evaluaciones</span>
+          <span class="metric-title">Evaluaciones</span>
           <span class="metric-num" id="metric-total-count">0</span>
-          <span class="metric-sub">Respuestas registradas</span>
+          <span class="metric-sub">Tests completados</span>
         </div>
         <div class="metric-card">
-          <span class="metric-title">Asistencia a Grupos</span>
+          <span class="metric-title">En Grupo</span>
           <span class="metric-num" id="metric-growth-pct">0%</span>
-          <span class="metric-sub" id="metric-growth-sub">Asisten a Grupo de Crecimiento</span>
+          <span class="metric-sub" id="metric-growth-sub">0 de 0 en Crecimiento</span>
         </div>
         <div class="metric-card">
-          <span class="metric-title">Claridad Promedio</span>
+          <span class="metric-title">Claridad</span>
           <span class="metric-num" id="metric-clarity-avg">0.0 ★</span>
-          <span class="metric-sub">Evaluación de la experiencia</span>
+          <span class="metric-sub">Comprensión promedio</span>
         </div>
         <div class="metric-card">
-          <span class="metric-title">Precisión Percibida</span>
+          <span class="metric-title">Precisión</span>
           <span class="metric-num" id="metric-accuracy-pct">0%</span>
-          <span class="metric-sub">Sienten que refleja sus vivencias</span>
+          <span class="metric-sub">Refleja su servicio</span>
         </div>
       </div>
 
-      <!-- Main Breakdown Sections -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px;">
+      <!-- Video Links Management Panel (Gestión de Serie en la Home) -->
+      <section class="data-section" style="border-left: 4px solid #e05a2b;">
+        <div class="section-head">
+          <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e05a2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="15" height="16" rx="2"/><path d="M22 7l-5 5 5 5V7z"/></svg>
+            Enlaces de Videos de Enseñanza (Home Page)
+          </h3>
+        </div>
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 16px;">
+          Ingresa o actualiza los links de YouTube de la serie de enseñanza. Los videos que tengan enlace activo se habilitarán automáticamente en la pantalla de inicio para todos los miembros.
+        </p>
 
-        <!-- Demografía por Zonas de Honduras -->
+        <div class="video-form-grid">
+          <div class="video-input-group">
+            <label for="yt-video-1">Parte 1: Los Dones de Gracia (URL YouTube)</label>
+            <input type="url" id="yt-video-1" placeholder="https://www.youtube.com/watch?v=...">
+          </div>
+          <div class="video-input-group">
+            <label for="yt-video-2">Parte 2: Descubriendo tu Don (URL YouTube)</label>
+            <input type="url" id="yt-video-2" placeholder="https://www.youtube.com/watch?v=...">
+          </div>
+          <div class="video-input-group">
+            <label for="yt-video-3">Parte 3: Servir con Propósito (URL YouTube)</label>
+            <input type="url" id="yt-video-3" placeholder="https://www.youtube.com/watch?v=...">
+          </div>
+          <button id="btn-save-video-links" class="btn btn-primary" style="height: 44px; font-size: 0.88rem; margin-top: 4px;">
+            💾 Guardar Enlaces de Videos
+          </button>
+          <div id="video-save-toast" style="display: none; font-size: 0.82rem; font-weight: 800; color: #059669; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 10px; text-align: center;">
+            ✓ Enlaces de video guardados exitosamente.
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Breakdown Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+
+        <!-- Demografía por Zonas -->
         <section class="data-section">
           <div class="section-head">
-            <h3>📍 Distribución por Zona / Ciudad</h3>
+            <h3>📍 Distribución por Zona</h3>
           </div>
           <div class="bar-list" id="zones-bar-list">
             <!-- Renderizado dinámico -->
@@ -307,7 +477,7 @@
         <!-- Distribución de Dones Principales -->
         <section class="data-section">
           <div class="section-head">
-            <h3>🔥 Dones Principales Más Frecuentes</h3>
+            <h3>🔥 Dones Más Frecuentes</h3>
           </div>
           <div class="bar-list" id="gifts-bar-list">
             <!-- Renderizado dinámico -->
@@ -316,26 +486,25 @@
 
       </div>
 
-      <!-- Tabla de Comentarios de Usuarios -->
+      <!-- Panel de Comentarios y Evaluaciones Abiertas (Mejorado Mobile) -->
       <section class="data-section">
         <div class="section-head">
-          <h3>💬 Comentarios y Sugerencias Abiertas</h3>
+          <h3>💬 Comentarios y Sugerencias de Evaluación</h3>
         </div>
-        <div style="overflow-x: auto;">
-          <table class="comments-table">
-            <thead>
-              <tr>
-                <th style="width: 160px;">Fecha y Hora</th>
-                <th style="width: 140px;">Zona</th>
-                <th style="width: 100px;">Claridad</th>
-                <th style="width: 120px;">Precisión</th>
-                <th>Comentario / Sugerencia</th>
-              </tr>
-            </thead>
-            <tbody id="comments-table-body">
-              <!-- Renderizado dinámico -->
-            </tbody>
-          </table>
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 14px;">
+          Retroalimentación abierta enviada por las personas al finalizar el test.
+        </p>
+
+        <!-- Filtros de Feedbacks -->
+        <div class="feedback-tabs">
+          <button class="feedback-tab-btn active" data-filter="all">Todos los Comentarios</button>
+          <button class="feedback-tab-btn" data-filter="has_text">Solo con Texto</button>
+          <button class="feedback-tab-btn" data-filter="high_stars">5 Estrellas ★</button>
+          <button class="feedback-tab-btn" data-filter="improvements">Sugerencias / Parcial</button>
+        </div>
+
+        <div class="feedback-cards-grid" id="feedback-cards-container">
+          <!-- Renderizado dinámico -->
         </div>
       </section>
 
@@ -353,10 +522,14 @@
     const logoutBtn = document.getElementById('admin-logout-btn');
     const errorMsg = document.getElementById('login-error-msg');
 
+    let globalAdminData = [];
+    let currentFeedbackFilter = 'all';
+
     function checkAuth() {
       if (sessionStorage.getItem('dones_admin_auth') === 'true') {
         loginOverlay.style.display = 'none';
         adminApp.style.display = 'block';
+        loadVideoLinksForm();
         loadDashboard();
       }
     }
@@ -367,6 +540,7 @@
         errorMsg.style.display = 'none';
         loginOverlay.style.display = 'none';
         adminApp.style.display = 'block';
+        loadVideoLinksForm();
         loadDashboard();
       } else {
         errorMsg.style.display = 'block';
@@ -384,6 +558,34 @@
       passInput.value = '';
     });
 
+    // Carga y guardado de enlaces de video
+    function loadVideoLinksForm() {
+      try {
+        const raw = localStorage.getItem('dones_igc_video_links');
+        const defaultLinks = {
+          v1: 'https://www.youtube.com/watch?v=SnUkqFxukyk&t=180s',
+          v2: '',
+          v3: ''
+        };
+        const links = raw ? { ...defaultLinks, ...JSON.parse(raw) } : defaultLinks;
+        document.getElementById('yt-video-1').value = links.v1 || '';
+        document.getElementById('yt-video-2').value = links.v2 || '';
+        document.getElementById('yt-video-3').value = links.v3 || '';
+      } catch (e) {}
+    }
+
+    document.getElementById('btn-save-video-links').addEventListener('click', () => {
+      const links = {
+        v1: document.getElementById('yt-video-1').value.trim(),
+        v2: document.getElementById('yt-video-2').value.trim(),
+        v3: document.getElementById('yt-video-3').value.trim(),
+      };
+      localStorage.setItem('dones_igc_video_links', JSON.stringify(links));
+      const toast = document.getElementById('video-save-toast');
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3500);
+    });
+
     // Filtros por fecha
     document.getElementById('btn-apply-filters').addEventListener('click', () => {
       const start = document.getElementById('filter-start-date').value;
@@ -397,8 +599,19 @@
       loadDashboard();
     });
 
+    // Filtros de pestañas de feedback
+    document.querySelectorAll('.feedback-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.feedback-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFeedbackFilter = btn.dataset.filter;
+        renderFeedbackFeed(globalAdminData);
+      });
+    });
+
     async function loadDashboard(startDate = null, endDate = null) {
       const data = await fetchAdminMetrics(startDate, endDate);
+      globalAdminData = data;
       renderMetrics(data);
     }
 
@@ -408,11 +621,12 @@
 
       if (total === 0) {
         document.getElementById('metric-growth-pct').textContent = '0%';
+        document.getElementById('metric-growth-sub').textContent = '0 de 0 en Crecimiento';
         document.getElementById('metric-clarity-avg').textContent = '0.0 ★';
         document.getElementById('metric-accuracy-pct').textContent = '0%';
-        document.getElementById('zones-bar-list').innerHTML = '<p style="color:var(--text-muted)">Sin registros.</p>';
-        document.getElementById('gifts-bar-list').innerHTML = '<p style="color:var(--text-muted)">Sin registros.</p>';
-        document.getElementById('comments-table-body').innerHTML = '<tr><td colspan="5" style="text-align:center">Sin comentarios aún.</td></tr>';
+        document.getElementById('zones-bar-list').innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem;">Sin registros.</p>';
+        document.getElementById('gifts-bar-list').innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem;">Sin registros.</p>';
+        document.getElementById('feedback-cards-container').innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem;">No hay respuestas aún.</p>';
         return;
       }
 
@@ -420,7 +634,7 @@
       const growthYes = data.filter(d => d.attends_growth_group === true).length;
       const growthPct = Math.round((growthYes / total) * 100);
       document.getElementById('metric-growth-pct').textContent = `${growthPct}%`;
-      document.getElementById('metric-growth-sub').textContent = `${growthYes} de ${total} asisten a grupo`;
+      document.getElementById('metric-growth-sub').textContent = `${growthYes} de ${total} en Crecimiento`;
 
       // 2. Claridad Promedio
       const clarityItems = data.filter(d => d.clarity_rating);
@@ -464,34 +678,61 @@
         const name = giftId.charAt(0).toUpperCase() + giftId.slice(1).replace('_', ' ');
         return `
           <div class="bar-item">
-            <div class="bar-info"><span>${name}</span><span>${cnt} persona(s)</span></div>
+            <div class="bar-info"><span>${name}</span><span>${cnt} pers. (${pct}%)</span></div>
             <div class="bar-track"><div class="bar-fill" style="width: ${pct}%; background: var(--navy)"></div></div>
           </div>
         `;
       }).join('');
 
-      // 6. Comentarios
-      const commentsBody = document.getElementById('comments-table-body');
-      const filteredComments = data.filter(d => d.feedback_comments && d.feedback_comments.trim() !== '');
-      if (filteredComments.length === 0) {
-        commentsBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: var(--text-muted);">No hay comentarios abiertos aún.</td></tr>';
-      } else {
-        commentsBody.innerHTML = filteredComments.map(d => {
-          const date = new Date(d.completed_at).toLocaleString('es-HN', { dateStyle: 'short', timeStyle: 'short' });
-          const zone = d.zone_location || 'N/A';
-          const clarity = d.clarity_rating ? `${d.clarity_rating} ★` : 'N/A';
-          const acc = d.accuracy_perception ? d.accuracy_perception.toUpperCase() : 'N/A';
-          return `
-            <tr>
-              <td><strong>${date}</strong></td>
-              <td>${zone}</td>
-              <td>${clarity}</td>
-              <td>${acc}</td>
-              <td>"${d.feedback_comments}"</td>
-            </tr>
-          `;
-        }).join('');
+      // 6. Comentarios y Feedbacks (Feed Mobile)
+      renderFeedbackFeed(data);
+    }
+
+    function renderFeedbackFeed(data) {
+      const container = document.getElementById('feedback-cards-container');
+      
+      let filtered = data.filter(d => d.clarity_rating || d.accuracy_perception || (d.feedback_comments && d.feedback_comments.trim() !== ''));
+
+      if (currentFeedbackFilter === 'has_text') {
+        filtered = filtered.filter(d => d.feedback_comments && d.feedback_comments.trim() !== '');
+      } else if (currentFeedbackFilter === 'high_stars') {
+        filtered = filtered.filter(d => Number(d.clarity_rating) === 5);
+      } else if (currentFeedbackFilter === 'improvements') {
+        filtered = filtered.filter(d => d.accuracy_perception === 'parcial' || d.accuracy_perception === 'no' || (d.clarity_rating && Number(d.clarity_rating) <= 3));
       }
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem; text-align: center; padding: 20px 0;">No hay feedbacks que coincidan con este filtro.</p>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(d => {
+        const date = new Date(d.completed_at).toLocaleString('es-HN', { dateStyle: 'short', timeStyle: 'short' });
+        const zone = d.zone_location || 'Zona no indicada';
+        const clarity = d.clarity_rating ? `${d.clarity_rating}.0 ★` : 'Sin calificación';
+        
+        let accBadge = '<span class="feedback-badge">Precisión N/A</span>';
+        if (d.accuracy_perception === 'si') accBadge = '<span class="feedback-badge yes">✓ Refleja su servicio</span>';
+        else if (d.accuracy_perception === 'parcial') accBadge = '<span class="feedback-badge parcial">⚠️ Parcialmente</span>';
+        else if (d.accuracy_perception === 'no') accBadge = '<span class="feedback-badge no">✕ No refleja</span>';
+
+        const commentText = d.feedback_comments && d.feedback_comments.trim() !== '' 
+          ? `<div class="feedback-text">“${d.feedback_comments}”</div>`
+          : `<div style="font-size: 0.78rem; color: var(--text-muted); font-style: italic;">Sin comentarios abiertos por escrito.</div>`;
+
+        return `
+          <div class="feedback-card">
+            <div class="feedback-card-header">
+              <span style="font-weight: 800; color: var(--navy);">📍 ${zone} <span style="font-weight: normal; color: var(--text-muted); margin-left: 6px;">${date}</span></span>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <span class="feedback-badge star">⭐ ${clarity}</span>
+                ${accBadge}
+              </div>
+            </div>
+            ${commentText}
+          </div>
+        `;
+      }).join('');
     }
 
     checkAuth();

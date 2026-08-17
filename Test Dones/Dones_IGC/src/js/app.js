@@ -929,10 +929,45 @@ el.glossarySearch.addEventListener('input', (e) => {
   renderGlossary(e.target.value);
 });
 
+function initVideoLinks() {
+  try {
+    const raw = localStorage.getItem('dones_igc_video_links');
+    if (!raw) return;
+    const links = JSON.parse(raw);
+    
+    const ep1 = document.getElementById('yt-link-1');
+    const ep2 = document.getElementById('yt-link-2');
+    const ep3 = document.getElementById('yt-link-3');
+
+    if (ep1 && links.v1 && links.v1.trim() !== '') {
+      ep1.href = links.v1;
+    }
+
+    if (ep2 && links.v2 && links.v2.trim() !== '') {
+      ep2.outerHTML = `
+        <a id="yt-link-2" href="${links.v2}" target="_blank" class="yt-episode-link" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(51,108,221,0.08); border: 1px solid rgba(51,108,221,0.2); border-radius: 12px; color: var(--navy); font-size: 0.85rem; font-weight: 800; text-decoration: none; transition: transform 0.2s ease;">
+          <span><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block; vertical-align:-1px; margin-right:4px;"><polygon points="5 3 19 12 5 21 5 3"/></svg> Parte 2: Descubriendo tu Don</span>
+          <span style="color: var(--primary); font-weight: 900;">Ver Video →</span>
+        </a>
+      `;
+    }
+
+    if (ep3 && links.v3 && links.v3.trim() !== '') {
+      ep3.outerHTML = `
+        <a id="yt-link-3" href="${links.v3}" target="_blank" class="yt-episode-link" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(51,108,221,0.08); border: 1px solid rgba(51,108,221,0.2); border-radius: 12px; color: var(--navy); font-size: 0.85rem; font-weight: 800; text-decoration: none; transition: transform 0.2s ease;">
+          <span><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block; vertical-align:-1px; margin-right:4px;"><polygon points="5 3 19 12 5 21 5 3"/></svg> Parte 3: Servir con Propósito</span>
+          <span style="color: var(--primary); font-weight: 900;">Ver Video →</span>
+        </a>
+      `;
+    }
+  } catch (e) {}
+}
+
 // ---------------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------------
 function init() {
+  initVideoLinks();
   initOnboardingFlow();
   initEvaluationSurvey();
   initQuickGiftsSlideover();
