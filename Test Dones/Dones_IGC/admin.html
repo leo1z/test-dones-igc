@@ -364,38 +364,42 @@
 
     /* Filtros Acumulables de la Gráfica de Dones */
     .chart-controls-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
       background: #fafafa;
-      border: 1px solid rgba(15,15,49,0.06);
-      padding: 12px;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      align-items: center;
+      border: 1px solid rgba(15, 15, 49, 0.08);
+      padding: 16px;
+      border-radius: 16px;
+      margin-bottom: 18px;
     }
     .chart-control-group {
       display: flex;
-      align-items: center;
-      gap: 6px;
-      flex: 1;
-      min-width: 140px;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
     }
     .chart-control-group label {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 850;
       color: var(--navy);
-      white-space: nowrap;
+      white-space: normal;
+      line-height: 1.2;
     }
     .chart-control-group select {
       width: 100%;
-      padding: 6px 8px;
-      border-radius: 8px;
-      border: 1px solid rgba(15, 15, 49, 0.15);
-      font-size: 0.78rem;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(15, 15, 49, 0.15);
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--navy);
       background: #ffffff;
+      box-sizing: border-box;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     /* Tarjetas de Feedbacks y Comentarios para Mobile */
