@@ -271,9 +271,9 @@ function renderScene() {
   
   // Notificaciones de seguimiento al empezar Parte 2, 5 y 9
   const progressToasts = {
-    2: { icon: "🚀", title: "¡Buen comienzo!", text: "Has iniciado la Parte 2. Responde con total sinceridad." },
-    5: { icon: "⚡", title: "¡Mitad del camino!", text: "Vas a la mitad del test. Cada respuesta perfecciona tus resultados." },
-    9: { icon: "🏁", title: "¡Recta final!", text: "Estás en las últimas partes para descubrir tus dones principales." }
+    2: { icon: "🚀", title: "¡Buen comienzo!", text: "Recuerda responder con total sinceridad." },
+    5: { icon: "⚡", title: "¡Mitad del camino!", text: "Cada respuesta nos ayuda a guiarte mejor." },
+    9: { icon: "🏁", title: "¡Ya casi terminas!", text: "Sigue adelante." }
   };
 
   if (progressToasts[sceneId]) {

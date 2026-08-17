@@ -17,7 +17,7 @@ Fecha de última actualización: 2026-08-17
 *   [x] Motor de cálculo recalibrado para escala 1..3 (`maxRawScore = questionCount × 3`).
 *   [x] Vaciado / Truncate de registros de prueba en Supabase (`dones_igc.results`) ejecutado exitosamente.
 *   [x] Permisos de lectura (`SELECT`) y eliminación (`DELETE`) concedidos para el Panel Admin (`admin.html`).
-*   [x] **Notificaciones de Seguimiento:** Implementadas notificaciones toast emergentes de ánimo al iniciar la Parte 2 (🚀 *¡Buen comienzo!*), Parte 5 (⚡ *¡Mitad del camino!*) y Parte 9 (🏁 *¡Recta final!*).
+*   [x] **Notificaciones de Seguimiento:** Implementadas notificaciones toast emergentes de ánimo al iniciar la Parte 2 (🚀 *¡Buen comienzo! Recuerda responder con total sinceridad.*), Parte 5 (⚡ *¡Mitad del camino! Cada respuesta nos ayuda a guiarte mejor*) y Parte 9 (🏁 *¡Ya casi terminas! Sigue adelante*).
 *   [x] **Auditoría de Cobertura de Dones (15 Dones):** Verificado que las 76 situaciones cubren al 100% los 15 dones del catálogo de `gifts.js` (Evangelismo: 7, Pastor: 7, Profecía: 4, los 12 dones restantes: 5 preguntas cada uno).
 *   [x] **Ajuste Fino de Preguntas 39 y 45:** Pregunta 39 adaptada a fluidez de escala (*"Participo con entusiasmo cuando se trata de iniciar un nuevo grupo o iglesia."*) y Pregunta 45 simplificada (*"Detecto rápido cuando una enseñanza contiene errores sutiles."*).
 *   [x] Onboarding inicial de 2 pasos antes de acceder al Home.

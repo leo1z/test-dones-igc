@@ -92,6 +92,11 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Icono & Título:** `🎯 Instrucción:`
 * **Texto:** `Imagínate en cada situación y responde con total sinceridad sobre lo que realmente harías, no lo que desearías hacer.`
 
+### Notificaciones de Seguimiento (Toast Emergente)
+* **Parte 2:** 🚀 `¡Buen comienzo! Recuerda responder con total sinceridad.`
+* **Parte 5:** ⚡ `¡Mitad del camino! Cada respuesta nos ayuda a guiarte mejor`
+* **Parte 9:** 🏁 `¡Ya casi terminas! Sigue adelante`
+
 ### Escala de Respuesta (3 Píldoras)
 * **Valor 1:** `1 | Rara vez`
 * **Valor 2:** `2 | En ocasiones`
