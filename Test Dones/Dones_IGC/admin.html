@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
+  <!-- Apache ECharts Library for Choropleth Map -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   <style>
     body {
       background-color: #f4f6fa;
@@ -310,21 +312,21 @@
       line-height: 1.35;
     }
 
-    /* Mapa Geográfico de Honduras */
+    /* Contenedor del Mapa Coroplético ECharts */
     .honduras-map-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
       align-items: center;
     }
-    .honduras-svg-wrapper {
+    .honduras-echarts-wrapper {
       width: 100%;
-      max-width: 540px;
+      max-width: 580px;
+      height: 380px;
       background: #f8fafc;
       border-radius: 16px;
-      padding: 16px;
+      padding: 8px;
       border: 1px solid rgba(15,15,49,0.06);
-      text-align: center;
       position: relative;
     }
 
@@ -408,7 +410,7 @@
       border-radius: 12px;
       font-size: 0.78rem;
       font-weight: 800;
-      border: 1px solid rgba(15,15,49,0.12);
+      border: 1.5px solid rgba(15,15,49,0.12);
       background: #ffffff;
       color: var(--text-muted);
       cursor: pointer;
@@ -583,7 +585,7 @@
             <span style="font-size:0.82rem; font-weight:850; color:var(--navy);">Filtrar por Zona / Ciudad:</span>
           </div>
           <p style="font-size:0.78rem; color:var(--text-muted); margin: 0 0 10px 0; font-weight:650;">
-            Elige la zona que quieres medir (aplica para métricas generales, mapa, combinaciones y encuesta):
+            Elige la zona que quieres medir (aplica para métricas generales, mapa coroplético, combinaciones y encuesta):
           </p>
           <div id="global-zone-pills" style="display:flex; gap:8px; flex-wrap:wrap;">
             <!-- Renderizado dinámico de píldoras de filtro por zona con "Todas las Zonas" activa por defecto -->
@@ -615,66 +617,22 @@
         </div>
       </div>
 
-      <!-- Geographic Distribution & Real Honduras Map Section -->
+      <!-- Mapa Coroplético Oficial de Honduras con Apache ECharts -->
       <section class="data-section">
         <div class="section-head">
           <h3>
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Distribución por Zona / Ciudad (Honduras)
+            Distribución Coroplética por Departamento (Honduras)
           </h3>
         </div>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:-8px; margin-bottom:14px; font-weight:650;">
+          Mapa interactivo de los 18 departamentos de Honduras coloreados según la densidad de encuestas completadas. Pasa el cursor para ver detalles.
+        </p>
         
         <div class="honduras-map-container">
-          <!-- Ilustración Mapa Geográfico Real SVG de Honduras -->
-          <div class="honduras-svg-wrapper">
-            <svg viewBox="0 0 520 270" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Silueta Geográfica Real de Honduras -->
-              <path d="M 45,120 L 70,95 L 110,85 L 140,90 L 165,75 L 210,65 L 255,60 L 305,65 L 340,75 L 375,90 L 440,115 L 465,130 L 440,145 L 415,160 L 390,175 L 360,195 L 320,205 L 285,215 L 250,225 L 220,240 L 205,245 L 195,225 L 180,210 L 165,190 L 140,185 L 110,180 L 80,165 L 55,145 Z" fill="rgba(51,108,221,0.06)" stroke="var(--primary)" stroke-width="2.2" stroke-linejoin="round"/>
-              <!-- Islas de la Bahía (Roatán / Utila) -->
-              <path d="M 230,45 A 6,4 0 1 1 242,45 A 6,4 0 1 1 230,45 Z" fill="rgba(51,108,221,0.2)" stroke="var(--primary)" stroke-width="1.5"/>
-              <path d="M 260,40 A 10,5 0 1 1 280,40 A 10,5 0 1 1 260,40 Z" fill="rgba(51,108,221,0.2)" stroke="var(--primary)" stroke-width="1.5"/>
-              
-              <!-- Pines Geográficos Reales -->
-              <!-- Tegucigalpa (Francisco Morazán) -->
-              <g class="map-pin" transform="translate(235, 175)">
-                <circle r="14" fill="#336cdd" fill-opacity="0.2"/>
-                <circle r="7" fill="#336cdd"/>
-                <text y="-14" text-anchor="middle" font-size="11" font-weight="900" fill="#0f0f31">Tegucigalpa</text>
-                <text y="20" id="map-pin-teg" text-anchor="middle" font-size="10" font-weight="800" fill="#336cdd">0%</text>
-              </g>
-
-              <!-- San Pedro Sula (Cortés) -->
-              <g class="map-pin" transform="translate(150, 100)">
-                <circle r="14" fill="#10b981" fill-opacity="0.2"/>
-                <circle r="7" fill="#10b981"/>
-                <text y="-14" text-anchor="middle" font-size="11" font-weight="900" fill="#0f0f31">San Pedro Sula</text>
-                <text y="20" id="map-pin-sps" text-anchor="middle" font-size="10" font-weight="800" fill="#059669">0%</text>
-              </g>
-
-              <!-- La Ceiba (Atlántida) -->
-              <g class="map-pin" transform="translate(265, 80)">
-                <circle r="12" fill="#e05a2b" fill-opacity="0.2"/>
-                <circle r="6" fill="#e05a2b"/>
-                <text y="-12" text-anchor="middle" font-size="10" font-weight="900" fill="#0f0f31">La Ceiba</text>
-                <text y="18" id="map-pin-ceiba" text-anchor="middle" font-size="9" font-weight="800" fill="#e05a2b">0%</text>
-              </g>
-
-              <!-- Choluteca / Zona Sur -->
-              <g class="map-pin" transform="translate(215, 230)">
-                <circle r="10" fill="#d4af37" fill-opacity="0.2"/>
-                <circle r="5" fill="#d4af37"/>
-                <text y="16" text-anchor="middle" font-size="10" font-weight="900" fill="#0f0f31">Choluteca</text>
-                <text y="-10" id="map-pin-choluteca" text-anchor="middle" font-size="9" font-weight="800" fill="#b45309">0%</text>
-              </g>
-
-              <!-- Danlí / El Paraíso -->
-              <g class="map-pin" transform="translate(320, 185)">
-                <circle r="10" fill="#8b5cf6" fill-opacity="0.2"/>
-                <circle r="5" fill="#8b5cf6"/>
-                <text y="-10" text-anchor="middle" font-size="10" font-weight="900" fill="#0f0f31">Danlí</text>
-                <text y="16" id="map-pin-danli" text-anchor="middle" font-size="9" font-weight="800" fill="#7c3aed">0%</text>
-              </g>
-            </svg>
+          <!-- Mapa ECharts Coroplético -->
+          <div class="honduras-echarts-wrapper" id="honduras-echarts-map">
+            <!-- Render dinámico Apache ECharts -->
           </div>
 
           <!-- Lista de Barras de Zonas -->
@@ -739,18 +697,18 @@
             </div>
           </div>
 
-          <!-- Card E: Don Más Frecuente por Ubicación -->
+          <!-- Card E: Top 3 Dones por Ubicación (Selector Interactivo) -->
           <div class="gift-stat-card">
             <div class="gift-stat-card-title">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#7c3aed" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Don Más Frecuente por Ubicación
+              Top 3 Dones por Ubicación
             </div>
             <div style="display:flex; flex-direction:column; gap:8px;">
               <select id="select-location-gift-filter" style="padding: 6px 8px; border-radius: 8px; border: 1px solid rgba(15,15,49,0.15); font-size: 0.8rem; font-weight: 700; color: var(--navy);">
                 <!-- Dynamic locations -->
               </select>
-              <div id="stat-location-top-gift" style="background: rgba(124, 58, 237, 0.08); padding: 10px; border-radius: 10px; text-align: center; font-size: 0.85rem; font-weight: 850; color: #6d28d9;">
-                Selecciona un lugar
+              <div id="stat-location-top-gift" style="display:flex; flex-direction:column; gap:6px;">
+                <!-- Render dinámico Top 3 por ubicación -->
               </div>
             </div>
           </div>
@@ -805,7 +763,7 @@
         </div>
       </section>
 
-      <!-- 6. Gráfica Completa de Barras de los 15 Dones con Filtros Autónomos Propios (Con Disclaimer) -->
+      <!-- 6. Gráfica Completa de Barras de los 15 Dones con Filtros Autónomos Propios (Fecha + Ubicación + Grupo + Precisión) -->
       <section class="data-section" style="border-top: 4px solid var(--primary);">
         <div class="section-head">
           <h3>
@@ -822,8 +780,18 @@
           Esta sección utiliza sus propios filtros independientes a continuación y no los filtros globales superiores.
         </p>
 
-        <!-- Filtros Propios Autónomos de la Gráfica -->
+        <!-- Filtros Propios Autónomos de la Gráfica (Fecha + Ubicación + Asistencia + Precisión) -->
         <div class="chart-controls-bar">
+          <div class="chart-control-group">
+            <label for="cross-filter-date">Fecha:</label>
+            <select id="cross-filter-date">
+              <option value="all">Todas las fechas</option>
+              <option value="today">Hoy</option>
+              <option value="week">Hace 1 semana</option>
+              <option value="month">Un mes</option>
+              <option value="3months">3 meses</option>
+            </select>
+          </div>
           <div class="chart-control-group">
             <label for="cross-filter-location">Ubicación:</label>
             <select id="cross-filter-location">
@@ -908,6 +876,46 @@
     let selectedZones = ['all']; // 'all' o array de zonas elegidas
     let currentFeedbackFilter = 'all';
     let currentChartMode = 'avg'; // 'avg' | 'total'
+
+    let echartsInstance = null;
+    let geoJsonData = null;
+
+    // Diccionario de mapeo de Zonas del Onboarding a Departamentos GeoJSON de Honduras
+    const zoneToDeptMap = {
+      'Tegucigalpa / M.D.C.': 'Franciscomorazan',
+      'San Pedro Sula': 'Cortes',
+      'Choluteca': 'Choluteca',
+      'Comayagua': 'Comayagua',
+      'Danlí': 'Elparaiso',
+      'La Ceiba': 'Atlantida',
+      'El Progreso': 'Yoro',
+      'Juticalpa': 'Olancho',
+      'Siguatepeque': 'Comayagua',
+      'La Esperanza': 'Intibuca',
+      'Santa Rosa de Copán': 'Copan',
+      'Roatán / Islas de la Bahía': 'Islasdelabahia'
+    };
+
+    const deptPrettyNames = {
+      'Atlantida': 'Atlántida (La Ceiba)',
+      'Colon': 'Colón',
+      'Comayagua': 'Comayagua',
+      'Copan': 'Copán (Santa Rosa)',
+      'Cortes': 'Cortés (San Pedro Sula)',
+      'Choluteca': 'Choluteca',
+      'Elparaiso': 'El Paraíso (Danlí)',
+      'Franciscomorazan': 'Francisco Morazán (Tegucigalpa)',
+      'Graciasadios': 'Gracias a Dios',
+      'Intibuca': 'Intibucá (La Esperanza)',
+      'Islasdelabahia': 'Islas de la Bahía (Roatán)',
+      'Lapaz': 'La Paz',
+      'Lempira': 'Lempira',
+      'Ocotepeque': 'Ocotepeque',
+      'Olancho': 'Olancho (Juticalpa)',
+      'Santabarbara': 'Santa Bárbara',
+      'Valle': 'Valle',
+      'Yoro': 'Yoro (El Progreso)'
+    };
 
     function checkAuth() {
       if (sessionStorage.getItem('dones_admin_auth') === 'true') {
@@ -1042,7 +1050,7 @@
       }
 
       renderMetrics(globalAdminData);
-      renderHondurasMapAndZones(globalAdminData);
+      renderEChartsHondurasMap(globalAdminData);
       renderGiftStatsCards(globalAdminData);
       populateCrossFilterDropdowns(rawMetricsData);
       renderFullGiftsChart();
@@ -1083,48 +1091,143 @@
       document.getElementById('metric-eval-filled-pct').textContent = `${evalFilledPct}% de respuesta`;
     }
 
-    // 2. Mapa Geográfico Real de Honduras y Distribución por Zonas
-    function renderHondurasMapAndZones(data) {
+    // 2. Mapa Coroplético Oficial de Honduras con Apache ECharts
+    async function renderEChartsHondurasMap(data) {
       const total = data.length;
       const container = document.getElementById('zones-bar-list');
 
-      if (total === 0) {
-        container.innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem;">Sin registros de zona.</p>';
-        return;
-      }
-
+      // Calcular conteos por departamento
+      const deptCounts = {};
       const zonesCount = {};
+
       data.forEach(d => {
         const zone = d.zone_location || 'No especificado';
         zonesCount[zone] = (zonesCount[zone] || 0) + 1;
+        const deptKey = zoneToDeptMap[zone] || zone;
+        deptCounts[deptKey] = (deptCounts[deptKey] || 0) + 1;
       });
 
-      // Actualizar porcentajes de pines en Mapa SVG Real
-      const findPct = (keyword) => {
-        const match = Object.entries(zonesCount).find(([k]) => k.toLowerCase().includes(keyword.toLowerCase()));
-        return match ? Math.round((match[1] / total) * 100) : 0;
+      // Render de la lista de barras lateral
+      if (total === 0) {
+        container.innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem;">Sin registros de zona.</p>';
+      } else {
+        const sortedZones = Object.entries(zonesCount).sort((a, b) => b[1] - a[1]);
+        container.innerHTML = sortedZones.map(([zone, cnt]) => {
+          const pct = Math.round((cnt / total) * 100);
+          return `
+            <div class="bar-item">
+              <div class="bar-info"><span>${zone}</span><span>${cnt} (${pct}%)</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width: ${pct}%"></div></div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Cargar GeoJSON de Honduras si no se ha cargado
+      if (!geoJsonData) {
+        try {
+          const res = await fetch('https://raw.githubusercontent.com/SEFINHN-UIT/hn-geo/main/geojson/hn-deparments.geo.json');
+          geoJsonData = await res.json();
+          // Mapear el atributo NOMBRE a name para ECharts
+          geoJsonData.features.forEach(f => {
+            f.properties.name = f.properties.NOMBRE || f.properties.name || '';
+          });
+          echarts.registerMap('Honduras', geoJsonData);
+        } catch (e) {
+          console.error('Error al cargar GeoJSON de Honduras:', e);
+          return;
+        }
+      }
+
+      // Preparar datos para el mapa coroplético de ECharts
+      const mapData = geoJsonData.features.map(f => {
+        const deptName = f.properties.NOMBRE;
+        const count = deptCounts[deptName] || 0;
+        const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+        const label = deptPrettyNames[deptName] || deptName;
+        return {
+          name: deptName,
+          value: count,
+          percentage: pct,
+          labelName: label
+        };
+      });
+
+      const maxVal = Math.max(...mapData.map(d => d.value), 5);
+
+      const chartDom = document.getElementById('honduras-echarts-map');
+      if (!echartsInstance) {
+        echartsInstance = echarts.init(chartDom);
+        window.addEventListener('resize', () => echartsInstance.resize());
+      }
+
+      const option = {
+        tooltip: {
+          trigger: 'item',
+          backgroundColor: 'rgba(15, 15, 49, 0.92)',
+          borderColor: 'rgba(51, 108, 221, 0.5)',
+          borderWidth: 1,
+          padding: [10, 14],
+          textStyle: { color: '#ffffff', fontFamily: 'Plus Jakarta Sans' },
+          formatter: function (params) {
+            const val = params.value || 0;
+            const pct = params.data ? params.data.percentage : 0;
+            const pretty = params.data ? params.data.labelName : params.name;
+            return `
+              <div style="font-weight:900; font-size:0.9rem; margin-bottom:4px; color:#ffffff;">📍 ${pretty}</div>
+              <div style="font-size:0.8rem; color:#93c5fd;"><strong>${val}</strong> personas (${pct}% del total)</div>
+            `;
+          }
+        },
+        visualMap: {
+          min: 0,
+          max: maxVal,
+          left: 'left',
+          bottom: 'bottom',
+          text: ['Alto', 'Bajo'],
+          calculable: true,
+          inRange: {
+            color: ['#e2e8f0', '#93c5fd', '#3b82f6', '#1d4ed8', '#0f0f31']
+          },
+          textStyle: {
+            color: '#0f0f31',
+            fontWeight: 'bold',
+            fontSize: 11
+          }
+        },
+        series: [
+          {
+            name: 'Encuestas por Departamento',
+            type: 'map',
+            map: 'Honduras',
+            roam: true,
+            zoom: 1.15,
+            itemStyle: {
+              borderColor: '#ffffff',
+              borderWidth: 1.2,
+              areaColor: '#e2e8f0'
+            },
+            emphasis: {
+              itemStyle: {
+                areaColor: '#f59e0b',
+                shadowBlur: 10,
+                shadowColor: 'rgba(0, 0, 0, 0.3)'
+              },
+              label: {
+                show: true,
+                color: '#ffffff',
+                fontWeight: 'bold'
+              }
+            },
+            data: mapData
+          }
+        ]
       };
 
-      document.getElementById('map-pin-teg').textContent = `${findPct('tegucigalpa')}%`;
-      document.getElementById('map-pin-sps').textContent = `${findPct('pedro')}%`;
-      document.getElementById('map-pin-ceiba').textContent = `${findPct('ceiba')}%`;
-      document.getElementById('map-pin-choluteca').textContent = `${findPct('choluteca')}%`;
-      document.getElementById('map-pin-danli').textContent = `${findPct('danl')}%`;
-
-      // Render de la lista de barras
-      const sortedZones = Object.entries(zonesCount).sort((a, b) => b[1] - a[1]);
-      container.innerHTML = sortedZones.map(([zone, cnt]) => {
-        const pct = Math.round((cnt / total) * 100);
-        return `
-          <div class="bar-item">
-            <div class="bar-info"><span>${zone}</span><span>${cnt} (${pct}%)</span></div>
-            <div class="bar-track"><div class="bar-fill" style="width: ${pct}%"></div></div>
-          </div>
-        `;
-      }).join('');
+      echartsInstance.setOption(option);
     }
 
-    // 3. Render de las 5 Tarjetas de Estadísticas de Dones
+    // 3. Render de las 5 Tarjetas de Estadísticas de Dones (Con Top 3 por Ubicación)
     function renderGiftStatsCards(data) {
       const total = data.length;
       if (total === 0) return;
@@ -1203,23 +1306,32 @@
         `;
       }
 
-      // Card E: Don Más Frecuente por Ubicación (Selector Interactivo)
+      // Card E: Top 3 Dones por Ubicación (Selector Interactivo)
       const locSelect = document.getElementById('select-location-gift-filter');
-      locSelect.innerHTML = Object.keys(locationGiftMap).map(loc => `<option value="${loc}">${loc}</option>`).join('');
+      const locKeys = Object.keys(locationGiftMap).sort();
+      locSelect.innerHTML = locKeys.map(loc => `<option value="${loc}">${loc}</option>`).join('');
       
       const updateLocationGift = () => {
         const chosenLoc = locSelect.value;
         const giftsInLoc = locationGiftMap[chosenLoc];
+        const container = document.getElementById('stat-location-top-gift');
+
         if (giftsInLoc) {
-          const topInLoc = Object.entries(giftsInLoc).sort((a, b) => b[1] - a[1])[0];
-          if (topInLoc) {
-            document.getElementById('stat-location-top-gift').innerHTML = `
-              Don más frecuente: <strong style="color:var(--navy);">${getGiftName(topInLoc[0])}</strong> (${topInLoc[1]} pers.)
-            `;
+          const sortedInLoc = Object.entries(giftsInLoc).sort((a, b) => b[1] - a[1]);
+          const top3InLoc = sortedInLoc.slice(0, 3);
+          const locTotal = Object.values(giftsInLoc).reduce((a, b) => a + b, 0) / 3 || 1; // personas aproximadas en esa zona
+
+          if (top3InLoc.length > 0) {
+            container.innerHTML = top3InLoc.map(([gId, cnt], idx) => `
+              <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--navy); background:rgba(124, 58, 237, 0.06); padding:6px 10px; border-radius:8px;">
+                <span>${idx + 1}. ${getGiftName(gId)}</span>
+                <span style="color:#6d28d9;">${cnt} pers.</span>
+              </div>
+            `).join('');
             return;
           }
         }
-        document.getElementById('stat-location-top-gift').textContent = 'Sin datos en este lugar';
+        container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); text-align:center;">Sin datos en este lugar</div>';
       };
 
       locSelect.onchange = updateLocationGift;
@@ -1233,7 +1345,7 @@
       locSelect.innerHTML = '<option value="all">Todas las ubicaciones</option>' + uniqueLocs.map(l => `<option value="${l}">${l}</option>`).join('');
     }
 
-    // 5. Renderizado de Gráfica Completa de Barras (15 Dones) con Filtros Autónomos Propios
+    // 5. Renderizado de Gráfica Completa de Barras (15 Dones) con Filtros Autónomos Propios (Fecha + Ubicación + Grupo + Precisión)
     document.getElementById('btn-metric-mode-avg').onclick = function() {
       currentChartMode = 'avg';
       this.classList.add('active');
@@ -1248,17 +1360,31 @@
       renderFullGiftsChart();
     };
 
+    document.getElementById('cross-filter-date').onchange = renderFullGiftsChart;
     document.getElementById('cross-filter-location').onchange = renderFullGiftsChart;
     document.getElementById('cross-filter-group').onchange = renderFullGiftsChart;
     document.getElementById('cross-filter-precision').onchange = renderFullGiftsChart;
 
     function renderFullGiftsChart() {
       const container = document.getElementById('gifts-full-chart-container');
+      const dateVal = document.getElementById('cross-filter-date').value;
       const locVal = document.getElementById('cross-filter-location').value;
       const groupVal = document.getElementById('cross-filter-group').value;
       const precVal = document.getElementById('cross-filter-precision').value;
 
-      let filtered = [...rawMetricsData]; // Utiliza la muestra filtrada por fecha
+      let filtered = [...rawMetricsData];
+
+      // Filtro autónomo de fecha
+      if (dateVal !== 'all') {
+        const now = new Date();
+        let past = new Date(now);
+        if (dateVal === 'today') past = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        else if (dateVal === 'week') past.setDate(past.getDate() - 7);
+        else if (dateVal === 'month') past.setMonth(past.getMonth() - 1);
+        else if (dateVal === '3months') past.setMonth(past.getMonth() - 3);
+
+        filtered = filtered.filter(d => new Date(d.completed_at) >= past);
+      }
 
       if (locVal !== 'all') filtered = filtered.filter(d => d.zone_location === locVal);
       if (groupVal === 'yes') filtered = filtered.filter(d => d.attends_growth_group === true);
