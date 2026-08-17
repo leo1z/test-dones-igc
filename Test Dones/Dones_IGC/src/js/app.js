@@ -610,6 +610,29 @@ function renderResults(calculation) {
 function initEvaluationSurvey() {
   if (el.btnOpenEvaluation) {
     el.btnOpenEvaluation.addEventListener('click', () => {
+      const stored = loadStoredResult();
+      if (stored) {
+        if (stored.clarityRating) {
+          state.evalRating = Number(stored.clarityRating);
+          const starsContainer = document.getElementById('star-rating-container');
+          if (starsContainer) {
+            starsContainer.querySelectorAll('span').forEach(s => {
+              s.style.color = Number(s.dataset.star) <= state.evalRating ? '#f59e0b' : '#cbd5e1';
+            });
+          }
+        }
+        if (stored.accuracyPerception) {
+          state.evalAccuracy = stored.accuracyPerception;
+          document.querySelectorAll('.eval-acc-btn').forEach(b => {
+            if (b.dataset.acc === state.evalAccuracy) b.classList.add('selected');
+            else b.classList.remove('selected');
+          });
+        }
+        const textInput = document.getElementById('eval-feedback-text');
+        if (textInput && stored.feedbackComments) {
+          textInput.value = stored.feedbackComments;
+        }
+      }
       el.modalEval.classList.add('active');
     });
   }
@@ -647,23 +670,49 @@ function initEvaluationSurvey() {
     el.btnSubmitEval.addEventListener('click', async () => {
       const feedbackText = document.getElementById('eval-feedback-text')?.value || '';
       
-      const stored = loadStoredResult();
+      let stored = loadStoredResult();
+      if (!stored && isTestComplete(state.answers)) {
+        const calculation = runFullCalculation(state.answers);
+        stored = {
+          completedAt: new Date().toISOString(),
+          answers: { ...state.answers },
+          scores: calculation.percentage,
+          topGifts: calculation.top3.map(g => g.id),
+        };
+      }
+
       if (stored) {
+        const activeSubId = state.submissionId || localStorage.getItem(STORAGE_SUBMISSION_ID_KEY) || stored.id || undefined;
+        
         const payload = {
-          id: state.submissionId || undefined,
+          id: activeSubId,
           version: '3.0.0',
           answers: stored.answers,
           scores: stored.scores,
           topGifts: stored.topGifts,
-          completedAt: stored.completedAt,
+          completedAt: stored.completedAt || new Date().toISOString(),
           attendsGrowthGroup: state.onboarding.attendsGrowthGroup,
           zoneLocation: state.onboarding.zoneLocation,
-          clarityRating: state.evalRating || null,
-          accuracyPerception: state.evalAccuracy || null,
+          clarityRating: state.evalRating || stored.clarityRating || null,
+          accuracyPerception: state.evalAccuracy || stored.accuracyPerception || null,
           feedbackComments: feedbackText,
         };
 
-        await submitResult(payload);
+        // Guardar/Actualizar en localStorage
+        stored.id = activeSubId;
+        stored.clarityRating = payload.clarityRating;
+        stored.accuracyPerception = payload.accuracyPerception;
+        stored.feedbackComments = payload.feedbackComments;
+        saveResult(stored);
+
+        // Enviar/Actualizar en Supabase
+        const updatedId = await submitResult(payload);
+        if (updatedId) {
+          state.submissionId = updatedId;
+          localStorage.setItem(STORAGE_SUBMISSION_ID_KEY, updatedId);
+          stored.id = updatedId;
+          saveResult(stored);
+        }
       }
 
       el.modalEval.classList.remove('active');

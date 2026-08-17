@@ -34,8 +34,8 @@ for (const s of situations) countPerGift[s.giftId] = (countPerGift[s.giftId] || 
 check('questionCount de cada don coincide con situaciones reales',
   gifts.every((g) => countPerGift[g.id] === g.questionCount));
 
-check('maxRawScore = questionCount * 5 en todos los dones',
-  gifts.every((g) => g.maxRawScore === g.questionCount * 5));
+check('maxRawScore = questionCount * 3 en todos los dones',
+  gifts.every((g) => g.maxRawScore === g.questionCount * 3));
 
 const scenesSeen = {};
 for (const s of situations) {
@@ -58,35 +58,32 @@ const allOnes = {};
 for (const s of situations) allOnes[s.id] = 1;
 const rMin = runFullCalculation(allOnes);
 check('todo en 1: complete === true', rMin.complete === true);
-check('todo en 1: todos los % en 0 (mínimo raw = questionCount, % = questionCount/max*100 redondeado)',
+check('todo en 1: todos los % en 33 (mínimo raw = questionCount, % = questionCount/max*100 redondeado)',
   Object.entries(rMin.percentage).every(([gid, p]) => {
     const g = gifts.find((x) => x.id === gid);
     const expected = Math.round((g.questionCount / g.maxRawScore) * 100);
     return p === expected;
   }));
 
-// --- Score engine: todo en 5 (máximo) --------------------------------------
-const allFives = {};
-for (const s of situations) allFives[s.id] = 5;
-const rMax = runFullCalculation(allFives);
-check('todo en 5: complete === true', rMax.complete === true);
-check('todo en 5: todos los % en 100', Object.values(rMax.percentage).every((p) => p === 100));
-check('todo en 5: ranked tiene 15 items con rank 1..15',
-  rMax.ranked.length === 15 && rMax.ranked.every((g, i) => g.rank === i + 1));
-check('todo en 5: top3 tiene 3 items', rMax.top3.length === 3);
-
-// --- Score engine: desempate por % (raw distinto decide) --------------------
-// Con todas las respuestas en 3, el % da exactamente 60% para los 15 dones
-// (3/5 = 60% sin importar questionCount), pero el puntaje CRUDO sí difiere
-// según cuántas situaciones tiene cada don -> debe ganar el de mayor raw.
+// --- Score engine: todo en 3 (máximo) --------------------------------------
 const allThrees = {};
 for (const s of situations) allThrees[s.id] = 3;
-const rThrees = runFullCalculation(allThrees);
-check('todo en 3: todos empatan en 60%', Object.values(rThrees.percentage).every((p) => p === 60));
-check('todo en 3: el ranking se decide por raw (evangelismo, 7 preguntas, va 1º)',
-  rThrees.ranked[0].id === 'evangelismo');
-check('todo en 3: pastor (6 preguntas) va 2º',
-  rThrees.ranked[1].id === 'pastor');
+const rMax = runFullCalculation(allThrees);
+check('todo en 3: complete === true', rMax.complete === true);
+check('todo en 3: todos los % en 100', Object.values(rMax.percentage).every((p) => p === 100));
+check('todo en 3: ranked tiene 15 items con rank 1..15',
+  rMax.ranked.length === 15 && rMax.ranked.every((g, i) => g.rank === i + 1));
+check('todo en 3: top3 tiene 3 items', rMax.top3.length === 3);
+
+// --- Score engine: desempate por % (raw distinto decide) --------------------
+// Con todas las respuestas en 2, el % da exactamente 67% para los 15 dones
+const allTwos = {};
+for (const s of situations) allTwos[s.id] = 2;
+const rTwos = runFullCalculation(allTwos);
+check('todo en 2: el ranking se decide por raw (evangelismo, 7 preguntas, va 1º)',
+  rTwos.ranked[0].id === 'evangelismo');
+check('todo en 2: pastor (6 preguntas) va 2º',
+  rTwos.ranked[1].id === 'pastor');
 
 // --- Score engine: empate real (% y raw idénticos) -> desempate por orden fijo
 // "dar" y "fe" tienen ambos questionCount=5. Si ambos responden todo en 4,

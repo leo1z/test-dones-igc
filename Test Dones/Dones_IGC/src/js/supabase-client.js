@@ -32,8 +32,13 @@ export async function submitResult(result) {
 
     if (result.id) {
       payload.id = result.id;
-      const { error } = await supabase.from('results').upsert(payload);
-      if (error) throw error;
+      const { data, error } = await supabase.from('results').upsert(payload).select('id').single();
+      if (error) {
+        // Fallback si la tabla no retorna single en upsert
+        const { error: upsertErr } = await supabase.from('results').upsert(payload);
+        if (upsertErr) throw upsertErr;
+      }
+      return data?.id || result.id;
     } else {
       const { data, error } = await supabase.from('results').insert(payload).select('id').single();
       if (error) throw error;
@@ -41,6 +46,7 @@ export async function submitResult(result) {
     }
   } catch (err) {
     console.warn('[Supabase] Sincronización (guardado local preservado):', err?.message || err);
+    return result.id || null;
   }
 }
 
