@@ -349,12 +349,14 @@ body {
 /* Botón Suave 'Conectar con Grupo de Crecimiento' (Paleta Primaria IGC) */
 .btn-connect-group {
   height: 52px;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 850;
   margin-bottom: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 0 12px !important;
   gap: 8px;
   text-decoration: none;
   background-color: rgba(51, 108, 221, 0.08) !important;
@@ -364,6 +366,12 @@ body {
   box-shadow: 0 4px 14px rgba(51, 108, 221, 0.08);
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   width: 100%;
+  white-space: nowrap;
+}
+
+.btn-connect-group svg {
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 .btn-connect-group:hover {

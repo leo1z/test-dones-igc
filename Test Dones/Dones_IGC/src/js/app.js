@@ -553,8 +553,8 @@ function renderResults(calculation) {
           <h4 style="margin: 0 0 6px 0; font-size: 1.05rem; font-weight: 850; color: var(--navy);">¿Aún no estás en un Grupo de Crecimiento?</h4>
           <p style="margin: 0 0 14px 0; font-size: 0.86rem; color: var(--text-muted); line-height: 1.4;">Descubrir tus dones es el primer paso. Conéctate a un grupo en tu comunidad para ejercitarlos con propósito.</p>
           <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-connect-group btn-block">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-3px; margin-right:6px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Conectar con un Grupo de Crecimiento
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Conectar con un Grupo de Crecimiento</span>
           </a>
         </div>
       `;
