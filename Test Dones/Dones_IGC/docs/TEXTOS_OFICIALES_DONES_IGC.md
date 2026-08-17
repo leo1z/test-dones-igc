@@ -97,101 +97,103 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 
 ## 5. 📋 Las 76 Situaciones del Test (Organizadas por Escenas)
 
+## 5. 📋 Las 76 Situaciones del Test (Organizadas por Escenas)
+
 ### PARTE 1
 1. En mis conversaciones cotidianas con familiares y amigos, suelo compartir sobre mi fe en Jesús.
-2. Identifico rápidamente necesidades materiales en hermanos de la iglesia o en mi comunidad y busco formas de ayudarlos.
-3. Permanezco tranquilo y confiado en Dios aun cuando las circunstancias a mi alrededor parecen totalmente desfavorables.
-4. Si veo una tarea práctica pendiente en la iglesia (ordenar, limpiar, preparar materiales), la realizo de inmediato sin esperar que me lo pidan.
-5. Siento una compasión profunda hacia personas que sufren enfermedad, soledad o dolor emocional, e intencionalmente busco acompañarlas.
-6. Cuando converso con alguien desanimado o confundido, logro orientarle usando principios de la Biblia para que tome decisiones sabias.
-7. Disfruto de estar al pendiente del crecimiento espiritual de un grupo pequeño de personas y cuidarlas con dedicación.
-8. Me resulta natural planificar actividades ministeriales, coordinar equipos de trabajo y verificar que cada detalle se cumpla con orden.
+2. Acompaño a otros con paciencia cuando están a punto de tomar decisiones difíciles o apresuradas.
+3. En mi vida diaria, dedico momentos constantes a la oración a solas con Dios.
+4. Tiendo de forma natural a buscar formas prácticas de aliviar la carga o tristeza de quienes están sufriendo.
+5. Cuando surgen problemas prácticos o de organización, encuentro soluciones con rapidez.
+6. Me motiva investigar y profundizar en la Biblia para comprender mejor la sana doctrina.
+7. Al explicar una enseñanza de la Biblia, lo hago de forma clara y fácil de entender.
+8. Al hacer una actividad en equipo, me importa más cuidar a las personas que solo cumplir las tareas.
 
 ### PARTE 2
-9. Asumo con naturalidad la responsabilidad de motivar y liderar a un grupo de personas para alcanzar un objetivo en común.
-10. Percibo con facilidad si una enseñanza o actitud se alinea con la verdad bíblica o si contiene desviaciones sutiles.
-11. Disfruto de investigar y estudiar a profundidad temas teológicos y doctrinales para comprender mejor la Palabra.
-12. La gente suele acudir a mí en busca de consejo para saber cómo aplicar la Biblia ante dilemas y problemas complejos de la vida diaria.
-13. Me apasiona explicar pasajes bíblicos a otros de forma estructurada, clara y didáctica para que comprendan su significado.
-14. Siento el impulso de comunicar verdades bíblicas de forma directa y confrontadora cuando veo que la iglesia se desvía.
-15. Me atrae la idea de iniciar ministerios desde cero o plantar grupos en zonas donde aún no hay presencia de la iglesia.
-16. Busco activamente espacios o conversaciones con personas no creyentes para explicarles el plan de salvación.
+9. Cuando explico que la salvación es solo por fe en Jesús sin obras, las personas lo entienden fácil.
+10. Disfruto cuidar y estar al pendiente del crecimiento espiritual de otras personas.
+11. Me nace de forma natural unirme o motivar a otros a participar en grupos de oración.
+12. Me motiva mucho participar en actividades para ayudar a personas necesitadas.
+13. Me siento cómodo organizando recursos, presupuestos o actividades.
+14. Cuando me surge una duda sobre la Biblia, me dedico a estudiar hasta entenderla bien.
+15. Me aseguro de que lo que enseño esté siempre bien respaldado por la Biblia.
+16. Visualizo con claridad metas a futuro y me es fácil entusiasmar a otros para alcanzarlas.
 
 ### PARTE 3
-17. Me produce verdadero gozo apartar parte de mis recursos económicos o materiales para apoyar causas del Reino o necesidades de otros.
-18. Suelo orar con firmeza por proyectos o situaciones que para la mayoría parecen imposibles de lograr.
-19. Prefiero servir en tareas operativas o de apoyo logístico detrás de escena antes que estar al frente o recibir reconocimiento público.
-20. Me resulta fácil ponerme en el lugar de quien sufre y dedicar tiempo para consolarle y aliviar su carga emocional.
-21. Sé cómo animar a las personas para que no se rindan en sus pruebas y sigan adelante en su caminata con Cristo.
-22. Me preocupo genuinamente cuando un hermano se aleja del grupo y busco la manera de restaurarlo y acompañarlo.
-23. Tengo facilidad para organizar recursos, presupuestos y agendas para que los eventos ministeriales funcionen con eficiencia.
-24. Logro que otros se entusiasmen y se sumen a colaborar en una visión o proyecto para la iglesia.
+17. En mis conversaciones del día a día, me resulta fácil hablar sobre temas espirituales con conocidos.
+18. Busco comunicarme con quienes noto desanimados o alejados para orar por ellos y acompañarlos.
+19. Veo respuestas concretas a peticiones específicas que he llevado en oración a Dios.
+20. Me ofrezco rápido para ayudar a otros en emergencias (traslados, comida, apoyo práctico).
+21. Al liderar un trabajo, prefiero repartir tareas en el equipo antes que hacer todo yo solo.
+22. Disfruto dedicar tiempo a leer y estudiar libros o materiales que me ayudan a entender la Biblia.
+23. Personas cercanas acuden a mí para que les explique pasajes de la Biblia que no entienden.
+24. Al hablar de verdades bíblicas, mis palabras llegan al corazón de quienes me escuchan.
 
 ### PARTE 4
-25. Distingo con rapidez si una persona habla con intenciones sinceras o si hay manipulación o engaño espiritual.
-26. Me deleito en pasar horas leyendo pasajes bíblicos, diccionarios o recursos de estudio para profundizar en la doctrina.
-27. Frente a conflictos o desacuerdos en el grupo, suelo proponer soluciones sabias que traen paz y claridad bíblica.
-28. Disfruto preparando dinámicas, esquemas o lecciones que faciliten el aprendizaje de la Biblia en grupos de conexión.
-29. Siento indignación cuando la Palabra de Dios es malinterpretada y me nace el deseo de aclarar la verdad públicamente.
-30. Me adapto con facilidad a diferentes entornos o culturas con tal de llevar la visión del Evangelio a nuevos lugares.
-31. Me resulta sencillo conectar con personas de diferentes trasfondos y llevar la conversación hacia Cristo.
-32. Administro mis finanzas con generosidad, buscando siempre oportunidades discretas para bendecir a otros.
+25. Hablo con soltura y tranquilidad sobre mi fe con amigos y conocidos.
+26. Aparto dinero o recursos materiales para apoyar a otros o a la iglesia con alegría.
+27. Sirvo con gusto en tareas prácticas de apoyo detrás de escena sin buscar sobresalir.
+28. Cuando alguien la pasa mal, me es fácil animarlo y aconsejarlo con promesas de la Biblia.
+29. Al escuchar una predicación o enseñanza, noto rápido si está de acuerdo con la Biblia o si hay errores.
+30. Ante problemas difíciles, encuentro principios en la Biblia que ayudan a saber qué hacer.
+31. Me entusiasma la idea de iniciar nuevos grupos o ministerios donde aún no existen.
+32. Mis palabras al enseñar motivan a las personas a tomar decisiones de cambio en su vida.
 
 ### PARTE 5
-33. Mantengo una actitud de fe positiva que contagia a los demás cuando el grupo atraviesa momentos difíciles.
-34. Me satisface realizar trabajos prácticos y manuales para que las reuniones de la iglesia se lleven a cabo sin contratiempos.
-35. Tiendo a visitar a personas enfermas o en crisis para brindarles compañía, escucha atenta y consuelo práctico.
-36. Mis palabras de aliento suelen ayudar a que otros descubran sus talentos y se animen a servir a Dios.
-37. Me tomo el tiempo de discipular a personas una a una, ayudándoles a formar hábitos de vida cristiana.
-38. Me gusta estructurar sistemas, listas de verificación y procesos para que el trabajo en equipo sea ordenado.
-39. Tomo la iniciativa para coordinar equipos de trabajo, asignando tareas según las capacidades de cada integrante.
-40. Detecto con agudeza cuando una enseñanza contiene elementos erróneos, aunque a primera vista parezca bíblica.
+33. Dios me ha usado para que varias personas entreguen su vida a Jesús.
+34. Noto con facilidad cuando alguien tiene una necesidad económica y busco ayudarle sin llamar la atención.
+35. Estoy siempre disponible cuando se necesita ayuda práctica de último momento.
+36. Sé cómo amonestar o corregir a alguien con firmeza pero con amor y sin herir.
+37. Presto mucha atención a las palabras y actitudes de otros para entender cómo se sienten en su corazón.
+38. Disfruto enseñar a otros cómo poner en práctica la Biblia en su vida diaria.
+39. Me encantaría ser parte de un equipo para iniciar un nuevo grupo o iglesia.
+40. Al hablar de la Biblia a un grupo, sé usar la Palabra para animar, consolar y corregir con amor.
 
 ### PARTE 6
-41. Me motiva sistematizar conceptos bíblicos complejos para enseñarlos a otros de forma accesible.
-42. Suelo percibir la mejor ruta de acción bíblica ante problemas familiares o personales que me comparten.
-43. Disfruto de la enseñanza bíblica y dedico tiempo para verificar que las explicaciones sean exactas y fundamentadas.
-44. Siento el llamado a comunicar mensajes que despierten la conciencia espiritual y motiven al arrepentimiento.
-45. Me emociona la posibilidad de liderar la apertura de una nueva célula, grupo de conexión o punto de misión.
-46. Experimento un deseo constante de que mis amigos no creyentes conozcan a Jesús y tomen una decisión por Él.
-47. Doy con libertad y generosidad de lo que tengo, sin esperar reconocimiento ni nada a cambio.
-48. Creo firmemente que Dios responderá nuestras oraciones, incluso cuando las evidencias físicas dicen lo contrario.
+41. Me resulta fácil enseñar y animar a otras personas a compartir su fe con los demás.
+42. Animo con entusiasmo a otros a ser generosos y apoyar proyectos u ofrendas.
+43. Ayudo con gusto en trabajos físicos o de esfuerzo práctico (mudanzas, arreglos, transporte).
+44. Uso versículos específicos de la Biblia para aconsejar y dar dirección a otros.
+45. Detecto rápido cuando una enseñanza contiene errores sutiles, aunque parezca popular.
+46. Las personas se sienten aliviadas y tranquilas cuando les muestro cómo aplicar un principio bíblico.
+47. Me gusta leer o escuchar historias y testimonios de misioneros en otros lugares.
+48. He visto cómo Dios ha usado conversaciones que he tenido con otros para cambiar sus vidas.
 
 ### PARTE 7
-49. Me alegra poder aliviar el trabajo de otros líderes realizando las tareas de soporte práctico que sean necesarias.
-50. Suelo estar atento al dolor ajeno y busco formas concretas de aliviar las necesidades de los más desfavorecidos.
-51. Disfruto guiar a las personas mediante la consejería personal para ayudarles a superar tropiezos espirituales.
-52. Asumo con amor la tarea de velar por el bienestar espiritual y personal de los miembros de mi grupo.
-53. Disfruto coordinar la logística de viajes, talleres o eventos para que todo salga según lo planificado.
-54. Me siento cómodo guiando reuniones, tomando decisiones estratégicas y orientando a la congregación.
-55. Puedo identificar si una manifestación o actitud proviene del Espíritu Santo, de emociones humanas o de influencias espirituales opuestas.
-56. Disfruto recopilar información doctrinal para dar respuestas fundamentadas a quienes tienen dudas sobre la fe.
+49. Aprovecho mensajes de texto, cartas o redes para compartir mensajes de fe con otros.
+50. Organizo mis gastos personales para tener siempre un margen con el cual bendecir a otros.
+51. Sé animar a otros colaboradores a servir a Dios con una buena actitud y sin cansarse.
+52. Me gusta dedicar tiempo a aconsejar y guiar a personas de forma individual usando la Biblia.
+53. Me piden consejo cuando hay situaciones confusas para saber qué es lo correcto.
+54. Me enfoco en enseñar sobre cómo vivir una vida cristiana íntegra en el día a día.
+55. Tengo un deseo constante de llevar el mensaje de Jesús a lugares o personas que no lo conocen.
 
 ### PARTE 8
-57. Cuando hay confusión sobre un tema, mis recomendaciones suelen traer claridad bíblica y pacificar el ambiente.
-58. Busco métodos dinámicos y didácticos para que la enseñanza de las Escrituras sea comprensible para todas las edades.
-59. Siento la urgencia de recordar a la iglesia la santidad y la obediencia a Dios en su vida cotidiana.
-60. Tengo facilidad para iniciar proyectos espirituales en contextos donde no hay recursos o estructura previa.
-61. Frecuentemente busco construir puentes de amistad con personas alejadas de Dios para compartirles el Evangelio.
-62. Considero que mis bienes e ingresos son herramientas para extender el Reino de Dios mediante la generosidad.
-63. Animo a otros a confiar en Dios durante momentos de incertidumbre económica o personal.
-64. Me complace servir de apoyo a los ministerios de la iglesia sin necesidad de estar visible al público.
+56. Dedico tiempo constante a discipular y acompañar a personas más nuevas en la fe.
+57. Doy mis ofrendas y apoyo económico de forma discreta, sin esperar reconocimientos.
+58. Disfruto servir en tareas sencillas detrás de escena para ayudar a que otros puedan ministrar bien.
+59. Las personas suelen buscar mi consejo u opinión cuando enfrentan problemas difíciles.
+60. Traigo calma y buen juicio cuando hay momentos de confusión o tensión en el equipo.
+61. Mi opinión suele ser escuchada con respeto por la madurez y prudencia que reflejo.
+62. Oro con frecuencia por grupos nuevos e iglesias que se están empezando a formar.
 
 ### PARTE 9
-65. Siento compasión por quienes atraviesan pérdidas o duelos y dedico tiempo a acompañarles en su proceso.
-66. Logro motivar a personas desanimadas para que reconozcan el perdón de Dios y renueven su compromiso de fe.
-67. Me preocupa el crecimiento constante de cada persona a mi cargo y busco que nadie se quede atrás.
-68. Me gusta organizar calendarios, horarios y responsabilidades para que los proyectos concluyan exitosamente.
-69. Puedo ver el potencial en otras personas y animarlas a asumir roles de liderazgo en la iglesia.
-70. Cuando escucho un argumento o filosofía secular, distingo rápidamente sus falacias respecto a la verdad bíblica.
+63. Mi mayor alegría es ver cómo una persona que cuido va creciendo y madurando espiritualmente.
+64. Mantengo la fe y la paz en Dios aun cuando paso por momentos económicos o personales difíciles.
+65. Siento una compasión sincera e inmediata cuando veo a alguien pasar por un dolor emocional.
+66. Me resulta fácil organizar horarios, tareas y actividades para que un equipo trabaje bien.
+67. Disfruto pasar tiempo estudiando temas profundos de la Biblia y la sana doctrina.
+68. Logro explicar temas bíblicos difíciles en palabras sencillas que cualquiera puede entender.
+69. Logro motivar y guiar a diferentes personas para trabajar juntas por una misma meta.
 
 ### PARTE 10
-71. Dedico tiempo al estudio constante para comprender el contexto histórico y teológico de los pasajes de la Biblia.
-72. Mi consejo suele ser buscado por líderes o hermanos cuando enfrentan situaciones de alta responsabilidad o dilemas.
-73. Me esfuerzo por preparar materiales de estudio claros para la formación espiritual de los miembros del grupo.
-74. Siento la responsabilidad de comunicar la verdad bíblica con valentía, sin temor al rechazo o la opinión pública.
-75. Me entusiasma la visión de expandir la iglesia a nuevas comunidades o ciudades mediante la plantación de grupos.
-76. Siento una carga continua en mi corazón por la salvación de quienes aún no conocen la gracia de Jesucristo.
+70. Me doy cuenta cuando alguien falta a las reuniones o anda triste, y lo busco para cuidarlo.
+71. Sé animar a personas que tienen dudas a confiar plenamente en Dios.
+72. Visito con amor a personas enfermas, hospitalizadas o que están pasando por un duelo.
+73. Tengo facilidad para armar un buen equipo de trabajo uniendo los talentos de cada quien.
+74. Puedo responder con claridad cuando me hacen preguntas difíciles sobre la Biblia.
+75. Me tomo el tiempo de estudiar bien la Biblia antes de enseñar cualquier tema a otros.
+76. Me gusta identificar el potencial en las personas y ayudarlas a formarse como líderes.
 
 ---
 
