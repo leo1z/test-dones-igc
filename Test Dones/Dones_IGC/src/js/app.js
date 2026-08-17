@@ -552,7 +552,7 @@ function renderResults(calculation) {
     row.innerHTML = `
       <div class="remaining-info">
         <span class="remaining-name">${g.name}</span>
-        <span class="remaining-pct">${g.percentage}%</span>
+        <span class="remaining-pct" style="display: inline-flex; align-items: center; gap: 4px;">${g.percentage}% <span style="font-size: 0.95rem; color: var(--primary); font-weight: 900;">›</span></span>
       </div>
       <div class="remaining-bar-track">
         <div class="remaining-bar-fill" style="width: ${g.percentage}%"></div>
