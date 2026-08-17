@@ -744,23 +744,20 @@ function renderGlossary(filterText = '') {
   const query = filterText.toLowerCase().trim();
   el.glossaryGrid.innerHTML = '';
 
-  // Banner personal si ya tiene test
   const stored = loadStoredResult();
-  const banner = document.getElementById('user-test-results-banner');
-  const title = document.getElementById('user-top3-summary-title');
-  if (stored && isTestComplete(stored.answers)) {
+  const hasCompletedTest = stored && isTestComplete(stored.answers);
+  let giftsList = [...gifts];
+
+  if (hasCompletedTest) {
     const calc = runFullCalculation(stored.answers);
-    const names = calc.top3.map(g => g.name).join(', ');
-    if (banner && title) {
-      title.textContent = `Tus Dones Principales: ${names}`;
-      banner.style.display = 'block';
-    }
-  } else if (banner) {
-    banner.style.display = 'none';
+    giftsList = giftsList.map(g => ({
+      ...g,
+      pct: calc.percentage[g.id] ?? 0
+    })).sort((a, b) => b.pct - a.pct);
   }
 
-  // Filtro exclusivo por nombre de don
-  const filtered = gifts.filter(g => {
+  // Filtro por nombre de don
+  const filtered = giftsList.filter(g => {
     if (!query) return true;
     return g.name.toLowerCase().includes(query);
   });
@@ -775,10 +772,17 @@ function renderGlossary(filterText = '') {
     card.className = 'glossary-card';
     card.addEventListener('click', () => openGiftModal(g.id));
     
+    const pctBadgeHTML = (hasCompletedTest && typeof g.pct === 'number') 
+      ? `<span class="glossary-pct-badge">${g.pct}% Afinidad</span>` 
+      : '';
+
     card.innerHTML = `
       <div class="glossary-card-header">
         <img src="${g.illustration || 'src/assets/illustrations/Evangelismo.png'}" alt="${g.name}" class="glossary-gift-img">
-        <h4 class="glossary-card-title">${g.name}</h4>
+        <div>
+          <h4 class="glossary-card-title">${g.name}</h4>
+          ${pctBadgeHTML}
+        </div>
       </div>
       <p class="glossary-card-summary">${g.summary || g.description}</p>
       <button class="btn-glossary-more" type="button">

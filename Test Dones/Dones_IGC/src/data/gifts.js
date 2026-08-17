@@ -10,7 +10,7 @@ export const GIFTS_COUNT = 15;
 export const gifts = [
   {
     id: 'evangelismo',
-    name: "Evangelismo",
+    name: "Evangelizar",
     summary: "Capacidad para comunicar el Evangelio de forma sencilla y clara, conectando a las personas con la salvación en Jesús.",
     description: "Capacidad sobrenatural para dar el evangelio de manera sencilla y breve. Es el único don hacia incrédulos. No lo hace igual con todos, sabe cómo entrarles, no importa su temperamento. Unos lo hacen a grandes públicos, otros 1 a 1, unos por escrito, no necesitan de una actividad de la iglesia: lo pasan haciendo. También son buenos para enseñar a evangelizar.",
     questionCount: 7,
@@ -169,7 +169,7 @@ export const gifts = [
   },
   {
     id: 'presidir_liderazgo',
-    name: "Presidir / Liderazgo",
+    name: "Liderar (Presidir)",
     summary: "Capacidad de liderar con visión, inspirar la colaboración en equipo y formar a la siguiente generación de líderes.",
     description: "De líder, influye y dirige hermanos, se suma al de Administración. Están al frente fácilmente, guían con claridad, saben tomar decisiones con sabiduría, envisionan a otros, ayudan a desarrollar líderes. El que preside se centra en las personas, el de Administrar en recursos, procesos, planes.",
     questionCount: 4,
@@ -189,7 +189,7 @@ export const gifts = [
   },
   {
     id: 'discernimiento',
-    name: "Discernimiento",
+    name: "Discernir",
     summary: "Capacidad para distinguir la verdad bíblica del error sutil, percibiendo el origen espiritual de enseñanzas y actitudes.",
     description: "Es una capacidad sobrenatural de distinguir el origen espiritual de un mensaje o enseñanza (si viene de Dios o del hombre o demonios). Es importante conocer la sana doctrina y no exponerse a cualquier enseñanza.",
     questionCount: 5,
@@ -247,7 +247,7 @@ export const gifts = [
   },
   {
     id: 'ensenanza',
-    name: "Enseñanza",
+    name: "Enseñar",
     summary: "Habilidad para estructurar y comunicar pasajes de la Biblia de forma clara, amena y accesible para todos.",
     description: "Capacidad sobrenatural para hacer entendibles enseñanzas de la Palabra de Dios. Puede ser al predicar, o al enseñar en un grupo pequeño, o por escrito. Aun temas no tan fáciles los presenta menos difíciles.",
     questionCount: 5,
@@ -286,7 +286,7 @@ export const gifts = [
   },
   {
     id: 'misionero_apostol',
-    name: "Misionero / Apóstol",
+    name: "Misionero (Apóstol)",
     summary: "Impulso emprendedor para plantar nuevas comunidades de fe e iniciar ministerios donde antes no existían.",
     description: "Tiene la capacidad sobrenatural para empezar un grupo, o una iglesia, ya sea que tenga otros dones o se acompañe de hermanos con dones necesarios (Administrar, Pastor, Evangelismo, Enseñanza, Servir).",
     questionCount: 5,

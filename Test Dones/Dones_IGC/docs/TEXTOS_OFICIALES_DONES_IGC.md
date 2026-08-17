@@ -212,10 +212,11 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Título Principal:** `Tus Dones Espirituales`
 * **Subtítulo:** `Dios te ha capacitado con recursos únicos para servir con propósito. Aquí están tus resultados.`
 * **Disclaimer Orientativo:** `💡 Recordatorio: Este test es únicamente una guía orientativa basada en tus respuestas. Es en la práctica diaria y sirviendo activamente donde realmente descubres y confirmas tus dones espirituales.`
-* **Sección Principal:** `🏆 Tus 3 Dones Principales` *(3 tarjetas de igual jerarquía con porcentaje y botón [Conocer más →])*
-* **Sección Secundaria:** `💡 Otros Dones en ti` *(Listado con barra de afinidad %)*
-* **Tarjeta de Evaluación:**
-  - **Título:** `¿Cómo fue tu experiencia?`
+* **Sección Principal:** `🏆 Tus 3 Dones con Mayor Afinidad` *(3 tarjetas de igual jerarquía con porcentaje y botón [Conocer más →])*
+* **Botonera de Acciones:**
+  * `✍️ Evaluar la Experiencia del Test`
+  * `🤝 Conectar con un Grupo de Crecimiento` *(Abre https://igcteg.org/grupos/)*
+  * `Reiniciar Test`
   - **Texto:** `Ayúdanos a mejorar completando 3 preguntas cortas de retroalimentación.`
   - **Botón 1:** `✍️ Evaluar la Experiencia del Test`
   - **Botón 2:** `Reiniciar Test`
