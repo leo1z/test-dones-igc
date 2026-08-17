@@ -159,6 +159,7 @@ function clearStorage() {
   localStorage.removeItem(STORAGE_ANSWERS_KEY);
   localStorage.removeItem(STORAGE_RESULT_KEY);
   localStorage.removeItem(STORAGE_SUBMISSION_ID_KEY);
+  localStorage.removeItem(STORAGE_ONBOARDING_KEY);
 }
 
 // ---------------------------------------------------------------------------
@@ -197,9 +198,7 @@ function showScreen(screenId) {
 // Flujo de Onboarding Inicial (Evangelio + Zona)
 // ---------------------------------------------------------------------------
 function initOnboardingFlow() {
-  if (!state.onboarding.completed) {
-    el.modalOnboarding.classList.add('active');
-  }
+  checkAndShowOnboarding();
 
   if (el.btnOnboardingStep2) {
     el.btnOnboardingStep2.addEventListener('click', () => {
@@ -238,6 +237,24 @@ function initOnboardingFlow() {
       el.modalOnboarding.classList.remove('active');
       showScreen('welcome');
     });
+  }
+}
+
+function checkAndShowOnboarding() {
+  if (!state.onboarding.completed) {
+    const step1 = document.getElementById('onboarding-step-1');
+    const step2 = document.getElementById('onboarding-step-2');
+    if (step1 && step2) {
+      step1.style.display = 'block';
+      step2.style.display = 'none';
+    }
+    if (el.btnGroupYes) el.btnGroupYes.classList.remove('selected');
+    if (el.btnGroupNo) el.btnGroupNo.classList.remove('selected');
+    if (el.zoneSelect) el.zoneSelect.value = '';
+    validateOnboardingForm();
+    el.modalOnboarding.classList.add('active');
+  } else {
+    el.modalOnboarding.classList.remove('active');
   }
 }
 
@@ -895,8 +912,10 @@ el.btnReset.addEventListener('click', () => {
     clearStorage();
     state.answers = {};
     state.currentScene = 1;
+    state.onboarding = { completed: false, attendsGrowthGroup: null, zoneLocation: '' };
     el.btnViewResults.style.display = 'none';
     showScreen('welcome');
+    checkAndShowOnboarding();
   }
 });
 

@@ -346,9 +346,10 @@ body {
   transform: translateY(1px) scale(0.98) !important;
 }
 
-/* Botón Suave 'Conectar con Grupo de Crecimiento' (Paleta Primaria IGC) */
+/* Botón Suave 'Conectar con Grupo de Crecimiento' (Paleta Primaria IGC - Responsive) */
 .btn-connect-group {
-  height: 52px;
+  min-height: 48px;
+  height: auto;
   font-size: 0.88rem;
   font-weight: 850;
   margin-bottom: 12px;
@@ -356,7 +357,7 @@ body {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  padding: 0 12px !important;
+  padding: 10px 14px !important;
   gap: 8px;
   text-decoration: none;
   background-color: rgba(51, 108, 221, 0.08) !important;
@@ -366,11 +367,16 @@ body {
   box-shadow: 0 4px 14px rgba(51, 108, 221, 0.08);
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   width: 100%;
-  white-space: nowrap;
+  box-sizing: border-box;
+  line-height: 1.35;
 }
 
 .btn-connect-group svg {
   flex-shrink: 0;
+  display: inline-block;
+}
+
+.btn-connect-group span {
   display: inline-block;
 }
 
