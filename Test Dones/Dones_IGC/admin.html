@@ -796,6 +796,7 @@
               <option value="week">Hace 1 semana</option>
               <option value="month">Un mes</option>
               <option value="3months">3 meses</option>
+              <option value="custom">Personalizado...</option>
             </select>
           </div>
           <div class="chart-control-group">
@@ -820,6 +821,20 @@
               <option value="parcial">Parcialmente</option>
               <option value="no">No</option>
             </select>
+          </div>
+        </div>
+
+        <!-- Rango Personalizado Autónomo de la Gráfica de 15 Dones -->
+        <div id="cross-custom-date-container" class="custom-date-inputs" style="display: none; margin-bottom: 16px;">
+          <div class="custom-date-row">
+            <div class="filter-field">
+              <label for="cross-start-date">Desde:</label>
+              <input type="date" id="cross-start-date">
+            </div>
+            <div class="filter-field">
+              <label for="cross-end-date">Hasta:</label>
+              <input type="date" id="cross-end-date">
+            </div>
           </div>
         </div>
 
@@ -1463,30 +1478,53 @@
       renderFullGiftsChart();
     };
 
-    document.getElementById('cross-filter-date').onchange = renderFullGiftsChart;
+    const crossDateSelect = document.getElementById('cross-filter-date');
+    const crossCustomContainer = document.getElementById('cross-custom-date-container');
+    const crossStartDate = document.getElementById('cross-start-date');
+    const crossEndDate = document.getElementById('cross-end-date');
+
+    crossDateSelect.onchange = function() {
+      if (this.value === 'custom') {
+        crossCustomContainer.style.display = 'flex';
+      } else {
+        crossCustomContainer.style.display = 'none';
+      }
+      renderFullGiftsChart();
+    };
+
+    crossStartDate.onchange = renderFullGiftsChart;
+    crossEndDate.onchange = renderFullGiftsChart;
+
     document.getElementById('cross-filter-location').onchange = renderFullGiftsChart;
     document.getElementById('cross-filter-group').onchange = renderFullGiftsChart;
     document.getElementById('cross-filter-precision').onchange = renderFullGiftsChart;
 
     function renderFullGiftsChart() {
       const container = document.getElementById('gifts-full-chart-container');
-      const dateVal = document.getElementById('cross-filter-date').value;
+      const dateVal = crossDateSelect.value;
       const locVal = document.getElementById('cross-filter-location').value;
       const groupVal = document.getElementById('cross-filter-group').value;
       const precVal = document.getElementById('cross-filter-precision').value;
 
       let filtered = [...rawMetricsData];
 
-      // Filtro autónomo de fecha
+      // Filtro autónomo de fecha (Presets + Personalizado)
       if (dateVal !== 'all') {
-        const now = new Date();
-        let past = new Date(now);
-        if (dateVal === 'today') past = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        else if (dateVal === 'week') past.setDate(past.getDate() - 7);
-        else if (dateVal === 'month') past.setMonth(past.getMonth() - 1);
-        else if (dateVal === '3months') past.setMonth(past.getMonth() - 3);
+        if (dateVal === 'custom') {
+          const sVal = crossStartDate.value;
+          const eVal = crossEndDate.value;
+          if (sVal) filtered = filtered.filter(d => new Date(d.completed_at) >= new Date(sVal));
+          if (eVal) filtered = filtered.filter(d => new Date(d.completed_at) <= new Date(eVal + 'T23:59:59'));
+        } else {
+          const now = new Date();
+          let past = new Date(now);
+          if (dateVal === 'today') past = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          else if (dateVal === 'week') past.setDate(past.getDate() - 7);
+          else if (dateVal === 'month') past.setMonth(past.getMonth() - 1);
+          else if (dateVal === '3months') past.setMonth(past.getMonth() - 3);
 
-        filtered = filtered.filter(d => new Date(d.completed_at) >= past);
+          filtered = filtered.filter(d => new Date(d.completed_at) >= past);
+        }
       }
 
       if (locVal !== 'all') filtered = filtered.filter(d => d.zone_location === locVal);
