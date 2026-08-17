@@ -882,20 +882,20 @@
     let echartsInstance = null;
     let geoJsonData = null;
 
-    // Diccionario de mapeo de Zonas del Onboarding a Departamentos GeoJSON de Honduras
+    // Diccionario exacto de mapeo de Zonas del Onboarding a NOMBRES oficiales de Departamentos GeoJSON de Honduras
     const zoneToDeptMap = {
-      'Tegucigalpa / M.D.C.': 'Franciscomorazan',
+      'Tegucigalpa / M.D.C.': 'Francisco Morazan',
       'San Pedro Sula': 'Cortes',
       'Choluteca': 'Choluteca',
       'Comayagua': 'Comayagua',
-      'Danlí': 'Elparaiso',
+      'Danlí': 'El Paraiso',
       'La Ceiba': 'Atlantida',
       'El Progreso': 'Yoro',
       'Juticalpa': 'Olancho',
       'Siguatepeque': 'Comayagua',
       'La Esperanza': 'Intibuca',
       'Santa Rosa de Copán': 'Copan',
-      'Roatán / Islas de la Bahía': 'Islasdelabahia'
+      'Roatán / Islas de la Bahía': 'Islas de La Bahia'
     };
 
     // Coordenadas geográficas [Longitud, Latitud] para cada ciudad/zona
@@ -921,37 +921,37 @@
       'Copan': 'Copán (Santa Rosa)',
       'Cortes': 'Cortés (San Pedro Sula)',
       'Choluteca': 'Choluteca',
-      'Elparaiso': 'El Paraíso (Danlí)',
-      'Franciscomorazan': 'Francisco Morazán (Tegucigalpa)',
-      'Graciasadios': 'Gracias a Dios',
+      'El Paraiso': 'El Paraíso (Danlí)',
+      'Francisco Morazan': 'Francisco Morazán (Tegucigalpa)',
+      'Gracias A Dios': 'Gracias a Dios',
       'Intibuca': 'Intibucá (La Esperanza)',
-      'Islasdelabahia': 'Islas de la Bahía (Roatán)',
-      'Lapaz': 'La Paz',
+      'Islas de La Bahia': 'Islas de la Bahía (Roatán)',
+      'La Paz': 'La Paz',
       'Lempira': 'Lempira',
       'Ocotepeque': 'Ocotepeque',
       'Olancho': 'Olancho (Juticalpa)',
-      'Santabarbara': 'Santa Bárbara',
+      'Santa Barbara': 'Santa Bárbara',
       'Valle': 'Valle',
       'Yoro': 'Yoro (El Progreso)'
     };
 
-    // Mapeo inteligente para textos de ciudades personalizadas a Departamentos
+    // Mapeo inteligente para textos de ciudades personalizadas a NOMBRES de Departamentos GeoJSON
     function getDeptFromCityString(zoneStr) {
       if (!zoneStr) return null;
       if (zoneToDeptMap[zoneStr]) return zoneToDeptMap[zoneStr];
 
       const s = zoneStr.toLowerCase();
-      if (s.includes('tegucigalpa') || s.includes('m.d.c') || s.includes('francisco moraz')) return 'Franciscomorazan';
+      if (s.includes('tegucigalpa') || s.includes('m.d.c') || s.includes('francisco moraz')) return 'Francisco Morazan';
       if (s.includes('san pedro sula') || s.includes('sps') || s.includes('cortes') || s.includes('cortés')) return 'Cortes';
       if (s.includes('ceiba') || s.includes('atlantida') || s.includes('atlántida')) return 'Atlantida';
       if (s.includes('choluteca')) return 'Choluteca';
       if (s.includes('comayagua') || s.includes('siguatepeque')) return 'Comayagua';
-      if (s.includes('danli') || s.includes('danlí') || s.includes('paraíso') || s.includes('paraiso')) return 'Elparaiso';
+      if (s.includes('danli') || s.includes('danlí') || s.includes('paraíso') || s.includes('paraiso')) return 'El Paraiso';
       if (s.includes('progreso') || s.includes('yoro')) return 'Yoro';
       if (s.includes('juticalpa') || s.includes('olancho')) return 'Olancho';
       if (s.includes('esperanza') || s.includes('intibuca') || s.includes('intibucá')) return 'Intibuca';
       if (s.includes('copan') || s.includes('copán') || s.includes('santa rosa')) return 'Copan';
-      if (s.includes('roatan') || s.includes('roatán') || s.includes('islas de la bahia') || s.includes('islas de la bahía')) return 'Islasdelabahia';
+      if (s.includes('roatan') || s.includes('roatán') || s.includes('islas de la bahia') || s.includes('islas de la bahía')) return 'Islas de La Bahia';
       
       return null;
     }
@@ -1135,7 +1135,7 @@
       const total = data.length;
       const container = document.getElementById('zones-bar-list');
 
-      // Conteo acumulativo por zona/ciudad y por departamento
+      // Conteo acumulativo por zona/ciudad y por departamento (Vinculación exacta)
       const deptCounts = {};
       const zonesCount = {};
 
@@ -1180,7 +1180,7 @@
         }
       }
 
-      // Datos coropléticos para los polígonos de los 18 departamentos
+      // Datos coropléticos para los polígonos de los 18 departamentos con acumulación por departamento
       const mapData = geoJsonData.features.map(f => {
         const deptName = f.properties.NOMBRE;
         const count = deptCounts[deptName] || 0;
@@ -1240,7 +1240,7 @@
               const pretty = params.data ? params.data.labelName : params.name;
               return `
                 <div style="font-weight:900; font-size:0.9rem; margin-bottom:4px; color:#ffffff;">🗺️ Depto: ${pretty}</div>
-                <div style="font-size:0.8rem; color:#93c5fd;"><strong>${val}</strong> respuestas (${pct}% del total)</div>
+                <div style="font-size:0.8rem; color:#93c5fd;"><strong>${val}</strong> respuestas en este departamento (${pct}% del total)</div>
               `;
             }
           }
