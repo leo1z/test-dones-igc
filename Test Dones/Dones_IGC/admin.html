@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
-  <!-- Apache ECharts Library for Choropleth Map -->
+  <!-- Apache ECharts Library for Choropleth Map & Scatter Pins -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   <style>
     body {
@@ -312,7 +312,7 @@
       line-height: 1.35;
     }
 
-    /* Contenedor del Mapa Coroplético ECharts */
+    /* Contenedor del Mapa Coroplético ECharts + Pines */
     .honduras-map-container {
       display: flex;
       flex-direction: column;
@@ -321,13 +321,14 @@
     }
     .honduras-echarts-wrapper {
       width: 100%;
-      max-width: 580px;
-      height: 380px;
+      max-width: 620px;
+      height: 320px;
       background: #f8fafc;
       border-radius: 16px;
-      padding: 8px;
+      padding: 4px;
       border: 1px solid rgba(15,15,49,0.06);
       position: relative;
+      overflow: hidden;
     }
 
     /* Gráficos de Barra Fluidos */
@@ -506,6 +507,7 @@
       .metric-num { font-size: 2.2rem; }
       .data-section { padding: 26px; border-radius: 20px; }
       .honduras-map-container { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+      .honduras-echarts-wrapper { height: 420px; }
     }
   </style>
 </head>
@@ -585,7 +587,7 @@
             <span style="font-size:0.82rem; font-weight:850; color:var(--navy);">Filtrar por Zona / Ciudad:</span>
           </div>
           <p style="font-size:0.78rem; color:var(--text-muted); margin: 0 0 10px 0; font-weight:650;">
-            Elige la zona que quieres medir (aplica para métricas generales, mapa coroplético, combinaciones y encuesta):
+            Elige la zona que quieres medir (aplica para métricas generales, mapa coroplético con pines, combinaciones y encuesta):
           </p>
           <div id="global-zone-pills" style="display:flex; gap:8px; flex-wrap:wrap;">
             <!-- Renderizado dinámico de píldoras de filtro por zona con "Todas las Zonas" activa por defecto -->
@@ -617,20 +619,20 @@
         </div>
       </div>
 
-      <!-- Mapa Coroplético Oficial de Honduras con Apache ECharts -->
+      <!-- Mapa Coroplético Oficial de Honduras con Pines de Ubicación Acumulada -->
       <section class="data-section">
         <div class="section-head">
           <h3>
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Distribución Coroplética por Departamento (Honduras)
+            Distribución por Departamento y Pines de Ciudades (Honduras)
           </h3>
         </div>
         <p style="font-size:0.78rem; color:var(--text-muted); margin-top:-8px; margin-bottom:14px; font-weight:650;">
-          Mapa interactivo de los 18 departamentos de Honduras coloreados según la densidad de encuestas completadas. Pasa el cursor para ver detalles.
+          Mapa coroplético responsivo con los 18 departamentos de Honduras e indicadores interactivos con pines pulsantes por ciudad.
         </p>
         
         <div class="honduras-map-container">
-          <!-- Mapa ECharts Coroplético -->
+          <!-- Mapa ECharts Coroplético + Pines -->
           <div class="honduras-echarts-wrapper" id="honduras-echarts-map">
             <!-- Render dinámico Apache ECharts -->
           </div>
@@ -896,6 +898,22 @@
       'Roatán / Islas de la Bahía': 'Islasdelabahia'
     };
 
+    // Coordenadas geográficas [Longitud, Latitud] para cada ciudad/zona
+    const cityCoords = {
+      'Tegucigalpa / M.D.C.': [-87.2068, 14.0723],
+      'San Pedro Sula': [-88.0250, 15.5042],
+      'La Ceiba': [-86.7900, 15.7597],
+      'Choluteca': [-87.1900, 13.3000],
+      'Comayagua': [-87.6400, 14.4500],
+      'Danlí': [-86.5800, 14.0300],
+      'El Progreso': [-87.8000, 15.4000],
+      'Juticalpa': [-86.2200, 14.6600],
+      'Siguatepeque': [-87.8300, 14.6000],
+      'La Esperanza': [-88.1800, 14.3100],
+      'Santa Rosa de Copán': [-88.7800, 14.7600],
+      'Roatán / Islas de la Bahía': [-86.5300, 16.3200]
+    };
+
     const deptPrettyNames = {
       'Atlantida': 'Atlántida (La Ceiba)',
       'Colon': 'Colón',
@@ -916,6 +934,27 @@
       'Valle': 'Valle',
       'Yoro': 'Yoro (El Progreso)'
     };
+
+    // Mapeo inteligente para textos de ciudades personalizadas a Departamentos
+    function getDeptFromCityString(zoneStr) {
+      if (!zoneStr) return null;
+      if (zoneToDeptMap[zoneStr]) return zoneToDeptMap[zoneStr];
+
+      const s = zoneStr.toLowerCase();
+      if (s.includes('tegucigalpa') || s.includes('m.d.c') || s.includes('francisco moraz')) return 'Franciscomorazan';
+      if (s.includes('san pedro sula') || s.includes('sps') || s.includes('cortes') || s.includes('cortés')) return 'Cortes';
+      if (s.includes('ceiba') || s.includes('atlantida') || s.includes('atlántida')) return 'Atlantida';
+      if (s.includes('choluteca')) return 'Choluteca';
+      if (s.includes('comayagua') || s.includes('siguatepeque')) return 'Comayagua';
+      if (s.includes('danli') || s.includes('danlí') || s.includes('paraíso') || s.includes('paraiso')) return 'Elparaiso';
+      if (s.includes('progreso') || s.includes('yoro')) return 'Yoro';
+      if (s.includes('juticalpa') || s.includes('olancho')) return 'Olancho';
+      if (s.includes('esperanza') || s.includes('intibuca') || s.includes('intibucá')) return 'Intibuca';
+      if (s.includes('copan') || s.includes('copán') || s.includes('santa rosa')) return 'Copan';
+      if (s.includes('roatan') || s.includes('roatán') || s.includes('islas de la bahia') || s.includes('islas de la bahía')) return 'Islasdelabahia';
+      
+      return null;
+    }
 
     function checkAuth() {
       if (sessionStorage.getItem('dones_admin_auth') === 'true') {
@@ -1091,20 +1130,23 @@
       document.getElementById('metric-eval-filled-pct').textContent = `${evalFilledPct}% de respuesta`;
     }
 
-    // 2. Mapa Coroplético Oficial de Honduras con Apache ECharts
+    // 2. Mapa Coroplético Oficial de Honduras con Pines Pulsantes por Ciudad (ECharts)
     async function renderEChartsHondurasMap(data) {
       const total = data.length;
       const container = document.getElementById('zones-bar-list');
 
-      // Calcular conteos por departamento
+      // Conteo acumulativo por zona/ciudad y por departamento
       const deptCounts = {};
       const zonesCount = {};
 
       data.forEach(d => {
         const zone = d.zone_location || 'No especificado';
         zonesCount[zone] = (zonesCount[zone] || 0) + 1;
-        const deptKey = zoneToDeptMap[zone] || zone;
-        deptCounts[deptKey] = (deptCounts[deptKey] || 0) + 1;
+        
+        const deptKey = getDeptFromCityString(zone);
+        if (deptKey) {
+          deptCounts[deptKey] = (deptCounts[deptKey] || 0) + 1;
+        }
       });
 
       // Render de la lista de barras lateral
@@ -1128,7 +1170,6 @@
         try {
           const res = await fetch('https://raw.githubusercontent.com/SEFINHN-UIT/hn-geo/main/geojson/hn-deparments.geo.json');
           geoJsonData = await res.json();
-          // Mapear el atributo NOMBRE a name para ECharts
           geoJsonData.features.forEach(f => {
             f.properties.name = f.properties.NOMBRE || f.properties.name || '';
           });
@@ -1139,7 +1180,7 @@
         }
       }
 
-      // Preparar datos para el mapa coroplético de ECharts
+      // Datos coropléticos para los polígonos de los 18 departamentos
       const mapData = geoJsonData.features.map(f => {
         const deptName = f.properties.NOMBRE;
         const count = deptCounts[deptName] || 0;
@@ -1153,6 +1194,19 @@
         };
       });
 
+      // Serie de Pines Pulsantes (effectScatter) por Ciudad con Conteo Acumulado
+      const scatterPinData = [];
+      Object.entries(zonesCount).forEach(([city, count]) => {
+        const coords = cityCoords[city];
+        if (coords) {
+          scatterPinData.push({
+            name: city,
+            value: [...coords, count],
+            percentage: total > 0 ? Math.round((count / total) * 100) : 0
+          });
+        }
+      });
+
       const maxVal = Math.max(...mapData.map(d => d.value), 5);
 
       const chartDom = document.getElementById('honduras-echarts-map');
@@ -1161,29 +1215,41 @@
         window.addEventListener('resize', () => echartsInstance.resize());
       }
 
+      const isMobile = window.innerWidth <= 768;
+
       const option = {
         tooltip: {
           trigger: 'item',
-          backgroundColor: 'rgba(15, 15, 49, 0.92)',
+          backgroundColor: 'rgba(15, 15, 49, 0.94)',
           borderColor: 'rgba(51, 108, 221, 0.5)',
           borderWidth: 1,
           padding: [10, 14],
           textStyle: { color: '#ffffff', fontFamily: 'Plus Jakarta Sans' },
           formatter: function (params) {
-            const val = params.value || 0;
-            const pct = params.data ? params.data.percentage : 0;
-            const pretty = params.data ? params.data.labelName : params.name;
-            return `
-              <div style="font-weight:900; font-size:0.9rem; margin-bottom:4px; color:#ffffff;">📍 ${pretty}</div>
-              <div style="font-size:0.8rem; color:#93c5fd;"><strong>${val}</strong> personas (${pct}% del total)</div>
-            `;
+            if (params.seriesType === 'effectScatter') {
+              const city = params.name;
+              const val = params.value[2] || 0;
+              const pct = params.data ? params.data.percentage : 0;
+              return `
+                <div style="font-weight:900; font-size:0.92rem; margin-bottom:4px; color:#f59e0b;">📌 Pin: ${city}</div>
+                <div style="font-size:0.82rem; color:#ffffff;"><strong>${val}</strong> encuestas completadas (${pct}%)</div>
+              `;
+            } else {
+              const val = params.value || 0;
+              const pct = params.data ? params.data.percentage : 0;
+              const pretty = params.data ? params.data.labelName : params.name;
+              return `
+                <div style="font-weight:900; font-size:0.9rem; margin-bottom:4px; color:#ffffff;">🗺️ Depto: ${pretty}</div>
+                <div style="font-size:0.8rem; color:#93c5fd;"><strong>${val}</strong> respuestas (${pct}% del total)</div>
+              `;
+            }
           }
         },
         visualMap: {
           min: 0,
           max: maxVal,
           left: 'left',
-          bottom: 'bottom',
+          bottom: '10',
           text: ['Alto', 'Bajo'],
           calculable: true,
           inRange: {
@@ -1192,39 +1258,73 @@
           textStyle: {
             color: '#0f0f31',
             fontWeight: 'bold',
-            fontSize: 11
+            fontSize: 10
+          }
+        },
+        geo: {
+          map: 'Honduras',
+          roam: true,
+          zoom: isMobile ? 1.05 : 1.15,
+          scaleLimit: { min: 0.8, max: 3.5 },
+          aspectScale: 0.85,
+          itemStyle: {
+            borderColor: '#ffffff',
+            borderWidth: 1.2,
+            areaColor: '#e2e8f0'
+          },
+          emphasis: {
+            itemStyle: {
+              areaColor: '#3b82f6',
+              shadowBlur: 8,
+              shadowColor: 'rgba(0, 0, 0, 0.2)'
+            },
+            label: {
+              show: true,
+              color: '#ffffff',
+              fontWeight: 'bold'
+            }
           }
         },
         series: [
           {
             name: 'Encuestas por Departamento',
             type: 'map',
-            map: 'Honduras',
-            roam: true,
-            zoom: 1.15,
-            itemStyle: {
-              borderColor: '#ffffff',
-              borderWidth: 1.2,
-              areaColor: '#e2e8f0'
-            },
-            emphasis: {
-              itemStyle: {
-                areaColor: '#f59e0b',
-                shadowBlur: 10,
-                shadowColor: 'rgba(0, 0, 0, 0.3)'
-              },
-              label: {
-                show: true,
-                color: '#ffffff',
-                fontWeight: 'bold'
-              }
-            },
+            geoIndex: 0,
             data: mapData
+          },
+          {
+            name: 'Pines de Ciudades',
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: scatterPinData,
+            symbolSize: function (val) {
+              return Math.min(Math.max(val[2] * 6, 12), 24);
+            },
+            showEffectOn: 'render',
+            rippleEffect: {
+              brushType: 'stroke',
+              scale: 3.5
+            },
+            label: {
+              formatter: '{b}',
+              position: 'right',
+              show: !isMobile,
+              fontSize: 10,
+              fontWeight: 'bold',
+              color: '#0f0f31'
+            },
+            itemStyle: {
+              color: '#f59e0b',
+              shadowBlur: 10,
+              shadowColor: '#d97706'
+            },
+            zlevel: 1
           }
         ]
       };
 
       echartsInstance.setOption(option);
+      setTimeout(() => echartsInstance.resize(), 100);
     }
 
     // 3. Render de las 5 Tarjetas de Estadísticas de Dones (Con Top 3 por Ubicación)
@@ -1319,7 +1419,6 @@
         if (giftsInLoc) {
           const sortedInLoc = Object.entries(giftsInLoc).sort((a, b) => b[1] - a[1]);
           const top3InLoc = sortedInLoc.slice(0, 3);
-          const locTotal = Object.values(giftsInLoc).reduce((a, b) => a + b, 0) / 3 || 1; // personas aproximadas en esa zona
 
           if (top3InLoc.length > 0) {
             container.innerHTML = top3InLoc.map(([gId, cnt], idx) => `
