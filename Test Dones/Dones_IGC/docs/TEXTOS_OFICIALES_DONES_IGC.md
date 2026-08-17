@@ -89,9 +89,9 @@ Este documento contiene la totalidad de los textos de la Web App **Dones IGC**, 
 * **Enlace Interactivo:** `Explorar Dones →` *(Abre hoja emergente de consulta rápida)*
 
 ### Escala de Respuesta (3 Píldoras)
-* **Valor 1:** `1 | Rara vez`
-* **Valor 2:** `2 | A veces`
-* **Valor 3:** `3 | Con frecuencia`
+* **Valor 1:** `1 | No es mi fuerte`
+* **Valor 2:** `2 | Lo hago si me lo piden`
+* **Valor 3:** `3 | Es natural en mí`
 
 ---
 

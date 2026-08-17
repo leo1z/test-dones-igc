@@ -294,9 +294,9 @@ function renderScene() {
     scaleWrapper.className = 'situation-scale-wrapper';
 
     const labels = {
-      1: "Rara vez",
-      2: "A veces",
-      3: "Con frecuencia"
+      1: "No es mi fuerte",
+      2: "Lo hago si me lo piden",
+      3: "Es natural en mí"
     };
 
     const scaleRow = document.createElement('div');

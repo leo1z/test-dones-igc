@@ -644,7 +644,8 @@ body {
 
 .scale-pill {
   flex: 1 1 0;
-  min-height: 52px;
+  min-height: 58px;
+  padding: 6px 4px;
   border-radius: var(--radius-md);
   border: 1.5px solid rgba(15, 15, 49, 0.1);
   background-color: #ffffff;
@@ -653,16 +654,27 @@ body {
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2px;
   box-shadow: 0 2px 6px rgba(15, 15, 49, 0.03);
 }
 
 .pill-number {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 900;
   line-height: 1;
   color: var(--navy);
+  transition: color 0.2s ease;
+}
+
+.pill-label {
+  font-size: 0.71rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-muted);
+  text-align: center;
   transition: color 0.2s ease;
 }
 
@@ -672,7 +684,8 @@ body {
   box-shadow: 0 4px 12px rgba(15, 15, 49, 0.08);
 }
 
-.scale-pill.selected .pill-number {
+.scale-pill.selected .pill-number,
+.scale-pill.selected .pill-label {
   color: #ffffff !important;
 }
 
