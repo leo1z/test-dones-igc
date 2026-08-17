@@ -17,13 +17,12 @@ Fecha de última actualización: 2026-08-17
 *   [x] Motor de cálculo recalibrado para escala 1..3 (`maxRawScore = questionCount × 3`).
 *   [x] Vaciado / Truncate de registros de prueba en Supabase (`dones_igc.results`) ejecutado exitosamente.
 *   [x] Permisos de lectura (`SELECT`) y eliminación (`DELETE`) concedidos para el Panel Admin (`admin.html`).
-*   [x] **Rediseño Completo del Panel Pastoral Admin (`admin.html`):**
-    *   **Filtros de Fecha Preseteados:** Botones rápidos `Todos`, `Hoy`, `Hace 1 semana`, `Un mes`, `3 meses` y `Personalizado` con corrección de alineación visual para etiquetas *Desde* y *Hasta*.
-    *   **Cuatro Métricas Principales (KPIs):** *Evaluaciones completadas*, *Asiste a grupo*, *No asiste a grupo* y *Llenó evaluación*.
-    *   **Mapa SVG Interactivo de Honduras:** Visualización geográfica regional (Tegucigalpa, SPS, La Ceiba, Choluteca, Danlí) con pines y porcentajes en vivo.
-    *   **Grid de 5 Tarjetas de Estadísticas de Dones:** Top 3 más frecuentes, Top 3 menos frecuentes, Combinación de 3 más común, Combinación de 3 menos común y Don más frecuente por ubicación con selector interactivo.
-    *   **Gráfica Completa de Barras con Filtros Acumulables:** Conmutador entre *Promedio por Don (%)* y *Total por Don (Frecuencia)* con filtros combinables por Ubicación, Asistencia a Grupo y Precisión de Evaluación.
-    *   **Gestor de Enlaces de Videos:** Reubicado al final de la página como última sección.
+*   [x] **Rediseño Pastoral Completo del Panel Admin (`admin.html`):**
+    *   **Filtro por Fecha y Zona Global:** Incorporada nota explicativa (*"Este filtro por fecha se aplica a todas las estadísticas del panel"*) y barra de píldoras de **Filtro Global por Zona/Ciudad** con opción de selección acumulable (*Todas las Zonas* o ciudades específicas) que impacta a todo el panel en tiempo real.
+    *   **UI Limpia del Rango Personalizado:** Corregido el solapamiento visual entre etiquetas *Desde* y *Hasta* con contenedores independientes `flex-direction: column` y padding adaptable.
+    *   **Mapa Real Geográfico de Honduras SVG:** Reemplazada la silueta simplificada por el mapa vectorial geográfico oficial con el contorno de Honduras e Islas de la Bahía (Roatán/Utila) con pines regionales.
+    *   **0% Emojis:** Reemplazados todos los emojis por íconos vectoriales SVG limpios (`stroke="currentColor"` / `stroke="var(--primary)"`).
+    *   **Sección de Estadísticas de la Encuesta de Evaluación:** Reestructurado el panel inferior en 3 bloques correspondientes a las preguntas oficiales del test (Pregunta 1: Promedio de Estrellas, Pregunta 2: Reflejo en su forma de servir, Pregunta 3: Feed de Comentarios por escrito).
 *   [x] **Ajuste de Tipografía y Espaciado:** Añadidas reglas de `letter-spacing: -0.012em` en cuerpo y `-0.025em` en encabezados (`styles.css`), mejorando la densidad tipográfica y legibilidad.
 *   [x] **Auditoría de Responsiveness & Navegadores:** Verificadas reglas CSS Flexbox/Grid móviles (`max-width: 600px`, `box-sizing: border-box`, `padding` líquido). Los componentes se adaptan sin desbordamiento desde 320px en iOS Safari, Android Chrome, Edge y Firefox.
 *   [x] **Persistencia Garantizada en Supabase:** Confirmado que `submitResult()` guarda las respuestas, puntuaciones, Top 3, datos de Onboarding (`attends_growth_group`, `zone_location`) y la Encuesta de Evaluación (`clarity_rating`, `accuracy_perception`, `feedback_comments`) en la tabla `dones_igc.results`.

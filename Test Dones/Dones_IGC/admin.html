@@ -109,15 +109,15 @@
       box-sizing: border-box;
     }
 
-    /* Barra de Filtros de Fecha Arreglada */
+    /* Barra de Filtros de Fecha Corregida */
     .filters-bar {
       background: #ffffff;
-      padding: 16px;
+      padding: 18px;
       border-radius: 18px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       box-shadow: 0 4px 14px rgba(15, 15, 49, 0.04);
       border: 1px solid rgba(15, 15, 49, 0.06);
     }
@@ -142,39 +142,67 @@
       color: #ffffff;
       border-color: var(--primary);
     }
+    
+    /* UI Limpia del Personalizado */
     .custom-date-inputs {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      background: rgba(15,15,49,0.02);
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(15,15,49,0.06);
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(51, 108, 221, 0.03);
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(51, 108, 221, 0.15);
+      margin-top: 6px;
     }
-    .filter-group {
+    .custom-date-row {
       display: flex;
-      align-items: center;
-      gap: 6px;
-      flex: 1;
-      min-width: 140px;
+      flex-wrap: wrap;
+      gap: 12px;
+      width: 100%;
     }
-    .filter-group label {
+    .filter-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 130px;
+    }
+    .filter-field label {
       font-size: 0.78rem;
       font-weight: 850;
       color: var(--navy);
-      white-space: nowrap;
-      flex-shrink: 0;
     }
-    .filter-group input[type="date"] {
+    .filter-field input[type="date"] {
       width: 100%;
-      padding: 6px 8px;
-      border-radius: 8px;
-      border: 1px solid rgba(15, 15, 49, 0.15);
-      font-size: 0.8rem;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(15, 15, 49, 0.15);
+      font-size: 0.85rem;
       font-weight: 700;
       box-sizing: border-box;
       color: var(--navy);
+      background: #ffffff;
+    }
+
+    /* Píldoras de Filtro por Zona */
+    .zone-pill-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 1.5px solid rgba(15,15,49,0.12);
+      background: #ffffff;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .zone-pill-btn.active {
+      background: var(--navy);
+      color: #ffffff;
+      border-color: var(--navy);
     }
 
     /* Grilla de 4 Métricas Principales */
@@ -278,11 +306,11 @@
       color: var(--navy);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       line-height: 1.35;
     }
 
-    /* Mapa SVG de Honduras */
+    /* Mapa Geográfico de Honduras */
     .honduras-map-container {
       display: flex;
       flex-direction: column;
@@ -291,7 +319,7 @@
     }
     .honduras-svg-wrapper {
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       background: #f8fafc;
       border-radius: 16px;
       padding: 16px;
@@ -475,7 +503,6 @@
       .metric-card { padding: 20px; gap: 6px; border-radius: 18px; }
       .metric-num { font-size: 2.2rem; }
       .data-section { padding: 26px; border-radius: 20px; }
-      .filters-bar { flex-direction: row; align-items: center; justify-content: space-between; }
       .honduras-map-container { flex-direction: row; align-items: flex-start; justify-content: space-between; }
     }
   </style>
@@ -510,10 +537,13 @@
 
     <main class="admin-container">
 
-      <!-- Date Filters Bar (Presets + Custom Range) -->
+      <!-- 1. Date Filters Bar (Presets + Clean Custom Range) -->
       <div class="filters-bar">
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <span style="font-size: 0.8rem; font-weight: 850; color: var(--navy);">Filtro por Fecha:</span>
+          <span style="font-size: 0.82rem; font-weight: 850; color: var(--navy); display:flex; align-items:center; gap:4px;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Filtro por Fecha:
+          </span>
           <div class="date-presets">
             <button class="preset-btn active" data-preset="all">Todos</button>
             <button class="preset-btn" data-preset="today">Hoy</button>
@@ -525,15 +555,36 @@
         </div>
 
         <div id="custom-date-container" class="custom-date-inputs" style="display: none;">
-          <div class="filter-group">
-            <label for="filter-start-date">Desde:</label>
-            <input type="date" id="filter-start-date">
+          <div class="custom-date-row">
+            <div class="filter-field">
+              <label for="filter-start-date">Desde:</label>
+              <input type="date" id="filter-start-date">
+            </div>
+            <div class="filter-field">
+              <label for="filter-end-date">Hasta:</label>
+              <input type="date" id="filter-end-date">
+            </div>
           </div>
-          <div class="filter-group">
-            <label for="filter-end-date">Hasta:</label>
-            <input type="date" id="filter-end-date">
-          </div>
-          <button id="btn-apply-filters" class="btn btn-primary" style="height: 32px; padding: 0 12px; font-size: 0.78rem;">Aplicar</button>
+          <button id="btn-apply-filters" class="btn btn-primary" style="height: 38px; width: 100%; font-size: 0.84rem; font-weight:850;">Aplicar Rango Personalizado</button>
+        </div>
+
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0 0; font-weight: 650; display:flex; align-items:center; gap:4px;">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--primary)" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Este filtro por fecha se aplica a todas las estadísticas del panel.
+        </p>
+      </div>
+
+      <!-- 2. Filtro Global por Zona / Ciudad -->
+      <div style="background: #ffffff; padding: 16px; border-radius: 18px; margin-bottom: 24px; box-shadow: 0 4px 14px rgba(15, 15, 49, 0.04); border: 1px solid rgba(15, 15, 49, 0.06);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <h4 style="margin:0; font-size:0.9rem; font-weight:900; color:var(--navy);">Filtro Global por Zona / Ciudad</h4>
+        </div>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin: 0 0 12px 0; font-weight:650;">
+          Elige la zona que quieres medir (aplica para todas las estadísticas del panel):
+        </p>
+        <div id="global-zone-pills" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <!-- Renderizado dinámico de píldoras de filtro por zona con "Todas las Zonas" activa -->
         </div>
       </div>
 
@@ -542,7 +593,7 @@
         <div class="metric-card">
           <span class="metric-title">Evaluaciones</span>
           <span class="metric-num" id="metric-total-count">0</span>
-          <span class="metric-sub">Tests completados</span>
+          <span class="metric-sub">Test completados</span>
         </div>
         <div class="metric-card">
           <span class="metric-title">Asiste a Grupo</span>
@@ -561,23 +612,28 @@
         </div>
       </div>
 
-      <!-- Geographic Distribution & Interactive Map Section -->
+      <!-- Geographic Distribution & Real Honduras Map Section -->
       <section class="data-section">
         <div class="section-head">
-          <h3>📍 Distribución por Zona / Ciudad (Honduras)</h3>
+          <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Distribución por Zona / Ciudad (Honduras)
+          </h3>
         </div>
         
         <div class="honduras-map-container">
-          <!-- Ilustración Mapa Interactivo SVG de Honduras -->
+          <!-- Ilustración Mapa Geográfico Real SVG de Honduras -->
           <div class="honduras-svg-wrapper">
-            <svg viewBox="0 0 500 280" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Contorno simplificado de Honduras -->
-              <path d="M 40,110 Q 110,60 220,70 Q 340,50 440,90 Q 470,140 430,200 Q 360,240 280,220 Q 200,240 120,200 Q 50,180 40,110 Z" fill="rgba(51,108,221,0.06)" stroke="var(--primary)" stroke-width="2.5" stroke-linejoin="round"/>
-              <path d="M 120,130 Q 180,100 240,120 Q 300,100 360,130" stroke="rgba(51,108,221,0.15)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <svg viewBox="0 0 520 270" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Silueta Geográfica Real de Honduras -->
+              <path d="M 45,120 L 70,95 L 110,85 L 140,90 L 165,75 L 210,65 L 255,60 L 305,65 L 340,75 L 375,90 L 440,115 L 465,130 L 440,145 L 415,160 L 390,175 L 360,195 L 320,205 L 285,215 L 250,225 L 220,240 L 205,245 L 195,225 L 180,210 L 165,190 L 140,185 L 110,180 L 80,165 L 55,145 Z" fill="rgba(51,108,221,0.06)" stroke="var(--primary)" stroke-width="2.2" stroke-linejoin="round"/>
+              <!-- Islas de la Bahía (Roatán / Utila) -->
+              <path d="M 230,45 A 6,4 0 1 1 242,45 A 6,4 0 1 1 230,45 Z" fill="rgba(51,108,221,0.2)" stroke="var(--primary)" stroke-width="1.5"/>
+              <path d="M 260,40 A 10,5 0 1 1 280,40 A 10,5 0 1 1 260,40 Z" fill="rgba(51,108,221,0.2)" stroke="var(--primary)" stroke-width="1.5"/>
               
-              <!-- Pines de Ubicaciones Principales -->
-              <!-- Tegucigalpa (Fco Morazán) -->
-              <g class="map-pin" transform="translate(230, 165)">
+              <!-- Pines Geográficos Reales -->
+              <!-- Tegucigalpa (Francisco Morazán) -->
+              <g class="map-pin" transform="translate(235, 175)">
                 <circle r="14" fill="#336cdd" fill-opacity="0.2"/>
                 <circle r="7" fill="#336cdd"/>
                 <text y="-14" text-anchor="middle" font-size="11" font-weight="900" fill="#0f0f31">Tegucigalpa</text>
@@ -585,7 +641,7 @@
               </g>
 
               <!-- San Pedro Sula (Cortés) -->
-              <g class="map-pin" transform="translate(145, 105)">
+              <g class="map-pin" transform="translate(150, 100)">
                 <circle r="14" fill="#10b981" fill-opacity="0.2"/>
                 <circle r="7" fill="#10b981"/>
                 <text y="-14" text-anchor="middle" font-size="11" font-weight="900" fill="#0f0f31">San Pedro Sula</text>
@@ -593,15 +649,15 @@
               </g>
 
               <!-- La Ceiba (Atlántida) -->
-              <g class="map-pin" transform="translate(260, 85)">
+              <g class="map-pin" transform="translate(265, 80)">
                 <circle r="12" fill="#e05a2b" fill-opacity="0.2"/>
                 <circle r="6" fill="#e05a2b"/>
                 <text y="-12" text-anchor="middle" font-size="10" font-weight="900" fill="#0f0f31">La Ceiba</text>
                 <text y="18" id="map-pin-ceiba" text-anchor="middle" font-size="9" font-weight="800" fill="#e05a2b">0%</text>
               </g>
 
-              <!-- Choluteca / Sur -->
-              <g class="map-pin" transform="translate(210, 220)">
+              <!-- Choluteca / Zona Sur -->
+              <g class="map-pin" transform="translate(215, 230)">
                 <circle r="10" fill="#d4af37" fill-opacity="0.2"/>
                 <circle r="5" fill="#d4af37"/>
                 <text y="16" text-anchor="middle" font-size="10" font-weight="900" fill="#0f0f31">Choluteca</text>
@@ -609,7 +665,7 @@
               </g>
 
               <!-- Danlí / El Paraíso -->
-              <g class="map-pin" transform="translate(310, 180)">
+              <g class="map-pin" transform="translate(320, 185)">
                 <circle r="10" fill="#8b5cf6" fill-opacity="0.2"/>
                 <circle r="5" fill="#8b5cf6"/>
                 <text y="-10" text-anchor="middle" font-size="10" font-weight="900" fill="#0f0f31">Danlí</text>
@@ -625,10 +681,13 @@
         </div>
       </section>
 
-      <!-- 5 Cards Grid de Estadísticas de Dones -->
+      <!-- 5 Cards Grid de Estadísticas de Dones (Sin emojis, SVG) -->
       <section style="margin-bottom: 24px;">
         <div style="margin-bottom: 14px;">
-          <h3 style="font-size: 1.1rem; font-weight: 900; color: var(--navy); margin: 0;">📊 Métricas de Afinidad y Combinaciones</h3>
+          <h3 style="font-size: 1.1rem; font-weight: 900; color: var(--navy); margin: 0; display:flex; align-items:center; gap:6px;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Métricas de Afinidad y Combinaciones de Dones
+          </h3>
         </div>
 
         <div class="gift-stats-grid">
@@ -647,7 +706,7 @@
           <!-- Card B: Top 3 Menos Frecuentes -->
           <div class="gift-stat-card">
             <div class="gift-stat-card-title">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
               Top 3 Dones Menos Frecuentes
             </div>
             <div id="stat-top-least-frequent" style="display:flex; flex-direction:column; gap:6px;">
@@ -678,7 +737,7 @@
           </div>
 
           <!-- Card E: Don Más Frecuente por Ubicación -->
-          <div class="gift-stat-card" style="grid-column: span 1;">
+          <div class="gift-stat-card">
             <div class="gift-stat-card-title">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#7c3aed" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               Don Más Frecuente por Ubicación
@@ -699,7 +758,10 @@
       <!-- Gráfica Completa de Barras de los 15 Dones con Filtros Acumulables -->
       <section class="data-section">
         <div class="section-head">
-          <h3>🔥 Análisis Global de los 15 Dones Espirituales</h3>
+          <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M12 20v-6 M6 20V10 M18 20V4"/></svg>
+            Análisis Global de los 15 Dones Espirituales
+          </h3>
           <div style="display: flex; gap: 6px;">
             <button class="preset-btn active" id="btn-metric-mode-avg" data-mode="avg">Promedio por Don (%)</button>
             <button class="preset-btn" id="btn-metric-mode-total" data-mode="total">Total por Don (Frecuencia)</button>
@@ -723,12 +785,12 @@
             </select>
           </div>
           <div class="chart-control-group">
-            <label for="cross-filter-precision">Precisión Encuesta:</label>
+            <label for="cross-filter-precision">¿Refleja su forma de servir?:</label>
             <select id="cross-filter-precision">
-              <option value="all">Todas las opiniones</option>
-              <option value="si">Sí refleja su servicio</option>
+              <option value="all">Todas las respuestas</option>
+              <option value="si">Sí</option>
               <option value="parcial">Parcialmente</option>
-              <option value="no">No refleja</option>
+              <option value="no">No</option>
             </select>
           </div>
         </div>
@@ -738,16 +800,41 @@
         </div>
       </section>
 
-      <!-- Panel de Comentarios y Evaluaciones Abiertas (Mejorado Mobile) -->
+      <!-- 6. Sección de Estadísticas de Cada Pregunta de la Encuesta de Evaluación -->
       <section class="data-section">
         <div class="section-head">
-          <h3>💬 Comentarios y Sugerencias de Evaluación</h3>
+          <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Estadísticas de la Encuesta de Evaluación de la Experiencia
+          </h3>
         </div>
-        <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 14px;">
-          Retroalimentación abierta enviada por las personas al finalizar el test.
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px; font-weight:650;">
+          Métricas y respuestas de la encuesta final, afectadas por los filtros globales de fecha y ubicación.
         </p>
 
-        <!-- Filtros de Feedbacks -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+          <!-- Pregunta 1: Claridad Promedio -->
+          <div style="background:#fafafa; border:1px solid rgba(15,15,49,0.08); border-radius:16px; padding:16px;">
+            <h4 style="margin:0 0 8px 0; font-size:0.85rem; font-weight:850; color:var(--navy);">1. ¿Qué tan claro y comprensible te pareció el test?</h4>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span id="survey-q1-avg" style="font-size:2.2rem; font-weight:900; color:var(--navy);">0.0</span>
+              <span style="font-size:1.1rem; color:#f59e0b;">★★★★★</span>
+            </div>
+            <p id="survey-q1-sub" style="margin:4px 0 0 0; font-size:0.78rem; color:var(--primary); font-weight:750;">0 evaluaciones con estrellas</p>
+          </div>
+
+          <!-- Pregunta 2: Reflejo en su forma de servir -->
+          <div style="background:#fafafa; border:1px solid rgba(15,15,49,0.08); border-radius:16px; padding:16px;">
+            <h4 style="margin:0 0 8px 0; font-size:0.85rem; font-weight:850; color:var(--navy);">2. ¿Sientes que los resultados reflejan tu forma de servir?</h4>
+            <div id="survey-q2-bars" style="display:flex; flex-direction:column; gap:6px; margin-top:8px;">
+              <!-- Render dinámico barras Sí, Parcial, No -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 3: Comentarios y Sugerencias Abiertas (Feed) -->
+        <h4 style="margin:0 0 12px 0; font-size:0.95rem; font-weight:900; color:var(--navy);">3. Comentarios o Sugerencias para Mejorar:</h4>
+
         <div class="feedback-tabs">
           <button class="feedback-tab-btn active" data-filter="all">Todos los Comentarios</button>
           <button class="feedback-tab-btn" data-filter="has_text">Solo con Texto</button>
@@ -760,7 +847,7 @@
         </div>
       </section>
 
-      <!-- Video Links Management Panel (Última Sección) -->
+      <!-- 7. Video Links Management Panel (Última Sección) -->
       <section class="data-section" style="border-left: 4px solid #e05a2b; margin-top: 32px;">
         <div class="section-head">
           <h3>
@@ -786,7 +873,7 @@
             <input type="url" id="yt-video-3" placeholder="https://www.youtube.com/watch?v=...">
           </div>
           <button id="btn-save-video-links" class="btn btn-primary" style="height: 44px; font-size: 0.88rem; margin-top: 4px;">
-            💾 Guardar Enlaces de Videos
+            Guardar Enlaces de Videos
           </button>
           <div id="video-save-toast" style="display: none; font-size: 0.82rem; font-weight: 800; color: #059669; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 10px; text-align: center;">
             ✓ Enlaces de video guardados exitosamente.
@@ -809,7 +896,9 @@
     const logoutBtn = document.getElementById('admin-logout-btn');
     const errorMsg = document.getElementById('login-error-msg');
 
-    let globalAdminData = [];
+    let rawMetricsData = []; // Datos crudos desde Supabase filtrados por fecha
+    let globalAdminData = []; // Datos filtrados por fecha Y zona global
+    let selectedZones = ['all']; // 'all' o array de zonas elegidas
     let currentFeedbackFilter = 'all';
     let currentChartMode = 'avg'; // 'avg' | 'total'
 
@@ -847,7 +936,7 @@
     });
 
     // ---------------------------------------------------------------------------
-    // Filtros de Fecha (Presets + Personalizado)
+    // 1. Filtros de Fecha (Presets + Personalizado)
     // ---------------------------------------------------------------------------
     const customDateContainer = document.getElementById('custom-date-container');
     const startDateInput = document.getElementById('filter-start-date');
@@ -897,20 +986,63 @@
     });
 
     // ---------------------------------------------------------------------------
-    // Carga de Datos y Renderizado Principal
+    // Carga de Datos y Aplicación de Filtro Global de Zona
     // ---------------------------------------------------------------------------
     async function loadDashboard(startDate = null, endDate = null) {
-      const data = await fetchAdminMetrics(startDate, endDate);
-      globalAdminData = data;
-      renderMetrics(data);
-      renderHondurasMapAndZones(data);
-      renderGiftStatsCards(data);
-      populateCrossFilterDropdowns(data);
-      renderFullGiftsChart();
-      renderFeedbackFeed(data);
+      rawMetricsData = await fetchAdminMetrics(startDate, endDate);
+      renderGlobalZonePills(rawMetricsData);
+      applyGlobalZoneFilter();
     }
 
-    // 1. Render de las 4 Tarjetas de Métricas Principales
+    function renderGlobalZonePills(data) {
+      const container = document.getElementById('global-zone-pills');
+      const uniqueLocs = [...new Set(data.map(d => d.zone_location).filter(Boolean))].sort();
+
+      let html = `<button class="zone-pill-btn ${selectedZones.includes('all') ? 'active' : ''}" data-zone="all">Todas las Zonas</button>`;
+      
+      uniqueLocs.forEach(loc => {
+        const isSelected = selectedZones.includes(loc);
+        html += `<button class="zone-pill-btn ${isSelected ? 'active' : ''}" data-zone="${loc}">${loc}</button>`;
+      });
+
+      container.innerHTML = html;
+
+      container.querySelectorAll('.zone-pill-btn').forEach(btn => {
+        btn.onclick = () => {
+          const z = btn.dataset.zone;
+          if (z === 'all') {
+            selectedZones = ['all'];
+          } else {
+            selectedZones = selectedZones.filter(x => x !== 'all');
+            if (selectedZones.includes(z)) {
+              selectedZones = selectedZones.filter(x => x !== z);
+            } else {
+              selectedZones.push(z);
+            }
+            if (selectedZones.length === 0) selectedZones = ['all'];
+          }
+          renderGlobalZonePills(rawMetricsData);
+          applyGlobalZoneFilter();
+        };
+      });
+    }
+
+    function applyGlobalZoneFilter() {
+      if (selectedZones.includes('all')) {
+        globalAdminData = [...rawMetricsData];
+      } else {
+        globalAdminData = rawMetricsData.filter(d => selectedZones.includes(d.zone_location));
+      }
+
+      renderMetrics(globalAdminData);
+      renderHondurasMapAndZones(globalAdminData);
+      renderGiftStatsCards(globalAdminData);
+      populateCrossFilterDropdowns(globalAdminData);
+      renderFullGiftsChart();
+      renderSurveyStatsSection(globalAdminData);
+    }
+
+    // 1. Render de las 4 Tarjetas de Métricas Principales (KPIs)
     function renderMetrics(data) {
       const total = data.length;
       document.getElementById('metric-total-count').textContent = total;
@@ -944,7 +1076,7 @@
       document.getElementById('metric-eval-filled-pct').textContent = `${evalFilledPct}% de respuesta`;
     }
 
-    // 2. Mapa SVG de Honduras y Distribución por Zonas
+    // 2. Mapa Geográfico Real de Honduras y Distribución por Zonas
     function renderHondurasMapAndZones(data) {
       const total = data.length;
       const container = document.getElementById('zones-bar-list');
@@ -960,7 +1092,7 @@
         zonesCount[zone] = (zonesCount[zone] || 0) + 1;
       });
 
-      // Actualizar porcentajes de pines en Mapa SVG
+      // Actualizar porcentajes de pines en Mapa SVG Real
       const findPct = (keyword) => {
         const match = Object.entries(zonesCount).find(([k]) => k.toLowerCase().includes(keyword.toLowerCase()));
         return match ? Math.round((match[1] / total) * 100) : 0;
@@ -1043,10 +1175,10 @@
         const mostNames = mostKey.split('__').map(id => getGiftName(id)).join(', ');
         document.getElementById('stat-trio-most-common').innerHTML = `
           <div class="trio-pill">
-            <span>🏆</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <div>
               <div>${mostNames}</div>
-              <div style="font-size:0.75rem; color:var(--primary); margin-top:2px;">Ocurre en ${mostCnt} evaluación(es)</div>
+              <div style="font-size:0.75rem; color:var(--primary); margin-top:2px;">Coincide en ${mostCnt} evaluación(es)</div>
             </div>
           </div>
         `;
@@ -1055,10 +1187,10 @@
         const leastNames = leastKey.split('__').map(id => getGiftName(id)).join(', ');
         document.getElementById('stat-trio-least-common').innerHTML = `
           <div class="trio-pill" style="background:rgba(239, 68, 68, 0.08); border-color:rgba(239, 68, 68, 0.2);">
-            <span>🧩</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
             <div>
               <div>${leastNames}</div>
-              <div style="font-size:0.75rem; color:#dc2626; margin-top:2px;">Ocurre en ${leastCnt} evaluación(es)</div>
+              <div style="font-size:0.75rem; color:#dc2626; margin-top:2px;">Coincide en ${leastCnt} evaluación(es)</div>
             </div>
           </div>
         `;
@@ -1075,7 +1207,7 @@
           const topInLoc = Object.entries(giftsInLoc).sort((a, b) => b[1] - a[1])[0];
           if (topInLoc) {
             document.getElementById('stat-location-top-gift').innerHTML = `
-              💡 Don más frecuente: <strong style="color:var(--navy);">${getGiftName(topInLoc[0])}</strong> (${topInLoc[1]} pers.)
+              Don más frecuente: <strong style="color:var(--navy);">${getGiftName(topInLoc[0])}</strong> (${topInLoc[1]} pers.)
             `;
             return;
           }
@@ -1090,7 +1222,7 @@
     // 4. Llenado de Dropdowns de Filtros Acumulables
     function populateCrossFilterDropdowns(data) {
       const locSelect = document.getElementById('cross-filter-location');
-      const uniqueLocs = [...new Set(data.map(d => d.zone_location).filter(Boolean))];
+      const uniqueLocs = [...new Set(data.map(d => d.zone_location).filter(Boolean))].sort();
       locSelect.innerHTML = '<option value="all">Todas las ubicaciones</option>' + uniqueLocs.map(l => `<option value="${l}">${l}</option>`).join('');
     }
 
@@ -1132,7 +1264,7 @@
         return;
       }
 
-      // Calcular métricas para los 15 dones
+      // Calcular métricas exactas para los 15 dones
       const giftStatsList = gifts.map(g => {
         let scoreSum = 0;
         let scoreCount = 0;
@@ -1195,7 +1327,58 @@
       }
     }
 
-    // 6. Comentarios y Feedbacks (Feed Mobile)
+    // 6. Sección de Estadísticas de Cada Pregunta de la Encuesta
+    function renderSurveyStatsSection(data) {
+      const total = data.length;
+      const q1AvgEl = document.getElementById('survey-q1-avg');
+      const q1SubEl = document.getElementById('survey-q1-sub');
+      const q2BarsEl = document.getElementById('survey-q2-bars');
+
+      if (total === 0) {
+        q1AvgEl.textContent = '0.0';
+        q1SubEl.textContent = '0 evaluaciones enviadas';
+        q2BarsEl.innerHTML = '<p style="color:var(--text-muted); font-size: 0.8rem;">Sin registros.</p>';
+        renderFeedbackFeed([]);
+        return;
+      }
+
+      // Pregunta 1: Claridad Promedio
+      const clarityItems = data.filter(d => d.clarity_rating);
+      const clarityAvg = clarityItems.length > 0 
+        ? (clarityItems.reduce((acc, d) => acc + Number(d.clarity_rating), 0) / clarityItems.length).toFixed(1) 
+        : '0.0';
+      q1AvgEl.textContent = clarityAvg;
+      q1SubEl.textContent = `${clarityItems.length} de ${total} enviaron estrellas`;
+
+      // Pregunta 2: ¿Refleja su forma de servir?
+      const accYes = data.filter(d => d.accuracy_perception === 'si').length;
+      const accParcial = data.filter(d => d.accuracy_perception === 'parcial').length;
+      const accNo = data.filter(d => d.accuracy_perception === 'no').length;
+
+      const pctYes = Math.round((accYes / total) * 100);
+      const pctParcial = Math.round((accParcial / total) * 100);
+      const pctNo = Math.round((accNo / total) * 100);
+
+      q2BarsEl.innerHTML = `
+        <div class="bar-item">
+          <div class="bar-info"><span>Sí refleja</span><span>${accYes} (${pctYes}%)</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pctYes}%; background:#10b981;"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-info"><span>Parcialmente</span><span>${accParcial} (${pctParcial}%)</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pctParcial}%; background:#f59e0b;"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-info"><span>No refleja</span><span>${accNo} (${pctNo}%)</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pctNo}%; background:#ef4444;"></div></div>
+        </div>
+      `;
+
+      // Pregunta 3: Render Feed de Comentarios Abiertos
+      renderFeedbackFeed(data);
+    }
+
+    // Tabs de comentarios
     document.querySelectorAll('.feedback-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.feedback-tab-btn').forEach(b => b.classList.remove('active'));
@@ -1219,23 +1402,23 @@
       }
 
       if (filtered.length === 0) {
-        container.innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem; text-align: center; padding: 20px 0;">No hay feedbacks que coincidan con este filtro.</p>';
+        container.innerHTML = '<p style="color:var(--text-muted); font-size: 0.84rem; text-align: center; padding: 20px 0;">No hay comentarios que coincidan con este filtro.</p>';
         return;
       }
 
       container.innerHTML = filtered.map(d => {
         const date = new Date(d.completed_at).toLocaleString('es-HN', { dateStyle: 'short', timeStyle: 'short' });
         const zone = d.zone_location || 'Zona no indicada';
-        const clarity = d.clarity_rating ? `${d.clarity_rating}.0 ★` : 'Sin calificación';
+        const clarity = d.clarity_rating ? `${d.clarity_rating}.0 ★` : 'Sin estrellas';
         
         let accBadge = '<span class="feedback-badge">Precisión N/A</span>';
-        if (d.accuracy_perception === 'si') accBadge = '<span class="feedback-badge yes">✓ Refleja su servicio</span>';
+        if (d.accuracy_perception === 'si') accBadge = '<span class="feedback-badge yes">✓ Sí refleja</span>';
         else if (d.accuracy_perception === 'parcial') accBadge = '<span class="feedback-badge parcial">⚠️ Parcialmente</span>';
         else if (d.accuracy_perception === 'no') accBadge = '<span class="feedback-badge no">✕ No refleja</span>';
 
         const commentText = d.feedback_comments && d.feedback_comments.trim() !== '' 
           ? `<div class="feedback-text">“${d.feedback_comments}”</div>`
-          : `<div style="font-size: 0.78rem; color: var(--text-muted); font-style: italic;">Sin comentarios abiertos por escrito.</div>`;
+          : `<div style="font-size: 0.78rem; color: var(--text-muted); font-style: italic;">Sin comentarios por escrito.</div>`;
 
         return `
           <div class="feedback-card">
