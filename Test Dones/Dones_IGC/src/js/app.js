@@ -281,18 +281,18 @@ function getFirstUnansweredScene() {
 
 const MILESTONE_BANNERS = {
   2: {
-    title: "⚡ ¡BUEN COMIENZO! (PARTE 2)",
-    text: "Recuerda responder con total sinceridad sobre lo que realmente harías en cada situación.",
+    title: "⚡ ¡BUEN COMIENZO!",
+    text: "Responde con sinceridad lo que realmente harías en cada situación.",
     illustration: "src/assets/illustrations/banners/Parte 2.png"
   },
   5: {
-    title: "⚡ ¡MITAD DEL CAMINO! (PARTE 5)",
-    text: "¡Vas excelente! Cada respuesta nos ayuda a identificar con precisión tus fortalezas principales.",
+    title: "⚡ ¡MITAD DEL CAMINO!",
+    text: "¡Vas excelente! Cada respuesta perfecciona tus resultados.",
     illustration: "src/assets/illustrations/banners/Parte 5.png"
   },
   9: {
-    title: "🏁 ¡YA CASI TERMINAS! (PARTE 9)",
-    text: "Estás a un paso de descubrir tus dones espirituales y su aplicación práctica en la iglesia local.",
+    title: "🏁 ¡YA CASI TERMINAS!",
+    text: "Últimas preguntas para descubrir tus dones espirituales.",
     illustration: "src/assets/illustrations/banners/Parte 9.png"
   }
 };
@@ -311,6 +311,12 @@ function renderScene() {
     el.sceneBanner.style.display = 'flex';
   } else if (el.sceneBanner) {
     el.sceneBanner.style.display = 'none';
+  }
+
+  // La instrucción honesta sólo se muestra en Parte 1 y Parte 5
+  const instructionEl = document.getElementById('test-honest-instruction-note');
+  if (instructionEl) {
+    instructionEl.style.display = (sceneId === 1 || sceneId === 5) ? 'block' : 'none';
   }
 
   // Estaciones del Mapa de Ruta
@@ -772,13 +778,9 @@ function initQuickGiftsSlideover() {
     if (el.modalQuickGifts) el.modalQuickGifts.classList.add('active');
   };
 
-  if (el.btnQuickExploreGifts) {
-    el.btnQuickExploreGifts.addEventListener('click', openSlideover);
-  }
-
-  const inlineBtn = document.getElementById('btn-quick-explore-gifts-inline');
-  if (inlineBtn) {
-    inlineBtn.addEventListener('click', openSlideover);
+  const linkBtn = document.getElementById('btn-quick-explore-gifts-link');
+  if (linkBtn) {
+    linkBtn.addEventListener('click', openSlideover);
   }
 
   if (el.quickGiftsCloseBtn) {

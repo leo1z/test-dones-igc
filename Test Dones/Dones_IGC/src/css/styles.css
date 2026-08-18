@@ -482,7 +482,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: width var(--transition-normal);
 }
 
-/* Single Unified Scene Banner Card (Parte X + Inline Link) */
+/* Single Unified Scene Banner Card (Partes Hito 2, 5, 9) */
 .scene-card {
   width: 100%;
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
@@ -491,43 +491,45 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 10px 30px -4px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 8px 24px -4px rgba(37, 99, 235, 0.3);
   position: relative;
   box-sizing: border-box;
+  margin-bottom: 14px;
 }
 
 .scene-banner-img {
-  height: 135px;
-  width: auto;
-  max-width: 190px;
+  height: 65px;
+  width: 65px;
   object-fit: contain;
   flex-shrink: 0;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
 }
 
 .scene-banner-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 4px;
   flex: 1;
   color: #ffffff;
 }
 
 .scene-banner-title {
-  font-size: 1.6rem;
+  font-size: 1.05rem;
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   margin: 0;
-  line-height: 1.1;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .scene-banner-disclaimer {
-  font-size: 0.82rem;
-  font-weight: 650;
-  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.35;
+  margin: 0;
+}
   line-height: 1.4;
   margin: 0;
 }
