@@ -115,21 +115,29 @@
           </div>
         </div>
 
-        <!-- Single Unified Scene Banner Card -->
-        <div class="scene-card" id="scene-banner">
-          <img src="src/assets/illustrations/banners/Parte 1.png" alt="Parte Ilustración" class="scene-banner-img" id="scene-illustration">
+        <!-- Single Unified Scene Banner Card (Se muestra únicamente en partes clave de avance) -->
+        <div class="scene-card" id="scene-banner" style="display: none;">
+          <img src="src/assets/illustrations/banners/Parte 2.png" alt="Progreso Ilustración" class="scene-banner-img" id="scene-illustration">
           <div class="scene-banner-content">
-            <h3 class="scene-banner-title" id="scene-part-title">PARTE 1</h3>
-            <p class="scene-banner-disclaimer">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:2px;"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8a6 6 0 0 0-12 0c0 1.6.64 2.99 1.69 3.99.66.63 1.2 1.5 1.4 2.5"/></svg> Conocer los dones te dará más claridad.
-              <span id="btn-quick-explore-gifts" class="scene-explore-link">Explorar Dones →</span>
+            <h3 class="scene-banner-title" id="scene-part-title">¡BUEN COMIENZO!</h3>
+            <p class="scene-banner-disclaimer" id="scene-banner-text" style="font-size: 0.86rem; color: var(--navy); margin-top: 4px; font-weight: 750;">
+              Recuerda responder con total sinceridad sobre lo que realmente harías.
             </p>
           </div>
         </div>
 
-        <!-- Nota de Instrucción Honesta -->
-        <div class="test-honest-instruction-note">
-          <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-3px; margin-right:4px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> <strong>Instrucción:</strong> Imagínate en cada situación y responde con total sinceridad sobre lo que <em>realmente harías</em>, no lo que desearías hacer.</span>
+        <!-- Nota de Instrucción Honesta con acceso a Explorar Dones -->
+        <div class="test-honest-instruction-note" style="margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <span style="flex: 1; min-width: 240px;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-3px; margin-right:4px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <strong>Instrucción:</strong> Imagínate en cada situación y responde con total sinceridad sobre lo que <em>realmente harías</em>, no lo que desearías hacer.
+            </span>
+            <span id="btn-quick-explore-gifts-inline" class="scene-explore-link" style="cursor: pointer; color: var(--primary); font-weight: 850; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 4px; background: rgba(51,108,221,0.08); padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(51,108,221,0.2); transition: background 0.2s ease;">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8a6 6 0 0 0-12 0c0 1.6.64 2.99 1.69 3.99.66.63 1.2 1.5 1.4 2.5"/></svg>
+              Conocer los dones te dará más claridad. <strong>Explorar Dones →</strong>
+            </span>
+          </div>
         </div>
 
         <!-- Situations / Questions list -->

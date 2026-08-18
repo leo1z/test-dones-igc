@@ -62,6 +62,7 @@ const el = {
   
   // Wizard
   testPercentIndicator: document.getElementById('test-percent-indicator'),
+  sceneBanner: document.getElementById('scene-banner'),
   sceneIllustration: document.getElementById('scene-illustration'),
   scenePartTitle: document.getElementById('scene-part-title'),
   questionsContainer: document.getElementById('questions-container'),
@@ -278,23 +279,38 @@ function getFirstUnansweredScene() {
   return 10;
 }
 
+const MILESTONE_BANNERS = {
+  2: {
+    title: "⚡ ¡BUEN COMIENZO! (PARTE 2)",
+    text: "Recuerda responder con total sinceridad sobre lo que realmente harías en cada situación.",
+    illustration: "src/assets/illustrations/banners/Parte 2.png"
+  },
+  5: {
+    title: "⚡ ¡MITAD DEL CAMINO! (PARTE 5)",
+    text: "¡Vas excelente! Cada respuesta nos ayuda a identificar con precisión tus fortalezas principales.",
+    illustration: "src/assets/illustrations/banners/Parte 5.png"
+  },
+  9: {
+    title: "🏁 ¡YA CASI TERMINAS! (PARTE 9)",
+    text: "Estás a un paso de descubrir tus dones espirituales y su aplicación práctica en la iglesia local.",
+    illustration: "src/assets/illustrations/banners/Parte 9.png"
+  }
+};
+
 function renderScene() {
   const sceneId = state.currentScene;
   const sceneQuestions = situations.filter(s => s.sceneId === sceneId);
   
-  // Banner de la Escena
-  el.sceneIllustration.src = SCENE_ILLUSTRATIONS[sceneId] || SCENE_ILLUSTRATIONS[1];
-  el.scenePartTitle.textContent = `PARTE ${sceneId}`;
-  
-  // Notificaciones de seguimiento al empezar Parte 2, 5 y 9
-  const progressToasts = {
-    2: { icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71 1.26-1.5 1.5-2.5l5.5-5.5c-2.83-2.83-6.5-2-6.5-2l-5.5 5.5c-1 .24-1.79.79-2.5 1.5z"/><path d="M12 15l-3-3"/><path d="M15 6l3 3"/></svg>`, title: "¡Buen comienzo!", text: "Recuerda responder con total sinceridad." },
-    5: { icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`, title: "¡Mitad del camino!", text: "Cada respuesta nos ayuda a guiarte mejor." },
-    9: { icon: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`, title: "¡Ya casi terminas!", text: "Sigue adelante." }
-  };
-
-  if (progressToasts[sceneId]) {
-    showProgressToast(progressToasts[sceneId]);
+  // Renderizado dinámico de Banner únicamente en partes hito (2, 5, 9)
+  const milestone = MILESTONE_BANNERS[sceneId];
+  if (milestone && el.sceneBanner) {
+    if (el.sceneIllustration) el.sceneIllustration.src = milestone.illustration;
+    if (el.scenePartTitle) el.scenePartTitle.textContent = milestone.title;
+    const bannerTextEl = document.getElementById('scene-banner-text');
+    if (bannerTextEl) bannerTextEl.textContent = milestone.text;
+    el.sceneBanner.style.display = 'flex';
+  } else if (el.sceneBanner) {
+    el.sceneBanner.style.display = 'none';
   }
 
   // Estaciones del Mapa de Ruta
@@ -751,11 +767,18 @@ function openGrowthGroupModal() {
 // Slideover Consulta Rápida de Dones (Desde el Test)
 // ---------------------------------------------------------------------------
 function initQuickGiftsSlideover() {
+  const openSlideover = () => {
+    renderQuickGiftsList();
+    if (el.modalQuickGifts) el.modalQuickGifts.classList.add('active');
+  };
+
   if (el.btnQuickExploreGifts) {
-    el.btnQuickExploreGifts.addEventListener('click', () => {
-      renderQuickGiftsList();
-      el.modalQuickGifts.classList.add('active');
-    });
+    el.btnQuickExploreGifts.addEventListener('click', openSlideover);
+  }
+
+  const inlineBtn = document.getElementById('btn-quick-explore-gifts-inline');
+  if (inlineBtn) {
+    inlineBtn.addEventListener('click', openSlideover);
   }
 
   if (el.quickGiftsCloseBtn) {
