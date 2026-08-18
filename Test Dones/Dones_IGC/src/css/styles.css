@@ -2075,15 +2075,29 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 14px rgba(51, 108, 221, 0.35) !important;
 }
 
+.glossary-container {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+}
+
 .glossary-header {
   position: sticky;
   top: 0;
   z-index: 90;
-  background: #fdfbf7;
+  background: var(--cream);
   padding-top: 10px;
   padding-bottom: 12px;
   margin-bottom: 16px;
   border-bottom: 1px solid rgba(15, 15, 49, 0.06);
+}
+
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  min-height: 450px;
+  align-content: start;
 }
 
 .screen {
