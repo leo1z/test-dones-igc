@@ -9,7 +9,7 @@
 import { situations, TOTAL_SITUATIONS } from '../data/situations.js';
 import { gifts } from '../data/gifts.js';
 import { runFullCalculation, isTestComplete } from './score-engine.js';
-import { submitResult } from './supabase-client.js';
+import { submitResult, deleteSubmission } from './supabase-client.js';
 
 // ---------------------------------------------------------------------------
 // Constantes de almacenamiento local
@@ -1022,12 +1022,17 @@ el.btnNext.addEventListener('click', () => {
   }
 });
 
-el.btnReset.addEventListener('click', () => {
+el.btnReset.addEventListener('click', async () => {
   const confirmed = window.confirm('¿Seguro que deseas reiniciar el test? Esto borrará tus respuestas actuales.');
   if (confirmed) {
+    const submissionId = state.submissionId || localStorage.getItem(STORAGE_SUBMISSION_ID_KEY);
+    if (submissionId) {
+      deleteSubmission(submissionId);
+    }
     clearStorage();
     state.answers = {};
     state.currentScene = 1;
+    state.submissionId = null;
     state.onboarding = { completed: false, attendsGrowthGroup: null, zoneLocation: '' };
     el.btnViewResults.style.display = 'none';
     showScreen('welcome');

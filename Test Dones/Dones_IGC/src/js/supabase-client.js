@@ -51,6 +51,21 @@ export async function submitResult(result) {
 }
 
 /**
+ * Elimina un registro de entrega en Supabase cuando el usuario reinicia el test.
+ */
+export async function deleteSubmission(submissionId) {
+  if (!submissionId) return false;
+  try {
+    const { error } = await supabase.from('results').delete().eq('id', submissionId);
+    if (error) throw error;
+    return true;
+  } catch (err) {
+    console.warn('[Supabase] No se pudo eliminar el registro remoto:', err?.message || err);
+    return false;
+  }
+}
+
+/**
  * Consulta métricas y resultados para el Panel Admin (admin.html) con filtros por fecha.
  */
 export async function fetchAdminMetrics(startDate = null, endDate = null) {
