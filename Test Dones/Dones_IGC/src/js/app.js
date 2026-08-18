@@ -442,6 +442,19 @@ function renderRoadmapTrack(currentSceneId) {
 
     container.appendChild(node);
   }
+
+  // Desplazamiento horizontal automático para mantener centrada la parte activa
+  setTimeout(() => {
+    const scrollParent = document.getElementById('journey-nodes-scroll');
+    const currentNode = container.querySelector('.roadmap-node.current');
+    if (scrollParent && currentNode) {
+      const scrollOffset = currentNode.offsetLeft - (scrollParent.clientWidth / 2) + (currentNode.clientWidth / 2);
+      scrollParent.scrollTo({
+        left: Math.max(0, scrollOffset),
+        behavior: 'smooth'
+      });
+    }
+  }, 60);
 }
 
 function handlePillClick(e, questionId, val, itemEl) {

@@ -1962,6 +1962,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .journey-nodes-scroll {
   overflow-x: auto;
+  scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 12px 14px;
