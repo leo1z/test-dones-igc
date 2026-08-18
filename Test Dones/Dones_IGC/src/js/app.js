@@ -165,8 +165,7 @@ function clearStorage() {
 
 // ---------------------------------------------------------------------------
 // Control de Pantallas
-// ---------------------------------------------------------------------------
-function showScreen(screenId) {
+function showScreen(screenId, pushHistory = true) {
   Object.keys(screens).forEach(key => {
     if (screens[key]) {
       screens[key].classList.remove('active');
@@ -192,8 +191,24 @@ function showScreen(screenId) {
   // Header Back Button
   el.navBtnBack.style.display = (screenId === 'welcome') ? 'none' : 'block';
 
+  if (pushHistory) {
+    history.pushState({ screen: screenId, scene: state.currentScene }, '', `#${screenId}`);
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+window.addEventListener('popstate', (e) => {
+  if (e.state && e.state.screen) {
+    if (e.state.scene) {
+      state.currentScene = e.state.scene;
+      renderScene();
+    }
+    showScreen(e.state.screen, false);
+  } else {
+    showScreen('welcome', false);
+  }
+});
 
 // ---------------------------------------------------------------------------
 // Flujo de Onboarding Inicial (Evangelio + Zona)
@@ -390,24 +405,33 @@ function renderRoadmapTrack(currentSceneId) {
   const container = document.getElementById('journey-nodes-container');
   if (!container) return;
   
+  const firstUnanswered = getFirstUnansweredScene();
+
   container.innerHTML = '';
   for (let i = 1; i <= 10; i++) {
     const sceneQuestions = situations.filter(s => s.sceneId === i);
     const isCompleted = sceneQuestions.every(q => state.answers[q.id]);
     const isCurrent = i === currentSceneId;
+    const isLocked = i > firstUnanswered && !isCompleted;
 
     const node = document.createElement('div');
-    node.className = `roadmap-node journey-node ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}`;
-    node.title = `Parte ${i}`;
+    node.className = `roadmap-node journey-node ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''}`;
+    node.title = isLocked ? `Parte ${i} (Bloqueada hasta responder las anteriores)` : `Parte ${i}`;
+
+    const circleContent = isCompleted
+      ? '✓'
+      : (isLocked 
+          ? `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+          : i);
 
     node.innerHTML = `
       <div class="node-circle">
-        ${isCompleted ? '✓' : i}
+        ${circleContent}
       </div>
       <span class="node-label">Parte ${i}</span>
     `;
 
-    if (isCompleted || i <= getFirstUnansweredScene()) {
+    if (!isLocked) {
       node.style.cursor = 'pointer';
       node.addEventListener('click', () => {
         state.currentScene = i;
@@ -453,6 +477,12 @@ function checkSceneCompletion() {
   const complete = sceneQuestions.every(q => state.answers[q.id]);
   el.btnNext.disabled = !complete;
   el.navHint.style.opacity = complete ? '0' : '1';
+
+  if (state.currentScene === 10) {
+    el.btnNext.innerHTML = `<span>Finalizar Test</span> <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+  } else {
+    el.btnNext.innerHTML = `<span>Siguiente</span> <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+  }
 }
 
 function updateProgressBar() {

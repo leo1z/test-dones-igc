@@ -1964,7 +1964,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 8px 4px;
+  padding: 12px 14px;
 }
 
 .journey-nodes-scroll::-webkit-scrollbar {
@@ -1976,6 +1976,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 16px;
   min-width: max-content;
+  padding: 4px 12px;
   position: relative;
 }
 
@@ -1992,6 +1993,16 @@ h1, h2, h3, h4, h5, h6 {
 .roadmap-node:hover,
 .journey-node:hover {
   transform: translateY(-3px);
+}
+
+.roadmap-node.locked,
+.journey-node.locked {
+  cursor: not-allowed;
+}
+
+.roadmap-node.locked:hover,
+.journey-node.locked:hover {
+  transform: none;
 }
 
 .node-circle {
@@ -2039,9 +2050,44 @@ h1, h2, h3, h4, h5, h6 {
 
 .roadmap-node.locked .node-circle,
 .journey-node.locked .node-circle {
-  opacity: 0.45;
-  border-style: dashed;
-  background: rgba(15, 15, 49, 0.03);
+  opacity: 0.55;
+  border: 1.5px dashed rgba(15, 15, 49, 0.25) !important;
+  background: rgba(15, 15, 49, 0.04) !important;
+  color: rgba(15, 15, 49, 0.4) !important;
+  box-shadow: none !important;
+}
+
+#btn-next:disabled,
+.btn:disabled {
+  background: #cbd5e1 !important;
+  color: #64748b !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.75 !important;
+}
+
+.eval-acc-btn.selected {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  font-weight: 850 !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 4px 14px rgba(51, 108, 221, 0.35) !important;
+}
+
+.glossary-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: #fdfbf7;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(15, 15, 49, 0.06);
+}
+
+.screen {
+  padding-bottom: 110px !important;
 }
 
 .node-label {

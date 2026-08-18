@@ -87,11 +87,12 @@
         </div>
 
         <!-- Créditos Oficiales -->
-        <div class="developed-by-home" style="margin-top: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;">
+        <div class="developed-by-home" style="margin-top: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding-bottom: 20px;">
           <div style="font-size: 0.88rem; color: var(--navy); font-weight: 850;">
             Creado por Iglesia Gran Comisión Tegucigalpa
           </div>
           <div class="reviewed-by-pastor" style="font-size: 0.76rem; font-weight: 650; color: var(--navy); opacity: 0.7; font-style: italic;">Revisado por Pastor Gustavo Zepeda</div>
+          <div style="margin-top: 4px; font-size: 0.76rem; font-weight: 700; color: var(--text-muted);">&copy; 2026 Iglesia Gran Comisión Tegucigalpa. Todos los derechos reservados.</div>
         </div>
       </div>
     </section>
@@ -106,7 +107,12 @@
               <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
               CONOCE TUS DONES
             </span>
-            <span class="journey-percent" id="test-percent-indicator">0% Completado</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 0.72rem; color: var(--primary); font-weight: 750; display: inline-flex; align-items: center; gap: 3px; background: rgba(51,108,221,0.08); padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(51,108,221,0.18);" title="Tu avance se guarda automáticamente en este dispositivo">
+                <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardado automático
+              </span>
+              <span class="journey-percent" id="test-percent-indicator">0% Completado</span>
+            </div>
           </div>
           <div class="journey-nodes-scroll" id="journey-nodes-scroll">
             <div class="journey-nodes-track" id="journey-nodes-container">
@@ -404,13 +410,6 @@
       <iframe src="https://igcteg.org/grupos/" style="width: 100%; height: 100%; border: none; background: #ffffff;"></iframe>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="footer-container" style="text-align: center;">
-      <p class="footer-copy" style="margin: 0; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">&copy; 2026 Iglesia Gran Comisión Tegucigalpa</p>
-    </div>
-  </footer>
 
   <!-- Floating Glass Bottom Navigation Bar -->
   <nav class="bottom-nav-glass" id="bottom-nav">
