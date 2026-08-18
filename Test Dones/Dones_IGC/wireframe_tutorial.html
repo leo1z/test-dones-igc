@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe Prototipo Interactivo & Explicación de Código — Dones IGC</title>
+  <!-- Google Fonts: Inter, Outfit, Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --panel-bg: #111827;
+      --panel-border: #1f2937;
+      --wf-bg: #f8fafc;
+      --wf-card: #ffffff;
+      --wf-border: #cbd5e1;
+      --wf-text: #0f172a;
+      --wf-muted: #64748b;
+      --primary: #3b82f6;
+      --accent: #8b5cf6;
+      --success: #10b981;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --code-bg: #030712;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header Nav */
+    .header-nav {
+      background-color: #0d1322;
+      border-bottom: 1px solid var(--panel-border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .brand-text span {
+      font-size: 0.72rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .screen-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px;
+    }
+
+    .tab-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--panel-border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+    }
+
+    /* Main Container (Split Screen) */
+    .workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Left Side: Pure Wireframe Mockup Canvas */
+    .wireframe-canvas {
+      flex: 1;
+      background-color: #1e293b;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* Mobile Device Wireframe Frame */
+    .phone-mockup {
+      width: 100%;
+      max-width: 420px;
+      min-height: 680px;
+      background-color: var(--wf-bg);
+      border: 12px solid #0f172a;
+      border-radius: 36px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      color: var(--wf-text);
+    }
+
+    .phone-notch {
+      width: 140px;
+      height: 20px;
+      background-color: #0f172a;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      margin: 0 auto;
+      z-index: 50;
+    }
+
+    .wf-screen-content {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    /* Wireframe Components UI Styling */
+    .wf-box {
+      border: 2px dashed var(--wf-border);
+      border-radius: 10px;
+      padding: 12px;
+      background: var(--wf-card);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .wf-box:hover {
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.04);
+    }
+
+    .wf-label {
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      text-transform: uppercase;
+    }
+
+    .wf-btn {
+      background: #2563eb;
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+    }
+
+    .wf-btn-secondary {
+      background: #e2e8f0;
+      color: #334155;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .wf-pill-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .wf-pill {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .wf-pill.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+
+    .wf-roadmap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    .wf-node {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      background: #fff;
+    }
+
+    .wf-node.done { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .wf-node.current { border-color: #2563eb; color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+
+    /* Right Side: Architecture & Code Inspector Pane */
+    .inspector-pane {
+      width: 500px;
+      background-color: var(--panel-bg);
+      border-left: 1px solid var(--panel-border);
+      padding: 28px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-card {
+      background-color: #1a2332;
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card p {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .code-box {
+      background-color: var(--code-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: #38bdf8;
+      margin-top: 8px;
+      overflow-x: auto;
+    }
+
+    .tag-selector {
+      background: rgba(139, 92, 246, 0.15);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+    }
+
+    /* Prompt Box */
+    .prompt-box {
+      background: rgba(16, 185, 129, 0.08);
+      border-left: 4px solid var(--success);
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.82rem;
+      color: #a7f3d0;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .workspace { flex-direction: column; overflow-y: auto; }
+      .phone-mockup { max-width: 100%; min-height: 500px; }
+      .inspector-pane { width: 100%; border-left: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header class="header-nav">
+    <div class="brand">
+      <div class="brand-logo">IGC</div>
+      <div class="brand-text">
+        <h1>Prototipo Wireframe Interactivo</h1>
+        <span>Explicador de Código y Arquitectura en Vivo</span>
+      </div>
+    </div>
+    
+    <div class="screen-tabs">
+      <button class="tab-btn active" onclick="switchScreen('welcome', this)">1. Bienvenida</button>
+      <button class="tab-btn" onclick="switchScreen('onboarding', this)">2. Onboarding</button>
+      <button class="tab-btn" onclick="switchScreen('test', this)">3. Test Wizard</button>
+      <button class="tab-btn" onclick="switchScreen('glossary', this)">4. Glosario</button>
+      <button class="tab-btn" onclick="switchScreen('results', this)">5. Resultados</button>
+      <button class="tab-btn" onclick="switchScreen('admin', this)">6. Panel Admin</button>
+    </div>
+  </header>
+
+  <!-- Workspace Split View -->
+  <div class="workspace">
+
+    <!-- LADO IZQUIERDO: Wireframe Móvil Autocontenido (0 imágenes externas) -->
+    <main class="wireframe-canvas">
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div id="wf-viewport" class="wf-screen-content">
+          <!-- Renderizado dinámico del Wireframe según la pestaña seleccionada -->
+        </div>
+      </div>
+    </main>
+
+    <!-- LADO DERECHO: Panel Explicativo de Código y Flujo Backend -->
+    <aside class="inspector-pane">
+      
+      <div class="info-card">
+        <h3><span>📱 Pantalla Actual:</span> <span id="info-screen-title" class="tag-selector">#screen-welcome</span></h3>
+        <p id="info-screen-desc">Cargando explicación del componente...</p>
+      </div>
+
+      <div class="info-card">
+        <h3>⚙️ Lógica Frontend (JS & Eventos)</h3>
+        <p id="info-js-desc">Funciones JavaScript responsables de renderizar y controlar esta pantalla.</p>
+        <div id="info-js-code" class="code-box">// Código JS ejecutado</div>
+      </div>
+
+      <div class="info-card">
+        <h3>💾 Almacenamiento & Backend (Supabase / Local)</h3>
+        <p id="info-db-desc">Estructura de datos persistida en el navegador o enviada a la base de datos remota.</p>
+        <div id="info-db-code" class="code-box">// Flujo de datos</div>
+      </div>
+
+      <div class="info-card">
+        <h3>✍️ Cheat Sheet de Prompt (Cómo pedir cambios)</h3>
+        <p style="font-size:0.82rem; color: var(--text-muted);">Usa esta plantilla exacta al pedirle modificaciones a la IA sobre esta vista:</p>
+        <div id="info-prompt-example" class="prompt-box">
+          "Modifica la vista X para cambiar Y..."
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script>
+    // Base de datos de pantallas de Wireframe e Información de Arquitectura
+    const screens = {
+      welcome: {
+        title: '#screen-welcome (Hero Section)',
+        desc: 'Es la pantalla inicial de aterrizaje. Presenta el título del test de dones, el botón principal "Comenzar el Test" y la opción de volver a consultar resultados guardados.',
+        wireframeHtml: `
+          <div class="wf-box" style="text-align:center; padding: 24px 12px;">
+            <span class="wf-label">HTML: .brand-logo</span>
+            <div style="font-weight:900; font-size:1.1rem; color:#1e293b;">IGC Tegucigalpa</div>
+          </div>
+          <div class="wf-box" style="text-align:center; padding: 32px 16px; flex:1; display:flex; flex-direction:column; justify-content:center;">
+            <span class="wf-label">HTML: .welcome-card</span>
+            <div style="font-size:1.3rem; font-weight:900; margin-bottom:8px;">Descubre tus Dones Espirituales</div>
+            <p style="font-size:0.8rem; color:#64748b; margin-bottom:20px;">Evaluación de 76 situaciones para identificar tus fortalezas de servicio.</p>
+            <div class="wf-btn">Comenzar el Test →</div>
+            <div class="wf-btn-secondary" style="margin-top:10px;">📊 Ver Mis Resultados Anteriores</div>
+          </div>
+        `,
+        jsDesc: 'Al hacer clic en "Comenzar el Test" (#btn-start), el event listener ejecuta checkAndShowOnboarding() en src/js/app.js.',
+        jsCode: `// src/js/app.js
+el.btnStart.addEventListener('click', () => {
+  checkAndShowOnboarding();
+});`,
+        dbDesc: 'Verifica en localStorage si existe la clave "dones_igc_onboarding" con completed = true.',
+        dbCode: `const stored = localStorage.getItem('dones_igc_onboarding');
+if (stored) state.onboarding = JSON.parse(stored);`,
+        prompt: '"Quiero cambiar el título de la bienvenida en index.html a X y ajustar el margen del botón #btn-start en styles.css."'
+      },
+
+      onboarding: {
+        title: '#modal-onboarding (Modal de Onboarding)',
+        desc: 'Modal introductorio obligatorio la primera vez. Muestra el video de enseñanza, pregunta si asiste a Grupo de Crecimiento y permite elegir su ciudad/departamento.',
+        wireframeHtml: `
+          <div class="wf-box">
+            <span class="wf-label">HTML: #modal-onboarding</span>
+            <div style="font-weight:800; font-size:1rem; margin-bottom:6px;">🎥 Entendiendo los Dones</div>
+            <div style="background:#cbd5e1; height:120px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#475569;">[ Reproductor de Video YouTube ]</div>
+          </div>
+          <div class="wf-box">
+            <span class="wf-label">HTML: #onboarding-growth-group</span>
+            <div style="font-size:0.8rem; font-weight:700;">¿Asistes a un Grupo de Crecimiento?</div>
+            <div class="wf-pill-group">
+              <div class="wf-pill active">Sí, asisto</div>
+              <div class="wf-pill">No asisto</div>
+            </div>
+          </div>
+          <div class="wf-box">
+            <span class="wf-label">HTML: #onboarding-city</span>
+            <div style="font-size:0.8rem; font-weight:700;">Ubicación / Ciudad:</div>
+            <div style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.8rem; margin-top:4px;">Tegucigalpa (Francisco Morazán)</div>
+          </div>
+          <div class="wf-btn">Continuar al Test →</div>
+        `,
+        jsDesc: 'Al presionar "Continuar al Test", saveOnboardingData() guarda las elecciones del usuario y abre la Parte 1.',
+        jsCode: `// src/js/app.js
+function saveOnboardingData() {
+  state.onboarding.completed = true;
+  localStorage.setItem('dones_igc_onboarding', JSON.stringify(state.onboarding));
+  showScreen('test');
+}`,
+        dbDesc: 'Prepara el objeto de perfil que se vinculará con la entrega final en Supabase.',
+        dbCode: `payload.attends_growth_group = state.onboarding.attendsGrowthGroup;
+payload.zone_location = state.onboarding.zoneLocation;`,
+        prompt: '"Agrega una nueva opción en el selector de ubicaciones del onboarding en index.html y actualiza la función saveOnboardingData en app.js."'
+      },
+
+      test: {
+        title: '#screen-test (Wizard del Test)',
+        desc: 'El flujo principal con 10 partes temáticas. Contiene el mapa de ruta superior con círculos interactivos, las situaciones con píldoras (1, 2, 3) y navegación inteligente.',
+        wireframeHtml: `
+          <div class="wf-box">
+            <span class="wf-label">HTML: #journey-roadmap-card</span>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:800; margin-bottom:6px;">
+              <span>💾 GUARDADO AUTOMÁTICO</span>
+              <span>40% Completado</span>
+            </div>
+            <div class="wf-roadmap">
+              <div class="wf-node done">✓</div>
+              <div class="wf-node done">✓</div>
+              <div class="wf-node done">✓</div>
+              <div class="wf-node current">4</div>
+              <div class="wf-node">🔒</div>
+              <div class="wf-node">🔒</div>
+            </div>
+          </div>
+          <div class="wf-box" style="flex:1;">
+            <span class="wf-label">HTML: .situation-card (Pregunta 24 de 76)</span>
+            <div style="font-size:0.85rem; font-weight:700; margin-bottom:8px;">Disfruto organizando actividades y asegurando que cada detalle funcione bien.</div>
+            <div class="wf-pill-group">
+              <div class="wf-pill">1. Rara vez</div>
+              <div class="wf-pill active">2. A veces</div>
+              <div class="wf-pill">3. Frecuentemente</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div class="wf-btn-secondary" style="flex:1;">← Anterior</div>
+            <div class="wf-btn" style="flex:2;">Siguiente →</div>
+          </div>
+        `,
+        jsDesc: 'handlePillClick() asigna el puntaje (1, 2 o 3) a la situación y renderRoadmapTrack() centra suavemente la estación activa.',
+        jsCode: `// src/js/app.js
+function handlePillClick(questionId, val) {
+  state.answers[questionId] = val;
+  saveAnswers(); // guarda en localStorage
+}`,
+        dbDesc: 'Guarda continuamente el diccionario de respuestas parciales en localStorage para prevenir pérdida de avance.',
+        dbCode: `localStorage.setItem('dones_igc_answers', JSON.stringify(state.answers));`,
+        prompt: '"Cambia el texto del botón Siguiente a Finalizar en la Parte 10 modificando renderScene() en src/js/app.js."'
+      },
+
+      glossary: {
+        title: '#screen-glossary (Glosario & Guía Rápida)',
+        desc: 'Permite buscar y explorar los 15 dones espirituales con sus referencias bíblicas y aplicaciones prácticas sin interrumpir el avance del test.',
+        wireframeHtml: `
+          <div class="wf-box">
+            <span class="wf-label">HTML: .glossary-header</span>
+            <div style="font-weight:900; font-size:1.1rem;">Aprender de los Dones</div>
+            <div style="font-size:0.75rem; color:#64748b; margin-bottom:8px;">Explora los 15 dones espirituales y ejemplos de cómo aplicarlos</div>
+            <div style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.8rem;">🔍 Buscar don o pasaje bíblico...</div>
+          </div>
+          <div class="wf-box" style="flex:1;">
+            <span class="wf-label">HTML: .gift-card (Don de Enseñanza)</span>
+            <div style="font-weight:800; font-size:0.95rem; color:#2563eb;">📘 Enseñanza</div>
+            <div style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">Romanos 12:7</div>
+            <p style="font-size:0.78rem;">Habilidad dada por Dios para comunicar la verdad bíblica con claridad y precisión.</p>
+          </div>
+        `,
+        jsDesc: 'renderGlossary(filterText) filtra los dones dinámicamente y mantiene fija la altura del contenedor para evitar saltos.',
+        jsCode: `// src/js/app.js
+el.glossarySearch.addEventListener('input', (e) => {
+  renderGlossary(e.target.value);
+});`,
+        dbDesc: 'Lee directamente del objeto estático gifts[] definido en src/data/gifts.js.',
+        dbCode: `import { gifts } from '../data/gifts.js';`,
+        prompt: '"Actualizar la descripción bíblica del don de Misericordia en src/data/gifts.js."'
+      },
+
+      results: {
+        title: '#screen-results (Resultados & Cierre)',
+        desc: 'Presenta los 3 dones principales (Top 3) del usuario en formato Bento Grid, tarjeta de evaluación de experiencia y llamado a Grupo de Crecimiento.',
+        wireframeHtml: `
+          <div class="wf-box" style="background:#eff6ff; border-color:#93c5fd;">
+            <span class="wf-label">HTML: .results-header</span>
+            <div style="font-size:1.1rem; font-weight:900; text-align:center;">¡Tus 3 Dones Principales!</div>
+          </div>
+          <div class="wf-box">
+            <span class="wf-label">HTML: .bento-card (Top 1)</span>
+            <div style="font-weight:900; color:#2563eb;">🥇 Don de Administración (89%)</div>
+            <p style="font-size:0.75rem; color:#64748b;">Capacidad para coordinar recursos y personas efectivamente.</p>
+          </div>
+          <div class="wf-box">
+            <span class="wf-label">HTML: .results-actions-card</span>
+            <div style="font-weight:700; font-size:0.82rem;">¿Cómo fue tu experiencia?</div>
+            <div class="wf-btn" style="margin-top:6px; font-size:0.8rem;">Evaluar la Experiencia del Test</div>
+          </div>
+          <div class="wf-btn-secondary" style="color:#ef4444;">Reiniciar Test</div>
+        `,
+        jsDesc: 'finishTest() llama a runFullCalculation() en score-engine.js y sincroniza el resultado final con Supabase via submitResult().',
+        jsCode: `// src/js/app.js
+const calculation = runFullCalculation(state.answers);
+const createdId = await submitResult(result);`,
+        dbDesc: 'Envía un POST o PATCH a la tabla dones_igc.results en Supabase con las puntuaciones y elecciones del onboarding.',
+        dbCode: `await supabase.from('results').insert(payload);`,
+        prompt: '"Separar la tarjeta de evaluación de experiencia de los botones de reinicio en index.html."'
+      },
+
+      admin: {
+        title: 'admin.html (Panel de Administración)',
+        desc: 'Panel independiente para el equipo pastoral. Incluye métricas acumulativas, visualización en mapa GeoJSON de Honduras y gráficos Apache ECharts.',
+        wireframeHtml: `
+          <div class="wf-box" style="background:#0f172a; color:#fff;">
+            <span class="wf-label">HTML: admin.html (.admin-header)</span>
+            <div style="font-weight:900; font-size:1rem;">Panel de Métricas IGC</div>
+            <div style="font-size:0.7rem; color:#94a3b8;">450 Encuestas Completadas</div>
+          </div>
+          <div class="wf-box">
+            <span class="wf-label">HTML: #honduras-map-container</span>
+            <div style="background:#e2e8f0; height:130px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#475569;">[ Mapa Vectorial GeoJSON de Honduras con Pines ]</div>
+          </div>
+          <div class="wf-box">
+            <span class="wf-label">HTML: #chart-gifts-distribution</span>
+            <div style="background:#cbd5e1; height:80px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#475569;">[ Gráfico Estadístico Apache ECharts ]</div>
+          </div>
+        `,
+        jsDesc: 'fetchAdminMetrics() en supabase-client.js consulta las entregas reales y renderiza las capas del mapa de Honduras.',
+        jsCode: `// admin.html
+const records = await fetchAdminMetrics(startDate, endDate);
+renderHondurasMap(records);`,
+        dbDesc: 'Ejecuta una consulta SELECT ordenada por fecha sobre dones_igc.results.',
+        dbCode: `supabase.from('results').select('*').order('completed_at', { ascending: false });`,
+        prompt: '"Agregar un filtro por rango de fechas en admin.html que actualice los gráficos de Apache ECharts."'
+      }
+    };
+
+    // Función para cambiar de pantalla en el Wireframe
+    function switchScreen(key, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const data = screens[key];
+      if (!data) return;
+
+      document.getElementById('wf-viewport').innerHTML = data.wireframeHtml;
+      document.getElementById('info-screen-title').textContent = data.title;
+      document.getElementById('info-screen-desc').textContent = data.desc;
+      document.getElementById('info-js-desc').textContent = data.jsDesc;
+      document.getElementById('info-js-code').textContent = data.jsCode;
+      document.getElementById('info-db-desc').textContent = data.dbDesc;
+      document.getElementById('info-db-code').textContent = data.dbCode;
+      document.getElementById('info-prompt-example').textContent = data.prompt;
+    }
+
+    // Inicializar en la pantalla de Bienvenida
+    switchScreen('welcome', document.querySelectorAll('.tab-btn')[0]);
+  </script>
+</body>
+</html>
