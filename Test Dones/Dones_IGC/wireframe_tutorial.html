@@ -740,48 +740,106 @@ PASS - runFullCalculation es determinista`,
       },
 
       admin: {
-        title: 'admin.html (Panel de Administración y Métricas GeoJSON)',
-        desc: 'Panel independiente y autónomo diseñado para líderes y administradores. Permite visualizar entregas acumuladas, filtrar por fechas, consultar mapas de calor en GeoJSON de Honduras y gráficos Apache ECharts.',
+        title: 'admin.html (Panel de Administración — Dashboard Completo)',
+        desc: 'Panel de control independiente para el equipo pastoral. Incluye autenticación con modal de clave, filtros de fecha/zona, 4 métricas clave KPI, mapa vectorial GeoJSON de Honduras con pines pulsantes, histogramas Apache ECharts de los 15 dones y tabla de retroalimentación cualitativa.',
         wireframeHtml: `
-          <div class="wf-box" style="background:#0f172a; color:#fff;">
-            <span class="wf-label">HTML: admin.html (.admin-header)</span>
+          <!-- Header Admin Bar -->
+          <div class="wf-box" style="background:#0f172a; color:#fff; padding:12px;">
+            <span class="wf-label">HTML: .admin-header</span>
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <div>
-                <div style="font-weight:900; font-size:1.05rem;">Panel Admin IGC</div>
-                <div style="font-size:0.7rem; color:#94a3b8;">Sincronizado con Supabase</div>
+                <div style="font-weight:900; font-size:0.95rem; color:#fff;">Panel Admin IGC</div>
+                <div style="font-size:0.68rem; color:#38bdf8;">Sincronizado con Supabase</div>
               </div>
-              <div style="background:#1e293b; padding:4px 8px; border-radius:6px; font-size:0.7rem; font-weight:700;">450 Encuestas</div>
+              <div style="background:#1e293b; padding:4px 8px; border-radius:6px; font-size:0.7rem; font-weight:800; color:#4ade80;">● 450 Encuestas</div>
             </div>
           </div>
+
+          <!-- Barra de Filtros por Fecha y Zona -->
           <div class="wf-box">
-            <span class="wf-label">HTML: #honduras-map-container (Apache ECharts)</span>
-            <div style="background:#e2e8f0; height:140px; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#475569; font-weight:700; font-size:0.8rem;">
+            <span class="wf-label">HTML: .filters-bar & .zone-pills</span>
+            <div style="font-size:0.75rem; font-weight:800; color:#0f172a; margin-bottom:6px;">Filtros por Fecha & Zona:</div>
+            <div style="display:flex; gap:4px; margin-bottom:6px;">
+              <div class="wf-pill active" style="font-size:0.65rem; padding:4px;">Todo</div>
+              <div class="wf-pill" style="font-size:0.65rem; padding:4px;">Últimos 7 días</div>
+              <div class="wf-pill" style="font-size:0.65rem; padding:4px;">Este mes</div>
+            </div>
+            <div style="font-size:0.7rem; color:#64748b;">📍 Zona: <strong>Todas las ciudades</strong></div>
+          </div>
+
+          <!-- Grilla de 4 Métricas KPI -->
+          <div class="wf-box">
+            <span class="wf-label">HTML: .metrics-grid (4 Métricas KPI)</span>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <div style="background:#f1f5f9; padding:8px; border-radius:6px;">
+                <div style="font-size:0.65rem; color:#64748b; font-weight:700;">TOTAL TEST</div>
+                <div style="font-weight:900; font-size:1.1rem; color:#0f172a;">450</div>
+              </div>
+              <div style="background:#f1f5f9; padding:8px; border-radius:6px;">
+                <div style="font-size:0.65rem; color:#64748b; font-weight:700;">% GRUPOS</div>
+                <div style="font-weight:900; font-size:1.1rem; color:#2563eb;">68%</div>
+              </div>
+              <div style="background:#f1f5f9; padding:8px; border-radius:6px;">
+                <div style="font-size:0.65rem; color:#64748b; font-weight:700;">DON #1 PREVALENTE</div>
+                <div style="font-weight:900; font-size:0.8rem; color:#16a34a;">Enseñanza (24%)</div>
+              </div>
+              <div style="background:#f1f5f9; padding:8px; border-radius:6px;">
+                <div style="font-size:0.65rem; color:#64748b; font-weight:700;">CLARIDAD TEST</div>
+                <div style="font-weight:900; font-size:1.1rem; color:#9333ea;">4.8 / 5.0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mapa Vectorial GeoJSON de Honduras -->
+          <div class="wf-box">
+            <span class="wf-label">HTML: #honduras-map-container (GeoJSON Map)</span>
+            <div style="background:#e2e8f0; height:120px; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#475569; font-weight:700; font-size:0.78rem;">
               <span>🗺️ Mapa Vectorial GeoJSON de Honduras</span>
-              <span style="font-size:0.7rem; color:#64748b; margin-top:4px;">[ Polígonos por Departamento + Pines Pulsantes ]</span>
+              <span style="font-size:0.68rem; color:#64748b; margin-top:2px;">[ Polígonos de 18 Deptos + Pines Pulsantes en Ciudades ]</span>
             </div>
           </div>
+
+          <!-- Gráfico Apache ECharts -->
           <div class="wf-box">
-            <span class="wf-label">HTML: #chart-gifts-distribution</span>
-            <div style="background:#cbd5e1; height:90px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#475569; font-weight:700; font-size:0.8rem;">[ Gráfico de Barras / Distribución de 15 Dones ]</div>
+            <span class="wf-label">HTML: #chart-gifts-distribution (Apache ECharts)</span>
+            <div style="background:#cbd5e1; height:80px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#475569; font-weight:700; font-size:0.75rem;">[ Histogramas de Distribución de los 15 Dones ]</div>
+          </div>
+
+          <!-- Tabla de Evaluaciones de Experiencia -->
+          <div class="wf-box">
+            <span class="wf-label">HTML: #feedback-table-container (Tabla de Feedback)</span>
+            <div style="font-size:0.75rem; font-weight:800; color:#0f172a; margin-bottom:4px;">💬 Retroalimentación de Miembros (3 Preguntas)</div>
+            <div style="font-size:0.68rem; color:#475569; background:#f8fafc; padding:6px; border-radius:6px;">"El test fue muy claro y los resultados encajan perfectamente con mi servicio actual."</div>
           </div>
         `,
         components: [
-          { name: 'Admin Dashboard Header', selector: '.admin-header', func: 'Encabezado con total de respuestas y filtros de fecha.' },
-          { name: 'GeoJSON Map Container', selector: '#honduras-map-container', func: 'Mapa interactivo de departamentos de Honduras.' },
-          { name: 'ECharts Scatter Pins', selector: 'series: effectScatter', func: 'Pines amarillos pulsantes en ciudades con encuestas.' },
-          { name: 'Gifts Distribution Chart', selector: '#chart-gifts-distribution', func: 'Histograma estadístico de los dones con mayor frecuencia.' }
+          { name: 'Admin Auth Login Modal', selector: '.login-overlay', func: 'Protección con contraseña antes de acceder a datos.' },
+          { name: 'Admin Header Bar', selector: '.admin-header', func: 'Branding y contador en vivo de entregas registradas.' },
+          { name: 'Date Range Filters', selector: '.filters-bar', func: 'Presets (Hoy, 7 Días, Mes, Todo) y selector de fechas.' },
+          { name: 'KPI Metrics Grid', selector: '.metrics-grid', func: '4 tarjetas con totales, % grupos, don top y claridad.' },
+          { name: 'GeoJSON Honduras Map', selector: '#honduras-map-container', func: 'Mapa coroplético interactivo con pines pulsantes en ciudades.' },
+          { name: 'ECharts Gifts Bar Chart', selector: '#chart-gifts-distribution', func: 'Gráfico estadístico de frecuencia de los 15 dones.' },
+          { name: 'Experience Feedback Table', selector: '#feedback-table-container', func: 'Tabla con calificaciones y comentarios cualitativos.' }
         ],
-        jsDesc: 'fetchAdminMetrics(startDate, endDate) consulta todas las entregas en Supabase, procesa las ubicaciones con getDeptFromCityString() y actualiza las instancias de ECharts.',
+        jsDesc: 'admin.html invoca fetchAdminMetrics(startDate, endDate) en src/js/supabase-client.js. Procesa las ciudades con getDeptFromCityString() para mapear coordenadas GeoJSON de Honduras y renderizar Apache ECharts.',
         jsCode: `// admin.html
 const records = await fetchAdminMetrics(startDate, endDate);
 const deptCounts = processDeptCounts(records);
-echartsInstance.setOption({ ... });`,
-        dbDesc: 'Consulta la vista o tabla dones_igc.results mediante SELECT * ordenado descendentemente por fecha.',
+
+// Renderizado de ECharts
+echartsInstance.setOption({
+  series: [
+    { type: 'map', map: 'Honduras', data: deptCounts },
+    { type: 'effectScatter', coordinateSystem: 'geo', data: pinsData }
+  ]
+});`,
+        dbDesc: 'Consulta SELECT sobre la tabla dones_igc.results en Supabase con filtros opcionales gte y lte en completed_at.',
         dbCode: `supabase.from('results').select('*').order('completed_at', { ascending: false });`,
-        testDesc: 'Verifica la integridad de concordancia de nombres de departamentos en GeoJSON (ej: Francisco Morazan, Cortes).',
-        testCode: `// dept matching check
-assert.strictEqual(getDeptFromCityString('Tegucigalpa'), 'Francisco Morazan');`,
-        prompt: '"Agregar un selector de filtro por departamento en admin.html que actualice los gráficos de Apache ECharts."'
+        testDesc: 'Certifica la coincidencia de nombres entre la lista de ciudades del onboarding y las claves del GeoJSON de Honduras.',
+        testCode: `// dept matching verification
+assert.strictEqual(getDeptFromCityString('Tegucigalpa'), 'Francisco Morazan');
+assert.strictEqual(getDeptFromCityString('San Pedro Sula'), 'Cortes');`,
+        prompt: '"Agregar un filtro selector de departamentos en admin.html que actualice tanto el mapa GeoJSON como las 4 métricas KPI."'
       }
     };
 
