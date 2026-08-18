@@ -21,7 +21,9 @@ Fecha de última actualización: 2026-08-17
     *   **Identificación de Departamentos por Ciudad:** Implementado motor inteligente de coincidencia (`getDeptFromCityString()`) que vincula ciudades seleccionadas en onboarding (ej: *Tegucigalpa*, *San Pedro Sula*, *La Ceiba*, *Danlí*, *Choluteca*, *Roatán*) a sus respectivos departamentos oficiales en la capa GeoJSON con claves de texto exactas (`Francisco Morazan`, `Cortes`, `El Paraiso`, `Islas de La Bahia`, etc.). Si hay 1 respuesta en Tegucigalpa, suma automáticamente 1 al conteo y color de polígono de Francisco Morazán.
     *   **Pines Pulsantes Acumulativos por Ubicación:** Incorporada la serie `effectScatter` de Apache ECharts que renderiza pines amarillos pulsantes sobre las coordenadas exactas de cada ciudad con encuestas completadas, escalando de tamaño según el conteo acumulativo.
     *   **Adaptación Móvil 100% Responsiva:** Ajustado el contenedor del mapa (`height: 320px` en móvil, `420px` en desktop) con `aspectScale: 0.85`, zoom táctil (`roam: true`) y redimensionamiento automático (`echartsInstance.resize()`).
-*   [x] **Actualización de Subtítulo en Glosario (`index.html`):** Cambiado el texto secundario bajo *Aprender de los Dones* a: **“Explora los 15 dones espirituales y ejemplos de cómo aplicarlos”**.
+*   [x] **Actualización de Redacción en Modal 'Pon en práctica tus dones' (`index.html`, `app.js`):**
+    *   **Texto descriptivo:** Actualizado a: *“Los dones cobran su verdadero propósito al ejercitarlos en tu grupo de crecimiento, con tu familia y con toda la familia de la fe.”*
+    *   **Texto azul de cierre:** Actualizado a: *“Este test te ayudará a guiarte pero en la práctica es donde validarás cuáles son tus dones”*.
 *   [x] **Separación de Tarjetas de Acción en Pantalla de Resultados (`index.html`):**
     *   **Tarjeta 1 (Evaluación):** Dedicada exclusivamente a *"¿Cómo fue tu experiencia?"* con el botón primario *"Evaluar la Experiencia del Test"*.
     *   **Tarjeta 2 (Siguientes Pasos):** Contenedor independiente con los botones *"Conectar con un Grupo de Crecimiento"* y *"Reiniciar Test"*, mejorando la jerarquía y claridad de acciones.

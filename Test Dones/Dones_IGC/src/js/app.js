@@ -785,15 +785,18 @@ function openGrowthGroupModal() {
 
   if (state.onboarding.attendsGrowthGroup === false) {
     container.innerHTML = `
-      <p style="font-size:0.85rem; color: var(--navy); font-weight: 750; margin-bottom: 16px;">
+      <p style="font-size:0.85rem; color: var(--navy); font-weight: 750; margin-bottom: 12px;">
         Indicaste que no asistes a un grupo. ¡Te invitamos a integrarte a uno cerca de ti!
       </p>
-      <a href="https://igcteg.org/grupos/" target="_blank" class="btn btn-primary btn-block" style="text-decoration:none; padding:12px; font-size:0.95rem;">🌱 Solicitar Grupo de Crecimiento</a>
+      <p style="font-size:0.88rem; color: var(--primary); font-weight: 800; margin-bottom: 16px;">
+        Este test te ayudará a guiarte pero en la práctica es donde validarás cuáles son tus dones
+      </p>
+      <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block" style="text-decoration:none; padding:12px; font-size:0.95rem;">🌱 Solicitar Grupo de Crecimiento</a>
     `;
   } else {
     container.innerHTML = `
       <p style="font-size:0.88rem; color: var(--primary); font-weight: 800; margin-bottom: 16px;">
-        ¡Sigue ejerciendo activamente tus dones en tu Grupo de Crecimiento!
+        Este test te ayudará a guiarte pero en la práctica es donde validarás cuáles son tus dones
       </p>
       <button class="btn btn-secondary btn-block" onclick="document.getElementById('modal-growth-group-callout').classList.remove('active')">Entendido</button>
     `;
