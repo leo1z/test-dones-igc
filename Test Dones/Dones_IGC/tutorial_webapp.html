@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual Maestro de Arquitectura y Tutorial — Dones IGC</title>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --code-bg: #030712;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Layout */
+    .sidebar {
+      width: 280px;
+      background-color: #0d1322;
+      border-right: 1px solid var(--card-border);
+      padding: 24px 16px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 8px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    .brand-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .brand-title span {
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background-color: var(--card-bg);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      padding: 40px 48px 80px 48px;
+      max-width: 1200px;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-banner h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .header-banner p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 800px;
+    }
+
+    .badge-master {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    section {
+      margin-bottom: 60px;
+      scroll-margin-top: 40px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--card-border);
+      padding-bottom: 12px;
+    }
+
+    .section-title span.number {
+      background: var(--primary);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* Cards & Grids */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    /* Analogy Box */
+    .analogy-box {
+      background: rgba(139, 92, 246, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 16px 0;
+    }
+
+    .analogy-box strong {
+      color: #c4b5fd;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Code & Tables */
+    pre, code {
+      font-family: 'Fira Code', monospace;
+    }
+
+    .code-block {
+      background-color: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 18px;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      color: #e5e7eb;
+      margin: 12px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      background-color: #1a2234;
+      color: #f3f4f6;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+    }
+
+    tr:hover td {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .tag-js { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .tag-html { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .tag-css { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .tag-db { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    /* Flow Diagrams */
+    .flow-step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: -16px;
+      width: 2px;
+      background: var(--card-border);
+    }
+
+    .flow-number {
+      width: 40px;
+      height: 40px;
+      background: #1e293b;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--primary);
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .flow-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      flex: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: relative; }
+      .main-content { margin-left: 0; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">IGC</div>
+      <div class="brand-title">
+        <h1>Manual Maestro</h1>
+        <span>Dones IGC Architecture</span>
+      </div>
+    </div>
+    <nav class="nav-menu">
+      <a href="#section-1" class="nav-item active">🗺️ 1. Arquitectura y Decisiones</a>
+      <a href="#section-2" class="nav-item">⚡ 2. Backend y Flujo de Datos</a>
+      <a href="#section-3" class="nav-item">🎨 3. UI/UX y Vocabulario</a>
+      <a href="#section-4" class="nav-item">🎓 4. Ruta de Estudio Personal</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <div class="header-banner">
+      <span class="badge-master">Tutorial de Ingeniería & Guía de Código Nivel 0</span>
+      <h2>Web App Test de Dones IGC</h2>
+      <p>Manual interactivo para comprender la estructura, arquitectura de datos, interfaz visual y cómo solicitar evoluciones del sistema sin romper la aplicación.</p>
+    </div>
+
+    <!-- SECCIÓN 1 -->
+    <section id="section-1">
+      <h2 class="section-title"><span class="number">1</span> Mapa de Arquitectura y Decisiones Técnicas</h2>
+
+      <div class="card">
+        <h3>🔍 Visión General de la Aplicación</h3>
+        <p style="margin-top: 10px;">
+          La Web App <strong>Test de Dones IGC (v3.0.0)</strong> es una plataforma interactiva de evaluación espiritual diseñada para la Iglesia Gran Comisión Tegucigalpa. Permite a los miembros completar un test de 76 situaciones distribuidas en 10 partes temáticas para calcular su nivel de afinidad respecto a 15 dones espirituales. Cuenta con un sistema de puntuación determinista en escala de 1 a 3, un slideover de consulta rápida de dones, una encuesta de evaluación de experiencia y un Panel de Administración autónomo con análisis geográfico en mapa vectorial GeoJSON de Honduras y gráficos estadísticos avanzados de Apache ECharts.
+        </p>
+
+        <div class="analogy-box">
+          <strong>💡 Analogías del Mundo Real para la Tecnología Utilizada:</strong>
+          <ul style="margin-top: 8px; padding-left: 20px; font-size: 0.92rem;">
+            <li><strong>Frontend (HTML/CSS/JS Vanilla):</strong> Es como la estructura física de un edificio (bloques, pintura y puertas). No usa armazones pesados externos (React/Next.js), por lo que se carga de forma instantánea al abrir.</li>
+            <li><strong>Backend Service (Supabase REST API):** Es como un archivador electrónico remoto en la nube con un mensajero automático. Guarda los registros finales de cada test y atiende al administrador sin necesidad de mantener un servidor encendido pagando rentas caras.</li>
+            <li><strong>Data Visualization (Apache ECharts + GeoJSON):** Es como un mapa táctico con luces LED de colores. Toma las ciudades seleccionadas en Honduras y enciende pines pulsantes y colores por departamento automáticamente.</li>
+            <li><strong>Motor de Cálculo (`score-engine.js`):** Es una calculadora científica blindada. Recibe las 76 respuestas y entrega los 3 dones principales (Top 3) sin alterar nunca los resultados.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📁 Árbol de Archivos Explicado</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Ruta / Archivo</th>
+              <th>Tipo</th>
+              <th>Propósito y Razón de Existencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>index.html</code></td>
+              <td><span class="tag tag-html">HTML5</span></td>
+              <td>Estructura principal de la Web App orientada al usuario: Welcome, Test Wizard (10 partes), Glosario y Modales.</td>
+            </tr>
+            <tr>
+              <td><code>admin.html</code></td>
+              <td><span class="tag tag-html">HTML5</span></td>
+              <td>Panel de administración autónomo para líderes: métricas globales, mapa de Honduras y gráficos estadísticos por don.</td>
+            </tr>
+            <tr>
+              <td><code>src/css/styles.css</code></td>
+              <td><span class="tag tag-css">CSS3</span></td>
+              <td>Sistema de diseño completo (tokens de color, glassmorphism, tipografía, barras de progreso y diseño móvil responsivo).</td>
+            </tr>
+            <tr>
+              <td><code>src/js/app.js</code></td>
+              <td><span class="tag tag-js">JS ES6</span></td>
+              <td>Orquestador principal del cliente: maneja el avance de escenas, guardado local, historial del navegador y llamadas a modales.</td>
+            </tr>
+            <tr>
+              <td><code>src/js/score-engine.js</code></td>
+              <td><span class="tag tag-js">JS ES6</span></td>
+              <td>Motor determinista de cálculo de puntajes. Convierte respuestas de escala 1..3 en porcentaje y ranking relativo.</td>
+            </tr>
+            <tr>
+              <td><code>src/js/score-engine.test.mjs</code></td>
+              <td><span class="tag tag-js">Node.js</span></td>
+              <td>Suite de 98 pruebas unitarias automatizadas ejecutadas con <code>node</code> para certificar que el motor de puntajes no falle.</td>
+            </tr>
+            <tr>
+              <td><code>src/js/supabase-client.js</code></td>
+              <td><span class="tag tag-db">Supabase</span></td>
+              <td>Capa de sincronización remota: envía resultados (<code>submitResult</code>), elimina registros al reiniciar (<code>deleteSubmission</code>) y consulta métricas admin.</td>
+            </tr>
+            <tr>
+              <td><code>src/data/situations.js</code></td>
+              <td><span class="tag tag-js">Datos</span></td>
+              <td>Base de datos de las 76 preguntas/situaciones indexadas por <code>sceneId</code> (1 a 10) y <code>giftId</code>.</td>
+            </tr>
+            <tr>
+              <td><code>src/data/gifts.js</code></td>
+              <td><span class="tag tag-js">Datos</span></td>
+              <td>Catálogo oficial de los 15 dones con nombres, pasajes bíblicos, resúmenes y ejemplos prácticos de servicio.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>⚖️ Decisiones Clave de Ingeniería y Ventajas</h3>
+        <div class="grid-2">
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--card-border);">
+            <h4 style="color: var(--primary); margin-bottom: 6px;">1. JS Vanilla vs React/Next.js</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              <strong>Decisión:</strong> No usar librerías de UI pesadas.<br>
+              <strong>Ventaja:</strong> Carga ultra-rápida (&lt; 0.3s) en cualquier teléfono celular o conexión 3G en Honduras sin necesidad de un proceso de compilación complejo.
+            </p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--card-border);">
+            <h4 style="color: var(--accent); margin-bottom: 6px;">2. Persistencia Local + Supabase Asíncrono</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              <strong>Decisión:</strong> Guardar primero en <code>localStorage</code> del navegador.<br>
+              <strong>Ventaja:</strong> Si el usuario se queda sin internet a mitad del test, sus respuestas están protegidas. Al reconectarse o enviar, se sincroniza con Supabase.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2 -->
+    <section id="section-2">
+      <h2 class="section-title"><span class="number">2</span> El Backend y Flujo de Datos (Cómo pedir cambios)</h2>
+
+      <div class="card">
+        <h3>🔄 Ciclo de Vida de una Acción (Paso a Paso)</h3>
+        
+        <div class="flow-step">
+          <div class="flow-number">1</div>
+          <div class="flow-content">
+            <h4 style="color: #ffffff;">Selección de Respuesta por el Usuario</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">El usuario presiona una píldora (1: Rara vez, 2: A veces, 3: Frecuentemente). Se ejecuta <code>handlePillClick()</code> en <code>app.js</code>, que guarda el valor en memoria y actualiza <code>localStorage</code>.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-number">2</div>
+          <div class="flow-content">
+            <h4 style="color: #ffffff;">Cálculo de Afinidad de Dones</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Al completar la Parte 10 y hacer clic en <em>"Finalizar Test"</em>, se invoca <code>runFullCalculation()</code> en <code>score-engine.js</code>. Suma los puntos por don y calcula el porcentaje exacto sobre la puntuación máxima posible.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-number">3</div>
+          <div class="flow-content">
+            <h4 style="color: #ffffff;">Sincronización con Supabase Remote</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);"><code>finishTest()</code> envía el objeto final a <code>submitResult()</code> en <code>supabase-client.js</code>, insertando la fila en la tabla <code>dones_igc.results</code> de Supabase y guardando el UUID de entrega devuelto.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-number">4</div>
+          <div class="flow-content">
+            <h4 style="color: #ffffff;">Reinicio Limpio (Si aplica)</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Si el usuario presiona <em>"Reiniciar Test"</em>, <code>deleteSubmission(submissionId)</code> elimina la entrega remota en Supabase para evitar métricas duplicadas en el panel admin antes de borrar la memoria local.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📖 Diccionario del Backend Explicado para Principiantes</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Término</th>
+              <th>Explicación Simple</th>
+              <th>Ejemplo en este Proyecto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>REST API</strong></td>
+              <td>El protocolo de mensajería estándar para pedir o enviar datos a la base de datos remota mediante URLs.</td>
+              <td>Llamadas HTTP a <code>https://vmlbrjzsuceizrwqryjf.supabase.co/rest/v1/results</code>.</td>
+            </tr>
+            <tr>
+              <td><strong>Upsert / Insert</strong></td>
+              <td>Insertar un nuevo registro o actualizar uno existente si ya se conoce su identificador único (ID).</td>
+              <td><code>supabase.from('results').upsert(payload)</code> en <code>supabase-client.js</code>.</td>
+            </tr>
+            <tr>
+              <td><strong>LocalStorage</strong></td>
+              <td>La pequeña base de datos interna dentro del navegador web del celular/computadora del usuario.</td>
+              <td>Clave <code>dones_igc_answers</code> para guardar las 76 respuestas localmente.</td>
+            </tr>
+            <tr>
+              <td><strong>RLS (Row Level Security)</strong></td>
+              <td>Las reglas de seguridad que determinan qué usuarios pueden leer o borrar filas de la base de datos.</td>
+              <td>Permite a la aplicación guardar encuestas y al admin consultar métricas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>📋 Cheat Sheet de Prompts (Cómo pedir cambios al Backend a la IA)</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Usa estos ejemplos exactos de estructura al solicitar cambios para garantizar que la IA preserve el motor de cálculo y la estabilidad:</p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo de Cambio</th>
+              <th>Estructura de Prompt Recomendada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Agregar Nuevo Campo en Encuesta</strong></td>
+              <td><code style="font-size:0.8rem; color:#818cf8;">"Necesito agregar un nuevo campo opcional llamado 'edad' en el onboarding. Modifica index.html para incluir el selector, app.js para guardarlo en state.onboarding, y actualiza el payload en supabase-client.js asegurando que no rompa las pruebas unitarias."</code></td>
+            </tr>
+            <tr>
+              <td><strong>Cambiar Pregunta o Don</strong></td>
+              <td><code style="font-size:0.8rem; color:#818cf8;">"Actualiza la redacción de la pregunta ID 14 en src/data/situations.js con el texto X. Asegúrate de verificar que siga asignada al giftId correcto y ejecuta 'node src/js/score-engine.test.mjs' para validar."</code></td>
+            </tr>
+            <tr>
+              <td><strong>Agregar Filtro en Panel Admin</strong></td>
+              <td><code style="font-size:0.8rem; color:#818cf8;">"Añade un filtro por departamento en admin.html que filtre los gráficos ECharts. Modifica la consulta en supabase-client.js/admin.html manteniendo los filtros de fecha existentes."</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3 -->
+    <section id="section-3">
+      <h2 class="section-title"><span class="number">3</span> Anatomía UI/UX y Vocabulario Visual</h2>
+
+      <div class="card">
+        <h3>🎨 Diccionario Visual y Mapa de Componentes</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Nombre estándar en la industria vs su implementación exacta en el código:</p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre Estándar UI</th>
+              <th>Función en la App</th>
+              <th>Archivo y Selector CSS/HTML</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hero Section</strong></td>
+              <td>Pantalla de bienvenida con título, ilustración y botón principal.</td>
+              <td><code>index.html</code> (`#screen-welcome` / `.welcome-card`)</td>
+            </tr>
+            <tr>
+              <td><strong>Roadmap / Step Tracker</strong></td>
+              <td>Barra superior horizontal con los 10 círculos de avance del test.</td>
+              <td><code>index.html</code> (`#journey-roadmap-card` / `.journey-nodes-scroll`)</td>
+            </tr>
+            <tr>
+              <td><strong>Pill Scale Selector</strong></td>
+              <td>Las 3 píldoras de opción (1, 2, 3) dentro de cada pregunta del test.</td>
+              <td><code>styles.css</code> (`.scale-pills` / `.scale-pill`)</td>
+            </tr>
+            <tr>
+              <td><strong>Milestone Banner Card</strong></td>
+              <td>Tarjeta azul compacta con ilustración que notifica hitos (Partes 2, 5, 9).</td>
+              <td><code>styles.css</code> (`.scene-card` / `.scene-banner-img`)</td>
+            </tr>
+            <tr>
+              <td><strong>Slideover Drawer</strong></td>
+              <td>Panel lateral emergente para consultar la Guía Rápida de Dones.</td>
+              <td><code>index.html</code> (`#modal-quick-gifts`)</td>
+            </tr>
+            <tr>
+              <td><strong>Floating Glass Bottom Nav</strong></td>
+              <td>Barra flotante inferior de navegación con efecto traslúcido glassmorphism.</td>
+              <td><code>styles.css</code> (`.bottom-nav-glass` / `.bottom-nav-item`)</td>
+            </tr>
+            <tr>
+              <td><strong>Bento Grid Layout</strong></td>
+              <td>Distribución modular para presentar las tarjetas del Top 3 de dones en resultados.</td>
+              <td><code>styles.css</code> (`.top-gifts-bento` / `.bento-card`)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>🎨 Cheat Sheet de Prompts (Cambios de UI/UX)</h3>
+        <div class="code-block">
+          <strong>Ejemplo 1: Cambios de Espaciado o Sombra</strong><br>
+          <em>"Ajusta el margen vertical entre las tarjetas de pregunta a 12px y reduce la sombra de `.scene-card` en styles.css para que sea más sutil en pantallas móviles."</em>
+          <br><br>
+          <strong>Ejemplo 2: Cambio de Animación u Holo Active</strong><br>
+          <em>"Modifica la regla `.roadmap-node.current .node-circle` en styles.css para que la animación de escala sea un 5% más suave y el color de borde use la variable --primary."</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4 -->
+    <section id="section-4">
+      <h2 class="section-title"><span class="number">4</span> Ruta de Estudio Personalizada</h2>
+
+      <div class="card">
+        <h3>🎓 ¿Qué debo estudiar para dominar esta Web App?</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Área de Conocimiento</th>
+              <th>Concepto Exacto</th>
+              <th>Aplicación en este Proyecto</th>
+              <th>Términos para Buscar en YouTube/Google</th>
+              <th>Tiempo Estimado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-html">HTML / CSS</span></td>
+              <td>Variables CSS & Flexbox/Grid</td>
+              <td><code>styles.css</code> (Tokens <code>:root</code>, layout <code>.top-gifts-bento</code>)</td>
+              <td><code>"CSS Custom Properties tutorial", "Flexbox vs CSS Grid guide"</code></td>
+              <td>4 horas</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-js">Frontend JS</span></td>
+              <td>ES Modules & History API</td>
+              <td><code>app.js</code> (import/export, <code>pushState</code> & <code>popstate</code>)</td>
+              <td><code>"JavaScript ES6 Modules tutorial", "Browser History API popstate SPA"</code></td>
+              <td>6 horas</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-db">Backend / DB</span></td>
+              <td>Supabase Client & REST API</td>
+              <td><code>supabase-client.js</code> (Upsert, Delete, Filter queries)</td>
+              <td><code>"Supabase JavaScript Client Crash Course", "REST API CRUD basics"</code></td>
+              <td>5 horas</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-js">Data Viz</span></td>
+              <td>ECharts & GeoJSON Maps</td>
+              <td><code>admin.html</code> (Renderizado de mapa de Honduras e histogramas)</td>
+              <td><code>"Apache ECharts beginner tutorial", "GeoJSON custom maps ECharts"</code></td>
+              <td>5 horas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Smooth navigation scrolling
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+          item.classList.add('active');
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
