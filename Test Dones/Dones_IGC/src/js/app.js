@@ -798,20 +798,26 @@ function openGrowthGroupModal() {
 
   if (state.onboarding.attendsGrowthGroup === false) {
     container.innerHTML = `
-      <p style="font-size:0.85rem; color: var(--navy); font-weight: 750; margin-bottom: 12px;">
+      <p style="font-size:0.85rem; color: var(--navy); font-weight: 750; margin-bottom: 10px;">
         Indicaste que no asistes a un grupo. ¡Te invitamos a integrarte a uno cerca de ti!
       </p>
       <p style="font-size:0.88rem; color: var(--primary); font-weight: 800; margin-bottom: 16px;">
         Este test te ayudará a guiarte pero en la práctica es donde validarás cuáles son tus dones
       </p>
-      <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block" style="text-decoration:none; padding:12px; font-size:0.95rem;">🌱 Solicitar Grupo de Crecimiento</a>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block" style="text-decoration:none; padding:12px; font-size:0.92rem; display:flex; align-items:center; justify-content:center; gap:6px;">🌱 Solicitar Grupo de Crecimiento</a>
+        <button type="button" class="btn btn-secondary btn-block" onclick="document.getElementById('modal-growth-group-callout').classList.remove('active')" style="padding:11px; font-size:0.9rem;">Entendido</button>
+      </div>
     `;
   } else {
     container.innerHTML = `
       <p style="font-size:0.88rem; color: var(--primary); font-weight: 800; margin-bottom: 16px;">
         Este test te ayudará a guiarte pero en la práctica es donde validarás cuáles son tus dones
       </p>
-      <button class="btn btn-secondary btn-block" onclick="document.getElementById('modal-growth-group-callout').classList.remove('active')">Entendido</button>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="https://igcteg.org/grupos/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block" style="text-decoration:none; padding:12px; font-size:0.92rem; display:flex; align-items:center; justify-content:center; gap:6px;">🌱 Solicitar Grupo de Crecimiento</a>
+        <button type="button" class="btn btn-secondary btn-block" onclick="document.getElementById('modal-growth-group-callout').classList.remove('active')" style="padding:11px; font-size:0.9rem;">Entendido</button>
+      </div>
     `;
   }
 
