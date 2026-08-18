@@ -1070,34 +1070,6 @@ function initVideoLinks() {
   } catch (e) {}
 }
 
-function initOnsiteGrowthGroupModal() {
-  const modal = document.getElementById('modal-growth-group-onsite');
-  const closeBtn = document.getElementById('close-modal-growth-onsite');
-
-  const openOnsite = (e) => {
-    if (e) e.preventDefault();
-    if (modal) modal.classList.add('active');
-  };
-
-  const closeOnsite = () => {
-    if (modal) modal.classList.remove('active');
-  };
-
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.btn-connect-group') || e.target.closest('#btn-open-growth-onsite');
-    if (btn) {
-      openOnsite(e);
-    }
-  });
-
-  if (closeBtn) closeBtn.addEventListener('click', closeOnsite);
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeOnsite();
-    });
-  }
-}
-
 // ---------------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------------
@@ -1106,7 +1078,6 @@ function init() {
   initOnboardingFlow();
   initEvaluationSurvey();
   initQuickGiftsSlideover();
-  initOnsiteGrowthGroupModal();
 
   const stored = loadStoredResult();
   if (stored && isTestComplete(stored.answers)) {
