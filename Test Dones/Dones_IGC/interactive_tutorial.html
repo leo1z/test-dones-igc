@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial Interactivo Vivo — Dones IGC</title>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- CSS de la Web App + Estilos del Tutorial Split View -->
+  <link rel="stylesheet" href="src/css/styles.css">
+  
+  <style>
+    :root {
+      --tutorial-bg: #0f172a;
+      --tutorial-card: #1e293b;
+      --tutorial-border: #334155;
+      --tutorial-primary: #38bdf8;
+      --tutorial-accent: #a855f7;
+      --tutorial-code: #030712;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--tutorial-bg);
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    /* Top Banner Bar */
+    .tutorial-topbar {
+      background: linear-gradient(90deg, #1e1b4b, #0f172a);
+      border-bottom: 1px solid var(--tutorial-border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .tutorial-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tutorial-badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--tutorial-primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .tutorial-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin: 0;
+      color: #fff;
+    }
+
+    .tutorial-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-tuto {
+      background: var(--tutorial-card);
+      border: 1px solid var(--tutorial-border);
+      color: #f8fafc;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-tuto:hover {
+      border-color: var(--tutorial-primary);
+      color: var(--tutorial-primary);
+    }
+
+    .btn-tuto.active {
+      background: var(--tutorial-primary);
+      color: #0f172a;
+      border-color: var(--tutorial-primary);
+    }
+
+    /* Split Container Layout */
+    .split-container {
+      display: flex;
+      height: calc(100vh - 57px);
+      width: 100vw;
+    }
+
+    /* Left Side: Live Web App Frame */
+    .app-preview-pane {
+      flex: 1;
+      background: #fdfbf7;
+      position: relative;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      border-right: 1px solid var(--tutorial-border);
+    }
+
+    .app-wrapper {
+      width: 100%;
+      max-width: 540px;
+      min-height: 100%;
+      background: #fdfbf7;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+
+    /* Right Side: Interactive Tutorial & Code Inspector */
+    .inspector-pane {
+      width: 480px;
+      background-color: var(--tutorial-bg);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 24px;
+      gap: 20px;
+    }
+
+    .inspector-card {
+      background-color: var(--tutorial-card);
+      border: 1px solid var(--tutorial-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .inspector-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--tutorial-primary);
+      margin-top: 0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .code-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre, code {
+      font-family: 'Fira Code', monospace;
+    }
+
+    .live-code-snippet {
+      background-color: var(--tutorial-code);
+      border: 1px solid var(--tutorial-border);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.82rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    .state-monitor {
+      background-color: #030712;
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.78rem;
+      color: #a7f3d0;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    /* Inspector Hover Overlay in App */
+    .inspect-hover {
+      outline: 2px dashed #38bdf8 !important;
+      outline-offset: 2px;
+      cursor: help !important;
+    }
+
+    @media (max-width: 1024px) {
+      .split-container { flex-direction: column; height: auto; }
+      .app-preview-pane { width: 100%; border-right: none; }
+      .inspector-pane { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior del Tutorial -->
+  <header class="tutorial-topbar">
+    <div class="tutorial-title">
+      <span class="tutorial-badge">Sandbox Interactivo Vivo</span>
+      <h1>Tutorial Duplicado — Test de Dones IGC</h1>
+    </div>
+    <div class="tutorial-controls">
+      <button id="btn-toggle-inspector" class="btn-tuto active">
+        <span>🔍 Modo Inspector Activo</span>
+      </button>
+      <a href="index.html" class="btn-tuto" style="text-decoration:none;">
+        <span>🚀 Ver Web App Real</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Split View: Aplicación Viva a la izquierda + Panel Explicativo a la derecha -->
+  <div class="split-container">
+    
+    <!-- LADO IZQUIERDO: Web App Duplicada Funcionando -->
+    <main class="app-preview-pane">
+      <div class="app-wrapper" id="app-root">
+        
+        <!-- PANTALLA WELCOME -->
+        <section id="screen-welcome" class="screen active">
+          <header class="app-header">
+            <img src="src/assets/illustrations/favicon_igc.png" alt="IGC Logo" class="brand-logo">
+            <button id="nav-btn-glossary-welcome" class="btn-text-secondary">
+              📖 Aprender de los Dones
+            </button>
+          </header>
+
+          <main class="main-content">
+            <div class="welcome-card">
+              <div class="welcome-illustration">
+                <img src="src/assets/illustrations/Home.png" alt="Ilustración Dones Espirituales" class="hero-illustration">
+              </div>
+
+              <span class="badge">EVALUACIÓN ESPIRITUAL</span>
+              <h1 class="welcome-title">Descubre tus Dones Espirituales</h1>
+              
+              <p class="welcome-description">
+                Esta prueba te ayudará a identificar tus fortalezas y llamados de servicio en la iglesia local a través de 76 situaciones prácticas.
+              </p>
+
+              <button id="btn-start" class="btn btn-primary btn-block">
+                <span>Comenzar el Test</span>
+                <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+
+              <button id="btn-view-results" class="btn btn-secondary btn-block" style="display: none; margin-top: 12px;">
+                📊 Ver Mis Resultados Anteriores
+              </button>
+            </div>
+          </main>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- LADO DERECHO: Panel de Explicación Técnica y Código en Vivo -->
+    <aside class="inspector-pane">
+
+      <!-- Tarjeta 1: Explicación de la Pantalla Actual -->
+      <div class="inspector-card">
+        <h3>
+          <span>🎓 Componente Activo:</span>
+          <span id="tuto-component-name" class="code-tag">screen-welcome</span>
+        </h3>
+        <p id="tuto-component-desc" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">
+          Esta es la pantalla de bienvenida (Hero Section). En JavaScript (<code>app.js</code>), la función <code>showScreen('welcome')</code> activa esta vista y oculta las demás utilizando clases CSS <code>.screen.active</code>.
+        </p>
+        <div id="tuto-component-code" class="live-code-snippet">
+          // Código en app.js<br>
+          showScreen('welcome');<br>
+          // Oculta pantallas previas y muestra #screen-welcome
+        </div>
+      </div>
+
+      <!-- Tarjeta 2: Monitor de Estado en Tiempo Real -->
+      <div class="inspector-card">
+        <h3>📊 Monitor de Estado en Tiempo Real (`state`)</h3>
+        <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 8px;">
+          Esta caja muestra exactamente la variable en memoria <code>state</code> y lo que se guardará en <code>localStorage</code> y Supabase:
+        </p>
+        <pre id="tuto-state-monitor" class="state-monitor">{
+  "currentScene": 1,
+  "answersCount": 0,
+  "onboarding": { "completed": false },
+  "submissionId": null
+}</pre>
+      </div>
+
+      <!-- Tarjeta 3: Flujo Backend & Supabase -->
+      <div class="inspector-card">
+        <h3>⚡ Flujo Backend & Datos Remotos</h3>
+        <p id="tuto-backend-desc" style="font-size: 0.85rem; color: #cbd5e1;">
+          Al presionar <strong>"Comenzar el Test"</strong>, la app validará si el usuario ya llenó el onboarding en <code>checkAndShowOnboarding()</code>. Si no, abrirá el modal de onboarding antes de cargar la Parte 1 (`situations.js`).
+        </p>
+        <div class="live-code-snippet" style="color: #a7f3d0;">
+          // Capa Supabase (supabase-client.js)<br>
+          async function submitResult(result) { ... }<br>
+          async function deleteSubmission(id) { ... }
+        </div>
+      </div>
+
+      <!-- Tarjeta 4: Instrucción Interactiva -->
+      <div class="inspector-card" style="border-color: var(--tutorial-primary);">
+        <h3 style="color: #fff;">💡 Prueba Interactiva</h3>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">
+          Haz clic en cualquier botón o elemento de la Web App a la izquierda. Verás cómo este panel de la derecha actualiza automáticamente el archivo de código, la función JavaScript y el objeto de estado en tiempo real.
+        </p>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script type="module">
+    import { situations } from './src/data/situations.js';
+    import { gifts } from './src/data/gifts.js';
+    import { runFullCalculation } from './src/js/score-engine.js';
+
+    // Objeto de Estado Simulado para el Tutorial
+    window.tutoState = {
+      currentScene: 1,
+      answers: {},
+      onboarding: { completed: false, attendsGrowthGroup: null, zoneLocation: '' },
+      submissionId: null
+    };
+
+    // Actualizador del Monitor de Estado
+    function updateMonitor() {
+      const el = document.getElementById('tuto-state-monitor');
+      if (el) {
+        el.textContent = JSON.stringify({
+          currentScene: window.tutoState.currentScene,
+          answersCount: Object.keys(window.tutoState.answers).length,
+          onboarding: window.tutoState.onboarding,
+          submissionId: window.tutoState.submissionId
+        }, null, 2);
+      }
+    }
+
+    // Eventos e Interacción del Tutorial
+    document.getElementById('btn-start').addEventListener('click', () => {
+      document.getElementById('tuto-component-name').textContent = 'Modal Onboarding (Demografía)';
+      document.getElementById('tuto-component-desc').textContent = 'Función initOnboardingModal() en app.js. Presenta el video del Evangelio y solicita la ubicación y asistencia a Grupo de Crecimiento.';
+      document.getElementById('tuto-component-code').textContent = `// app.js\nfunction checkAndShowOnboarding() {\n  if (!state.onboarding.completed) {\n    el.modalOnboarding.classList.add('active');\n  }\n}`;
+      document.getElementById('tuto-backend-desc').textContent = 'Guarda el estado onboarding en localStorage con la clave "dones_igc_onboarding".';
+      updateMonitor();
+    });
+
+    document.getElementById('nav-btn-glossary-welcome').addEventListener('click', () => {
+      document.getElementById('tuto-component-name').textContent = 'Section Glossary (#screen-glossary)';
+      document.getElementById('tuto-component-desc').textContent = 'Función renderGlossary() en app.js. Muestra los 15 dones con sus tarjetas, buscador reactivo y guía de aplicación.';
+      document.getElementById('tuto-component-code').textContent = `// app.js\nfunction renderGlossary(filterText = '') {\n  const filtered = gifts.filter(g => ...);\n  // Renderiza .glossary-grid\n}`;
+      updateMonitor();
+    });
+
+    updateMonitor();
+  </script>
+</body>
+</html>
