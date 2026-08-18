@@ -284,19 +284,19 @@ const MILESTONE_BANNERS = {
     icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
     title: "¡BUEN COMIENZO!",
     text: "Responde con sinceridad lo que realmente harías en cada situación.",
-    illustration: "src/assets/illustrations/banners/Parte 2.png"
+    illustration: "src/assets/illustrations/banners/Parte 10.png"
   },
   5: {
     icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
     title: "¡MITAD DEL CAMINO!",
     text: "¡Vas excelente! Sigue respondiendo, pronto conocerás tus resultados",
-    illustration: "src/assets/illustrations/banners/Parte 5.png"
+    illustration: "src/assets/illustrations/banners/Parte 6.png"
   },
   9: {
     icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
     title: "¡YA CASI TERMINAS!",
     text: "Últimas preguntas para conocer con qué dones tienes mayor afinidad",
-    illustration: "src/assets/illustrations/banners/Parte 9.png"
+    illustration: "src/assets/illustrations/banners/Parte 8.png"
   }
 };
 

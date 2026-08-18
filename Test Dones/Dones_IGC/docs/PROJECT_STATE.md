@@ -21,12 +21,13 @@ Fecha de última actualización: 2026-08-17
     *   **Identificación de Departamentos por Ciudad:** Implementado motor inteligente de coincidencia (`getDeptFromCityString()`) que vincula ciudades seleccionadas en onboarding (ej: *Tegucigalpa*, *San Pedro Sula*, *La Ceiba*, *Danlí*, *Choluteca*, *Roatán*) a sus respectivos departamentos oficiales en la capa GeoJSON con claves de texto exactas (`Francisco Morazan`, `Cortes`, `El Paraiso`, `Islas de La Bahia`, etc.). Si hay 1 respuesta en Tegucigalpa, suma automáticamente 1 al conteo y color de polígono de Francisco Morazán.
     *   **Pines Pulsantes Acumulativos por Ubicación:** Incorporada la serie `effectScatter` de Apache ECharts que renderiza pines amarillos pulsantes sobre las coordenadas exactas de cada ciudad con encuestas completadas, escalando de tamaño según el conteo acumulativo.
     *   **Adaptación Móvil 100% Responsiva:** Ajustado el contenedor del mapa (`height: 320px` en móvil, `420px` en desktop) con `aspectScale: 0.85`, zoom táctil (`roam: true`) y redimensionamiento automático (`echartsInstance.resize()`).
-*   [x] **Ajustes Finos de Banners e Instrucción (`app.js`):**
-    *   **Visibilidad Exclusiva de Instrucción en Parte 1:** Removida la tarjeta de instrucción honesta de la Parte 5; ahora se muestra únicamente al iniciar el test en la **Parte 1** (`sceneId === 1`).
-    *   **Íconos SVG Vectoriales en Banners (Sin Emojis):** Reemplazados los caracteres emoji en los títulos por íconos SVG vectoriales inline (*Rayos/Chispas*, *Brújula/Meta*, *Bandera/Trofeo*).
-    *   **Textos Actualizados en Partes 5 y 9:**
-        *   Parte 5: *“¡Vas excelente! Sigue respondiendo, pronto conocerás tus resultados”*
-        *   Parte 9: *“Últimas preguntas para conocer con qué dones tienes mayor afinidad”*
+*   [x] **Sincronización de Ilustraciones Específicas y Proporciones Compactas en Banners (`styles.css`, `app.js`):**
+    *   **Asignación de Ilustraciones Requeridas:**
+        *   Parte 2 (*¡BUEN COMIENZO!*): Vinculada a `src/assets/illustrations/banners/Parte 10.png`
+        *   Parte 5 (*¡MITAD DEL CAMINO!*): Vinculada a `src/assets/illustrations/banners/Parte 6.png`
+        *   Parte 9 (*¡YA CASI TERMINAS!*): Vinculada a `src/assets/illustrations/banners/Parte 8.png`
+    *   **Reducción de Altura del Banner:** Relleno horizontal y vertical compactado (`10px 16px`), sombras suaves y margen inferior reducido a `10px`.
+    *   **Ampliación Visual de la Ilustración:** Incrementado el tamaño relativo de la ilustración dentro de la tarjeta a `76×76 px` para darle mayor prominencia y dinamismo.
 *   [x] **Filtros Autónomos Completos de Fecha y Ubicación en Análisis de 15 Dones:** Incorporados controles internos independientes de **Rango de Fecha** (`cross-filter-date`: *Todas las fechas, Hoy, 1 semana, 1 mes, 3 meses, Personalizado*) y **Ubicación** (`cross-filter-location`) que se combinan acumulativamente con *Asistencia a Grupo* y *Reflejo de Servicio*. Al seleccionar *Personalizado...*, despliega selectores interactivos `Desde` (`cross-start-date`) y `Hasta` (`cross-end-date`).
 *   [x] **Ilustración de Portada Ampliada (`index.html`):** Incrementado el tamaño visual de la ilustración principal de bienvenida (`src/assets/illustrations/ui/Home.png`) de 190px a **250px de altura** (`max-height: 38vh`), dándole mayor presencia visual en desktop y teléfonos móviles.
 *   [x] **Vaciado de Registros de Prueba en Supabase (`dones_igc.results`):** Ejecutado script de limpieza vía API REST de Supabase que eliminó todas las respuestas de prueba previas y **mantuvo intacto únicamente el último registro real** del usuario (`Tegucigalpa / M.D.C.`).
