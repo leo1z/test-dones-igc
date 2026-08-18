@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wireframe Prototipo Interactivo & Explicación de Código — Dones IGC</title>
+  <title>Manual Maestro Wireframe Interactivo — Dones IGC</title>
   <!-- Google Fonts: Inter, Outfit, Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -22,6 +22,8 @@
       --primary: #3b82f6;
       --accent: #8b5cf6;
       --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
       --code-bg: #030712;
@@ -61,8 +63,8 @@
     }
 
     .brand-logo {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       background: linear-gradient(135deg, var(--primary), var(--accent));
       border-radius: 8px;
       display: flex;
@@ -72,19 +74,22 @@
       font-weight: 900;
       color: #fff;
       font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
     }
 
     .brand-text h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: #fff;
+      line-height: 1.2;
     }
 
     .brand-text span {
       font-size: 0.72rem;
       color: var(--primary);
       font-weight: 600;
+      letter-spacing: 0.05em;
     }
 
     .screen-tabs {
@@ -129,7 +134,7 @@
     /* Left Side: Pure Wireframe Mockup Canvas */
     .wireframe-canvas {
       flex: 1;
-      background-color: #1e293b;
+      background-color: #1a2332;
       padding: 24px;
       display: flex;
       align-items: center;
@@ -141,12 +146,12 @@
     /* Mobile Device Wireframe Frame */
     .phone-mockup {
       width: 100%;
-      max-width: 420px;
-      min-height: 680px;
+      max-width: 430px;
+      min-height: 700px;
       background-color: var(--wf-bg);
       border: 12px solid #0f172a;
-      border-radius: 36px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      border-radius: 38px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
       display: flex;
       flex-direction: column;
       position: relative;
@@ -169,7 +174,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       overflow-y: auto;
     }
 
@@ -200,6 +205,7 @@
       border-radius: 4px;
       font-family: 'Fira Code', monospace;
       text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
 
     .wf-btn {
@@ -209,7 +215,7 @@
       border-radius: 8px;
       text-align: center;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
     }
 
@@ -220,7 +226,7 @@
       border-radius: 8px;
       text-align: center;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
 
     .wf-pill-group {
@@ -231,11 +237,11 @@
 
     .wf-pill {
       flex: 1;
-      padding: 8px;
+      padding: 8px 4px;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       background: #fff;
     }
@@ -271,18 +277,18 @@
 
     /* Right Side: Architecture & Code Inspector Pane */
     .inspector-pane {
-      width: 500px;
+      width: 540px;
       background-color: var(--panel-bg);
       border-left: 1px solid var(--panel-border);
-      padding: 28px;
+      padding: 24px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
     .info-card {
-      background-color: #1a2332;
+      background-color: #172033;
       border: 1px solid var(--panel-border);
       border-radius: 12px;
       padding: 18px;
@@ -290,7 +296,7 @@
 
     .info-card h3 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: var(--primary);
       margin-bottom: 8px;
@@ -311,10 +317,11 @@
       border-radius: 8px;
       padding: 14px;
       font-family: 'Fira Code', monospace;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: #38bdf8;
       margin-top: 8px;
       overflow-x: auto;
+      line-height: 1.45;
     }
 
     .tag-selector {
@@ -327,6 +334,26 @@
       font-size: 0.78rem;
     }
 
+    /* Component List Table */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.8rem;
+    }
+
+    .comp-table th, .comp-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--panel-border);
+      text-align: left;
+    }
+
+    .comp-table th {
+      background: #0d1322;
+      color: var(--primary);
+      font-family: 'Outfit', sans-serif;
+    }
+
     /* Prompt Box */
     .prompt-box {
       background: rgba(16, 185, 129, 0.08);
@@ -336,24 +363,25 @@
       font-size: 0.82rem;
       color: #a7f3d0;
       margin-top: 10px;
+      font-family: 'Fira Code', monospace;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .workspace { flex-direction: column; overflow-y: auto; }
-      .phone-mockup { max-width: 100%; min-height: 500px; }
+      .phone-mockup { max-width: 100%; min-height: 520px; }
       .inspector-pane { width: 100%; border-left: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header Navigation -->
+  <!-- Header Navigation Tabs -->
   <header class="header-nav">
     <div class="brand">
       <div class="brand-logo">IGC</div>
       <div class="brand-text">
-        <h1>Prototipo Wireframe Interactivo</h1>
-        <span>Explicador de Código y Arquitectura en Vivo</span>
+        <h1>Manual Maestro Wireframe</h1>
+        <span>Arquitectura y Componentes Frontend & Backend</span>
       </div>
     </div>
     
@@ -370,41 +398,65 @@
   <!-- Workspace Split View -->
   <div class="workspace">
 
-    <!-- LADO IZQUIERDO: Wireframe Móvil Autocontenido (0 imágenes externas) -->
+    <!-- LADO IZQUIERDO: Wireframe Móvil Vectorial (Sin dependencias externas) -->
     <main class="wireframe-canvas">
       <div class="phone-mockup">
         <div class="phone-notch"></div>
         <div id="wf-viewport" class="wf-screen-content">
-          <!-- Renderizado dinámico del Wireframe según la pestaña seleccionada -->
+          <!-- Renderizado dinámico del Wireframe según la vista -->
         </div>
       </div>
     </main>
 
-    <!-- LADO DERECHO: Panel Explicativo de Código y Flujo Backend -->
+    <!-- LADO DERECHO: Panel Explicativo Completo de Ingeniería -->
     <aside class="inspector-pane">
       
+      <!-- Bloque 1: Identificación y Componentes UI -->
       <div class="info-card">
-        <h3><span>📱 Pantalla Actual:</span> <span id="info-screen-title" class="tag-selector">#screen-welcome</span></h3>
-        <p id="info-screen-desc">Cargando explicación del componente...</p>
+        <h3><span>📱 Vista & Componentes:</span> <span id="info-screen-title" class="tag-selector">#screen-welcome</span></h3>
+        <p id="info-screen-desc">Cargando descripción del componente...</p>
+        
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Componente UI</th>
+              <th>Selector CSS / ID</th>
+              <th>Función Principal</th>
+            </tr>
+          </thead>
+          <tbody id="info-comp-table-body">
+            <!-- Filas dinámicas -->
+          </tbody>
+        </table>
       </div>
 
+      <!-- Bloque 2: Lógica Frontend JS -->
       <div class="info-card">
-        <h3>⚙️ Lógica Frontend (JS & Eventos)</h3>
-        <p id="info-js-desc">Funciones JavaScript responsables de renderizar y controlar esta pantalla.</p>
-        <div id="info-js-code" class="code-box">// Código JS ejecutado</div>
+        <h3>⚙️ Lógica Frontend (JavaScript & Eventos)</h3>
+        <p id="info-js-desc">Lógica JavaScript en `src/js/app.js` o `src/js/score-engine.js`.</p>
+        <div id="info-js-code" class="code-box">// Código JS</div>
       </div>
 
+      <!-- Bloque 3: Flujo de Datos & Backend Supabase -->
       <div class="info-card">
-        <h3>💾 Almacenamiento & Backend (Supabase / Local)</h3>
-        <p id="info-db-desc">Estructura de datos persistida en el navegador o enviada a la base de datos remota.</p>
-        <div id="info-db-code" class="code-box">// Flujo de datos</div>
+        <h3>💾 Flujo de Datos & Backend (Supabase REST API)</h3>
+        <p id="info-db-desc">Persistencia en `localStorage` y tabla remota Supabase `dones_igc.results`.</p>
+        <div id="info-db-code" class="code-box">// Flujo backend</div>
       </div>
 
+      <!-- Bloque 4: Pruebas Unitarias -->
       <div class="info-card">
-        <h3>✍️ Cheat Sheet de Prompt (Cómo pedir cambios)</h3>
-        <p style="font-size:0.82rem; color: var(--text-muted);">Usa esta plantilla exacta al pedirle modificaciones a la IA sobre esta vista:</p>
+        <h3>🧪 Pruebas Unitarias Automatizadas</h3>
+        <p id="info-test-desc">Validación con `node src/js/score-engine.test.mjs`.</p>
+        <div id="info-test-code" class="code-box">// Test suite</div>
+      </div>
+
+      <!-- Bloque 5: Cheat Sheet de Prompts -->
+      <div class="info-card">
+        <h3>✍️ Cheat Sheet de Prompts (Cómo pedir cambios)</h3>
+        <p style="font-size:0.82rem; color: var(--text-muted);">Estrucura recomendada para solicitar cambios a la IA sin romper nada:</p>
         <div id="info-prompt-example" class="prompt-box">
-          "Modifica la vista X para cambiar Y..."
+          "Modifica X..."
         </div>
       </div>
 
@@ -413,47 +465,79 @@
   </div>
 
   <script>
-    // Base de datos de pantallas de Wireframe e Información de Arquitectura
+    // Registro completo de las 6 vistas del sistema con explicaciones exhaustivas de arquitectura
     const screens = {
       welcome: {
-        title: '#screen-welcome (Hero Section)',
-        desc: 'Es la pantalla inicial de aterrizaje. Presenta el título del test de dones, el botón principal "Comenzar el Test" y la opción de volver a consultar resultados guardados.',
+        title: '#screen-welcome (Pantalla de Inicio / Hero Section)',
+        desc: 'Es la vista inicial de aterrizaje. Presenta el título del test de dones, la ilustración principal, el botón primario para iniciar la prueba y el acceso secundario a resultados anteriores.',
         wireframeHtml: `
-          <div class="wf-box" style="text-align:center; padding: 24px 12px;">
-            <span class="wf-label">HTML: .brand-logo</span>
-            <div style="font-weight:900; font-size:1.1rem; color:#1e293b;">IGC Tegucigalpa</div>
+          <div class="wf-box" style="text-align:center; padding: 20px 12px;">
+            <span class="wf-label">HTML: .app-header</span>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-weight:900; font-size:1rem; color:#1e293b;">IGC Tegucigalpa</div>
+              <div style="font-size:0.75rem; color:#2563eb; font-weight:700;">📖 Aprender de los Dones</div>
+            </div>
           </div>
-          <div class="wf-box" style="text-align:center; padding: 32px 16px; flex:1; display:flex; flex-direction:column; justify-content:center;">
+          <div class="wf-box" style="text-align:center; padding: 28px 16px; flex:1; display:flex; flex-direction:column; justify-content:center;">
             <span class="wf-label">HTML: .welcome-card</span>
-            <div style="font-size:1.3rem; font-weight:900; margin-bottom:8px;">Descubre tus Dones Espirituales</div>
-            <p style="font-size:0.8rem; color:#64748b; margin-bottom:20px;">Evaluación de 76 situaciones para identificar tus fortalezas de servicio.</p>
-            <div class="wf-btn">Comenzar el Test →</div>
+            <div style="background:#e2e8f0; height:120px; border-radius:12px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; color:#64748b; font-weight:700; font-size:0.85rem;">[ Ilustración Hero: Home.png ]</div>
+            <div style="display:inline-block; background:rgba(37,99,235,0.1); color:#2563eb; font-size:0.65rem; font-weight:800; padding:2px 8px; border-radius:10px; margin-bottom:8px;">EVALUACIÓN ESPIRITUAL</div>
+            <div style="font-size:1.25rem; font-weight:900; color:#0f172a; margin-bottom:6px;">Descubre tus Dones Espirituales</div>
+            <p style="font-size:0.78rem; color:#64748b; margin-bottom:20px;">Evaluación de 76 situaciones prácticas para identificar tus fortalezas de servicio.</p>
+            <div class="wf-btn" id="wf-btn-start">Comenzar el Test →</div>
             <div class="wf-btn-secondary" style="margin-top:10px;">📊 Ver Mis Resultados Anteriores</div>
           </div>
+          <div class="wf-box" style="text-align:center; padding:10px;">
+            <span class="wf-label">HTML: .bottom-nav-glass</span>
+            <div style="display:flex; justify-content:space-around; font-size:0.72rem; font-weight:700; color:#64748b;">
+              <span>🏠 Inicio</span>
+              <span>⚡ Test</span>
+              <span>📘 Dones</span>
+              <span>🏆 Resultados</span>
+            </div>
+          </div>
         `,
-        jsDesc: 'Al hacer clic en "Comenzar el Test" (#btn-start), el event listener ejecuta checkAndShowOnboarding() en src/js/app.js.',
+        components: [
+          { name: 'Hero Section', selector: '#screen-welcome', func: 'Contenedor principal de la bienvenida.' },
+          { name: 'Header Brand', selector: '.app-header', func: 'Logo oficial e hipervínculo directo al Glosario.' },
+          { name: 'Start Test Button', selector: '#btn-start', func: 'Dispara `checkAndShowOnboarding()`.' },
+          { name: 'Floating Glass Nav', selector: '.bottom-nav-glass', func: 'Barra flotante inferior fija con glassmorphism.' }
+        ],
+        jsDesc: 'Al hacer clic en #btn-start, app.js consulta si el usuario completó el onboarding. Si no lo ha completado, activa el modal de onboarding (#modal-onboarding). Si ya existe, navega directo a la Parte 1 del test.',
         jsCode: `// src/js/app.js
 el.btnStart.addEventListener('click', () => {
   checkAndShowOnboarding();
-});`,
-        dbDesc: 'Verifica en localStorage si existe la clave "dones_igc_onboarding" con completed = true.',
-        dbCode: `const stored = localStorage.getItem('dones_igc_onboarding');
-if (stored) state.onboarding = JSON.parse(stored);`,
-        prompt: '"Quiero cambiar el título de la bienvenida en index.html a X y ajustar el margen del botón #btn-start en styles.css."'
+});
+
+function showScreen(screenId, pushHistory = true) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(\`screen-\${screenId}\`).classList.add('active');
+  if (pushHistory) history.pushState({ screen: screenId }, '', \`#\${screenId}\`);
+}`,
+        dbDesc: 'Consulta localStorage buscando la clave "dones_igc_onboarding" y "dones_igc_result".',
+        dbCode: `// Lectura de Estado Local
+const storedOnboarding = localStorage.getItem('dones_igc_onboarding');
+if (storedOnboarding) state.onboarding = JSON.parse(storedOnboarding);`,
+        testDesc: 'No aplica lógica de motor directo en bienvenida, pero la suite valida la estructura inicial.',
+        testCode: `// node src/js/score-engine.test.mjs
+PASS - 76 situaciones cargadas
+PASS - 15 dones definidos`,
+        prompt: '"Modifica index.html para actualizar el texto del subtítulo en .welcome-description y cambia el padding en styles.css."'
       },
 
       onboarding: {
-        title: '#modal-onboarding (Modal de Onboarding)',
-        desc: 'Modal introductorio obligatorio la primera vez. Muestra el video de enseñanza, pregunta si asiste a Grupo de Crecimiento y permite elegir su ciudad/departamento.',
+        title: '#modal-onboarding (Modal de Onboarding y Mapa Demográfico)',
+        desc: 'Modal emergente introductorio que se despliega automáticamente si el usuario no ha completado sus datos. Incluye video del Evangelio, asistencia a Grupo de Crecimiento y selección de ciudad/departamento en Honduras.',
         wireframeHtml: `
-          <div class="wf-box">
+          <div class="wf-box" style="background:#fff;">
             <span class="wf-label">HTML: #modal-onboarding</span>
-            <div style="font-weight:800; font-size:1rem; margin-bottom:6px;">🎥 Entendiendo los Dones</div>
-            <div style="background:#cbd5e1; height:120px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#475569;">[ Reproductor de Video YouTube ]</div>
+            <div style="font-weight:900; font-size:1.05rem; margin-bottom:4px; color:#0f172a;">🌱 Bienvenido a Dones IGC</div>
+            <p style="font-size:0.75rem; color:#64748b; margin-bottom:12px;">Mira este breve mensaje antes de comenzar:</p>
+            <div style="background:#0f172a; height:120px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#38bdf8; font-weight:700; font-size:0.8rem;">[ Video YouTube Embed: El Evangelio y los Dones ]</div>
           </div>
           <div class="wf-box">
             <span class="wf-label">HTML: #onboarding-growth-group</span>
-            <div style="font-size:0.8rem; font-weight:700;">¿Asistes a un Grupo de Crecimiento?</div>
+            <div style="font-size:0.78rem; font-weight:700; color:#0f172a;">¿Asistes actualmente a un Grupo de Crecimiento?</div>
             <div class="wf-pill-group">
               <div class="wf-pill active">Sí, asisto</div>
               <div class="wf-pill">No asisto</div>
@@ -461,46 +545,65 @@ if (stored) state.onboarding = JSON.parse(stored);`,
           </div>
           <div class="wf-box">
             <span class="wf-label">HTML: #onboarding-city</span>
-            <div style="font-size:0.8rem; font-weight:700;">Ubicación / Ciudad:</div>
-            <div style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.8rem; margin-top:4px;">Tegucigalpa (Francisco Morazán)</div>
+            <div style="font-size:0.78rem; font-weight:700; color:#0f172a;">Ciudad / Municipio en Honduras:</div>
+            <div style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.78rem; margin-top:4px; font-weight:600;">Tegucigalpa (Francisco Morazán)</div>
           </div>
           <div class="wf-btn">Continuar al Test →</div>
         `,
-        jsDesc: 'Al presionar "Continuar al Test", saveOnboardingData() guarda las elecciones del usuario y abre la Parte 1.',
+        components: [
+          { name: 'Modal Overlay', selector: '#modal-onboarding', func: 'Capa traslúcida que bloquea el fondo hasta responder.' },
+          { name: 'YouTube Embed', selector: '#onboarding-video-frame', func: 'Reproductor iframe de concientización.' },
+          { name: 'Growth Group Selector', selector: '.onboarding-choice-btn', func: 'Registra si el miembro asiste a célula/grupo.' },
+          { name: 'City Select Dropdown', selector: '#onboarding-city-select', func: 'Indexa ciudad para el mapa GeoJSON en admin.html.' }
+        ],
+        jsDesc: 'saveOnboardingData() almacena completed = true, guarda las elecciones en state.onboarding y oculta el modal para mostrar la Parte 1.',
         jsCode: `// src/js/app.js
 function saveOnboardingData() {
   state.onboarding.completed = true;
+  state.onboarding.attendsGrowthGroup = selectedGroupChoice;
+  state.onboarding.zoneLocation = selectedCity;
   localStorage.setItem('dones_igc_onboarding', JSON.stringify(state.onboarding));
+  el.modalOnboarding.classList.remove('active');
   showScreen('test');
 }`,
-        dbDesc: 'Prepara el objeto de perfil que se vinculará con la entrega final en Supabase.',
+        dbDesc: 'Prepara las variables demográficas que se enviarán a la tabla dones_igc.results en Supabase al finalizar.',
         dbCode: `payload.attends_growth_group = state.onboarding.attendsGrowthGroup;
 payload.zone_location = state.onboarding.zoneLocation;`,
-        prompt: '"Agrega una nueva opción en el selector de ubicaciones del onboarding en index.html y actualiza la función saveOnboardingData en app.js."'
+        testDesc: 'Verifica la integridad de datos cuando el campo attendsGrowthGroup es null o booleano.',
+        testCode: `// test payload validation
+assert.strictEqual(typeof state.onboarding.completed, 'boolean');`,
+        prompt: '"Añade la ciudad de Siguatepeque al selector de ciudades en index.html y actualiza la función saveOnboardingData en app.js."'
       },
 
       test: {
-        title: '#screen-test (Wizard del Test)',
-        desc: 'El flujo principal con 10 partes temáticas. Contiene el mapa de ruta superior con círculos interactivos, las situaciones con píldoras (1, 2, 3) y navegación inteligente.',
+        title: '#screen-test (Wizard del Test — 10 Partes & 76 Preguntas)',
+        desc: 'La sección interactiva principal. Muestra el mapa de ruta horizontal con desplazamiento suave automático (scrollTo), la barra de porcentaje, tarjetas de hito compactas y las píldoras de opción (1: Rara vez, 2: A veces, 3: Frecuentemente).',
         wireframeHtml: `
           <div class="wf-box">
             <span class="wf-label">HTML: #journey-roadmap-card</span>
             <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:800; margin-bottom:6px;">
-              <span>💾 GUARDADO AUTOMÁTICO</span>
-              <span>40% Completado</span>
+              <span style="color:#2563eb;">💾 GUARDADO AUTOMÁTICO</span>
+              <span style="color:#0f172a;">74% Completado</span>
             </div>
             <div class="wf-roadmap">
               <div class="wf-node done">✓</div>
               <div class="wf-node done">✓</div>
               <div class="wf-node done">✓</div>
-              <div class="wf-node current">4</div>
+              <div class="wf-node current">8</div>
               <div class="wf-node">🔒</div>
               <div class="wf-node">🔒</div>
             </div>
           </div>
+          <div class="wf-box" style="background:#eff6ff; border-color:#93c5fd;">
+            <span class="wf-label">HTML: .scene-card (Banner de Hito Parte 8)</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="background:#2563eb; color:#fff; padding:6px; border-radius:6px; font-size:0.7rem; font-weight:800;">BANNER</div>
+              <div style="font-size:0.75rem; font-weight:700; color:#1e3a8a;">¡Vas Excelente! Sigue respondiendo, pronto conocerás tus resultados.</div>
+            </div>
+          </div>
           <div class="wf-box" style="flex:1;">
-            <span class="wf-label">HTML: .situation-card (Pregunta 24 de 76)</span>
-            <div style="font-size:0.85rem; font-weight:700; margin-bottom:8px;">Disfruto organizando actividades y asegurando que cada detalle funcione bien.</div>
+            <span class="wf-label">HTML: .situation-item (Situación 58 de 76)</span>
+            <div style="font-size:0.85rem; font-weight:700; color:#0f172a; margin-bottom:8px;">Disfruto organizando actividades y asegurando que cada detalle funcione bien.</div>
             <div class="wf-pill-group">
               <div class="wf-pill">1. Rara vez</div>
               <div class="wf-pill active">2. A veces</div>
@@ -512,102 +615,177 @@ payload.zone_location = state.onboarding.zoneLocation;`,
             <div class="wf-btn" style="flex:2;">Siguiente →</div>
           </div>
         `,
-        jsDesc: 'handlePillClick() asigna el puntaje (1, 2 o 3) a la situación y renderRoadmapTrack() centra suavemente la estación activa.',
+        components: [
+          { name: 'Roadmap Track', selector: '#journey-nodes-scroll', func: 'Barra horizontal de estaciones (Partes 1 a 10).' },
+          { name: 'Locked Node', selector: '.roadmap-node.locked', func: 'Estaciones no alcanzadas (candado 🔒 y clics desactivados).' },
+          { name: 'Milestone Banner', selector: '.scene-card', func: 'Notificación compacta en Partes 2, 5 y 9.' },
+          { name: 'Scale Pill Group', selector: '.scale-pills', func: 'Selector de 3 opciones (1: Rara vez, 2: A veces, 3: Frecuentemente).' },
+          { name: 'Next Button', selector: '#btn-next', func: 'Avanza a la siguiente parte o muestra "Finalizar Test" en Parte 10.' }
+        ],
+        jsDesc: 'handlePillClick() actualiza el valor en state.answers, guarda en localStorage y actualiza la barra de progreso. renderRoadmapTrack() realiza scroll horizontal suave para centrar la parte activa.',
         jsCode: `// src/js/app.js
 function handlePillClick(questionId, val) {
   state.answers[questionId] = val;
-  saveAnswers(); // guarda en localStorage
+  localStorage.setItem('dones_igc_answers', JSON.stringify(state.answers));
+  updateProgressBar();
+}
+
+function renderRoadmapTrack(currentSceneId) {
+  // auto-scroll suave para centrar nodo activo
+  scrollParent.scrollTo({ left: scrollOffset, behavior: 'smooth' });
 }`,
-        dbDesc: 'Guarda continuamente el diccionario de respuestas parciales en localStorage para prevenir pérdida de avance.',
+        dbDesc: 'Guarda continuamente el objeto de respuestas parciales en localStorage.',
         dbCode: `localStorage.setItem('dones_igc_answers', JSON.stringify(state.answers));`,
-        prompt: '"Cambia el texto del botón Siguiente a Finalizar en la Parte 10 modificando renderScene() en src/js/app.js."'
+        testDesc: 'Valida que las 76 situaciones estén asignadas a los 10 sceneIds y 15 giftIds únicos.',
+        testCode: `// node src/js/score-engine.test.mjs
+PASS - 76 situaciones
+PASS - ids 1..76 únicos y sin huecos
+PASS - cada situación apunta a un giftId válido`,
+        prompt: '"Modifica styles.css para cambiar el color de fondo de las píldoras seleccionadas .scale-pill.selected a var(--primary)."'
       },
 
       glossary: {
-        title: '#screen-glossary (Glosario & Guía Rápida)',
-        desc: 'Permite buscar y explorar los 15 dones espirituales con sus referencias bíblicas y aplicaciones prácticas sin interrumpir el avance del test.',
+        title: '#screen-glossary (Glosario & Guía Rápida de Dones)',
+        desc: 'Sección educativa donde los miembros pueden buscar y estudiar los 15 dones espirituales, pasajes bíblicos y ejemplos de servicio. Incluye un buscador reactivo que mantiene fija la altura del contenedor.',
         wireframeHtml: `
-          <div class="wf-box">
+          <div class="wf-box" style="background:#fff;">
             <span class="wf-label">HTML: .glossary-header</span>
-            <div style="font-weight:900; font-size:1.1rem;">Aprender de los Dones</div>
+            <div style="font-weight:900; font-size:1.05rem; color:#0f172a;">Aprender de los Dones</div>
             <div style="font-size:0.75rem; color:#64748b; margin-bottom:8px;">Explora los 15 dones espirituales y ejemplos de cómo aplicarlos</div>
-            <div style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.8rem;">🔍 Buscar don o pasaje bíblico...</div>
+            <div style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.78rem; font-weight:600;">🔍 Buscar don o pasaje bíblico...</div>
           </div>
           <div class="wf-box" style="flex:1;">
-            <span class="wf-label">HTML: .gift-card (Don de Enseñanza)</span>
-            <div style="font-weight:800; font-size:0.95rem; color:#2563eb;">📘 Enseñanza</div>
-            <div style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">Romanos 12:7</div>
-            <p style="font-size:0.78rem;">Habilidad dada por Dios para comunicar la verdad bíblica con claridad y precisión.</p>
+            <span class="wf-label">HTML: .gift-card (Don de Administración)</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <div style="font-weight:900; font-size:0.95rem; color:#2563eb;">🏛️ Administración</div>
+              <span style="font-size:0.65rem; background:#eff6ff; color:#2563eb; font-weight:800; padding:2px 6px; border-radius:4px;">1 Corintios 12:28</span>
+            </div>
+            <p style="font-size:0.78rem; color:#475569; margin-bottom:8px;">Habilidad dada por Dios para coordinar proyectos, recursos y personas para lograr metas del reino.</p>
+            <div style="font-size:0.72rem; background:#f8fafc; padding:6px; border-radius:6px; font-weight:600; color:#334155;">Ejemplo: Organizar la logística de eventos, ministerios o grupos.</div>
           </div>
         `,
-        jsDesc: 'renderGlossary(filterText) filtra los dones dinámicamente y mantiene fija la altura del contenedor para evitar saltos.',
+        components: [
+          { name: 'Sticky Glossary Header', selector: '.glossary-header', func: 'Cabecera fija con buscador reactivo.' },
+          { name: 'Search Input', selector: '#glossary-search', func: 'Filtra dones por nombre, resumen o versículo en tiempo real.' },
+          { name: 'Glossary Grid', selector: '.glossary-grid', func: 'Contenedor flex/grid con min-height: 450px para evitar saltos.' },
+          { name: 'Gift Card', selector: '.gift-card', func: 'Tarjeta con descripción bíblica y ejemplos prácticos.' }
+        ],
+        jsDesc: 'renderGlossary(filterText) filtra los dones coincidentes de src/data/gifts.js y actualiza la grilla sin parpadeos.',
         jsCode: `// src/js/app.js
-el.glossarySearch.addEventListener('input', (e) => {
-  renderGlossary(e.target.value);
-});`,
-        dbDesc: 'Lee directamente del objeto estático gifts[] definido en src/data/gifts.js.',
+function renderGlossary(filterText = '') {
+  const query = filterText.toLowerCase().trim();
+  const filtered = gifts.filter(g => g.name.toLowerCase().includes(query) || g.biblePassage.toLowerCase().includes(query));
+  // Renderiza el HTML de tarjetas
+}`,
+        dbDesc: 'Lee del array estático gifts[] expuesto por src/data/gifts.js.',
         dbCode: `import { gifts } from '../data/gifts.js';`,
-        prompt: '"Actualizar la descripción bíblica del don de Misericordia en src/data/gifts.js."'
+        testDesc: 'Garantiza que los 15 dones tengan propiedades id, name, summary, biblePassage y examples válidos.',
+        testCode: `// node src/js/score-engine.test.mjs
+PASS - 15 dones
+PASS - questionCount de cada don coincide con situaciones reales`,
+        prompt: '"Actualiza el texto del subtítulo en index.html bajo el encabezado Aprender de los Dones."'
       },
 
       results: {
-        title: '#screen-results (Resultados & Cierre)',
-        desc: 'Presenta los 3 dones principales (Top 3) del usuario en formato Bento Grid, tarjeta de evaluación de experiencia y llamado a Grupo de Crecimiento.',
+        title: '#screen-results (Pantalla de Resultados & Modales de Cierre)',
+        desc: 'Pantalla final presentada al completar el test. Muestra el Top 3 de dones principales en formato Bento Grid, tarjeta dedicada de evaluación de experiencia y tarjeta independiente con accesos a Grupos de Crecimiento y Reinicio.',
         wireframeHtml: `
-          <div class="wf-box" style="background:#eff6ff; border-color:#93c5fd;">
+          <div class="wf-box" style="background:#eff6ff; border-color:#93c5fd; text-align:center;">
             <span class="wf-label">HTML: .results-header</span>
-            <div style="font-size:1.1rem; font-weight:900; text-align:center;">¡Tus 3 Dones Principales!</div>
+            <div style="font-size:1.1rem; font-weight:900; color:#1e3a8a;">¡Tus 3 Dones Principales!</div>
+            <div style="font-size:0.75rem; color:#2563eb;">Calculado con el motor determinista de puntajes</div>
           </div>
           <div class="wf-box">
             <span class="wf-label">HTML: .bento-card (Top 1)</span>
-            <div style="font-weight:900; color:#2563eb;">🥇 Don de Administración (89%)</div>
-            <p style="font-size:0.75rem; color:#64748b;">Capacidad para coordinar recursos y personas efectivamente.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-weight:900; color:#2563eb; font-size:0.95rem;">🥇 Don de Servicio (95%)</div>
+              <div style="font-size:0.7rem; font-weight:800; background:#dbeafe; color:#1e40af; padding:2px 6px; border-radius:4px;">19 / 20 pts</div>
+            </div>
+            <p style="font-size:0.75rem; color:#64748b; margin-top:4px;">Habilidad para detectar necesidades prácticas y ayudar con gozo.</p>
           </div>
           <div class="wf-box">
-            <span class="wf-label">HTML: .results-actions-card</span>
-            <div style="font-weight:700; font-size:0.82rem;">¿Cómo fue tu experiencia?</div>
+            <span class="wf-label">HTML: .results-actions-card (Tarjeta 1: Evaluación)</span>
+            <div style="font-weight:800; font-size:0.82rem; color:#0f172a;">¿Cómo fue tu experiencia?</div>
+            <p style="font-size:0.72rem; color:#64748b;">Ayúdanos a mejorar completando 3 preguntas cortas de retroalimentación.</p>
             <div class="wf-btn" style="margin-top:6px; font-size:0.8rem;">Evaluar la Experiencia del Test</div>
           </div>
-          <div class="wf-btn-secondary" style="color:#ef4444;">Reiniciar Test</div>
+          <div class="wf-box">
+            <span class="wf-label">HTML: .results-next-steps-card (Tarjeta 2: Siguientes Pasos)</span>
+            <div class="wf-btn" style="font-size:0.8rem; background:#16a34a;">🌱 Conectar con un Grupo de Crecimiento ↗</div>
+            <div class="wf-btn-secondary" style="margin-top:8px; color:#ef4444; font-size:0.8rem;">Reiniciar Test</div>
+          </div>
         `,
-        jsDesc: 'finishTest() llama a runFullCalculation() en score-engine.js y sincroniza el resultado final con Supabase via submitResult().',
-        jsCode: `// src/js/app.js
+        components: [
+          { name: 'Bento Grid Top 3', selector: '.top-gifts-bento', func: 'Visualización destacada de los 3 dones con mayor puntuación.' },
+          { name: 'Evaluation Action Card', selector: '.results-actions-card', func: 'Tarjeta exclusiva para abrir el modal de feedback (#modal-eval).' },
+          { name: 'Next Steps Card', selector: '.results-next-steps-card', func: 'Tarjeta independiente con Grupo de Crecimiento y Reinicio.' },
+          { name: 'Reset Test Button', selector: '#btn-reset', func: 'Elimina el registro en Supabase (deleteSubmission) y reinicia la app.' }
+        ],
+        jsDesc: 'finishTest() llama a runFullCalculation(state.answers) en score-engine.js y luego a submitResult() en supabase-client.js. Al hacer clic en #btn-reset, invoca deleteSubmission(submissionId).',
+        jsCode: `// src/js/app.js & score-engine.js
 const calculation = runFullCalculation(state.answers);
-const createdId = await submitResult(result);`,
-        dbDesc: 'Envía un POST o PATCH a la tabla dones_igc.results en Supabase con las puntuaciones y elecciones del onboarding.',
-        dbCode: `await supabase.from('results').insert(payload);`,
-        prompt: '"Separar la tarjeta de evaluación de experiencia de los botones de reinicio en index.html."'
+const createdId = await submitResult(result);
+
+// Al reiniciar test:
+if (submissionId) await deleteSubmission(submissionId);
+clearStorage();`,
+        dbDesc: 'Guarda la entrega final en Supabase (insert/upsert) y elimina la fila de la tabla si el usuario reinicia.',
+        dbCode: `await supabase.from('results').delete().eq('id', submissionId);`,
+        testDesc: 'Valida desempates por rawScore, ordenación de Top 3 y determinismo completo.',
+        testCode: `// node src/js/score-engine.test.mjs
+PASS - todo en 3: ranked tiene 15 items con rank 1..15
+PASS - todo en 3: top3 tiene 3 items
+PASS - runFullCalculation es determinista`,
+        prompt: '"Separar la tarjeta de evaluación de la tarjeta de siguientes pasos en index.html."'
       },
 
       admin: {
-        title: 'admin.html (Panel de Administración)',
-        desc: 'Panel independiente para el equipo pastoral. Incluye métricas acumulativas, visualización en mapa GeoJSON de Honduras y gráficos Apache ECharts.',
+        title: 'admin.html (Panel de Administración y Métricas GeoJSON)',
+        desc: 'Panel independiente y autónomo diseñado para líderes y administradores. Permite visualizar entregas acumuladas, filtrar por fechas, consultar mapas de calor en GeoJSON de Honduras y gráficos Apache ECharts.',
         wireframeHtml: `
           <div class="wf-box" style="background:#0f172a; color:#fff;">
             <span class="wf-label">HTML: admin.html (.admin-header)</span>
-            <div style="font-weight:900; font-size:1rem;">Panel de Métricas IGC</div>
-            <div style="font-size:0.7rem; color:#94a3b8;">450 Encuestas Completadas</div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-weight:900; font-size:1.05rem;">Panel Admin IGC</div>
+                <div style="font-size:0.7rem; color:#94a3b8;">Sincronizado con Supabase</div>
+              </div>
+              <div style="background:#1e293b; padding:4px 8px; border-radius:6px; font-size:0.7rem; font-weight:700;">450 Encuestas</div>
+            </div>
           </div>
           <div class="wf-box">
-            <span class="wf-label">HTML: #honduras-map-container</span>
-            <div style="background:#e2e8f0; height:130px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#475569;">[ Mapa Vectorial GeoJSON de Honduras con Pines ]</div>
+            <span class="wf-label">HTML: #honduras-map-container (Apache ECharts)</span>
+            <div style="background:#e2e8f0; height:140px; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#475569; font-weight:700; font-size:0.8rem;">
+              <span>🗺️ Mapa Vectorial GeoJSON de Honduras</span>
+              <span style="font-size:0.7rem; color:#64748b; margin-top:4px;">[ Polígonos por Departamento + Pines Pulsantes ]</span>
+            </div>
           </div>
           <div class="wf-box">
             <span class="wf-label">HTML: #chart-gifts-distribution</span>
-            <div style="background:#cbd5e1; height:80px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#475569;">[ Gráfico Estadístico Apache ECharts ]</div>
+            <div style="background:#cbd5e1; height:90px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#475569; font-weight:700; font-size:0.8rem;">[ Gráfico de Barras / Distribución de 15 Dones ]</div>
           </div>
         `,
-        jsDesc: 'fetchAdminMetrics() en supabase-client.js consulta las entregas reales y renderiza las capas del mapa de Honduras.',
+        components: [
+          { name: 'Admin Dashboard Header', selector: '.admin-header', func: 'Encabezado con total de respuestas y filtros de fecha.' },
+          { name: 'GeoJSON Map Container', selector: '#honduras-map-container', func: 'Mapa interactivo de departamentos de Honduras.' },
+          { name: 'ECharts Scatter Pins', selector: 'series: effectScatter', func: 'Pines amarillos pulsantes en ciudades con encuestas.' },
+          { name: 'Gifts Distribution Chart', selector: '#chart-gifts-distribution', func: 'Histograma estadístico de los dones con mayor frecuencia.' }
+        ],
+        jsDesc: 'fetchAdminMetrics(startDate, endDate) consulta todas las entregas en Supabase, procesa las ubicaciones con getDeptFromCityString() y actualiza las instancias de ECharts.',
         jsCode: `// admin.html
 const records = await fetchAdminMetrics(startDate, endDate);
-renderHondurasMap(records);`,
-        dbDesc: 'Ejecuta una consulta SELECT ordenada por fecha sobre dones_igc.results.',
+const deptCounts = processDeptCounts(records);
+echartsInstance.setOption({ ... });`,
+        dbDesc: 'Consulta la vista o tabla dones_igc.results mediante SELECT * ordenado descendentemente por fecha.',
         dbCode: `supabase.from('results').select('*').order('completed_at', { ascending: false });`,
-        prompt: '"Agregar un filtro por rango de fechas en admin.html que actualice los gráficos de Apache ECharts."'
+        testDesc: 'Verifica la integridad de concordancia de nombres de departamentos en GeoJSON (ej: Francisco Morazan, Cortes).',
+        testCode: `// dept matching check
+assert.strictEqual(getDeptFromCityString('Tegucigalpa'), 'Francisco Morazan');`,
+        prompt: '"Agregar un selector de filtro por departamento en admin.html que actualice los gráficos de Apache ECharts."'
       }
     };
 
-    // Función para cambiar de pantalla en el Wireframe
+    // Función para alternar de pantalla en el Wireframe y renderizar toda la información de arquitectura
     function switchScreen(key, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -615,17 +793,37 @@ renderHondurasMap(records);`,
       const data = screens[key];
       if (!data) return;
 
+      // 1. Renderizar Wireframe HTML
       document.getElementById('wf-viewport').innerHTML = data.wireframeHtml;
+
+      // 2. Actualizar Nombre de la Vista
       document.getElementById('info-screen-title').textContent = data.title;
       document.getElementById('info-screen-desc').textContent = data.desc;
+
+      // 3. Renderizar Tabla de Componentes UI
+      const tbody = document.getElementById('info-comp-table-body');
+      tbody.innerHTML = '';
+      data.components.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:700; color:#fff;">${c.name}</td>
+          <td><span class="tag-selector">${c.selector}</span></td>
+          <td style="color:#cbd5e1;">${c.func}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // 4. Actualizar Bloques de Código
       document.getElementById('info-js-desc').textContent = data.jsDesc;
       document.getElementById('info-js-code').textContent = data.jsCode;
       document.getElementById('info-db-desc').textContent = data.dbDesc;
       document.getElementById('info-db-code').textContent = data.dbCode;
+      document.getElementById('info-test-desc').textContent = data.testDesc;
+      document.getElementById('info-test-code').textContent = data.testCode;
       document.getElementById('info-prompt-example').textContent = data.prompt;
     }
 
-    // Inicializar en la pantalla de Bienvenida
+    // Inicializar en la vista de Bienvenida
     switchScreen('welcome', document.querySelectorAll('.tab-btn')[0]);
   </script>
 </body>
