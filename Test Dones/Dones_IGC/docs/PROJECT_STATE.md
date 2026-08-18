@@ -25,6 +25,7 @@ Fecha de última actualización: 2026-08-17
     *   Implementada función `deleteSubmission(submissionId)` que elimina el registro correspondiente de la tabla `dones_igc.results` en Supabase al confirmar el reinicio del test.
     *   Garantiza que al reiniciar el test no queden respuestas obsoletas o duplicadas en la base de datos remota, manteniendo métricas 100% limpias e insaltables en el Panel Admin (`admin.html`).
 *   [x] **Estabilización de Contenedor en Búsqueda de Glosario (`styles.css`):** Asignada una altura mínima constante (`min-height: calc(100vh - 160px)` en `.glossary-container` y `min-height: 450px` con `align-content: start` en `.glossary-grid`). Al buscar un término sin coincidencias (0 resultados), el encabezado *"Aprender de los Dones"* y el buscador permanecen fijos en su posición superior sin saltos visuales ni colapsos.
+*   [x] **Actualización de Subtítulo en Guía Rápida de Dones (`index.html`):** Cambiado el texto secundario en la cabecera del slideover de consulta rápida a: **“Conocer los dones te dará más claridad al llenar el test”**.
 *   [x] **Actualización de Redacción en Modal 'Pon en práctica tus dones' (`index.html`, `app.js`):**
     *   **Texto descriptivo:** Actualizado a: *“Los dones cobran su verdadero propósito al ejercitarlos en tu grupo de crecimiento, con tu familia y con toda la familia de la fe.”*
     *   **Texto azul de cierre:** Actualizado a: *“Este test te ayudará a guiarte pero en la práctica es donde validarás cuáles son tus dones”*.
