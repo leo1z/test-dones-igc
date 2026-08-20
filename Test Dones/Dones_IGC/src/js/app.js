@@ -1188,13 +1188,8 @@ async function downloadResultsImage() {
     const dataUrl = canvas.toDataURL('image/png');
     const filename = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
 
-    // 1. Intentar descarga directa
-    const link = document.createElement('a');
-    link.download = filename;
-    link.href = dataUrl;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // 1. Intentar compartir/guardar mediante Web Share API (o descarga fallback)
+    shareOrDownloadImage(dataUrl, filename);
 
     // 2. Desplegar Modal de Previsualización para móviles y descarga manual
     const modalPreview = document.getElementById('modal-image-preview');
@@ -1249,6 +1244,39 @@ function roundRect(ctx, x, y, w, h, r, fill = true, stroke = false) {
   if (stroke) ctx.stroke();
 }
 
+async function shareOrDownloadImage(dataUrl, filename = 'Mis_Dones_IGC.png') {
+  if (!dataUrl) return;
+
+  try {
+    const response = await fetch(dataUrl);
+    const blob = await response.blob();
+    const file = new File([blob], filename, { type: 'image/png' });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: 'Mis Dones Espirituales — IGC',
+        text: 'Mis resultados del Test de Dones Espirituales de la Iglesia Gran Comisión Tegucigalpa.',
+      });
+      return;
+    }
+  } catch (err) {
+    if (err.name !== 'AbortError') {
+      console.log('Share cancelado o no soportado, ejecutando descarga directa:', err);
+    } else {
+      return;
+    }
+  }
+
+  // Fallback a descarga por etiqueta <a>
+  const link = document.createElement('a');
+  link.download = filename;
+  link.href = dataUrl;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 // ---------------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------------
@@ -1266,6 +1294,16 @@ function init() {
   if (previewCloseBtn) {
     previewCloseBtn.addEventListener('click', () => {
       document.getElementById('modal-image-preview')?.classList.remove('active');
+    });
+  }
+
+  const modalShareBtn = document.getElementById('btn-modal-share');
+  if (modalShareBtn) {
+    modalShareBtn.addEventListener('click', () => {
+      const dataUrl = document.getElementById('preview-result-img')?.src;
+      if (dataUrl) {
+        shareOrDownloadImage(dataUrl);
+      }
     });
   }
 

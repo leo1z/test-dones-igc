@@ -973,23 +973,32 @@ h1, h2, h3, h4, h5, h6 {
 /* Top 3 Equal Grid */
 .top3-equal-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
   gap: 16px;
   width: 100%;
+}
+
+@media (min-width: 640px) {
+  .top3-equal-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .top3-equal-card {
   background: #ffffff;
   border-radius: var(--radius-lg);
-  padding: 24px 20px;
+  padding: 22px 18px;
   border: 2px solid rgba(51, 108, 221, 0.25);
   box-shadow: 0 10px 30px -6px rgba(15, 15, 49, 0.06);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: space-between;
   gap: 12px;
   position: relative;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .top3-equal-card .top3-rank-badge {
