@@ -1181,13 +1181,31 @@
       renderQuestionsAnalysisTable();
     }
 
+    const giftIconsMap = {
+      evangelismo: '📢',
+      dar: '🎁',
+      servir: '🤝',
+      exhortar: '💬',
+      discernimiento: '🔍',
+      sabiduria: '💡',
+      misionero_apostol: '🌍',
+      profecia: '📜',
+      pastor: '🐑',
+      fe: '🛡️',
+      misericordia: '❤️',
+      administrar: '🏛️',
+      ciencia_conocimiento: '📖',
+      ensenanza: '✏️',
+      presidir_liderazgo: '👑'
+    };
+
     function populateGiftSelectFilter() {
       const select = document.getElementById('filter-gift-select');
       if (!select || select.children.length > 1) return;
       gifts.forEach(g => {
         const opt = document.createElement('option');
         opt.value = g.id;
-        opt.textContent = `${g.icon} ${g.name}`;
+        opt.textContent = `${giftIconsMap[g.id] || '📖'} ${g.name}`;
         select.appendChild(opt);
       });
 
@@ -1250,7 +1268,8 @@
 
       let html = '';
       questionsToRender.forEach(s => {
-        const gift = gifts.find(g => g.id === s.giftId) || { name: s.giftId, icon: '📖' };
+        const gift = gifts.find(g => g.id === s.giftId) || { name: s.giftId };
+        const icon = giftIconsMap[s.giftId] || '📖';
         
         let cnt1 = 0, cnt2 = 0, cnt3 = 0, totalAns = 0, sumVal = 0;
         
@@ -1265,24 +1284,37 @@
           }
         });
 
-        const avg = totalAns > 0 ? (sumVal / totalAns).toFixed(2) : '-';
         const pct1 = totalAns > 0 ? Math.round((cnt1 / totalAns) * 100) : 0;
         const pct2 = totalAns > 0 ? Math.round((cnt2 / totalAns) * 100) : 0;
         const pct3 = totalAns > 0 ? Math.round((cnt3 / totalAns) * 100) : 0;
 
+        let avgBadge = '-';
+        let exactAvgSub = '';
         let avgBadgeColor = 'background: rgba(15,15,49,0.06); color: var(--navy);';
+
         if (totalAns > 0) {
-          if (avg >= 2.4) avgBadgeColor = 'background: rgba(16, 185, 129, 0.12); color: #059669;';
-          else if (avg >= 1.8) avgBadgeColor = 'background: rgba(51, 108, 221, 0.12); color: var(--primary);';
-          else avgBadgeColor = 'background: rgba(245, 158, 11, 0.12); color: #b45309;';
+          const numAvg = sumVal / totalAns;
+          const roundedVal = Math.round(numAvg); // 1, 2, o 3
+          exactAvgSub = `(promedio ${numAvg.toFixed(2)})`;
+
+          if (roundedVal === 3) {
+            avgBadge = '3 (Frecuentemente)';
+            avgBadgeColor = 'background: rgba(16, 185, 129, 0.12); color: #059669;';
+          } else if (roundedVal === 2) {
+            avgBadge = '2 (A veces)';
+            avgBadgeColor = 'background: rgba(51, 108, 221, 0.12); color: var(--primary);';
+          } else {
+            avgBadge = '1 (Rara vez)';
+            avgBadgeColor = 'background: rgba(245, 158, 11, 0.12); color: #b45309;';
+          }
         }
 
         html += `
           <tr style="border-bottom: 1px solid rgba(15,15,49,0.06);">
             <td style="padding: 10px; text-align: center; font-weight: 850; color: var(--navy);">${s.id}</td>
             <td style="padding: 10px;">
-              <div style="font-weight: 850; color: var(--navy); font-size: 0.8rem;">${gift.icon} ${gift.name}</div>
-              <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 650;">Parte ${s.sceneId}</div>
+              <div style="font-weight: 850; color: var(--navy); font-size: 0.82rem;">${icon} ${gift.name}</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 650;">Parte ${s.sceneId}</div>
             </td>
             <td style="padding: 10px; font-weight: 650; color: var(--navy); line-height: 1.35;">${s.text}</td>
             <td style="padding: 10px; text-align: center; font-weight: 800; color: var(--navy);">${totalAns}</td>
@@ -1294,9 +1326,10 @@
               </div>
             </td>
             <td style="padding: 10px; text-align: center;">
-              <span style="display:inline-block; padding: 4px 8px; border-radius: 10px; font-weight: 900; font-size: 0.85rem; ${avgBadgeColor}">
-                ${avg}
+              <span style="display:inline-block; padding: 5px 10px; border-radius: 10px; font-weight: 900; font-size: 0.8rem; ${avgBadgeColor}">
+                ${avgBadge}
               </span>
+              ${exactAvgSub ? `<div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 3px; font-weight: 650;">${exactAvgSub}</div>` : ''}
             </td>
           </tr>
         `;
