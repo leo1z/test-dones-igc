@@ -449,50 +449,50 @@
     </button>
   </nav>
 
-  <!-- Plantilla Oculta de Alta Definición para Generación de Poster PNG -->
-  <div id="results-poster-template" style="position: fixed; top: 0; left: -9999px; width: 840px; background: linear-gradient(180deg, #090d26 0%, #12183b 50%, #0a0d24 100%); color: #ffffff; padding: 36px; border-radius: 20px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; box-sizing: border-box; z-index: -9999;">
+  <!-- Plantilla Oculta de Alta Definición para Generación de Poster PNG (Paleta de Diseño Oficial) -->
+  <div id="results-poster-template" style="position: fixed; top: 0; left: -9999px; width: 840px; background: #f6f8fc; color: #0f0f31; padding: 36px; border-radius: 20px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; box-sizing: border-box; z-index: -9999; border: 1px solid rgba(15,15,49,0.1);">
     <!-- Encabezado Institucional -->
-    <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 24px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1.5px solid rgba(15,15,49,0.08); margin-bottom: 24px;">
       <div style="display: flex; align-items: center; gap: 16px;">
         <img src="src/assets/logos/IGC.png" alt="IGC Logo" style="width: 52px; height: 52px; object-fit: contain;">
         <div>
-          <div style="font-size: 0.76rem; font-weight: 800; color: #60a5fa; letter-spacing: 0.06em; text-transform: uppercase;">Iglesia Gran Comisión Tegucigalpa</div>
-          <h2 style="font-size: 1.75rem; font-weight: 900; color: #ffffff; margin: 2px 0 0 0; letter-spacing: -0.02em;">Mis Dones Espirituales</h2>
+          <div style="font-size: 0.76rem; font-weight: 800; color: #336cdd; letter-spacing: 0.06em; text-transform: uppercase;">Iglesia Gran Comisión Tegucigalpa</div>
+          <h2 style="font-size: 1.75rem; font-weight: 900; color: #0f0f31; margin: 2px 0 0 0; letter-spacing: -0.02em;">Mis Dones Espirituales</h2>
         </div>
       </div>
       <div style="text-align: right;">
-        <div style="font-size: 0.82rem; font-weight: 700; color: #94a3b8;" id="poster-date-str">Test de Afinidad</div>
-        <div style="font-size: 0.74rem; font-weight: 700; color: #3b82f6; margin-top: 2px;">igcteg.org</div>
+        <div style="font-size: 0.82rem; font-weight: 700; color: #64748b;" id="poster-date-str">Test de Afinidad</div>
+        <div style="font-size: 0.74rem; font-weight: 800; color: #336cdd; margin-top: 2px;">igcteg.org</div>
       </div>
     </div>
 
     <!-- Título Sección Top 3 -->
     <div style="text-align: center; margin-bottom: 18px;">
-      <span style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.35); font-size: 0.82rem; font-weight: 900; padding: 6px 18px; border-radius: 20px; display: inline-block;">
-        ⭐ TUS 3 DONES CON MAYOR AFINIDAD ⭐
+      <span style="background: rgba(51, 108, 221, 0.08); color: #336cdd; border: 1.5px solid rgba(51, 108, 221, 0.2); font-size: 0.82rem; font-weight: 900; padding: 6px 18px; border-radius: 20px; display: inline-block;">
+        ⭐ TUS 3 DONES DE MAYOR AFINIDAD ⭐
       </span>
     </div>
 
-    <!-- Top 3 Grid (3 Columnas Iguales) -->
+    <!-- Top 3 Grid (3 Columnas Iguales en Blanco Elegante) -->
     <div id="poster-top3-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px;">
       <!-- Renderizado dinámico de las 3 tarjetas -->
     </div>
 
     <!-- Título Sección Demás Dones -->
     <div style="text-align: center; margin-bottom: 16px;">
-      <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.35); font-size: 0.8rem; font-weight: 850; padding: 5px 16px; border-radius: 20px; display: inline-block;">
+      <span style="background: rgba(15, 15, 49, 0.05); color: #0f0f31; border: 1px solid rgba(15, 15, 49, 0.12); font-size: 0.8rem; font-weight: 850; padding: 5px 16px; border-radius: 20px; display: inline-block;">
         📊 AFINIDAD EN LOS DEMÁS DONES
       </span>
     </div>
 
     <!-- Grid 2 Columnas de los 12 Dones Restantes -->
-    <div id="poster-remaining-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 28px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 22px; margin-bottom: 24px;">
+    <div id="poster-remaining-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 28px; background: #ffffff; border: 1.5px solid rgba(15,15,49,0.08); border-radius: 16px; padding: 22px; margin-bottom: 24px; box-shadow: 0 8px 24px -4px rgba(15,15,49,0.04);">
       <!-- Renderizado dinámico de las 12 barras de dones -->
     </div>
 
     <!-- Pie de Tarjeta Institucional -->
-    <div style="background: rgba(51, 108, 221, 0.16); border: 1px solid rgba(51, 108, 221, 0.35); border-radius: 14px; padding: 14px 20px; text-align: center;">
-      <p style="font-size: 0.84rem; font-weight: 700; color: #93c5fd; margin: 0; line-height: 1.4;">
+    <div style="background: rgba(51, 108, 221, 0.06); border: 1.5px solid rgba(51, 108, 221, 0.18); border-radius: 14px; padding: 14px 20px; text-align: center;">
+      <p style="font-size: 0.84rem; font-weight: 700; color: #336cdd; margin: 0; line-height: 1.4;">
         Conocer tus dones te dará más claridad al servir a Dios y a los demás • Iglesia Gran Comisión Tegucigalpa
       </p>
     </div>

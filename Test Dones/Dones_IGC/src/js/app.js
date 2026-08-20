@@ -1153,33 +1153,36 @@ function populatePosterTemplate(calculation) {
     dateStr.textContent = 'Test de Afinidad • ' + today;
   }
 
-  const borderColors = ['rgba(245, 158, 11, 0.6)', 'rgba(59, 130, 246, 0.6)', 'rgba(16, 185, 129, 0.6)'];
-  const bgColors = ['rgba(245, 158, 11, 0.12)', 'rgba(59, 130, 246, 0.12)', 'rgba(16, 185, 129, 0.12)'];
-  const pctColors = ['#f59e0b', '#3b82f6', '#10b981'];
-
+  // Tarjetas Top 3 en Paleta Oficial Blanca/Azul
   top3Grid.innerHTML = calculation.top3.map((g, i) => {
     const giftObj = gifts.find(gift => gift.id === g.id) || { name: g.name, summary: '', illustration: '' };
+    const pctVal = g.percentage !== undefined ? g.percentage : (g.score !== undefined ? g.score : 0);
+    const summaryText = giftObj.summary || giftObj.description || g.summary || g.description || '';
+    const imgUrl = g.illustration || giftObj.illustration || 'src/assets/illustrations/Evangelismo.png';
+
     return `
-      <div style="background: ${bgColors[i]}; border: 2px solid ${borderColors[i]}; border-radius: 16px; padding: 20px 14px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; position: relative;">
-        <span style="position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.12); color: ${pctColors[i]}; font-size: 0.75rem; font-weight: 900; padding: 3px 9px; border-radius: 12px;">#${i + 1}</span>
-        ${giftObj.illustration ? `<img src="${giftObj.illustration}" style="width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));">` : `<div style="width: 70px; height: 70px; border-radius: 50%; background:${pctColors[i]}; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.5rem; color:#fff;">#${i+1}</div>`}
-        <h4 style="font-size: 1.1rem; font-weight: 900; color: #ffffff; margin: 0; line-height: 1.2;">${g.name}</h4>
-        <span style="background: ${pctColors[i]}; color: #ffffff; font-size: 0.82rem; font-weight: 900; padding: 4px 14px; border-radius: 14px;">${g.score}% Afinidad</span>
-        <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.38; margin: 0;">${giftObj.summary || giftObj.description || ''}</p>
+      <div style="background: #ffffff; border: 2px solid rgba(51, 108, 221, 0.25); border-radius: 16px; padding: 22px 14px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between; gap: 10px; position: relative; box-shadow: 0 10px 30px -6px rgba(15, 15, 49, 0.06);">
+        <span style="position: absolute; top: 12px; right: 12px; background: rgba(51, 108, 221, 0.1); color: #336cdd; font-size: 0.75rem; font-weight: 900; padding: 3px 9px; border-radius: 12px;">LUGAR #${i + 1}</span>
+        <img src="${imgUrl}" alt="${g.name}" style="width: 90px; height: 90px; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(15, 15, 49, 0.12)); margin-top: 4px;">
+        <h4 style="font-size: 1.15rem; font-weight: 900; color: #0f0f31; margin: 0; line-height: 1.25;">${g.name}</h4>
+        <span style="background: #336cdd; color: #ffffff; font-size: 0.85rem; font-weight: 850; padding: 4px 14px; border-radius: 14px;">${pctVal}% afinidad</span>
+        <p style="font-size: 0.8rem; color: #64748b; line-height: 1.4; margin: 0;">${summaryText}</p>
       </div>
     `;
   }).join('');
 
+  // 12 Dones Restantes en 2 Columnas
   const remaining = calculation.ranked.slice(3);
   remainingGrid.innerHTML = remaining.map(g => {
+    const pctVal = g.percentage !== undefined ? g.percentage : (g.score !== undefined ? g.score : 0);
     return `
       <div style="display: flex; flex-direction: column; gap: 4px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 700; color: #f1f5f9;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem; font-weight: 750; color: #0f0f31;">
           <span>${g.name}</span>
-          <span style="color: #60a5fa; font-weight: 900;">${g.score}%</span>
+          <span style="color: #336cdd; font-weight: 900;">${pctVal}%</span>
         </div>
-        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden;">
-          <div style="width: ${Math.max(6, g.score)}%; height: 100%; background: #3b82f6; border-radius: 3px;"></div>
+        <div style="width: 100%; height: 7px; background: rgba(15, 15, 49, 0.06); border-radius: 4px; overflow: hidden;">
+          <div style="width: ${Math.max(6, pctVal)}%; height: 100%; background: #336cdd; border-radius: 4px;"></div>
         </div>
       </div>
     `;
