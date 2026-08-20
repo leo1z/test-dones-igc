@@ -1138,60 +1138,104 @@ function initVideoLinks() {
 }
 
 // ---------------------------------------------------------------------------
-// Generación y Descarga de Resultados como Captura de Pantalla PNG (html2canvas)
+// Generación de Poster HD de Resultados (Plantilla Dedicada + html2canvas)
 // ---------------------------------------------------------------------------
+function populatePosterTemplate(calculation) {
+  const poster = document.getElementById('results-poster-template');
+  const top3Grid = document.getElementById('poster-top3-grid');
+  const remainingGrid = document.getElementById('poster-remaining-grid');
+  const dateStr = document.getElementById('poster-date-str');
+
+  if (!poster || !top3Grid || !remainingGrid) return;
+
+  if (dateStr) {
+    const today = new Date().toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
+    dateStr.textContent = 'Test de Afinidad • ' + today;
+  }
+
+  const borderColors = ['rgba(245, 158, 11, 0.6)', 'rgba(59, 130, 246, 0.6)', 'rgba(16, 185, 129, 0.6)'];
+  const bgColors = ['rgba(245, 158, 11, 0.12)', 'rgba(59, 130, 246, 0.12)', 'rgba(16, 185, 129, 0.12)'];
+  const pctColors = ['#f59e0b', '#3b82f6', '#10b981'];
+
+  top3Grid.innerHTML = calculation.top3.map((g, i) => {
+    const giftObj = gifts.find(gift => gift.id === g.id) || { name: g.name, summary: '', illustration: '' };
+    return `
+      <div style="background: ${bgColors[i]}; border: 2px solid ${borderColors[i]}; border-radius: 16px; padding: 20px 14px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; position: relative;">
+        <span style="position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.12); color: ${pctColors[i]}; font-size: 0.75rem; font-weight: 900; padding: 3px 9px; border-radius: 12px;">#${i + 1}</span>
+        ${giftObj.illustration ? `<img src="${giftObj.illustration}" style="width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));">` : `<div style="width: 70px; height: 70px; border-radius: 50%; background:${pctColors[i]}; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.5rem; color:#fff;">#${i+1}</div>`}
+        <h4 style="font-size: 1.1rem; font-weight: 900; color: #ffffff; margin: 0; line-height: 1.2;">${g.name}</h4>
+        <span style="background: ${pctColors[i]}; color: #ffffff; font-size: 0.82rem; font-weight: 900; padding: 4px 14px; border-radius: 14px;">${g.score}% Afinidad</span>
+        <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.38; margin: 0;">${giftObj.summary || giftObj.description || ''}</p>
+      </div>
+    `;
+  }).join('');
+
+  const remaining = calculation.ranked.slice(3);
+  remainingGrid.innerHTML = remaining.map(g => {
+    return `
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 700; color: #f1f5f9;">
+          <span>${g.name}</span>
+          <span style="color: #60a5fa; font-weight: 900;">${g.score}%</span>
+        </div>
+        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden;">
+          <div style="width: ${Math.max(6, g.score)}%; height: 100%; background: #3b82f6; border-radius: 3px;"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 async function downloadResultsImage() {
   const btn = el.btnDownloadResultsImage;
   const originalHTML = btn ? btn.innerHTML : '';
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = '<span>Generando captura de resultados...</span>';
+    btn.innerHTML = '<span>Generando poster HD de resultados...</span>';
   }
 
   try {
-    const resultsContainer = document.querySelector('#screen-results .results-container');
-    if (!resultsContainer) {
-      alert('No se encontraron los resultados en pantalla.');
-      return;
-    }
+    const stored = loadStoredResult();
+    const answers = isTestComplete(state.answers) ? state.answers : (stored ? stored.answers : state.answers);
+    const calculation = runFullCalculation(answers);
+    if (!calculation || !calculation.top3 || calculation.top3.length === 0) return;
 
-    // Ocultar temporalmente elementos de acción para la captura limpia
-    const btnDownloadContainer = btn.parentElement;
-    const actionsCard = document.querySelector('.results-actions-card');
-    const nextStepsCard = document.querySelector('.results-next-steps-card');
+    // 1. Poblar la plantilla de poster HD
+    populatePosterTemplate(calculation);
 
-    if (btnDownloadContainer) btnDownloadContainer.style.display = 'none';
-    if (actionsCard) actionsCard.style.display = 'none';
-    if (nextStepsCard) nextStepsCard.style.display = 'none';
+    const poster = document.getElementById('results-poster-template');
+    if (!poster) return;
+
+    // Colocar temporalmente la plantilla visible para html2canvas
+    poster.style.left = '0px';
+    poster.style.top = '0px';
 
     let canvas = null;
     if (typeof window.html2canvas === 'function') {
-      canvas = await window.html2canvas(resultsContainer, {
+      canvas = await window.html2canvas(poster, {
         scale: 2,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#f6f8fc',
+        backgroundColor: '#090d26',
         logging: false,
       });
     }
 
-    // Restaurar elementos de acción
-    if (btnDownloadContainer) btnDownloadContainer.style.display = 'block';
-    if (actionsCard) actionsCard.style.display = 'block';
-    if (nextStepsCard) nextStepsCard.style.display = 'flex';
+    // Ocultar plantilla
+    poster.style.left = '-9999px';
 
     if (!canvas) {
-      alert('Ocurrió un error al capturar la imagen. Inténtalo de nuevo.');
+      alert('Ocurrió un error al generar la imagen.');
       return;
     }
 
     const dataUrl = canvas.toDataURL('image/png');
     const filename = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
 
-    // 1. Intentar compartir/guardar mediante Web Share API (o descarga fallback)
+    // Compartir o descargar
     shareOrDownloadImage(dataUrl, filename);
 
-    // 2. Desplegar Modal de Previsualización para móviles y descarga manual
+    // Abrir modal de previsualización
     const modalPreview = document.getElementById('modal-image-preview');
     const imgPreview = document.getElementById('preview-result-img');
     const downloadBtnModal = document.getElementById('btn-modal-download-link');
@@ -1204,8 +1248,8 @@ async function downloadResultsImage() {
     }
 
   } catch (err) {
-    console.error('Error al capturar resultados con html2canvas:', err);
-    alert('Ocurrió un inconveniente al generar la captura. Inténtalo de nuevo.');
+    console.error('Error al capturar resultados poster con html2canvas:', err);
+    alert('Ocurrió un inconveniente al generar la imagen. Inténtalo de nuevo.');
   } finally {
     if (btn) {
       btn.disabled = false;
