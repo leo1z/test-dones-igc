@@ -1144,7 +1144,7 @@ function loadImage(src) {
   return new Promise((resolve) => {
     if (!src) return resolve(null);
     const img = new Image();
-    img.crossOrigin = 'anonymous';
+    // NOTA IMPORTANTE: No establecer crossOrigin en archivos locales/relativos para evitar Canvas Taint
     img.onload = () => resolve(img);
     img.onerror = () => resolve(null);
     img.src = src;
@@ -1334,14 +1334,29 @@ async function downloadResultsImage() {
     ctx.textAlign = 'center';
     ctx.fillText('Conocer los dones te dará más claridad al llenar el test y servir • igcteg.org', 420, footerY + 31);
 
-    // Disparar descarga confiable en navegadores de escritorio y móviles
+    // Obtener DataURL
     const dataUrl = canvas.toDataURL('image/png');
+    const filename = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
+
+    // 1. Intentar descarga automática
     const link = document.createElement('a');
-    link.download = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
+    link.download = filename;
     link.href = dataUrl;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // 2. Desplegar Modal de Previsualización (Garantiza descarga en móviles e iOS)
+    const modalPreview = document.getElementById('modal-image-preview');
+    const imgPreview = document.getElementById('preview-result-img');
+    const downloadBtnModal = document.getElementById('btn-modal-download-link');
+
+    if (modalPreview && imgPreview && downloadBtnModal) {
+      imgPreview.src = dataUrl;
+      downloadBtnModal.href = dataUrl;
+      downloadBtnModal.download = filename;
+      modalPreview.classList.add('active');
+    }
 
   } catch (err) {
     console.error('Error al generar la imagen:', err);
@@ -1395,6 +1410,13 @@ function init() {
 
   if (el.btnDownloadResultsImage) {
     el.btnDownloadResultsImage.addEventListener('click', downloadResultsImage);
+  }
+
+  const previewCloseBtn = document.getElementById('preview-modal-close');
+  if (previewCloseBtn) {
+    previewCloseBtn.addEventListener('click', () => {
+      document.getElementById('modal-image-preview')?.classList.remove('active');
+    });
   }
 
   const stored = loadStoredResult();

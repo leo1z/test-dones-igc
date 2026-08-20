@@ -359,6 +359,26 @@
     </div>
   </div>
 
+  <!-- Modal 4: Previsualización y Descarga de Imagen de Resultados -->
+  <div id="modal-image-preview" class="modal-overlay">
+    <div class="modal-content" style="max-width: 500px; padding: 24px 20px; text-align: center;">
+      <button class="modal-close" id="preview-modal-close">&times;</button>
+      <h3 style="font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 4px;">🖼️ Tus Resultados en Imagen</h3>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">
+        Presiona el botón a continuación para descargar, o mantén presionada la imagen en tu teléfono para guardarla en tus fotos.
+      </p>
+
+      <div style="max-height: 52vh; overflow-y: auto; border-radius: 14px; border: 1px solid rgba(15,15,49,0.12); margin-bottom: 16px; background: #0b0f28; padding: 8px;">
+        <img id="preview-result-img" src="" alt="Resultado Dones IGC" style="width: 100%; height: auto; border-radius: 10px; display: block;">
+      </div>
+
+      <a id="btn-modal-download-link" href="" download="Mis_Dones_IGC.png" class="btn btn-primary btn-block" style="height: 48px; font-size: 0.95rem; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Descargar Imagen PNG</span>
+      </a>
+    </div>
+  </div>
+
   <!-- Slideover Consulta Rápida de Dones (Desde el Test) -->
   <div id="modal-quick-gifts" class="modal-overlay">
     <div class="modal-content" style="max-width: 540px; max-height: 85vh; overflow-y: auto; padding: 24px;">
