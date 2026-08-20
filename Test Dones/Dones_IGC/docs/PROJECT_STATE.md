@@ -25,7 +25,11 @@ Fecha de última actualización: 2026-08-17
     *   Implementada función `deleteSubmission(submissionId)` que elimina el registro correspondiente de la tabla `dones_igc.results` en Supabase al confirmar el reinicio del test.
     *   Garantiza que al reiniciar el test no queden respuestas obsoletas o duplicadas en la base de datos remota, manteniendo métricas 100% limpias e insaltables en el Panel Admin (`admin.html`).
 *   [x] **Estabilización de Contenedor en Búsqueda de Glosario (`styles.css`):** Asignada una altura mínima constante (`min-height: calc(100vh - 160px)` en `.glossary-container` y `min-height: 450px` con `align-content: start` en `.glossary-grid`). Al buscar un término sin coincidencias (0 resultados), el encabezado *"Aprender de los Dones"* y el buscador permanecen fijos en su posición superior sin saltos visuales ni colapsos.
-*   [x] **Sección de Análisis por Pregunta con Filtro de Afinidad de Don en Panel Admin (`admin.html`):**
+*   [x] **Descarga de Resultados en Imagen PNG (`index.html`, `app.js`):**
+    *   Incorporado el botón **`📥 Descargar Mis Resultados (Imagen PNG)`** en la pantalla de resultados (`#screen-results`).
+    *   Genera de forma nativa e instantánea mediante HTML5 Canvas una tarjeta de resultados en alta resolución (`800x1120px`) con diseño azul/navy elegante.
+    *   Incluye marca de agua IGC, fecha del test, insignias destacadas de los **Top 3 Dones** con sus descripciones y el gráfico de barras del perfil completo de los 15 dones.
+    *   Descarga el archivo `.png` automáticamente a cualquier dispositivo móvil o escritorio sin dependencias externas.
     *   Incorporada la sección *"Análisis Detallado por Pregunta del Test (76 Situaciones)"* envuelta en un contenedor scrollable compacto (`max-height: 520px; overflow-y: auto;`) con cabecera pegajosa (`sticky top: 0`).
     *   Agregados 3 filtros avanzados: **Asistencia a Grupo de Crecimiento**, **Don Espiritual Específico** (los 15 dones) y **Afinidad Mínima (% >= 50%, >= 70%, >= 85%)**.
     *   Genera dinámicamente el promedio puntual (1.00 a 3.00), total de respuestas y distribución porcentual para cada una de las 76 preguntas.

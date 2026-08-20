@@ -76,6 +76,7 @@ const el = {
   remainingGiftsContainer: document.getElementById('remaining-gifts-container'),
   btnReset: document.getElementById('btn-reset'),
   btnOpenEvaluation: document.getElementById('btn-open-evaluation'),
+  btnDownloadResultsImage: document.getElementById('btn-download-results-image'),
   
   // Glosario
   glossarySearch: document.getElementById('glossary-search'),
@@ -1137,6 +1138,202 @@ function initVideoLinks() {
 }
 
 // ---------------------------------------------------------------------------
+// Generación y Descarga de Resultados como Imagen (Canvas HTML5)
+// ---------------------------------------------------------------------------
+const giftIconsMap = {
+  evangelismo: '📢',
+  dar: '🎁',
+  servir: '🤝',
+  exhortar: '💬',
+  discernimiento: '🔍',
+  sabiduria: '💡',
+  misionero_apostol: '🌍',
+  profecia: '📜',
+  pastor: '🐑',
+  fe: '🛡️',
+  misericordia: '❤️',
+  administrar: '🏛️',
+  ciencia_conocimiento: '📖',
+  ensenanza: '✏️',
+  presidir_liderazgo: '👑'
+};
+
+function downloadResultsImage() {
+  const stored = loadStoredResult();
+  const answers = isTestComplete(state.answers) ? state.answers : (stored ? stored.answers : state.answers);
+  const calculation = runFullCalculation(answers);
+  if (!calculation || !calculation.top3 || calculation.top3.length === 0) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 800;
+  canvas.height = 1120;
+  const ctx = canvas.getContext('2d');
+
+  // Background Gradient
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  bgGrad.addColorStop(0, '#0b0f28');
+  bgGrad.addColorStop(0.5, '#141a3c');
+  bgGrad.addColorStop(1, '#0e122e');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Decorative Glow
+  const glowGrad = ctx.createRadialGradient(400, 0, 10, 400, 0, 400);
+  glowGrad.addColorStop(0, 'rgba(51, 108, 221, 0.35)');
+  glowGrad.addColorStop(1, 'rgba(51, 108, 221, 0)');
+  ctx.fillStyle = glowGrad;
+  ctx.fillRect(0, 0, 800, 400);
+
+  // Top Badge
+  ctx.fillStyle = 'rgba(51, 108, 221, 0.22)';
+  roundRect(ctx, 210, 32, 380, 32, 16, true, false);
+  ctx.fillStyle = '#60a5fa';
+  ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('IGLESIA GRAN COMISIÓN TEGUCIGALPA', 400, 52);
+
+  // Title & Subtitle
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '900 32px system-ui, -apple-system, sans-serif';
+  ctx.fillText('Mis Dones Espirituales', 400, 100);
+
+  const todayStr = new Date().toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '500 14px system-ui, -apple-system, sans-serif';
+  ctx.fillText('Resultados del Test de Afinidad • ' + todayStr, 400, 124);
+
+  // Top 3 Header
+  ctx.fillStyle = '#f59e0b';
+  ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+  ctx.fillText('🏆 TUS 3 DONES CON MAYOR AFINIDAD', 400, 165);
+
+  // Render Top 3 Cards
+  const top3 = calculation.top3;
+  const colors = ['#f59e0b', '#3b82f6', '#10b981'];
+  const bgColors = ['rgba(245, 158, 11, 0.12)', 'rgba(59, 130, 246, 0.12)', 'rgba(16, 185, 129, 0.12)'];
+  
+  let startY = 185;
+  top3.forEach((g, i) => {
+    const cardY = startY + i * 140;
+    
+    ctx.fillStyle = bgColors[i];
+    roundRect(ctx, 40, cardY, 720, 125, 16, true, false);
+    
+    ctx.strokeStyle = colors[i];
+    ctx.lineWidth = 2;
+    roundRect(ctx, 40, cardY, 720, 125, 16, false, true);
+
+    ctx.fillStyle = colors[i];
+    ctx.beginPath();
+    ctx.arc(85, cardY + 40, 22, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '900 18px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`#${i + 1}`, 85, cardY + 46);
+
+    const giftObj = gifts.find(gift => gift.id === g.id) || { name: g.name, summary: '' };
+    const icon = giftIconsMap[g.id] || '📖';
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 22px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${icon} ${g.name}`, 125, cardY + 43);
+
+    ctx.fillStyle = colors[i];
+    ctx.font = '900 22px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${g.score}%`, 730, cardY + 43);
+
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '400 13px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    wrapCanvasText(ctx, giftObj.summary || giftObj.description || '', 125, cardY + 72, 590, 18);
+  });
+
+  // Remaining Gifts Grid (2 Columns)
+  const remainingY = 635;
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('📊 PERFIL DE LOS DEMÁS DONES', 400, remainingY);
+
+  const remaining = calculation.ranked.slice(3);
+  remaining.forEach((g, idx) => {
+    const col = idx % 2;
+    const row = Math.floor(idx / 2);
+    const x = col === 0 ? 50 : 410;
+    const y = remainingY + 30 + row * 52;
+
+    const icon = giftIconsMap[g.id] || '📖';
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '600 13px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${icon} ${g.name}`, x, y);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '700 13px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${g.score}%`, x + 340, y);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+    roundRect(ctx, x, y + 8, 340, 6, 3, true, false);
+
+    ctx.fillStyle = '#3b82f6';
+    const fillW = Math.max(8, (g.score / 100) * 340);
+    roundRect(ctx, x, y + 8, fillW, 6, 3, true, false);
+  });
+
+  // Footer Card
+  const footerY = 1035;
+  ctx.fillStyle = 'rgba(51, 108, 221, 0.18)';
+  roundRect(ctx, 40, footerY, 720, 50, 12, true, false);
+
+  ctx.fillStyle = '#93c5fd';
+  ctx.font = '600 13px system-ui, -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Conocer tus dones te dará más claridad al servir • igcteg.org', 400, footerY + 30);
+
+  // Trigger Download
+  const link = document.createElement('a');
+  link.download = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(' ');
+  let line = '';
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth && n > 0) {
+      ctx.fillText(line, x, y);
+      line = words[n] + ' ';
+      y += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line, x, y);
+  return y;
+}
+
+function roundRect(ctx, x, y, w, h, r, fill = true, stroke = false) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+  if (fill) ctx.fill();
+  if (stroke) ctx.stroke();
+}
+
+// ---------------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------------
 function init() {
@@ -1144,6 +1341,10 @@ function init() {
   initOnboardingFlow();
   initEvaluationSurvey();
   initQuickGiftsSlideover();
+
+  if (el.btnDownloadResultsImage) {
+    el.btnDownloadResultsImage.addEventListener('click', downloadResultsImage);
+  }
 
   const stored = loadStoredResult();
   if (stored && isTestComplete(stored.answers)) {
