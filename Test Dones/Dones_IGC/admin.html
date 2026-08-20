@@ -602,6 +602,33 @@
             <!-- Renderizado dinámico de píldoras de filtro por zona con "Todas las Zonas" activa por defecto -->
           </div>
         </div>
+
+        <!-- Filtros por Asistencia a Grupo, Don Espiritual y % Mínimo -->
+        <div style="background: rgba(51, 108, 221, 0.03); padding: 14px; border-radius: 14px; border: 1px solid rgba(51, 108, 221, 0.15); margin-top: 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+          <div class="filter-field">
+            <label for="filter-group-attendance" style="font-size:0.78rem; font-weight:850; color:var(--navy);">Asistencia a Grupo:</label>
+            <select id="filter-group-attendance" style="width:100%; padding:8px 10px; border-radius:10px; border:1.5px solid rgba(15,15,49,0.15); font-size:0.84rem; font-weight:700; background:#fff; color:var(--navy);">
+              <option value="all">Todos los miembros</option>
+              <option value="yes">Sí asiste a Grupo</option>
+              <option value="no">No asiste a Grupo</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="filter-gift-select" style="font-size:0.78rem; font-weight:850; color:var(--navy);">Filtrar por Don Espiritual:</label>
+            <select id="filter-gift-select" style="width:100%; padding:8px 10px; border-radius:10px; border:1.5px solid rgba(15,15,49,0.15); font-size:0.84rem; font-weight:700; background:#fff; color:var(--navy);">
+              <option value="all">Todos los 15 Dones</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="filter-gift-pct-min" style="font-size:0.78rem; font-weight:850; color:var(--navy);">Afinidad / Porcentaje Mínimo:</label>
+            <select id="filter-gift-pct-min" style="width:100%; padding:8px 10px; border-radius:10px; border:1.5px solid rgba(15,15,49,0.15); font-size:0.84rem; font-weight:700; background:#fff; color:var(--navy);">
+              <option value="0">Cualquier Porcentaje (0% - 100%)</option>
+              <option value="50">>= 50% Afinidad</option>
+              <option value="70">>= 70% Afinidad Alta</option>
+              <option value="85">>= 85% Afinidad Sobresaliente</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <!-- Top 4 Summary Metrics Cards -->
@@ -650,6 +677,37 @@
           <div style="flex: 1; width: 100%;" class="bar-list" id="zones-bar-list">
             <!-- Renderizado dinámico -->
           </div>
+        </div>
+      <!-- Sección: Análisis Detallado por Pregunta del Test (76 Situaciones) con Contenedor Scrollable -->
+      <section class="data-section">
+        <div class="section-head">
+          <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Análisis Detallado por Pregunta del Test (76 Situaciones)
+          </h3>
+          <span style="font-size:0.75rem; background:rgba(51,108,221,0.08); color:var(--primary); font-weight:800; padding:4px 10px; border-radius:12px;" id="question-filter-status">76 preguntas analizadas</span>
+        </div>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:-8px; margin-bottom:14px; font-weight:650;">
+          Desglose puntual de promedios (1.00 a 3.00) y distribución de respuestas por situación, sincronizado con los filtros superiores de fecha, zona, grupo y porcentaje de don.
+        </p>
+
+        <!-- Contenedor Fijo Scrollable para Evitar Alargar la Página -->
+        <div style="max-height: 520px; overflow-y: auto; border: 1px solid rgba(15,15,49,0.08); border-radius: 14px; background: #ffffff; position: relative;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left;">
+            <thead style="position: sticky; top: 0; background: var(--navy); color: #ffffff; z-index: 10;">
+              <tr>
+                <th style="padding: 10px; width: 45px; text-align: center;">#</th>
+                <th style="padding: 10px; width: 150px;">Don / Parte</th>
+                <th style="padding: 10px;">Enunciado de la Situación</th>
+                <th style="padding: 10px; width: 85px; text-align: center;">Total Resp.</th>
+                <th style="padding: 10px; width: 175px; text-align: center;">Distribución (1 / 2 / 3)</th>
+                <th style="padding: 10px; width: 100px; text-align: center;">Promedio</th>
+              </tr>
+            </thead>
+            <tbody id="questions-analysis-table-body">
+              <!-- Renderizado dinámico de las 76 preguntas -->
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -888,6 +946,7 @@
   <script type="module">
     import { fetchAdminMetrics } from './src/js/supabase-client.js';
     import { gifts } from './src/data/gifts.js';
+    import { situations } from './src/data/situations.js';
 
     const ADMIN_PASS = 'igc2026';
     const loginOverlay = document.getElementById('login-overlay');
@@ -1118,6 +1177,132 @@
       populateCrossFilterDropdowns(rawMetricsData);
       renderFullGiftsChart();
       renderSurveyStatsSection(globalAdminData);
+      populateGiftSelectFilter();
+      renderQuestionsAnalysisTable();
+    }
+
+    function populateGiftSelectFilter() {
+      const select = document.getElementById('filter-gift-select');
+      if (!select || select.children.length > 1) return;
+      gifts.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g.id;
+        opt.textContent = `${g.icon} ${g.name}`;
+        select.appendChild(opt);
+      });
+
+      ['filter-group-attendance', 'filter-gift-select', 'filter-gift-pct-min'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !el.dataset.bound) {
+          el.dataset.bound = 'true';
+          el.addEventListener('change', () => {
+            renderQuestionsAnalysisTable();
+          });
+        }
+      });
+    }
+
+    function getFilteredRecordsForQuestions() {
+      let dataset = [...globalAdminData];
+      
+      // 1. Filtro de Grupo de Crecimiento
+      const groupVal = document.getElementById('filter-group-attendance')?.value || 'all';
+      if (groupVal === 'yes') {
+        dataset = dataset.filter(d => d.attends_growth_group === true);
+      } else if (groupVal === 'no') {
+        dataset = dataset.filter(d => d.attends_growth_group === false);
+      }
+
+      // 2. Filtro de Don Específico y % Afinidad Mínima
+      const giftVal = document.getElementById('filter-gift-select')?.value || 'all';
+      const pctMinVal = Number(document.getElementById('filter-gift-pct-min')?.value || 0);
+
+      if (giftVal !== 'all' || pctMinVal > 0) {
+        dataset = dataset.filter(d => {
+          if (!d.scores) return false;
+          if (giftVal !== 'all') {
+            const score = d.scores[giftVal] || 0;
+            return score >= pctMinVal;
+          } else {
+            return Object.values(d.scores).some(s => s >= pctMinVal);
+          }
+        });
+      }
+
+      return dataset;
+    }
+
+    function renderQuestionsAnalysisTable() {
+      const tbody = document.getElementById('questions-analysis-table-body');
+      const statusEl = document.getElementById('question-filter-status');
+      if (!tbody) return;
+
+      const dataset = getFilteredRecordsForQuestions();
+      
+      const giftVal = document.getElementById('filter-gift-select')?.value || 'all';
+      const questionsToRender = giftVal === 'all'
+        ? situations
+        : situations.filter(s => s.giftId === giftVal);
+
+      if (statusEl) {
+        statusEl.textContent = `${questionsToRender.length} preguntas analizadas (${dataset.length} evaluaciones)`;
+      }
+
+      let html = '';
+      questionsToRender.forEach(s => {
+        const gift = gifts.find(g => g.id === s.giftId) || { name: s.giftId, icon: '📖' };
+        
+        let cnt1 = 0, cnt2 = 0, cnt3 = 0, totalAns = 0, sumVal = 0;
+        
+        dataset.forEach(d => {
+          if (d.answers && d.answers[s.id]) {
+            const val = Number(d.answers[s.id]);
+            if (val === 1) cnt1++;
+            if (val === 2) cnt2++;
+            if (val === 3) cnt3++;
+            sumVal += val;
+            totalAns++;
+          }
+        });
+
+        const avg = totalAns > 0 ? (sumVal / totalAns).toFixed(2) : '-';
+        const pct1 = totalAns > 0 ? Math.round((cnt1 / totalAns) * 100) : 0;
+        const pct2 = totalAns > 0 ? Math.round((cnt2 / totalAns) * 100) : 0;
+        const pct3 = totalAns > 0 ? Math.round((cnt3 / totalAns) * 100) : 0;
+
+        let avgBadgeColor = 'background: rgba(15,15,49,0.06); color: var(--navy);';
+        if (totalAns > 0) {
+          if (avg >= 2.4) avgBadgeColor = 'background: rgba(16, 185, 129, 0.12); color: #059669;';
+          else if (avg >= 1.8) avgBadgeColor = 'background: rgba(51, 108, 221, 0.12); color: var(--primary);';
+          else avgBadgeColor = 'background: rgba(245, 158, 11, 0.12); color: #b45309;';
+        }
+
+        html += `
+          <tr style="border-bottom: 1px solid rgba(15,15,49,0.06);">
+            <td style="padding: 10px; text-align: center; font-weight: 850; color: var(--navy);">${s.id}</td>
+            <td style="padding: 10px;">
+              <div style="font-weight: 850; color: var(--navy); font-size: 0.8rem;">${gift.icon} ${gift.name}</div>
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 650;">Parte ${s.sceneId}</div>
+            </td>
+            <td style="padding: 10px; font-weight: 650; color: var(--navy); line-height: 1.35;">${s.text}</td>
+            <td style="padding: 10px; text-align: center; font-weight: 800; color: var(--navy);">${totalAns}</td>
+            <td style="padding: 10px;">
+              <div style="display:flex; flex-direction:column; gap:2px; font-size:0.72rem; font-weight:750;">
+                <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">1 (Rara vez):</span><span style="color:#0f172a;">${cnt1} (${pct1}%)</span></div>
+                <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">2 (A veces):</span><span style="color:#0f172a;">${cnt2} (${pct2}%)</span></div>
+                <div style="display:flex; justify-content:space-between;"><span style="color:#64748b;">3 (Frecuentemente):</span><span style="color:#0f172a;">${cnt3} (${pct3}%)</span></div>
+              </div>
+            </td>
+            <td style="padding: 10px; text-align: center;">
+              <span style="display:inline-block; padding: 4px 8px; border-radius: 10px; font-weight: 900; font-size: 0.85rem; ${avgBadgeColor}">
+                ${avg}
+              </span>
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html || '<tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">No hay respuestas disponibles para los filtros seleccionados.</td></tr>';
     }
 
     // 1. Render de las 4 Tarjetas de Métricas Principales (KPIs)

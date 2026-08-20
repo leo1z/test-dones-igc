@@ -25,7 +25,16 @@ Fecha de última actualización: 2026-08-17
     *   Implementada función `deleteSubmission(submissionId)` que elimina el registro correspondiente de la tabla `dones_igc.results` en Supabase al confirmar el reinicio del test.
     *   Garantiza que al reiniciar el test no queden respuestas obsoletas o duplicadas en la base de datos remota, manteniendo métricas 100% limpias e insaltables en el Panel Admin (`admin.html`).
 *   [x] **Estabilización de Contenedor en Búsqueda de Glosario (`styles.css`):** Asignada una altura mínima constante (`min-height: calc(100vh - 160px)` en `.glossary-container` y `min-height: 450px` con `align-content: start` en `.glossary-grid`). Al buscar un término sin coincidencias (0 resultados), el encabezado *"Aprender de los Dones"* y el buscador permanecen fijos en su posición superior sin saltos visuales ni colapsos.
-*   [x] **Integración de Botones 'Solicitar Grupo' y 'Entendido' (`app.js`):** Actualizada la llamada en el modal *"¡Pon en práctica tus dones!"* para ofrecer ambos botones (**`🌱 Solicitar Grupo de Crecimiento`** e **`Entendido`**), brindando una acción clara para unirse al grupo o cerrar la ventana.
+*   [x] **Sección de Análisis por Pregunta con Filtro de Afinidad de Don en Panel Admin (`admin.html`):**
+    *   Incorporada la sección *"Análisis Detallado por Pregunta del Test (76 Situaciones)"* envuelta en un contenedor scrollable compacto (`max-height: 520px; overflow-y: auto;`) con cabecera pegajosa (`sticky top: 0`).
+    *   Agregados 3 filtros avanzados: **Asistencia a Grupo de Crecimiento**, **Don Espiritual Específico** (los 15 dones) y **Afinidad Mínima (% >= 50%, >= 70%, >= 85%)**.
+    *   Genera dinámicamente el promedio puntual (1.00 a 3.00), total de respuestas y distribución porcentual para cada una de las 76 preguntas.
+*   [x] **Botón Dinámico 'Descubrir (continuar test)' en Bienvenida (`index.html`, `app.js`):**
+    *   Implementada función `updateWelcomeButton()` que detecta si el usuario ya respondió al menos 1 pregunta (`countAnswered() > 0`) y cambia automáticamente el texto de `#btn-start` a **`Descubrir (continuar test)`**.
+*   [x] **Flujo de Evaluación de Experiencia Previo a Resultados (`index.html`, `app.js`):**
+    *   Actualizado el título del modal `#modal-eval` a **"Antes de ver tus resultados ayúdanos a evaluar tu experiencia"**.
+    *   Modificado `finishTest()` para desplegar de inmediato la evaluación al presionar *Finalizar Test*.
+    *   El modal incluye botón de cierre (`×`) permitiendo al usuario continuar hacia los resultados de inmediato sin bloqueos. Preserva la tarjeta de evaluación en la pantalla de resultados.
 *   [x] **Desplazamiento Horizontal Automático del Mapa de Ruta (`styles.css`, `app.js`):** Incorporada lógica de auto-scroll suave (`scrollTo`) que centra automáticamente el círculo de la parte activa (`.roadmap-node.current`) dentro del contenedor `#journey-nodes-scroll` a medida que el usuario avanza de la Parte 1 a la Parte 10, evitando desplazamientos manuales.
 *   [x] **Actualización de Subtítulo en Guía Rápida de Dones (`index.html`):** Cambiado el texto secundario en la cabecera del slideover de consulta rápida a: **“Conocer los dones te dará más claridad al llenar el test”**.
 *   [x] **Actualización de Redacción en Modal 'Pon en práctica tus dones' (`index.html`, `app.js`):**

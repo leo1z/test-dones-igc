@@ -163,6 +163,19 @@ function clearStorage() {
   localStorage.removeItem(STORAGE_ONBOARDING_KEY);
 }
 
+function updateWelcomeButton() {
+  if (!el.btnStart) return;
+  const answered = countAnswered();
+  const stored = loadStoredResult();
+  const complete = stored && isTestComplete(stored.answers);
+  
+  if (answered > 0 && !complete) {
+    el.btnStart.textContent = 'Descubrir (continuar test)';
+  } else {
+    el.btnStart.textContent = 'Descubrir';
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Control de Pantallas
 function showScreen(screenId, pushHistory = true) {
@@ -174,6 +187,10 @@ function showScreen(screenId, pushHistory = true) {
 
   if (screens[screenId]) {
     screens[screenId].classList.add('active');
+  }
+
+  if (screenId === 'welcome') {
+    updateWelcomeButton();
   }
 
   // Actualizar Bottom Navigation
@@ -470,6 +487,7 @@ function handlePillClick(e, questionId, val, itemEl) {
 
   checkSceneCompletion();
   updateProgressBar();
+  updateWelcomeButton();
 
   // Auto-scroll a la siguiente pregunta
   setTimeout(() => {
@@ -582,6 +600,18 @@ async function finishTest() {
   }
 
   renderResults(calculation);
+  
+  // Guardar indicador de navegación posterior a la evaluación
+  state.isFinishingTest = true;
+
+  if (el.modalEval) {
+    el.modalEval.classList.add('active');
+  } else {
+    showResultsAfterEval();
+  }
+}
+
+function showResultsAfterEval() {
   showScreen('results');
   triggerConfetti();
 
@@ -708,6 +738,10 @@ function initEvaluationSurvey() {
   if (el.evalCloseBtn) {
     el.evalCloseBtn.addEventListener('click', () => {
       el.modalEval.classList.remove('active');
+      if (state.isFinishingTest) {
+        state.isFinishingTest = false;
+        showResultsAfterEval();
+      }
     });
   }
 
@@ -785,6 +819,11 @@ function initEvaluationSurvey() {
 
       el.modalEval.classList.remove('active');
       alert('¡Gracias por tus comentarios! Nos ayudan a mejorar.');
+      
+      if (state.isFinishingTest) {
+        state.isFinishingTest = false;
+        showResultsAfterEval();
+      }
     });
   }
 }
