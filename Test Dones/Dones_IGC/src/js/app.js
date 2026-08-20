@@ -1138,207 +1138,57 @@ function initVideoLinks() {
 }
 
 // ---------------------------------------------------------------------------
-// Generación y Descarga de Resultados como Imagen (Canvas HTML5 con Ilustraciones PNG)
+// Generación y Descarga de Resultados como Captura de Pantalla PNG (html2canvas)
 // ---------------------------------------------------------------------------
-function loadImage(src) {
-  return new Promise((resolve) => {
-    if (!src) return resolve(null);
-    const img = new Image();
-    // NOTA IMPORTANTE: No establecer crossOrigin en archivos locales/relativos para evitar Canvas Taint
-    img.onload = () => resolve(img);
-    img.onerror = () => resolve(null);
-    img.src = src;
-  });
-}
-
 async function downloadResultsImage() {
   const btn = el.btnDownloadResultsImage;
   const originalHTML = btn ? btn.innerHTML : '';
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = '<span>Generando imagen de alta calidad...</span>';
+    btn.innerHTML = '<span>Generando captura de resultados...</span>';
   }
 
   try {
-    const stored = loadStoredResult();
-    const answers = isTestComplete(state.answers) ? state.answers : (stored ? stored.answers : state.answers);
-    const calculation = runFullCalculation(answers);
-    if (!calculation || !calculation.top3 || calculation.top3.length === 0) return;
-
-    // Precargar Logo e Ilustraciones Oficiales del Top 3
-    const logoImgPromise = loadImage('src/assets/logos/IGC.png');
-    const top3GiftObjs = calculation.top3.map(g => gifts.find(gift => gift.id === g.id) || { name: g.name, summary: '', illustration: '' });
-    const top3ImgPromises = top3GiftObjs.map(g => loadImage(g.illustration));
-    
-    const [logoImg, ...top3Imgs] = await Promise.all([logoImgPromise, ...top3ImgPromises]);
-
-    const canvas = document.createElement('canvas');
-    canvas.width = 840;
-    canvas.height = 1180;
-    const ctx = canvas.getContext('2d');
-
-    // Background Gradient
-    const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    bgGrad.addColorStop(0, '#0a0e28');
-    bgGrad.addColorStop(0.5, '#12183b');
-    bgGrad.addColorStop(1, '#0b0e26');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Decorative Glow
-    const glowGrad = ctx.createRadialGradient(420, 0, 10, 420, 0, 420);
-    glowGrad.addColorStop(0, 'rgba(51, 108, 221, 0.4)');
-    glowGrad.addColorStop(1, 'rgba(51, 108, 221, 0)');
-    ctx.fillStyle = glowGrad;
-    ctx.fillRect(0, 0, 840, 420);
-
-    // Dibujar Logo IGC si cargó
-    if (logoImg) {
-      ctx.drawImage(logoImg, 50, 28, 48, 48);
+    const resultsContainer = document.querySelector('#screen-results .results-container');
+    if (!resultsContainer) {
+      alert('No se encontraron los resultados en pantalla.');
+      return;
     }
 
-    // Encabezado
-    ctx.fillStyle = '#60a5fa';
-    ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText('IGLESIA GRAN COMISIÓN TEGUCIGALPA', logoImg ? 112 : 50, 44);
+    // Ocultar temporalmente elementos de acción para la captura limpia
+    const btnDownloadContainer = btn.parentElement;
+    const actionsCard = document.querySelector('.results-actions-card');
+    const nextStepsCard = document.querySelector('.results-next-steps-card');
 
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '900 28px system-ui, -apple-system, sans-serif';
-    ctx.fillText('Mis Dones Espirituales', logoImg ? 112 : 50, 74);
+    if (btnDownloadContainer) btnDownloadContainer.style.display = 'none';
+    if (actionsCard) actionsCard.style.display = 'none';
+    if (nextStepsCard) nextStepsCard.style.display = 'none';
 
-    const todayStr = new Date().toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '500 13px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'right';
-    ctx.fillText('Test de Afinidad • ' + todayStr, 790, 52);
+    let canvas = null;
+    if (typeof window.html2canvas === 'function') {
+      canvas = await window.html2canvas(resultsContainer, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#f6f8fc',
+        logging: false,
+      });
+    }
 
-    // Línea divisoria
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(50, 96);
-    ctx.lineTo(790, 96);
-    ctx.stroke();
+    // Restaurar elementos de acción
+    if (btnDownloadContainer) btnDownloadContainer.style.display = 'block';
+    if (actionsCard) actionsCard.style.display = 'block';
+    if (nextStepsCard) nextStepsCard.style.display = 'flex';
 
-    // Encabezado Top 3
-    ctx.fillStyle = '#f59e0b';
-    ctx.font = 'bold 15px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('⭐ TUS 3 DONES DE MAYOR AFINIDAD ⭐', 420, 128);
+    if (!canvas) {
+      alert('Ocurrió un error al capturar la imagen. Inténtalo de nuevo.');
+      return;
+    }
 
-    // Renderizar Tarjetas Top 3 con Ilustraciones Oficiales PNG
-    const colors = ['#f59e0b', '#3b82f6', '#10b981'];
-    const bgColors = ['rgba(245, 158, 11, 0.12)', 'rgba(59, 130, 246, 0.12)', 'rgba(16, 185, 129, 0.12)'];
-    const borderColors = ['rgba(245, 158, 11, 0.5)', 'rgba(59, 130, 246, 0.5)', 'rgba(16, 185, 129, 0.5)'];
-
-    let startY = 148;
-    calculation.top3.forEach((g, i) => {
-      const cardY = startY + i * 155;
-      const giftObj = top3GiftObjs[i];
-      const illustrationImg = top3Imgs[i];
-
-      // Fondo Card
-      ctx.fillStyle = bgColors[i];
-      roundRect(ctx, 40, cardY, 760, 140, 18, true, false);
-      
-      // Borde Card
-      ctx.strokeStyle = borderColors[i];
-      ctx.lineWidth = 2;
-      roundRect(ctx, 40, cardY, 760, 140, 18, false, true);
-
-      // Dibujar Ilustración Oficial PNG
-      if (illustrationImg) {
-        ctx.save();
-        roundRect(ctx, 55, cardY + 15, 110, 110, 14, false, false);
-        ctx.clip();
-        ctx.drawImage(illustrationImg, 55, cardY + 15, 110, 110);
-        ctx.restore();
-
-        // Borde alrededor de la ilustración
-        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-        ctx.lineWidth = 1.5;
-        roundRect(ctx, 55, cardY + 15, 110, 110, 14, false, true);
-      } else {
-        // Fallback si no carga imagen
-        ctx.fillStyle = colors[i];
-        ctx.beginPath();
-        ctx.arc(110, cardY + 70, 30, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#fff';
-        ctx.font = '900 24px system-ui';
-        ctx.textAlign = 'center';
-        ctx.fillText(`#${i + 1}`, 110, cardY + 78);
-      }
-
-      const textX = illustrationImg ? 180 : 160;
-      
-      // Nombre del Don y Porcentaje
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 24px system-ui, -apple-system, sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText(`${i + 1}. ${g.name}`, textX, cardY + 45);
-
-      ctx.fillStyle = colors[i];
-      ctx.font = '900 24px system-ui, -apple-system, sans-serif';
-      ctx.textAlign = 'right';
-      ctx.fillText(`${g.score}%`, 770, cardY + 45);
-
-      // Resumen / Descripción
-      ctx.fillStyle = '#cbd5e1';
-      ctx.font = '400 13px system-ui, -apple-system, sans-serif';
-      ctx.textAlign = 'left';
-      wrapCanvasText(ctx, giftObj.summary || giftObj.description || '', textX, cardY + 75, 570, 19);
-    });
-
-    // Sección: Perfil de los Demás Dones (2 Columnas)
-    const remainingY = 645;
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('📊 AFINIDAD EN LOS DEMÁS DONES', 420, remainingY);
-
-    const remaining = calculation.ranked.slice(3);
-    remaining.forEach((g, idx) => {
-      const col = idx % 2;
-      const row = Math.floor(idx / 2);
-      const x = col === 0 ? 50 : 430;
-      const y = remainingY + 32 + row * 54;
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '600 13px system-ui, -apple-system, sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText(`${g.name}`, x, y);
-
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '700 13px system-ui, -apple-system, sans-serif';
-      ctx.textAlign = 'right';
-      ctx.fillText(`${g.score}%`, x + 360, y);
-
-      // Barra mini
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-      roundRect(ctx, x, y + 8, 360, 6, 3, true, false);
-
-      ctx.fillStyle = '#3b82f6';
-      const fillW = Math.max(8, (g.score / 100) * 360);
-      roundRect(ctx, x, y + 8, fillW, 6, 3, true, false);
-    });
-
-    // Pie de Tarjeta
-    const footerY = 1095;
-    ctx.fillStyle = 'rgba(51, 108, 221, 0.18)';
-    roundRect(ctx, 40, footerY, 760, 52, 14, true, false);
-
-    ctx.fillStyle = '#93c5fd';
-    ctx.font = '600 13px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('Conocer los dones te dará más claridad al llenar el test y servir • igcteg.org', 420, footerY + 31);
-
-    // Obtener DataURL
     const dataUrl = canvas.toDataURL('image/png');
     const filename = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
 
-    // 1. Intentar descarga automática
+    // 1. Intentar descarga directa
     const link = document.createElement('a');
     link.download = filename;
     link.href = dataUrl;
@@ -1346,7 +1196,7 @@ async function downloadResultsImage() {
     link.click();
     document.body.removeChild(link);
 
-    // 2. Desplegar Modal de Previsualización (Garantiza descarga en móviles e iOS)
+    // 2. Desplegar Modal de Previsualización para móviles y descarga manual
     const modalPreview = document.getElementById('modal-image-preview');
     const imgPreview = document.getElementById('preview-result-img');
     const downloadBtnModal = document.getElementById('btn-modal-download-link');
@@ -1359,8 +1209,8 @@ async function downloadResultsImage() {
     }
 
   } catch (err) {
-    console.error('Error al generar la imagen:', err);
-    alert('Ocurrió un inconveniente al generar la imagen. Inténtalo de nuevo.');
+    console.error('Error al capturar resultados con html2canvas:', err);
+    alert('Ocurrió un inconveniente al generar la captura. Inténtalo de nuevo.');
   } finally {
     if (btn) {
       btn.disabled = false;
