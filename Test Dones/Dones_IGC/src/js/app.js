@@ -1219,7 +1219,7 @@ async function downloadResultsImage() {
         scale: 2,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#090d26',
+        backgroundColor: '#f6f8fc',
         logging: false,
       });
     }
@@ -1235,10 +1235,7 @@ async function downloadResultsImage() {
     const dataUrl = canvas.toDataURL('image/png');
     const filename = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
 
-    // Compartir o descargar
-    shareOrDownloadImage(dataUrl, filename);
-
-    // Abrir modal de previsualización
+    // Cargar la imagen generada en el modal y abrir la ventana emergente
     const modalPreview = document.getElementById('modal-image-preview');
     const imgPreview = document.getElementById('preview-result-img');
     const downloadBtnModal = document.getElementById('btn-modal-download-link');
