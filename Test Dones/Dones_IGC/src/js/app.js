@@ -1138,169 +1138,220 @@ function initVideoLinks() {
 }
 
 // ---------------------------------------------------------------------------
-// Generación y Descarga de Resultados como Imagen (Canvas HTML5)
+// Generación y Descarga de Resultados como Imagen (Canvas HTML5 con Ilustraciones PNG)
 // ---------------------------------------------------------------------------
-const giftIconsMap = {
-  evangelismo: '📢',
-  dar: '🎁',
-  servir: '🤝',
-  exhortar: '💬',
-  discernimiento: '🔍',
-  sabiduria: '💡',
-  misionero_apostol: '🌍',
-  profecia: '📜',
-  pastor: '🐑',
-  fe: '🛡️',
-  misericordia: '❤️',
-  administrar: '🏛️',
-  ciencia_conocimiento: '📖',
-  ensenanza: '✏️',
-  presidir_liderazgo: '👑'
-};
-
-function downloadResultsImage() {
-  const stored = loadStoredResult();
-  const answers = isTestComplete(state.answers) ? state.answers : (stored ? stored.answers : state.answers);
-  const calculation = runFullCalculation(answers);
-  if (!calculation || !calculation.top3 || calculation.top3.length === 0) return;
-
-  const canvas = document.createElement('canvas');
-  canvas.width = 800;
-  canvas.height = 1120;
-  const ctx = canvas.getContext('2d');
-
-  // Background Gradient
-  const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  bgGrad.addColorStop(0, '#0b0f28');
-  bgGrad.addColorStop(0.5, '#141a3c');
-  bgGrad.addColorStop(1, '#0e122e');
-  ctx.fillStyle = bgGrad;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Decorative Glow
-  const glowGrad = ctx.createRadialGradient(400, 0, 10, 400, 0, 400);
-  glowGrad.addColorStop(0, 'rgba(51, 108, 221, 0.35)');
-  glowGrad.addColorStop(1, 'rgba(51, 108, 221, 0)');
-  ctx.fillStyle = glowGrad;
-  ctx.fillRect(0, 0, 800, 400);
-
-  // Top Badge
-  ctx.fillStyle = 'rgba(51, 108, 221, 0.22)';
-  roundRect(ctx, 210, 32, 380, 32, 16, true, false);
-  ctx.fillStyle = '#60a5fa';
-  ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('IGLESIA GRAN COMISIÓN TEGUCIGALPA', 400, 52);
-
-  // Title & Subtitle
-  ctx.fillStyle = '#ffffff';
-  ctx.font = '900 32px system-ui, -apple-system, sans-serif';
-  ctx.fillText('Mis Dones Espirituales', 400, 100);
-
-  const todayStr = new Date().toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = '500 14px system-ui, -apple-system, sans-serif';
-  ctx.fillText('Resultados del Test de Afinidad • ' + todayStr, 400, 124);
-
-  // Top 3 Header
-  ctx.fillStyle = '#f59e0b';
-  ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
-  ctx.fillText('🏆 TUS 3 DONES CON MAYOR AFINIDAD', 400, 165);
-
-  // Render Top 3 Cards
-  const top3 = calculation.top3;
-  const colors = ['#f59e0b', '#3b82f6', '#10b981'];
-  const bgColors = ['rgba(245, 158, 11, 0.12)', 'rgba(59, 130, 246, 0.12)', 'rgba(16, 185, 129, 0.12)'];
-  
-  let startY = 185;
-  top3.forEach((g, i) => {
-    const cardY = startY + i * 140;
-    
-    ctx.fillStyle = bgColors[i];
-    roundRect(ctx, 40, cardY, 720, 125, 16, true, false);
-    
-    ctx.strokeStyle = colors[i];
-    ctx.lineWidth = 2;
-    roundRect(ctx, 40, cardY, 720, 125, 16, false, true);
-
-    ctx.fillStyle = colors[i];
-    ctx.beginPath();
-    ctx.arc(85, cardY + 40, 22, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '900 18px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(`#${i + 1}`, 85, cardY + 46);
-
-    const giftObj = gifts.find(gift => gift.id === g.id) || { name: g.name, summary: '' };
-    const icon = giftIconsMap[g.id] || '📖';
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 22px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(`${icon} ${g.name}`, 125, cardY + 43);
-
-    ctx.fillStyle = colors[i];
-    ctx.font = '900 22px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'right';
-    ctx.fillText(`${g.score}%`, 730, cardY + 43);
-
-    ctx.fillStyle = '#cbd5e1';
-    ctx.font = '400 13px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'left';
-    wrapCanvasText(ctx, giftObj.summary || giftObj.description || '', 125, cardY + 72, 590, 18);
+function loadImage(src) {
+  return new Promise((resolve) => {
+    if (!src) return resolve(null);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
   });
+}
 
-  // Remaining Gifts Grid (2 Columns)
-  const remainingY = 635;
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('📊 PERFIL DE LOS DEMÁS DONES', 400, remainingY);
+async function downloadResultsImage() {
+  const btn = el.btnDownloadResultsImage;
+  const originalHTML = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>Generando imagen de alta calidad...</span>';
+  }
 
-  const remaining = calculation.ranked.slice(3);
-  remaining.forEach((g, idx) => {
-    const col = idx % 2;
-    const row = Math.floor(idx / 2);
-    const x = col === 0 ? 50 : 410;
-    const y = remainingY + 30 + row * 52;
+  try {
+    const stored = loadStoredResult();
+    const answers = isTestComplete(state.answers) ? state.answers : (stored ? stored.answers : state.answers);
+    const calculation = runFullCalculation(answers);
+    if (!calculation || !calculation.top3 || calculation.top3.length === 0) return;
 
-    const icon = giftIconsMap[g.id] || '📖';
+    // Precargar Logo e Ilustraciones Oficiales del Top 3
+    const logoImgPromise = loadImage('src/assets/logos/IGC.png');
+    const top3GiftObjs = calculation.top3.map(g => gifts.find(gift => gift.id === g.id) || { name: g.name, summary: '', illustration: '' });
+    const top3ImgPromises = top3GiftObjs.map(g => loadImage(g.illustration));
+    
+    const [logoImg, ...top3Imgs] = await Promise.all([logoImgPromise, ...top3ImgPromises]);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 840;
+    canvas.height = 1180;
+    const ctx = canvas.getContext('2d');
+
+    // Background Gradient
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    bgGrad.addColorStop(0, '#0a0e28');
+    bgGrad.addColorStop(0.5, '#12183b');
+    bgGrad.addColorStop(1, '#0b0e26');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Decorative Glow
+    const glowGrad = ctx.createRadialGradient(420, 0, 10, 420, 0, 420);
+    glowGrad.addColorStop(0, 'rgba(51, 108, 221, 0.4)');
+    glowGrad.addColorStop(1, 'rgba(51, 108, 221, 0)');
+    ctx.fillStyle = glowGrad;
+    ctx.fillRect(0, 0, 840, 420);
+
+    // Dibujar Logo IGC si cargó
+    if (logoImg) {
+      ctx.drawImage(logoImg, 50, 28, 48, 48);
+    }
+
+    // Encabezado
+    ctx.fillStyle = '#60a5fa';
+    ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('IGLESIA GRAN COMISIÓN TEGUCIGALPA', logoImg ? 112 : 50, 44);
 
     ctx.fillStyle = '#ffffff';
-    ctx.font = '600 13px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(`${icon} ${g.name}`, x, y);
+    ctx.font = '900 28px system-ui, -apple-system, sans-serif';
+    ctx.fillText('Mis Dones Espirituales', logoImg ? 112 : 50, 74);
 
+    const todayStr = new Date().toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
     ctx.fillStyle = '#94a3b8';
-    ctx.font = '700 13px system-ui, -apple-system, sans-serif';
+    ctx.font = '500 13px system-ui, -apple-system, sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText(`${g.score}%`, x + 340, y);
+    ctx.fillText('Test de Afinidad • ' + todayStr, 790, 52);
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-    roundRect(ctx, x, y + 8, 340, 6, 3, true, false);
+    // Línea divisoria
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(50, 96);
+    ctx.lineTo(790, 96);
+    ctx.stroke();
 
-    ctx.fillStyle = '#3b82f6';
-    const fillW = Math.max(8, (g.score / 100) * 340);
-    roundRect(ctx, x, y + 8, fillW, 6, 3, true, false);
-  });
+    // Encabezado Top 3
+    ctx.fillStyle = '#f59e0b';
+    ctx.font = 'bold 15px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('⭐ TUS 3 DONES DE MAYOR AFINIDAD ⭐', 420, 128);
 
-  // Footer Card
-  const footerY = 1035;
-  ctx.fillStyle = 'rgba(51, 108, 221, 0.18)';
-  roundRect(ctx, 40, footerY, 720, 50, 12, true, false);
+    // Renderizar Tarjetas Top 3 con Ilustraciones Oficiales PNG
+    const colors = ['#f59e0b', '#3b82f6', '#10b981'];
+    const bgColors = ['rgba(245, 158, 11, 0.12)', 'rgba(59, 130, 246, 0.12)', 'rgba(16, 185, 129, 0.12)'];
+    const borderColors = ['rgba(245, 158, 11, 0.5)', 'rgba(59, 130, 246, 0.5)', 'rgba(16, 185, 129, 0.5)'];
 
-  ctx.fillStyle = '#93c5fd';
-  ctx.font = '600 13px system-ui, -apple-system, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('Conocer tus dones te dará más claridad al servir • igcteg.org', 400, footerY + 30);
+    let startY = 148;
+    calculation.top3.forEach((g, i) => {
+      const cardY = startY + i * 155;
+      const giftObj = top3GiftObjs[i];
+      const illustrationImg = top3Imgs[i];
 
-  // Trigger Download
-  const link = document.createElement('a');
-  link.download = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+      // Fondo Card
+      ctx.fillStyle = bgColors[i];
+      roundRect(ctx, 40, cardY, 760, 140, 18, true, false);
+      
+      // Borde Card
+      ctx.strokeStyle = borderColors[i];
+      ctx.lineWidth = 2;
+      roundRect(ctx, 40, cardY, 760, 140, 18, false, true);
+
+      // Dibujar Ilustración Oficial PNG
+      if (illustrationImg) {
+        ctx.save();
+        roundRect(ctx, 55, cardY + 15, 110, 110, 14, false, false);
+        ctx.clip();
+        ctx.drawImage(illustrationImg, 55, cardY + 15, 110, 110);
+        ctx.restore();
+
+        // Borde alrededor de la ilustración
+        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+        ctx.lineWidth = 1.5;
+        roundRect(ctx, 55, cardY + 15, 110, 110, 14, false, true);
+      } else {
+        // Fallback si no carga imagen
+        ctx.fillStyle = colors[i];
+        ctx.beginPath();
+        ctx.arc(110, cardY + 70, 30, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.font = '900 24px system-ui';
+        ctx.textAlign = 'center';
+        ctx.fillText(`#${i + 1}`, 110, cardY + 78);
+      }
+
+      const textX = illustrationImg ? 180 : 160;
+      
+      // Nombre del Don y Porcentaje
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(`${i + 1}. ${g.name}`, textX, cardY + 45);
+
+      ctx.fillStyle = colors[i];
+      ctx.font = '900 24px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(`${g.score}%`, 770, cardY + 45);
+
+      // Resumen / Descripción
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '400 13px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'left';
+      wrapCanvasText(ctx, giftObj.summary || giftObj.description || '', textX, cardY + 75, 570, 19);
+    });
+
+    // Sección: Perfil de los Demás Dones (2 Columnas)
+    const remainingY = 645;
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('📊 AFINIDAD EN LOS DEMÁS DONES', 420, remainingY);
+
+    const remaining = calculation.ranked.slice(3);
+    remaining.forEach((g, idx) => {
+      const col = idx % 2;
+      const row = Math.floor(idx / 2);
+      const x = col === 0 ? 50 : 430;
+      const y = remainingY + 32 + row * 54;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '600 13px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(`${g.name}`, x, y);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 13px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(`${g.score}%`, x + 360, y);
+
+      // Barra mini
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+      roundRect(ctx, x, y + 8, 360, 6, 3, true, false);
+
+      ctx.fillStyle = '#3b82f6';
+      const fillW = Math.max(8, (g.score / 100) * 360);
+      roundRect(ctx, x, y + 8, fillW, 6, 3, true, false);
+    });
+
+    // Pie de Tarjeta
+    const footerY = 1095;
+    ctx.fillStyle = 'rgba(51, 108, 221, 0.18)';
+    roundRect(ctx, 40, footerY, 760, 52, 14, true, false);
+
+    ctx.fillStyle = '#93c5fd';
+    ctx.font = '600 13px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Conocer los dones te dará más claridad al llenar el test y servir • igcteg.org', 420, footerY + 31);
+
+    // Disparar descarga confiable en navegadores de escritorio y móviles
+    const dataUrl = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = `Mis_Dones_IGC_${new Date().toISOString().slice(0, 10)}.png`;
+    link.href = dataUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+  } catch (err) {
+    console.error('Error al generar la imagen:', err);
+    alert('Ocurrió un inconveniente al generar la imagen. Inténtalo de nuevo.');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+    }
+  }
 }
 
 function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
